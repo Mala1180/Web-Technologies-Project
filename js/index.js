@@ -1,3 +1,6 @@
+/*
+ * TODO: Consider using jQuery? 
+ */
 window.onload = function() {
 
     document.querySelector("header nav ul li:nth-child(2)")
