@@ -1,5 +1,6 @@
 <html lang="it">
     <head>
+        <!-- Consider removing My from project name :) -->
         <title>My Unibo Vinyl</title>
         <?php require("templates/head-section.php"); ?>
     </head>
