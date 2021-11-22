@@ -3,7 +3,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Unibo Vinyl</title>
+    <title>My Unibo Vinyl - Login</title>
 
     <link rel="stylesheet" href="css/index.css" />
     <link rel="stylesheet" href="css/font.css" />
@@ -48,17 +48,12 @@
         </section>
     </header>
     <main>
-        <section>
-            <h1>Vinili</h1>
-        </section>
-        <section>
-            <h1>CD</h1>
-        </section>
-        <section>
-            <h1>Giradischi</h1>
-        </section>
-        <section>
-            <h1>Bundle</h1>
+        <section><br><br><br><br>
+            <form name="formLogin" action="login.php" method="post">
+                <input type="email" name="txtEmail" id="txtEmail" placeholder="Email" value="" required><br/>
+                <input type="password" name="txtPassword" id="txtPassword" placeholder="Password" value="" required><br/>
+                <input type="submit" name="btnLogin" id="SubmitLogin" name="SubmitLogin" value="Entra">
+            </form>
         </section>
     </main>
 </body>
