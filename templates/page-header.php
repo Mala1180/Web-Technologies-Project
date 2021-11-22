@@ -8,7 +8,7 @@
                 <img src="img/icons/search.png" alt="search icon" />
             </li>
             <li>
-                <img src="img/icons/menu.png" alt="search icon">
+                <img src="img/icons/menu.png" alt="search icon" />
             </li>
         </ul>
     </nav>
@@ -28,8 +28,16 @@
         </div>
     </section>
     <section class="hidden">
-        <a href="userRegister.php">Registrati</a>
-        <a href="userLogin.php">Accedi</a>
-        <a href="terms.php">Informativa sui dati</a>
+        <?php 
+            if(isset($username)) {?>
+                    <a href="profile.php">Il mio profilo</a>
+                    <a href="terms.php">Informativa sui dati</a>
+                    <a href="logout.php">Logout</a>
+        <?php 
+             } else {?>
+                    <a href="userRegister.php">Registrati</a>
+                    <a href="userLogin.php">Login</a>
+                    <a href="terms.php">Informativa sui dati</a>
+        <?php }?> 
     </section>
 </header>

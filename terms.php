@@ -11,6 +11,7 @@
     <main>
         <section>
             <h1>Termini e condizioni</h1>
+            <p>questi sono termini e condizioni</p>
         </section>
     </main>
 </body>

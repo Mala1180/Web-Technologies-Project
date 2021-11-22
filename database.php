@@ -2,8 +2,6 @@
 
 // require "vendor/autoload.php";
 // use \Firebase\JWT\JWT;
-
-
  class DatabaseHelper
  {
  	private $db;
@@ -30,12 +28,13 @@
  		$stmt = $this->db->prepare($query);
  		$stmt->bind_param("sssss", $name, $surname, $birthDate, $email, $password);
  		$stmt->execute();
- 		if($stmt->error){
- 			die("Errori nella registrazione dell'utente.");
+ 		if($stmt->error) {
+ 		return false;
  		}
+ 		return true;
  	}
 
-
+ 	/*Please don't remove this metafunction, thanks.*/
  	public function funzione($parameter = "default") {
  		$query = "SQL FORMAT";
  		$stmt = $this->db->prepare($query);
