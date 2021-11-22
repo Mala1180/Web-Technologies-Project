@@ -11,6 +11,7 @@ if(isset($_POST['txtEmail']) && isset($_POST['txtPassword'])) {
 
 	if ($user[0] && password_verify($_POST['txtPassword'], $password)) {
 		print ("Benvenuto ".$username);
+		
 	}
 	else {
 		echo "Utente non autorizzato";
