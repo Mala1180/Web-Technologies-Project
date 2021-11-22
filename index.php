@@ -1,9 +1,8 @@
-<?php define("ROOT_DIR", dirname(__FILE__)); ?>
 <html lang="it">
     <head>
         <!-- Consider removing My from project name :) -->
-        <title>My Unibo Vinyl</title>
         <?php require("./templates/head-section.php"); ?>
+        <title>My Unibo Vinyl</title>
     </head>
     <body>
         <?php require("./templates/page-header.php"); ?>

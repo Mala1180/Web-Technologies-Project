@@ -2,26 +2,26 @@
     <nav>
         <ul>
             <li>
-                <a href="index.php"><img src="<?php echo ROOT_DIR.'/public/img/logoBianco.png'?>" alt="unibo logo"></a>
+                <a href="index.php"><img src="./public/img/logoBianco.png" alt="unibo logo"></a>
             </li>
             <li>
-                <img src="././public/img/icons/search.png" alt="search icon" />
+                <img src="./public/img/icons/search.png" alt="search icon" />
             </li>
             <li>
-                <img src="././public/img/icons/menu.png" alt="search icon" />
+                <img src="./public/img/icons/menu.png" alt="search icon" />
             </li>
         </ul>
     </nav>
     <a href="index.php">
-        <img src="././public/img/logoBianco.png" alt="unibo logo" />
+        <img src="./public/img/logoBianco.png" alt="unibo logo" />
     </a>
-    <section class="hidden">
+    <section>
         <div>
-            <img src="././public/img/icons/search.png" alt="search icon" />
+            <img src="./public/img/icons/search.png" alt="search icon" />
             <input type="text" />
         </div>
         <div>
-            <label id="ciao" for="filter">Filtra: </label>
+            <label for="filter">Filtra: </label>
             <select id="filter" name="filter">
                 <option value="Vinile">Vinile</option>
                 <option value="CD">CD</option>
@@ -30,17 +30,15 @@
             </select>
         </div>
     </section>
-    <section class="hidden">
-        <?php 
-            if(isset($username)) {?>
-                    <a href="./profile.php">Il mio profilo</a>
-                    <a href="./terms.php">Informativa sui dati</a>
-                    <a href="./logout.php">Logout</a>
-        <?php 
-             } else {?>
-                    <a href="./userRegister.php">Registrati</a>
-                    <a href="./userLogin.php">Login</a>
-                    <a href="./terms.php">Informativa sui dati</a>
-        <?php }?> 
+    <section>
+        <?php if (isset($username)) { ?>
+                <a href="./profile.php">Il mio profilo</a>
+                <a href="./terms.php">Informativa sui dati</a>
+                <a href="./logout.php">Logout</a>
+        <?php } else { ?>
+                <a href="./userRegister.php">Registrati</a>
+                <a href="./userLogin.php">Login</a>
+                <a href="./terms.php">Informativa sui dati</a>
+        <?php } ?> 
     </section>
 </header>
