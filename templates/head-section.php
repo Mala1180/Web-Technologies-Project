@@ -2,9 +2,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<link rel="stylesheet" href="css/index.css" />
-<link rel="stylesheet" href="css/font.css" />
-<link rel="stylesheet" href="css/utility.css" />
+<link rel="stylesheet" href="./public/css/index.css" />
+<link rel="stylesheet" href="./public/css/font.css" />
+<link rel="stylesheet" href="./public/css/utility.css" />
 
-
-<script src="js/index.js"></script>
+<script src="./public/js/index.js"></script>

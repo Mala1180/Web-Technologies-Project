@@ -1,6 +1,4 @@
 <?php 
-	
 	unset($username);
-	require("index.php");
-
+	require("./index.php");
 ?>

@@ -1,9 +1,12 @@
+<!DOCTYPE html>
 <html lang="it">
 <head>
     <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <!-- Consider removing My from project name :) -->
         <title>My Unibo Vinyl - Login</title>
-        <?php require("templates/head-section.php"); ?>
     </head>
 </head>
 <body>

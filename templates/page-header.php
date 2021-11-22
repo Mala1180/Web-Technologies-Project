@@ -2,19 +2,22 @@
     <nav>
         <ul>
             <li>
-                <a href="index.html"><img src="img/logoBianco.png" alt="unibo logo"></a>
+                <a href="index.php"><img src="<?php echo ROOT_DIR.'/public/img/logoBianco.png'?>" alt="unibo logo"></a>
             </li>
             <li>
-                <img src="img/icons/search.png" alt="search icon" />
+                <img src="././public/img/icons/search.png" alt="search icon" />
             </li>
             <li>
-                <img src="img/icons/menu.png" alt="search icon" />
+                <img src="././public/img/icons/menu.png" alt="search icon" />
             </li>
         </ul>
     </nav>
+    <a href="index.php">
+        <img src="././public/img/logoBianco.png" alt="unibo logo" />
+    </a>
     <section class="hidden">
         <div>
-            <img src="img/icons/search.png" alt="search icon" />
+            <img src="././public/img/icons/search.png" alt="search icon" />
             <input type="text" />
         </div>
         <div>
@@ -30,14 +33,14 @@
     <section class="hidden">
         <?php 
             if(isset($username)) {?>
-                    <a href="profile.php">Il mio profilo</a>
-                    <a href="terms.php">Informativa sui dati</a>
-                    <a href="logout.php">Logout</a>
+                    <a href="./profile.php">Il mio profilo</a>
+                    <a href="./terms.php">Informativa sui dati</a>
+                    <a href="./logout.php">Logout</a>
         <?php 
              } else {?>
-                    <a href="userRegister.php">Registrati</a>
-                    <a href="userLogin.php">Login</a>
-                    <a href="terms.php">Informativa sui dati</a>
+                    <a href="./userRegister.php">Registrati</a>
+                    <a href="./userLogin.php">Login</a>
+                    <a href="./terms.php">Informativa sui dati</a>
         <?php }?> 
     </section>
 </header>
