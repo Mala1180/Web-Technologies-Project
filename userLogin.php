@@ -14,13 +14,14 @@
     <!-- wait for mala -->
     </header>
     <main>
-        <section>
-            <form name="formLogin" action="login.php" method="post">
+        <section><!-- action="login.php" method="post" -->
+            <form method="post" action="login.php" name="formLogin">
                 <input type="email" name="txtEmail" id="txtEmail" placeholder="Email" value="" required><br/>
                 <input type="password" name="txtPassword" id="txtPassword" placeholder="Password" value="" required><br/>
-                <input type="submit" name="btnLogin" id="SubmitLogin" name="SubmitLogin" value="Entra">
+                <input type="button" name="btnLogin" id="SubmitLogin" value="Entra">
             </form>
         </section>
     </main>
+    <script type="text/javascript" src="./public/js/login.js"></script>
 </body>
 </html>
