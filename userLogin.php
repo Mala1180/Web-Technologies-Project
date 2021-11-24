@@ -15,13 +15,18 @@
     </header>
     <main>
         <section><!-- action="login.php" method="post" -->
-            <form method="post" action="login.php" name="formLogin">
+            <form name="formLogin">
                 <input type="email" name="txtEmail" id="txtEmail" placeholder="Email" value="" required><br/>
                 <input type="password" name="txtPassword" id="txtPassword" placeholder="Password" value="" required><br/>
                 <input type="button" name="btnLogin" id="SubmitLogin" value="Entra">
             </form>
+
+
+            <input type="button" name="btnGetResource" id="GetResource" value="get resource">
         </section>
     </main>
+    <script type="text/javascript" src="./public/js/RequestHelper.js"></script>
+    <script type="text/javascript" src="./public/js/myjwtclass.js"></script>
     <script type="text/javascript" src="./public/js/login.js"></script>
 </body>
 </html>
