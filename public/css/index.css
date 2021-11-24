@@ -10,6 +10,7 @@
     --nav-height: 8vh;
 }
 
+
 /**
  *  Header and Navbar
  */
@@ -64,11 +65,15 @@ header nav ul li img {
  *  Search section in header
  */
 header section {
-    display: flex;
+    display: none;
     flex-direction: column;
     justify-content: center;
     height: 30vh;
     padding-bottom: 25px;
+}
+
+header > a img {
+    display: none;
 }
 
 header section div {
@@ -161,14 +166,16 @@ main section:nth-child(2) {
 }
 
 main section:nth-child(3) {
-    background-image: url(../img/giradischi1.jpg);
+    background-image: url(../img/giradischi3.jpg);
 }
 
 main section:nth-child(4) {
     background-image: url(../img/bundle.jpg);
 }
 
-
+/**
+ *  Medium Screens
+ */
 @media screen and (min-width: 768px) {
 
     main {
@@ -190,6 +197,55 @@ main section:nth-child(4) {
     main section:nth-child(4) h1 {
         height: calc((100vh - var(--nav-height)) / 2);
         line-height: calc((100vh - var(--nav-height)) / 2);
+    }
+
+}
+
+/**
+ *  Large Screens
+ */
+@media screen and (min-width: 1200px) {
+    
+    :root {
+        --header-height: 32vh;
+    }
+
+    header {
+        height: var(--header-height);
+        display: flex;
+        justify-content: space-between;
+    }
+
+    header nav {
+        display: none;
+    }
+
+    header > a img {
+        display: block;
+        height: 100%;
+        padding: 10%;
+    }
+
+    header section {
+        display: flex !important;
+        align-self: center;
+    }
+
+    header section:first-of-type {
+        flex: 1 0 50%;
+    }
+
+    header section:last-of-type {
+        margin-right: 20px;
+    }
+
+    main section {
+        flex: 1 0 24%;
+    }
+
+    main section:nth-child(n) h1 {
+        height: 100vh;
+        line-height: calc((100vh - var(--header-height)) + 2 * var(--header-height))
     }
 
 }
