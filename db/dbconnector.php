@@ -3,7 +3,7 @@
 	require_once("database.php");
 	
 	$servername = "localhost";
-	$database = "myunivinyl";
+	$database = "UniboVinyl";
 	$username = "prova";
 	$password = "prova";
 	$port = 3306;
