@@ -25,7 +25,7 @@ create table vendor (
      surname varchar(25) not null,
      email varchar(50) not null,
      username varchar(16) not null,
-     password varchar(8) not null,
+     password varchar(150) not null,
      constraint IDvendor primary key (idVendor));
 
 create table customer (
@@ -34,7 +34,7 @@ create table customer (
      surname varchar(25) not null,
      email varchar(50) not null,
      username varchar(16) not null,
-     password varchar(8) not null,
+     password varchar(150) not null,
      idCard int,
      constraint IDvendor primary key (idCustomer));
 
