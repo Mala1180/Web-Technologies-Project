@@ -15,3 +15,5 @@ class MyJWT {
 		this._JWT = JWT;
 	}
 }
+
+const jwt = new MyJWT();

@@ -15,7 +15,7 @@
  	}
 
  	public function login($username) {
- 		$query = "SELECT name, password FROM `user` WHERE email=?";
+ 		$query = "SELECT name, password FROM `customer` WHERE username=?";
  		$stmt = $this->db->prepare($query);
  		$stmt->bind_param("s", $username);
  		$stmt->execute();
@@ -23,13 +23,25 @@
  		return $result->fetch_all(MYSQLI_ASSOC);
  	}
 
- 	public function register($name, $surname, $birthDate, $email, $password) {
- 		$query = "INSERT INTO `user` (`name`, `surname`, `birthDate`, `email`, `password`) VALUES (?, ?, ?, ?, ?)";
+ 	public function register($name, $surname, $email, $username, $password) {
+
+		$stmt = $this->db->prepare("SELECT MAX(idCustomer) AS oldId FROM customer");
+		$stmt->execute();
+
+		$newId = $stmt->get_result();
+		$newId = $newId->fetch_object();
+		$newId = $newId -> oldId;
+
+		//se db vuoto. 
+		if($newId == NULL){ $newId = 1;}
+		else {$newId = $newId + 1;}
+		
+ 		$query = "INSERT INTO `customer` (`idCustomer`, `name`, `surname`, `email`, `username`, `password`, `idCard`) VALUES (?, ?, ?, ?, ?, ?, NULL)";
  		$stmt = $this->db->prepare($query);
- 		$stmt->bind_param("sssss", $name, $surname, $birthDate, $email, $password);
+ 		$stmt->bind_param("isssss", $newId, $name, $surname, $email, $username, $password);
  		$stmt->execute();
  		if($stmt->error) {
- 		return false;
+ 			return false;
  		}
  		return true;
  	}

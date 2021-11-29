@@ -3,12 +3,10 @@
 */
 const BASE_URL = "./";
 
-class RequestHelper {
-	
+class RequestHelper {	
 	constructor() {
 
 	}
-
 	async makeRequest(method, action, myHeaders, parameters = []) {
 		const res = await fetch('./' + action + '.php', {
 		  method: method,
@@ -19,3 +17,4 @@ class RequestHelper {
 		return res;
 	}
 }
+const reqHelper = new RequestHelper();

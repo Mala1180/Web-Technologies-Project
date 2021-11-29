@@ -2,8 +2,8 @@
 
 	require_once("database.php");
 	
-	$servername = "192.168.64.2";
-	$database = "myunivinyl";
+	$servername = "localhost";
+	$database = "UniboVinyl";
 	$username = "prova";
 	$password = "prova";
 	$port = 3306;
