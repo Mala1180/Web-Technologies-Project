@@ -18,7 +18,7 @@ use Firebase\JWT\JWT;
 			//$expire     = $issuedAt->modify('+6 minutes')->getTimestamp();      // Add 60 seconds
 			$tokenId    = base64_encode(random_bytes(16));
 			$createdAt   = new DateTimeImmutable();
-			$username = $user[0]["name"];
+			$username = $body["username"];
 			// Expire -> 'exp'  => $expire, ..., ..., 
 			$data = [
 			    'createdAt'  => $createdAt->getTimestamp(),    // Issued at: time when the token was generated

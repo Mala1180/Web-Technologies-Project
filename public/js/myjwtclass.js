@@ -1,6 +1,7 @@
 /**
 *	Simple class for JWT to get and set the token.
 */
+
 class MyJWT {
 
 	constructor() {

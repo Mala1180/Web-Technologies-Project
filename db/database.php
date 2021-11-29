@@ -46,6 +46,45 @@
  		return true;
  	}
 
+	public function getUserInfo($username) {
+		$query = "SELECT idCustomer, name, surname, email, username FROM customer WHERE username=?";
+		$stmt = $this->db->prepare($query);
+		$stmt->bind_param("s", $username);
+		$stmt->execute();
+ 		$result = $stmt->get_result();
+ 		return $result->fetch_all(MYSQLI_ASSOC);
+ 	}
+
+
+	public function addCardToUser($username, $cardNumber, $circuit, $expiryDate) {
+		$stmt = $this->db->prepare("SELECT MAX(idCard) AS oldId FROM creditCard");
+		$stmt->execute();
+
+		$newId = $stmt->get_result();
+		$newId = $newId->fetch_object();
+		$newId = $newId -> oldId;
+
+		//se db vuoto. 
+		if($newId == NULL){ $newId = 1;}
+		else {$newId = $newId + 1;}
+
+		//$query = "INSERT INTO `creditCard` (`idCard`, `cardNumber`, `circuit`, `expiryDate`, `isDeleted`, `idCustomer`) VALUES (?, ?, ?, ?, ?, ?)";
+		
+		$query = "SELECT * FROM creditCard";
+
+		$stmt = $this->db->prepare($query);
+		$idCustomer = $this->getUserInfo($username)[0]["idCustomer"];
+		//$stmt->bind_param("isssii", $newId, $cardNumber, $circuit, $expiryDate, 0, $idCustomer);
+		$stmt->execute();
+		$result = $stmt->get_result();
+ 		return var_dump($result->fetch_all(MYSQLI_ASSOC));
+		// if($stmt->error) {
+		// 	return false;
+		// }
+		// return true;
+ 	}
+
+	
  	/*Please don't remove this metafunction, thanks.*/
  	public function funzione($parameter = "default") {
  		$query = "SQL FORMAT";
