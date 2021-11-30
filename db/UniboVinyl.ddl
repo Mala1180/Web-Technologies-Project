@@ -20,7 +20,7 @@ use UniboVinyl;
 -- _____________ 
 
 create table vendor (
-     idVendor int not null,
+     idVendor int not null auto_increment,
      name varchar(25) not null,
      surname varchar(25) not null,
      email varchar(50) not null,
@@ -29,7 +29,7 @@ create table vendor (
      constraint IDvendor primary key (idVendor));
 
 create table customer (
-     idCustomer int not null,
+     idCustomer int not null auto_increment,
      name varchar(25) not null,
      surname varchar(25) not null,
      email varchar(50) not null,
@@ -39,17 +39,17 @@ create table customer (
      constraint IDvendor primary key (idCustomer));
 
 create table creditCard (
-     idCard int not null,
+     idCard int not null auto_increment,
      cardNumber varchar(16) not null,
      circuit varchar(10) not null,
-     expireDate date not null,
-     isDeleted char not null,
+     expiryDate date not null,
+     isDeleted tinyint not null,
      idCustomer int not null,
      constraint IDcreditCard primary key (idCard),
      constraint IDcreditCard_1 unique (cardNumber));
 
 create table transaction (
-     idTransaction int not null,
+     idTransaction int not null auto_increment,
      idOrder int not null,
      transactionDate date not null,
      idCard int not null,
@@ -57,7 +57,7 @@ create table transaction (
      constraint FKpayment_ID unique (idOrder));
 
 create table album (
-     idAlbum int not null,
+     idAlbum int not null auto_increment,
      name varchar(50) not null,
      idAuthor int not null,
      duration int not null,
@@ -74,7 +74,7 @@ create table genre (
      constraint IDgenre primary key (name));
 
 create table author (
-     idAuthor int not null,
+     idAuthor int not null auto_increment,
      artName char(1) not null,
      constraint IDauthor primary key (idAuthor));
 
@@ -85,7 +85,7 @@ create table song (
      constraint IDsong primary key (idAlbum, name));
 
 create table product (
-     idProduct int not null,
+     idProduct int not null auto_increment,
      quantity int not null,
      price decimal(4,2) not null,
      description varchar(280) not null,
@@ -118,7 +118,7 @@ create table cartEntry (
      constraint IDcartEntry primary key (idCustomer, idProduct));
 
 create table notification (
-     idNotification char(1) not null,
+     idNotification int not null auto_increment,
      subject varchar(50) not null,
      message varchar(280) not null,
      notificationDate date not null,
@@ -233,4 +233,3 @@ alter table featuring add constraint FKauthor
 
 -- Index Section
 -- _____________ 
-

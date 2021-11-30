@@ -2,7 +2,7 @@
 
 	require_once("database.php");
 	
-	$servername = "192.168.64.2";
+	$servername = "localhost";
 	$database = "UniboVinyl";
 	$username = "prova";
 	$password = "prova";
