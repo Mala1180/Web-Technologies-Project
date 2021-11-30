@@ -31,6 +31,9 @@
                 <input type="text" name="txtCircuit" id="txtCircuit" placeholder="Circuito (ES. Visa, Mastercard, ...)" value="" required><br/>
                 <input type="date" name="expiryDateCreditCard" id="expiryDateCreditCard" placeholder="Data di scadenza" value="" required><br/>
 
+                <label for="cmbDefault">Vuoi impostare la carta come predefinita?</label>
+                <input type="checkbox" id="cmbDefault" name="cmbDefault" value="Default">
+    <br>
                 <input type="button" name="btnAddCard" id="btnAddCard" value="Aggiungi">
             </form>
         </section>

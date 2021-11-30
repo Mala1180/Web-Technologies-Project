@@ -17,7 +17,7 @@ use Firebase\JWT\JWT;
                 requireUserInfo($body["Authorization"]);
                 break;
             case "addcard":
-                addCard($body["Authorization"], $body["cardNumber"], $body["circuit"], $body["expiryDate"]);
+                addCard($body["Authorization"], $body["cardNumber"], $body["circuit"], $body["expiryDate"], $body["isDefault"]);
                 break;
             case "action3":
                 echo "action 3";
@@ -29,9 +29,8 @@ use Firebase\JWT\JWT;
         $data = JWT::decode($token, SECRET_KEY, [JWT_CRYPTO_ALGORITHM]);
         print(json_encode($GLOBALS["dbh"]->getUserInfo($data->data->username)));
     }
-    function addCard($token, $cardNumber, $circuit, $expiryDate) {
+    function addCard($token, $cardNumber, $circuit, $expiryDate, $isDefault) {
         $data = JWT::decode($token, SECRET_KEY, [JWT_CRYPTO_ALGORITHM]);
-        //print($cardNumber.$circuit.$expiryDate);
-        print($GLOBALS["dbh"]->addCardToUser($data->data->username, $cardNumber, $circuit, $expiryDate));
+        print($GLOBALS["dbh"]->addCardToUser($data->data->username, $cardNumber, $circuit, $expiryDate, $isDefault));
     }
 ?>
