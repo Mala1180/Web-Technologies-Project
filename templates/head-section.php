@@ -6,9 +6,8 @@
 <link rel="stylesheet" href="./public/css/select2.min.css">
 <link rel="stylesheet" href="./public/css/sweetalert2.min.css">
 
-<link rel="stylesheet" href="./public/css/index.css" />
+<link rel="stylesheet" href="./public/css/common.css" />
 <link rel="stylesheet" href="./public/css/font.css" />
-<link rel="stylesheet" href="./public/css/utility.css" />
 
 <!-- JQuery -->
 <script src="./public/libraries/jquery3.6.0.js"></script>

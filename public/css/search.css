@@ -1,0 +1,73 @@
+:root {
+    --image-height: 120px;
+}
+
+header {
+    position: unset;
+    /* Default image without filter in reasearch */
+    background-image: url(../img/vinile2.jpg);
+    background-size: cover;
+    background-position: center;
+}
+
+header > div.container {
+    backdrop-filter: blur(5px);
+}
+
+/**
+ * Show by default the search menu
+ */
+header section:first-of-type {
+    display: flex;
+}
+
+section.article {
+    padding: 10px;
+}
+
+section.article img {
+    float: left;
+    width: 40vw;
+    height: var(--image-height);
+    object-fit: cover;
+    object-position: center;
+    margin-right: 10px;
+    border-radius: 10px;
+}
+
+section.article aside {
+    height: var(--image-height);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+section.article aside h1 {
+    font-family: lato-regular;
+    font-size: 22px;
+    margin: 5px 0;
+}
+section.article aside span {
+}
+
+section.article aside div:nth-of-type(2) {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+section.article aside div:last-of-type span {
+    font-family: lato-regular;
+    font-size: 18px;
+}
+
+section.article aside input[type="button"] {
+    border-radius: 5px;
+    background-color: #777;
+    border: none;
+    padding: 8px 10px;
+    color: #fff;
+    cursor: pointer;
+    font-family: lato-regular;
+    font-size: 15px;
+}
