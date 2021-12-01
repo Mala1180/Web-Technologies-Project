@@ -10,14 +10,13 @@
     --nav-height: 8vh;
 }
 
-
 /**
  *  Header and Navbar
  */
 header {
     position: fixed;
     width: 100%;
-    background-color: rgba(70, 70, 70, .95);
+    background-color: rgba(70, 70, 70, 0.95);
     /* over respect the main */
     z-index: 1;
 }
@@ -92,12 +91,16 @@ header section div input,
 header section div select {
     height: 30px;
     font-size: 15px;
-    color: white;
     text-align: center;
+    color: white;
     background-color: transparent;
     border: 1px solid white;
     border-radius: 10px;
     margin-left: 10px;
+}
+
+header section div select option {
+    color: initial;
 }
 
 header section div input {
@@ -158,7 +161,9 @@ main section h1 {
 
 main section:first-child h1 {
     height: calc(((100vh - var(--nav-height)) / 4) + var(--nav-height));
-    line-height: calc(((100vh - var(--nav-height)) / 4) + 2 * var(--nav-height));
+    line-height: calc(
+        ((100vh - var(--nav-height)) / 4) + 2 * var(--nav-height)
+    );
 }
 
 main section:nth-child(2) {
@@ -177,7 +182,6 @@ main section:nth-child(4) {
  *  Medium Screens
  */
 @media screen and (min-width: 768px) {
-
     main {
         flex-direction: row;
         flex-wrap: wrap;
@@ -190,7 +194,9 @@ main section:nth-child(4) {
     main section:nth-child(1) h1,
     main section:nth-child(2) h1 {
         height: calc(((100vh - var(--nav-height)) / 2) + var(--nav-height));
-        line-height: calc(((100vh - var(--nav-height)) / 2) + 2 * var(--nav-height));
+        line-height: calc(
+            ((100vh - var(--nav-height)) / 2) + 2 * var(--nav-height)
+        );
     }
 
     main section:nth-child(3) h1,
@@ -198,14 +204,12 @@ main section:nth-child(4) {
         height: calc((100vh - var(--nav-height)) / 2);
         line-height: calc((100vh - var(--nav-height)) / 2);
     }
-
 }
 
 /**
  *  Large Screens
  */
 @media screen and (min-width: 1200px) {
-    
     :root {
         --header-height: 32vh;
     }
@@ -245,7 +249,8 @@ main section:nth-child(4) {
 
     main section:nth-child(n) h1 {
         height: 100vh;
-        line-height: calc((100vh - var(--header-height)) + 2 * var(--header-height))
+        line-height: calc(
+            (100vh - var(--header-height)) + 2 * var(--header-height)
+        );
     }
-
 }
