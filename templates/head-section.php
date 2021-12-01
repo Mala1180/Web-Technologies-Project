@@ -6,6 +6,9 @@
 <link rel="stylesheet" href="./public/css/select2.min.css">
 <link rel="stylesheet" href="./public/css/sweetalert2.min.css">
 
+<!-- Google Material Icons -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 <link rel="stylesheet" href="./public/css/common.css" />
 <link rel="stylesheet" href="./public/css/font.css" />
 

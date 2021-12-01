@@ -24,8 +24,14 @@ main section h1 {
     letter-spacing: 0.35em;
     /* same of sections height */
     line-height: calc((100vh - var(--nav-height)) / 4);
-    backdrop-filter: blur(1px);
     cursor: pointer;
+}
+
+@supports ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+    main section h1 {
+        -webkit-backdrop-filter: blur(1px);
+        backdrop-filter: blur(1px);
+    }
 }
 
 main section:first-child h1 {
