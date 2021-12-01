@@ -5,3 +5,7 @@
 report/*
 !report/report.tex
 !report/report.pdf
+
+# ignore zip files
+*.zip
+

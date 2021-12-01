@@ -1,13 +1,13 @@
 /**
  * Are you happy Kel?
  */
-$(document).ready(function() {
+$(document).ready(function () {
     const $searchSection = $("header section:first-of-type");
     const $menuSection = $("header section:last-of-type");
-    const $searchIcon =  $("header nav ul li:nth-child(2) img");
-    const $menuIcon =  $("header nav ul li:nth-child(3) img");
+    const $searchIcon = $("header nav ul li:nth-child(2) img");
+    const $menuIcon = $("header nav ul li:nth-child(3) img");
 
-    $("header nav ul li:nth-child(2)").click(function() {
+    $("header nav ul li:nth-child(2)").click(function () {
         if ($searchSection.css("display") === "none") {
             replaceIconSrc($searchIcon, "public/img/icons/cancel.png");
             $searchSection.fadeIn(100).css("display", "flex");
@@ -21,7 +21,7 @@ $(document).ready(function() {
         }
     });
 
-    $("header nav ul li:nth-child(3)").click(function() {
+    $("header nav ul li:nth-child(3)").click(function () {
         if ($menuSection.css("display") === "none") {
             replaceIconSrc($menuIcon, "public/img/icons/cancel.png");
             $menuSection.fadeIn(100).css("display", "flex");
