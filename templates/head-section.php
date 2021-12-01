@@ -13,5 +13,5 @@
 <script src="./public/libraries/jquery3.6.0.js"></script>
 
 <!-- Js Scripts -->
-<script src="./public/js/select2.min.js"></script>
+<script src="./public/libraries/select2.min.js"></script>
 <script src="./public/js/index.js"></script>
