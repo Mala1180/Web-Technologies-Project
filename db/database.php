@@ -45,10 +45,8 @@
  	}
 
 
-	public function addCardToUser($username, $cardNumber, $circuit, $expiryDate) {
-
-		$query = "INSERT INTO `creditCard` (`cardNumber`, `circuit`, `expiryDate`, `isDeleted`, `idCustomer`) VALUES (?, ?, ?, ?, ?)";
-		
+	public function addCardToUser($username, $cardNumber, $circuit, $expiryDate, $isDefault) {
+		$query = "INSERT INTO `creditCard` (`cardNumber`, `circuit`, `expiryDate`, `isDeleted`, `idCustomer`) VALUES (?, ?, ?, ?, ?)";	
 		$stmt = $this->db->prepare($query);
 		$idCustomer = $this->getUserInfo($username)[0]["idCustomer"];
 		$isDeleted = 0;
@@ -57,8 +55,34 @@
 		if($stmt->error) {
 			return false;
 		}
+		
+		if($isDefault == 1){
+			//la voglio impostare anche come predefinita.
+			$this->setDefaultCard($username, $cardNumber, $circuit, $expiryDate);
+		} 
 		return true;
  	}
+
+	public function setDefaultCard($username, $cardNumber, $circuit, $expiryDate) {
+		
+		$query = "SELECT idCard FROM creditCard WHERE cardNumber=? AND circuit=? AND expiryDate=? AND idCustomer=?";
+		$stmt = $this->db->prepare($query);
+		$idCustomer = $this->getUserInfo($username)[0]["idCustomer"];
+		$stmt->bind_param("sssi", $cardNumber, $circuit, $expiryDate, $idCustomer);
+		$stmt->execute();
+ 		$result = $stmt->get_result();
+		$idCard = $result->fetch_array();
+		$idCard = intval($idCard['idCard']);
+
+		$query = "UPDATE `customer` SET idCard=? WHERE idCustomer=?";
+		$stmt = $this->db->prepare($query);
+		$stmt->bind_param("ii", $idCard, $idCustomer);
+		$stmt->execute();
+		if($stmt->error) {
+			return false;
+		}
+		return true;
+	}
 
 	
  	/*Please don't remove this metafunction, thanks.*/

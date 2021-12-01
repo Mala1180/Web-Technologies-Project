@@ -4,17 +4,14 @@
 const BASE_URL = "./";
 
 class RequestHelper {	
-	constructor() {
-
-	}
-	async makeRequest(method, action, myHeaders, parameters = []) {
-		const res = await fetch('./' + action + '.php', {
+	constructor() {}
+	
+	makeRequest(method, action, myHeaders, parameters = []) {
+		return fetch('./' + action + '.php', {
 		  method: method,
 		  headers: myHeaders,
 		  body: JSON.stringify(parameters)
 		});
-
-		return res;
 	}
 }
 const reqHelper = new RequestHelper();

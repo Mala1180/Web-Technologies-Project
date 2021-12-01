@@ -8,10 +8,10 @@ document.querySelector('#SubmitRegister').addEventListener('click', async (e) =>
         {"name": txtName.value, "surname": txtSurname.value, "email": txtEmail.value, "username": txtUsername.value, "password":  txtPassword.value});
         
     if (res.status >= 200 && res.status <= 299) {
-        $esito = await res.text();
-        if($esito){
-        //let newUrl = location.href.replace("Register.php", "Login.php");
-        //location.href = newUrl;
+        let esito = await res.text();
+        if(esito){
+        let newUrl = location.href.replace("Register.php", "Login.php");
+        location.href = newUrl;
         }
     } else {
         //errore nella registrazione.
