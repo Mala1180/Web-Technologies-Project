@@ -15,4 +15,4 @@
 <!-- Js Scripts -->
 <script src="./public/libraries/select2.min.js"></script>
 <script src="./public/libraries/sweetalert2.min.js"></script>
-<script src="./public/js/index.js"></script>
+<script src="./public/js/header.js"></script>
