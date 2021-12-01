@@ -1,13 +1,13 @@
-<?php 
+<?php
 
-// require "vendor/autoload.php";
-// use \Firebase\JWT\JWT;
- class DatabaseHelper
+require_once("db/dbconnector.php");
+
+class DBUserMgr
  {
  	private $db;
  	
- 	public function __construct($servername, $username, $password, $dbname, $port) {
- 		$this->db = new mysqli($servername, $username, $password, $dbname, $port);
+ 	public function __construct($dbConnection) {
+ 		$this->db = $dbConnection;
 
  		if($this->db->connect_error) {
  			die("Connessione al database fallita.");
@@ -35,7 +35,7 @@
  		return true;
  	}
 
-	public function getUserInfo($username) {
+     public function getUserInfo($username) {
 		$query = "SELECT idCustomer, name, surname, email, username FROM customer WHERE username=?";
 		$stmt = $this->db->prepare($query);
 		$stmt->bind_param("s", $username);
@@ -83,19 +83,6 @@
 		}
 		return true;
 	}
+ }
 
-	
- 	/*Please don't remove this metafunction, thanks.*/
- 	public function funzione($parameter = "default") {
- 		$query = "SQL FORMAT";
- 		$stmt = $this->db->prepare($query);
- 		$stmt->bind_param("i", $n);
- 		$stmt->execute();
- 		$result = $stmt->get_result();
- 		if($stmt->error){
- 			die("Errore.");
- 		}
- 		return $result->fetch_all(MYSQLI_ASSOC);
- 	}
- } 
 ?>

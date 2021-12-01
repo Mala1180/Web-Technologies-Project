@@ -8,5 +8,5 @@
 	$password = "prova";
 	$port = 3306;
 
-	$dbh = new DatabaseHelper($servername, $username, $password, $database, $port);
+	$db = new mysqli($servername, $username, $password, $dbname, $port);
  ?>
