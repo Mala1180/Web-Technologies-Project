@@ -1,0 +1,14 @@
+:root {
+    --nav-height: 8vh;
+}
+
+* {
+    margin: 0;
+    box-sizing: border-box;
+    font-weight: normal;
+    font-family: lato-light;
+}
+
+a {
+    text-decoration: none;
+}
