@@ -2,7 +2,7 @@
     --image-height: 120px;
 }
 
-header {
+body > header {
     position: unset;
     /* Default image without filter in reasearch */
     background-image: url(../img/vinile2.jpg);
@@ -10,7 +10,7 @@ header {
     background-position: center;
 }
 
-header > div.container {
+body > header > div.container {
     background-color: rgba(70, 70, 70, 0.95);
 }
 
@@ -18,7 +18,7 @@ header > div.container {
  *  if backdrop-filter supported
  */
 @supports ((-webkit-backdrop-filter: blur(5px)) or (backdrop-filter: blur(5px))) {
-    header > div.container {
+    body > header > div.container {
         -webkit-backdrop-filter: blur(5px);
         backdrop-filter: blur(5px);
         background-color: unset;
@@ -28,7 +28,7 @@ header > div.container {
 /**
  * Show by default the search menu
  */
-header section:first-of-type {
+body > header section:first-of-type {
     display: flex;
 }
 
@@ -92,41 +92,62 @@ main section aside input[type="button"] {
 /**
  *  Cart Preview
  */
-footer {
+body > aside {
     position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
+    transition: bottom 0.3s ease-in-out;
     background-color: rgba(0, 0, 0, 0.7);
     margin: 5px;
     border-radius: 10px;
     color: white;
 }
 
-footer > h1 {
+body > aside > header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+body > aside > header > h1 {
     font-family: lato-light;
     font-size: 20px;
-    margin: 20px;
+    margin: 15px 20px;
     letter-spacing: 0.2em;
 }
 
-footer > img {
-    width: 20px;
-    height: 20px;
-    float: right;
-    margin: 20px;
+body > aside > header > img {
+    width: 30px;
+    height: 30px;
+    margin: 0 20px;
+    cursor: pointer;
 }
 
-footer > span {
-    font-family: lato-light;
+body > aside footer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    cursor: pointer;
+}
+
+body > aside footer > span:last-of-type {
+    margin: 10px 20px 10px 0;
+}
+
+body > aside footer > span:first-of-type {
+    font-family: lato-regular;
     font-size: 15px;
-    float: right;
     letter-spacing: 0.2em;
-    margin-bottom: 10px;
-    margin-right: 20px;
+    margin: 10px 5px;
 }
 
-footer section {
+body > aside div {
+    max-height: 30vh;
+    overflow-y: scroll;
+}
+
+body > aside div section {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -136,12 +157,13 @@ footer section {
     background-color: rgba(124, 41, 41, 0.9);
 }
 
-footer section div:first-of-type {
+body > aside div section div {
     display: flex;
     align-items: center;
+    min-width: min-content;
 }
 
-footer section img {
+body > aside div section img {
     height: 40px;
     width: 40px;
     object-fit: cover;
@@ -149,23 +171,39 @@ footer section img {
     border-radius: 10px;
 }
 
-footer section h1,
-footer section span {
-    font-size: 14px;
+body > aside div section h1 {
+    font-size: 16px;
     margin-left: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* number of lines to show */
+    -webkit-box-orient: vertical;
+}
+
+body > aside div section div:last-of-type span {
+    margin-left: 3px;
+}
+body > aside div section div:last-of-type span:nth-of-type(2) {
+    font-family: lato-regular;
+}
+
+span.material-icons-outlined {
+    font-size: 26px;
+    cursor: pointer;
 }
 
 /**
  *  if backdrop-filter supported
  */
 @supports ((-webkit-backdrop-filter: blur(30px)) or (backdrop-filter: blur(30px))) {
-    footer {
+    body > aside {
         -webkit-backdrop-filter: blur(30px);
         backdrop-filter: blur(30px);
         background-color: rgba(0, 0, 0, 0.3);
     }
 
-    footer section {
+    body > aside div section {
         -webkit-backdrop-filter: blur(30px);
         backdrop-filter: blur(30px);
         background-color: rgba(0, 0, 0, 0.5);
