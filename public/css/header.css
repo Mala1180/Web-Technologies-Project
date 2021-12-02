@@ -1,26 +1,27 @@
 /**
  *  Header and Navbar
  */
-header {
+body > header {
     position: fixed;
     width: 100%;
     background-color: rgba(70, 70, 70, 0.95);
     /* over respect the main */
     z-index: 1;
+    transition: top 0.3s; /* Transition effect when sliding down (and up) */
 }
 
 /**
  *  if backdrop-filter supported
  */
 @supports ((-webkit-backdrop-filter: blur(25px)) or (backdrop-filter: blur(25px))) {
-    header {
+    body > header {
         -webkit-backdrop-filter: blur(25px);
         backdrop-filter: blur(25px);
         background-color: unset;
     }
 }
 
-header nav ul {
+body > header nav ul {
     height: var(--nav-height);
     padding: 5px;
     list-style: none;
@@ -28,23 +29,23 @@ header nav ul {
     align-items: center;
 }
 
-header nav ul li {
+body > header nav ul li {
     cursor: pointer;
     margin-right: 10px;
 }
 
-header nav ul li:nth-child(2) {
+body > header nav ul li:nth-child(2) {
     margin-left: auto;
     margin-right: 20px;
 }
 
-header nav ul li a,
-header nav ul li a img {
+body > header nav ul li a,
+body > header nav ul li a img {
     width: 6.5vh;
     height: 6.5vh;
 }
 
-header nav ul li img {
+body > header nav ul li img {
     width: 5vh;
     height: 5vh;
 }
@@ -52,7 +53,7 @@ header nav ul li img {
 /**
  *  Search section in header
  */
-header section {
+body > header section {
     display: none;
     flex-direction: column;
     justify-content: center;
@@ -60,24 +61,24 @@ header section {
     padding-bottom: 25px;
 }
 
-header > div > a img {
+body > header > div > a img {
     display: none;
 }
 
-header section div {
+body > header section div {
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 10px 0;
 }
 
-header section div img {
+body > header section div img {
     width: 30px;
     height: 30px;
 }
 
-header section div input,
-header section div select {
+body > header section div input,
+body > header section div select {
     height: 30px;
     font-size: 15px;
     letter-spacing: 0.35em;
@@ -89,20 +90,20 @@ header section div select {
     margin-left: 10px;
 }
 
-header section div select option {
+body > header section div select option {
     color: initial;
 }
 
-header section div input {
+body > header section div input {
     letter-spacing: 0;
     width: 60%;
 }
 
-header section div select {
+body > header section div select {
     width: 40%;
 }
 
-header section div label {
+body > header section div label {
     color: white;
     font-size: 18px;
     letter-spacing: 0.2em;
@@ -111,7 +112,7 @@ header section div label {
 /**
  *   Menu section in header
  */
-header section a {
+body > header section a {
     letter-spacing: 0.35em;
     color: white;
     font-size: 22px;
@@ -127,32 +128,32 @@ header section a {
         --header-height: 32vh;
     }
 
-    header div.container {
+    body > header div.container {
         height: var(--header-height);
         display: flex;
         justify-content: space-between;
     }
 
-    header nav {
+    body > header nav {
         display: none;
     }
 
-    header > div > a img {
+    body > header > div > a img {
         display: block;
         height: 100%;
         padding: 10%;
     }
 
-    header section {
+    body > header section {
         display: flex !important;
         align-self: center;
     }
 
-    header section:first-of-type {
+    body > header section:first-of-type {
         flex: 1 0 50%;
     }
 
-    header section:last-of-type {
+    body > header section:last-of-type {
         margin-right: 20px;
     }
 }
