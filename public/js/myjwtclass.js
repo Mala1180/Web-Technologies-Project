@@ -12,6 +12,10 @@ class MyJWT {
 	setJWT(JWT) {
 		localStorage.setItem("AuthToken", JWT);
 	}
+
+	unsetJWT() {
+		localStorage.removeItem("AuthToken");
+	}
 }
 
 const jwt = new MyJWT();
