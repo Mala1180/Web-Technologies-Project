@@ -39,7 +39,7 @@ use Firebase\JWT\JWT;
         //è un post.
         switch ($_POST["action"]) {
             case "addcard":
-                $data = JWT::decode(apache_request_header()["Authorization"], SECRET_KEY, [JWT_CRYPTO_ALGORITHM]);
+                $data = JWT::decode(apache_request_headers()["Authorization"], SECRET_KEY, [JWT_CRYPTO_ALGORITHM]);
                 print($dbUserMgr->addCardToUser($data->data->username, $cardNumber, $circuit, $expiryDate, $isDefault));
                 break;
             case "requireUserInfo":
