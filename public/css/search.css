@@ -142,7 +142,7 @@ body > aside footer > span:first-of-type {
     margin: 10px 5px;
 }
 
-body > aside div {
+body > aside > div {
     max-height: 30vh;
     overflow-y: scroll;
 }
