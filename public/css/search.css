@@ -11,7 +11,7 @@ body > header {
 }
 
 body > header > div.container {
-    background-color: rgba(70, 70, 70, 0.95);
+    background-color: rgba(70, 70, 70, 0.8);
 }
 
 /**
@@ -35,6 +35,10 @@ body > header section:first-of-type {
 /**
  * Article section
  */
+body > main {
+    margin-bottom: 60px;
+}
+
 main section {
     padding: 10px;
 }
@@ -98,7 +102,7 @@ body > aside {
     left: 0;
     right: 0;
     transition: bottom 0.3s ease-in-out;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgb(80, 80, 80);
     margin: 5px;
     border-radius: 10px;
     color: white;
@@ -155,7 +159,7 @@ body > aside div section {
     margin: 10px 20px;
     border-radius: 10px;
     padding: 7px;
-    background-color: rgba(124, 41, 41, 0.9);
+    background-color: rgb(35, 35, 35);
 }
 
 body > aside div section div {
