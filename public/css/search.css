@@ -112,6 +112,7 @@ body > aside > header {
 
 body > aside > header > h1 {
     font-family: lato-light;
+    flex-grow: 1;
     font-size: 20px;
     margin: 15px 20px;
     letter-spacing: 0.2em;
