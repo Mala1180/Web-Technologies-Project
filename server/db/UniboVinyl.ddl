@@ -89,7 +89,7 @@ create table product (
      quantity int not null,
      price decimal(4,2) not null,
      description varchar(280) not null,
-     type int not null,
+     type tinyint not null,
      idAuthor int,
      name varchar(50),
      idAlbum int,
@@ -104,7 +104,7 @@ create table orderDetail (
 
 create table customerOrder (
      idOrder int not null,
-     state int not null,
+     state tinyint not null,
      orderDate date not null,
      shippingDate date not null,
      deliveryDate date not null,
