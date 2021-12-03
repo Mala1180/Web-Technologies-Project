@@ -3,16 +3,14 @@
 */
 class MyJWT {
 
-	constructor() {
-		this._JWT = "";
-	}
+	constructor() { }
 
 	getJWT() {
-		return this._JWT;
+		return localStorage.getItem("AuthToken");
 	}
 
 	setJWT(JWT) {
-		this._JWT = JWT;
+		localStorage.setItem("AuthToken", JWT);
 	}
 }
 

@@ -4,7 +4,7 @@
 const BASE_URL = "./server/";
 
 function getDefaultHeaders() {
-	authorizationToken = localStorage.getItem("AuthToken");
+	authorizationToken = jwt.getJWT();
 	const headers = {};
 	if (authorizationToken != null) {
 		headers.Authorization = "Bearer " + authorizationToken;
