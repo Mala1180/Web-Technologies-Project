@@ -1,0 +1,159 @@
+/**
+ *  Header and Navbar
+ */
+body > header {
+    position: fixed;
+    width: 100%;
+    background-color: rgba(70, 70, 70, 0.95);
+    /* over respect the main */
+    z-index: 1;
+    transition: top 0.3s; /* Transition effect when sliding down (and up) */
+}
+
+/**
+ *  if backdrop-filter supported
+ */
+@supports ((-webkit-backdrop-filter: blur(25px)) or (backdrop-filter: blur(25px))) {
+    body > header {
+        -webkit-backdrop-filter: blur(25px);
+        backdrop-filter: blur(25px);
+        background-color: unset;
+    }
+}
+
+body > header nav ul {
+    height: var(--nav-height);
+    padding: 5px;
+    list-style: none;
+    display: flex;
+    align-items: center;
+}
+
+body > header nav ul li {
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+body > header nav ul li:nth-child(2) {
+    margin-left: auto;
+    margin-right: 20px;
+}
+
+body > header nav ul li a,
+body > header nav ul li a img {
+    width: 6.5vh;
+    height: 6.5vh;
+}
+
+body > header nav ul li img {
+    width: 5vh;
+    height: 5vh;
+}
+
+/**
+ *  Search section in header
+ */
+body > header section {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    height: 30vh;
+    padding-bottom: 25px;
+}
+
+body > header > div > a img {
+    display: none;
+}
+
+body > header section div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0;
+}
+
+body > header section div img {
+    width: 30px;
+    height: 30px;
+}
+
+body > header section div input,
+body > header section div select {
+    height: 30px;
+    font-size: 15px;
+    letter-spacing: 0.35em;
+    text-align: center;
+    color: white;
+    background-color: transparent;
+    border: 1px solid white;
+    border-radius: 10px;
+    margin-left: 10px;
+}
+
+body > header section div select option {
+    color: initial;
+}
+
+body > header section div input {
+    letter-spacing: 0;
+    width: 60%;
+}
+
+body > header section div select {
+    width: 40%;
+}
+
+body > header section div label {
+    color: white;
+    font-size: 18px;
+    letter-spacing: 0.2em;
+}
+
+/**
+ *   Menu section in header
+ */
+body > header section a {
+    letter-spacing: 0.35em;
+    color: white;
+    font-size: 22px;
+    text-align: center;
+    margin: 15px 0;
+}
+
+/**
+ *  Large Screens
+ */
+@media screen and (min-width: 1200px) {
+    :root {
+        --header-height: 32vh;
+    }
+
+    body > header div.container {
+        height: var(--header-height);
+        display: flex;
+        justify-content: space-between;
+    }
+
+    body > header nav {
+        display: none;
+    }
+
+    body > header > div > a img {
+        display: block;
+        height: 100%;
+        padding: 10%;
+    }
+
+    body > header section {
+        display: flex !important;
+        align-self: center;
+    }
+
+    body > header section:first-of-type {
+        flex: 1 0 50%;
+    }
+
+    body > header section:last-of-type {
+        margin-right: 20px;
+    }
+}

@@ -1,0 +1,225 @@
+:root {
+    --image-height: 120px;
+}
+
+body > header {
+    position: unset;
+    /* Default image without filter in reasearch */
+    background-image: url(../img/vinile2.jpg);
+    background-size: cover;
+    background-position: center;
+}
+
+body > header > div.container {
+    background-color: rgba(70, 70, 70, 0.8);
+}
+
+/**
+ *  if backdrop-filter supported
+ */
+@supports (
+    (-webkit-backdrop-filter: blur(5px)) or (backdrop-filter: blur(5px))
+) {
+    body > header > div.container {
+        -webkit-backdrop-filter: blur(5px);
+        backdrop-filter: blur(5px);
+        background-color: unset;
+    }
+}
+
+/**
+ * Show by default the search menu
+ */
+body > header section:first-of-type {
+    display: flex;
+}
+
+main {
+    /* This is for when the preview is down */
+    margin-bottom: 60px;
+}
+
+/**
+ * Article section
+ */
+body > main {
+    margin-bottom: 60px;
+}
+
+main section {
+    padding: 10px;
+}
+
+main section img {
+    float: left;
+    width: 40vw;
+    height: var(--image-height);
+    object-fit: cover;
+    object-position: center;
+    margin-right: 10px;
+    border-radius: 10px;
+}
+
+main section aside {
+    height: var(--image-height);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+main section aside h1 {
+    font-family: lato-regular;
+    font-size: 22px;
+    margin-bottom: 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* number of lines to show */
+    -webkit-box-orient: vertical;
+}
+
+main section aside div:nth-of-type(2) {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+main section aside div:last-of-type span {
+    font-family: lato-regular;
+    font-size: 18px;
+}
+
+main section aside input[type="button"] {
+    border-radius: 5px;
+    background-color: #777;
+    border: none;
+    padding: 8px 10px;
+    color: #fff;
+    cursor: pointer;
+    font-family: lato-regular;
+    font-size: 15px;
+}
+
+/**
+ *  Cart Preview
+ */
+body > aside {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    transition: bottom 0.3s ease-in-out;
+    background-color: rgb(80, 80, 80);
+    margin: 5px;
+    border-radius: 10px;
+    color: white;
+}
+
+body > aside > header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+body > aside > header > h1 {
+    font-family: lato-light;
+    flex-grow: 1;
+    font-size: 20px;
+    margin: 15px 20px;
+    letter-spacing: 0.2em;
+}
+
+body > aside > header > img {
+    width: 30px;
+    height: 30px;
+    margin: 0 20px;
+    cursor: pointer;
+}
+
+body > aside footer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    cursor: pointer;
+}
+
+body > aside footer > span:last-of-type {
+    margin: 10px 20px 10px 0;
+}
+
+body > aside footer > span:first-of-type {
+    font-family: lato-regular;
+    font-size: 15px;
+    letter-spacing: 0.2em;
+    margin: 10px 5px;
+}
+
+body > aside > div {
+    max-height: 30vh;
+    overflow-y: scroll;
+}
+
+body > aside div section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 20px;
+    border-radius: 10px;
+    padding: 7px;
+    background-color: rgb(35, 35, 35);
+}
+
+body > aside div section div {
+    display: flex;
+    align-items: center;
+    min-width: min-content;
+}
+
+body > aside div section img {
+    height: 40px;
+    width: 40px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 10px;
+}
+
+body > aside div section h1 {
+    font-size: 16px;
+    margin-left: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* number of lines to show */
+    -webkit-box-orient: vertical;
+}
+
+body > aside div section div:last-of-type span {
+    margin-left: 3px;
+}
+body > aside div section div:last-of-type span:nth-of-type(2) {
+    font-family: lato-regular;
+}
+
+span.material-icons-outlined {
+    font-size: 26px;
+    cursor: pointer;
+}
+
+/**
+ *  if backdrop-filter supported
+ */
+@supports (
+    (-webkit-backdrop-filter: blur(30px)) or (backdrop-filter: blur(30px))
+) {
+    body > aside {
+        -webkit-backdrop-filter: blur(30px);
+        backdrop-filter: blur(30px);
+        background-color: rgba(0, 0, 0, 0.3);
+    }
+
+    body > aside div section {
+        -webkit-backdrop-filter: blur(30px);
+        backdrop-filter: blur(30px);
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+}

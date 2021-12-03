@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="it">
     <head>
-        <!-- Consider removing My from project name :) -->
         <?php require("./templates/head-section.php"); ?>
-        <title>My Unibo Vinyl</title>
+        <link rel="stylesheet" href="./public/css/index.css" />
+        <link rel="stylesheet" href="./public/css/header.css" />
+
+        <title>Unibo Vinyl</title>
     </head>
     <body>
         <?php require("./templates/page-header.php"); ?>
