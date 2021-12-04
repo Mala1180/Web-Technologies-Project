@@ -74,9 +74,28 @@
 
     function send_data($data) {
         print json_encode(array("success"=>true, "data"=>$data));
+        exit();
     }
 
     function send_error($error) {
         print json_encode(array("success"=>false, "error"=>$error));
+        exit();
+    }
+
+    function send_success($success) {
+        print json_encode(array("success"=>$success));
+        exit();
+    }
+
+    /*
+     * Check is all params are set in array (GET, POST)
+     */
+    function checkParams($array, $params) {
+        foreach($params as $p) {
+            if (!isset($array[$p])) {
+                send_error("Malformed request");
+            }
+        }
+        return true;
     }
 ?>
