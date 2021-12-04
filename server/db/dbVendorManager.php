@@ -2,7 +2,7 @@
 
 require_once("db/dbconnector.php");
 
-class DBUserMgr
+class DBVendorMgr
  {
  	private $db;
  	
@@ -12,15 +12,6 @@ class DBUserMgr
  		if($this->db->connect_error) {
  			die("Connessione al database fallita.");
  		}
- 	}
-
- 	public function login($username) {
- 		$query = "SELECT name, password FROM `customer` WHERE username=?";
- 		$stmt = $this->db->prepare($query);
- 		$stmt->bind_param("s", $username);
- 		$stmt->execute();
- 		$result = $stmt->get_result();
- 		return $result->fetch_all(MYSQLI_ASSOC);
  	}
 
  	public function register($name, $surname, $email, $username, $password) {
@@ -85,6 +76,6 @@ class DBUserMgr
 	}
  }
 
- $dbUserMgr = new DBUserMgr($db);
+ $dbVendorMgr = new DBVendorMgr($db);
 
 ?>
