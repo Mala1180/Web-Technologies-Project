@@ -57,13 +57,16 @@
      * or a boolean in any other case 
      */
     function execute_query($db, $query, $params) {
+        /*
+         * try to understand the type of query 
+         */
         switch(strtolower(substr($query, 0, 1))) {
-            case "s":
+            case "s": // select
                 return select_query($db, $query, $params);
                 break;
-            case "i":
-            case "u":
-            case "d":
+            case "i": // insert
+            case "u": // update
+            case "d": // delete
                 return statement_success(query_execution($db, $query, $params));
                 break;
             default:
