@@ -11,7 +11,7 @@ function validate($JSONWebToken) {
         $token = JWT::decode((string)$JSONWebToken, SECRET_KEY, [JWT_CRYPTO_ALGORITHM]);
         $now = new DateTimeImmutable();
 
-        if ($token->iss !== SERVER_NAME || $token->nbf > $now->getTimestamp())// || $token->exp < $now->getTimestamp() da aggiungere se aggiungiamo l'expiry
+        if ($token->iss !== SERVER_NAME || $token->nbf > $now->getTimestamp())
         {
             return false;
         }

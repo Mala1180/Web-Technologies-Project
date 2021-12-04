@@ -5,11 +5,12 @@ $(document).ready(function () {
     });
 
     function login(username, password) {
-        reqHelper.post("login", "", {
+        reqHelper.post("userAccess", "login", {
             "username": username,
             "password": password
         }, function (data) {
-            console.log(data);
+            //da correggere, da errore ma va(??)
+            jwt.setJWT(data["data"]);
         });
         /*
          * TODO: Set AuthToken in localStorage

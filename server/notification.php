@@ -1,12 +1,11 @@
-<?php
-    
-    declare(strict_types=1);
+<?php  
+declare(strict_types=1);
 
-    require_once('utils.php');
-    require_once("db/dbconnector.php");
-    require_once("db/dbNotificationManager.php");
-    require_once("../vendor/autoload.php");
-    require_once('validate.php');
+require_once('utils.php');
+require_once("db/dbconnector.php");
+require_once("db/dbNotificationManager.php");
+require_once("../vendor/autoload.php");
+require_once('validate.php');
 
     if($_SERVER["REQUEST_METHOD"] == "GET") {
         if(!isset($_GET["action"])) {
@@ -15,8 +14,8 @@
         } 
         switch($_GET["action"]) {
             /*
-             * Get list of all notifications
-             */
+                * Get list of all notifications
+                */
             case "getnotifications":
                 $data = $dbNotificationMgr->getNotifications(1); // TODO: customer id must be taken from jwt
                 send_data($data);

@@ -4,7 +4,7 @@ $(document).ready(function () {
         requireUserInfo();
     });
     function requireUserInfo() {
-        reqHelper.post("actions", "myprofile",
+        reqHelper.post("userMgr", "myprofile",
             {}, function (data) {
                 console.log(data);
             }

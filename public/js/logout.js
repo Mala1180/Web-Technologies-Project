@@ -5,7 +5,7 @@ $(document).ready(function () {
     });
 
     function logout() {
-        reqHelper.post("logout", "", {}, function (data) {
+        reqHelper.post("userAccess", "logout", {}, function (data) {
             console.log(data);
             /*
              * TODO: Unset AuthToken from localStorage

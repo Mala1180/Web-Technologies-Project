@@ -1,11 +1,10 @@
 <?php
-    require_once("db/dbconnector.php");
+require_once("db/dbconnector.php");
 
-    class DBNotificationMgr
-    {
-        private $db;
+class DBNotificationMgr {
+    private $db;
 
-        public function __construct($dbConnection) {
+    public function __construct($dbConnection) {
         $this->db = $dbConnection;
 
         if($this->db->connect_error) {

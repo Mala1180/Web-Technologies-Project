@@ -2,7 +2,7 @@ $(document).ready(function () {
     $("#SubmitRegister").click((e) => {
         e.preventDefault();
         //make post request with the helper, eh 
-        reqHelper.post("register", "",
+        reqHelper.post("userAccess", "register",
             {
                 name: txtName.value,
                 surname: txtSurname.value,
@@ -10,8 +10,8 @@ $(document).ready(function () {
                 username: txtUsername.value,
                 password: txtPassword.value
             }, function (data) {
-                /*let newUrl = location.href.replace("Register.php", "Login.php");
-                location.href = newUrl;*/
+                let newUrl = location.href.replace("Register.php", "Login.php");
+                location.href = newUrl;
                 console.log(data);
             }
         );

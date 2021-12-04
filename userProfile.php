@@ -16,15 +16,7 @@
             <h1>Il mio profilo</h1>
         </section>
 
-        <!-- <section>
-            <form name="formVendor">
-                <input type="text" name="txtUsername" id="txtUsername" placeholder="Username" value="" required><br/>
-                <input type="password" name="txtPassword" id="txtPassword" placeholder="Password" value="" required><br/>
-                <input type="button" name="btnLogin" id="SubmitLogin" value="Entra">
-            </form>
-            <input type="button" name="btnGetResource" id="GetResource" value="test get resource">
-            <input type="button" name="SubmitLogout" id="SubmitLogout" value="Logout">
-        </section> -->
+
     </main>
     <script type="text/javascript" src="./public/js/RequestHelper.js"></script>
     <script type="text/javascript" src="./public/js/myjwtclass.js"></script>
