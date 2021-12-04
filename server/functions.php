@@ -71,4 +71,12 @@
                 break;
         }
     }
+
+    function send_data($data) {
+        print json_encode(array("success"=>true, "data"=>$data));
+    }
+
+    function send_error($error) {
+        print json_encode(array("success"=>false, "error"=>$error));
+    }
 ?>
