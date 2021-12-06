@@ -14,4 +14,9 @@
 	 * other usable algorithms -> https://tools.ietf.org/html/draft-ietf-jose-json-web-algorithms-40#section-3
 	 */
 	define("JWT_CRYPTO_ALGORITHM", "HS512");
+
+	/*
+	 * Variable that contains headers 
+	 */
+	$request_headers = apache_request_headers();
  ?>
