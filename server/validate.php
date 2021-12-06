@@ -10,7 +10,7 @@ function validate($JSONWebToken) {
     if(isset($JSONWebToken) && $JSONWebToken) {
         $token = JWT::decode((string)$JSONWebToken, SECRET_KEY, [JWT_CRYPTO_ALGORITHM]);
         $now = new DateTimeImmutable();
-        return $token->iss === SERVER_NAME && $token->nbf < $now->getTimestamp()  
+        return $token->iss === SERVER_NAME && $token->nbf < $now->getTimestamp();
     }
 }
 
