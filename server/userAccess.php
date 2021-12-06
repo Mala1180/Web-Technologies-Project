@@ -48,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			break;
 		case "logout":
             /*
-             * Is not mandatory that client side calls this api.
+             * Is not mandatory (and actually useless) that client side calls this api.
              * For the server authorization is determined by the presence of
              * the Authorization header.
              */
