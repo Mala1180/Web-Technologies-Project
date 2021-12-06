@@ -5,7 +5,7 @@ $(document).ready(function () {
     });
 
     function addCardToUser($cardNumber, $circuit, $expiryDate, $isDefault) {
-        reqHelper.post("actions", "addcard", {
+        reqHelper.post("userMgr", "addcard", {
             "cardNumber": $cardNumber,
             "circuit": $circuit,
             "expiryDate": $expiryDate,

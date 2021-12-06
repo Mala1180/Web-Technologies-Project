@@ -4,7 +4,7 @@
 const BASE_URL = "./server/";
 
 function getDefaultHeaders() {
-	authorizationToken = jwt.getJWT();
+	let authorizationToken = jwt.getJWT();
 	const headers = {};
 	if (authorizationToken != null) {
 		headers.Authorization = "Bearer " + authorizationToken;
@@ -19,7 +19,7 @@ function makeUrl(name) {
 class RequestHelper {
 	constructor() { }
 	/* We need to add Authorization header for every request */
-	makeRequest(method, url, action, data, callback) {
+	makeRequest(method, url, action, data, callback = function(){}) {
 		data.action = action;
 		$.ajax({
 			method: method,
@@ -28,7 +28,7 @@ class RequestHelper {
 			success: callback,
 			dataType: "json",
 			headers: getDefaultHeaders()
-		});
+		}).done(callback());
 	}
 
 	get(url, action, data, callback) {
