@@ -47,7 +47,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }      
 			break;
 		case "logout":
-            echo "logout";
+            /*
+             * Is not mandatory that client side calls this api.
+             * For the server authorization is determined by the presence of
+             * the Authorization header.
+             */
+            send_success(true);
 			break;
 		case "register":
 			checkParams($_POST, array("name", "surname", "email", "username", "password"));
