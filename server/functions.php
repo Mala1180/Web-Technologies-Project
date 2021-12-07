@@ -95,7 +95,7 @@
      */
     function checkParams($array, $params) {
         foreach($params as $p) {
-            if (!isset($array[$p])) {
+            if (!isset($array[$p]) || $array[$p] == "") {
                 send_error("Malformed request");
             }
         }
