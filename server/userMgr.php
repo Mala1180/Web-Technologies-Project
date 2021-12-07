@@ -8,7 +8,6 @@ require_once('../vendor/autoload.php');
 require_once('validate.php');
 
 use Firebase\JWT\JWT;
-
     if($_SERVER["REQUEST_METHOD"] == "GET") {
         if(!isset($_GET["action"])) {
             send_error("An action is required");
@@ -16,11 +15,9 @@ use Firebase\JWT\JWT;
         }
         switch($_GET["action"]) {
             case "":
-
                 break;
             default:
                 break;
-
         }
         // è un get.
     } else if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -41,10 +38,8 @@ use Firebase\JWT\JWT;
                 break;
             default:
                 break;
-
         }
     }
-
 
     function requireUserInfo($token) {     
         $data = JWT::decode($token, SECRET_KEY, [JWT_CRYPTO_ALGORITHM]);
