@@ -11,8 +11,5 @@ $(document).ready(function () {
         }, function (data) {
             jwt.setJWT(data.data);
         });
-        /*
-         * TODO: Set AuthToken in localStorage
-         */
     }
 });
