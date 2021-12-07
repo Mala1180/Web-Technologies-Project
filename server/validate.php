@@ -32,7 +32,7 @@ function is_user_logged() {
 }
 /*
  * Extracts data from token. This should be called
- * after verifying that user is logged.
+ * after verifying that user is actually logged in.
  */
 function get_token_data() {
     return JWT::decode(get_auth_token(), SECRET_KEY, [JWT_CRYPTO_ALGORITHM])->data;
