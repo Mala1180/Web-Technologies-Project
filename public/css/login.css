@@ -1,0 +1,14 @@
+form {
+    padding: 20px 5%;
+}
+
+form ul {
+    padding: 0;
+    list-style: none;
+}
+
+form label {
+    /* Accessibility */
+    display: block;
+    height: 0;
+}

@@ -33,7 +33,7 @@ class DBUserMgr {
 		$idCustomer = $this->getUserInfo($username)[0]["idCustomer"];
 		$isDeleted = 0;
 		execute_query($this->db, $query, array($cardNumber, $circuit, $expiryDate, $isDeleted, $idCustomer));
-		if($isDefault == 1){
+		if($isDefault == true){
 			/**
 			 * User is setting this card as default.
 			 */
@@ -43,12 +43,13 @@ class DBUserMgr {
  	}
 
 	public function setDefaultCard($username, $cardNumber, $circuit, $expiryDate) {
+		/* Remove default  */
 		$query = "SELECT idCard FROM creditCard WHERE cardNumber=? AND circuit=? AND expiryDate=? AND idCustomer=?";
 		$idCustomer = $this->getUserInfo($username)[0]["idCustomer"];
-		$idCard = execute_query($this->db, $query, array($cardNumber, $circuit, $expiryDate, $idCustomer));
+		$idCard = execute_query($this->db, $query, array($cardNumber, $circuit, $expiryDate, $idCustomer))[0];
 		$idCard = intval($idCard['idCard']);
-		 $query = "UPDATE `customer` SET idCard=? WHERE idCustomer=?";
-		 return execute_query($this->db, $query, array($idCard, $idCustomer));
+		$query = "UPDATE `customer` SET idCard=? WHERE idCustomer=?";
+		return execute_query($this->db, $query, array($idCard, $idCustomer));
 	}
 }
 

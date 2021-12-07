@@ -10,25 +10,31 @@ function validate($JSONWebToken) {
     if(isset($JSONWebToken) && $JSONWebToken) {
         $token = JWT::decode((string)$JSONWebToken, SECRET_KEY, [JWT_CRYPTO_ALGORITHM]);
         $now = new DateTimeImmutable();
-        return $token->iss === SERVER_NAME && $token->nbf < $now->getTimestamp()  
+        return $token->iss === SERVER_NAME && $token->nbf < $now->getTimestamp();
     }
 }
-
 /*
  * Gets the the jwt token from authorization header 
  */
-function get_token_from_bearer($authorization) {
-    return substr($authorization, 7);
+function get_auth_token() {
+    if (isset(getallheaders()["Authorization"])) {
+        return substr(getallheaders()["Authorization"], 7);
+    }
+    return "";
 }
-
 /*
  * Checks if an authorization header is presente and if
  * the token is valid 
  */
 function is_user_logged() {
-    if (!isset($request_headers["Authorization"])) {
-        return false;
-    }
-    return validate(get_token_from_bearer($request_headers["Authorization"]));
+    $token = get_auth_token();
+    return $token > "" && validate($token);
+}
+/*
+ * Extracts data from token. This should be called
+ * after verifying that user is actually logged in.
+ */
+function get_token_data() {
+    return JWT::decode(get_auth_token(), SECRET_KEY, [JWT_CRYPTO_ALGORITHM])->data;
 }
 ?>

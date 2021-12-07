@@ -19,7 +19,7 @@ function makeUrl(name) {
 class RequestHelper {
 	constructor() { }
 	/* We need to add Authorization header for every request */
-	makeRequest(method, url, action, data, callback = function(){}) {
+	makeRequest(method, url, action, data, callback = function () { }) {
 		data.action = action;
 		$.ajax({
 			method: method,
@@ -28,7 +28,7 @@ class RequestHelper {
 			success: callback,
 			dataType: "json",
 			headers: getDefaultHeaders()
-		}).done(callback());
+		});
 	}
 
 	get(url, action, data, callback) {

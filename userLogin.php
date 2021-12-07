@@ -4,25 +4,34 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- JQUERY HAS TO BE DELETED FROM HERE -->
-    <script src="./public/libraries/jquery3.6.0.js"></script>
+    <?php require_once("templates/head-section.php"); ?>
+    <link rel="stylesheet" href="./public/css/login.css" />
     <!-- Consider removing My from project name :) -->
     <title>My Unibo Vinyl - Login</title>
 </head>
 <body>
     <header>
-    <!-- wait for mala -->
+        <!-- TODO: HEADER SHOULD BE INCLUDED HERE, BUT SOME PROBLEMS OCCURS -->
     </header>
     <main>
+        <form name="formLogin">
+            <ul>
+                <li>
+                    <label for="txtUsername">Username</label>
+                    <input type="text" name="txtUsername" id="txtUsername" placeholder="Username" required />
+                </li>
+                <li>
+                    <label for="txtPassword">Password</label>
+                    <input type="password" name="txtPassword" id="txtPassword" placeholder="Password"required />
+                </li>
+                <li>
+                    <input type="button" name="btnLogin" id="SubmitLogin" value="Entra" />
+                </li>
+            </ul>
+        </form>
         <section>
-            <form name="formLogin">
-                <input type="text" name="txtUsername" id="txtUsername" placeholder="Username" value="" required><br/>
-                <input type="password" name="txtPassword" id="txtPassword" placeholder="Password" value="" required><br/>
-                <input type="button" name="btnLogin" id="SubmitLogin" value="Entra">
-            </form>
             <input type="button" name="SubmitLogout" id="SubmitLogout" value="Logout">
             <input id="btnMyProfile" type="button" value="Il mio profilo">
-
         </section>
 
         <section><br><br>

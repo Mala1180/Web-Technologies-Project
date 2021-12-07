@@ -9,8 +9,7 @@ $(document).ready(function () {
             "username": username,
             "password": password
         }, function (data) {
-            //da correggere, da errore ma va(??)
-            jwt.setJWT(data["data"]);
+            jwt.setJWT(data.data);
         });
         /*
          * TODO: Set AuthToken in localStorage
