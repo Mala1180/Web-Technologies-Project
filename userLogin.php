@@ -10,9 +10,6 @@
     <title>My Unibo Vinyl - Login</title>
 </head>
 <body>
-    <header>
-        <!-- TODO: HEADER SHOULD BE INCLUDED HERE, BUT SOME PROBLEMS OCCURS -->
-    </header>
     <main>
         <div>
             <a href="index.php" title="Homepage"><img src="./public/img/logoRosso.png" alt="" /></a>
