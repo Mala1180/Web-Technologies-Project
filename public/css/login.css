@@ -1,14 +1,74 @@
-form {
-    padding: 20px 5%;
+main > div {
+    text-align: center;
+    margin: 10% 0;
 }
 
-form ul {
+main > div > img {
+    width: 33%;
+}
+
+section {
+    margin: 20px 5%;
+}
+
+section p {
+    text-align: center;
+}
+section form {
+    margin-top: 20px;
+    padding: 0 5%;
+}
+
+section form li {
+    margin-bottom: 25px;
+}
+
+section form li img {
+    width: 10%;
+    vertical-align: text-top;
+    margin-right: 5%;
+}
+
+section form input {
+    width: 85%;
+    border: none;
+    line-height: 2;
+}
+
+section form input:focus {
+    outline: none;
+}
+
+section form li a {
+    display: block;
+    font-size: 14px;
+    margin-top: 10px;
+    margin-left: 15%;
+}
+
+section form li:last-child {
+    text-align: center;
+}
+
+section form input[type="submit"] {
+    background-color: #000;
+    color: #fff;
+    border-radius: 10px;
+}
+
+section form input:not([type="submit"]) {
+    border-bottom: 1px solid #000;
+}
+
+section form ul {
     padding: 0;
     list-style: none;
 }
 
-form label {
+section form label {
     /* Accessibility */
     display: block;
+    overflow: hidden;
     height: 0;
+    width: 0;
 }

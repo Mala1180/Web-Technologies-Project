@@ -14,21 +14,32 @@
         <!-- TODO: HEADER SHOULD BE INCLUDED HERE, BUT SOME PROBLEMS OCCURS -->
     </header>
     <main>
-        <form name="formLogin">
-            <ul>
-                <li>
-                    <label for="txtUsername">Username</label>
-                    <input type="text" name="txtUsername" id="txtUsername" placeholder="Username" required />
-                </li>
-                <li>
-                    <label for="txtPassword">Password</label>
-                    <input type="password" name="txtPassword" id="txtPassword" placeholder="Password"required />
-                </li>
-                <li>
-                    <input type="button" name="btnLogin" id="SubmitLogin" value="Entra" />
-                </li>
-            </ul>
-        </form>
+        <div>
+            <img src="./public/img/logoRosso.png" alt="" />
+            <h1>Unibo Vinyl</h1>
+        </div>
+        <section>
+            <h2>Accedi</h2>
+            <form name="formLogin">
+                <ul>
+                    <li>
+                        <label for="txtUsername">Username</label>
+                        <img src="./public/img/icons/person_black.png" alt=""><input type="text" name="txtUsername" id="txtUsername" placeholder="Username" required />
+                    </li>
+                    <li>
+                        <label for="txtPassword">Password</label>
+                        <img src="./public/img/icons/key_black.png" alt=""><input type="password" name="txtPassword" id="txtPassword" placeholder="Password"required />
+                        <a href="#">Hai dimenticato la password?</a>
+                    </li>
+                    <li>
+                        <input type="submit" name="btnLogin" id="SubmitLogin" value="Entra" />
+                    </li>
+                </ul>
+            </form>
+            <p>Non sei ancora regitrato? <a href="#">Registrati</a></p>
+        </section>
+        
+<!-- 
         <section>
             <input type="button" name="SubmitLogout" id="SubmitLogout" value="Logout">
             <input id="btnMyProfile" type="button" value="Il mio profilo">
@@ -43,13 +54,11 @@
 
                 <label for="cmbDefault">Vuoi impostare la carta come predefinita?</label>
                 <input type="checkbox" id="cmbDefault" name="cmbDefault" value="Default">
-    <br>
+                <br>
                 <input type="button" name="btnAddCard" id="btnAddCard" value="Aggiungi">
             </form>
         </section>
-
-
-
+-->
     </main>
     <script type="text/javascript" src="./public/js/RequestHelper.js"></script>
     <script type="text/javascript" src="./public/js/myjwtclass.js"></script>
