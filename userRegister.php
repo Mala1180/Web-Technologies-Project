@@ -7,16 +7,16 @@
     <!-- Consider removing My from project name :) -->
     <title>My Unibo Vinyl - Register</title>
     <?php require_once("templates/head-section.php") ?>
-    <link rel="stylesheet" href="./public/css/login.css" />
+    <link rel="stylesheet" href="./public/css/register.css" />
 </head>
 <body>
     <main>
-        <div>
-            <a href="index.php" title="Homepage"><img src="./public/img/logoRosso.png" alt="" /></a>
-            <h1>Unibo Vinyl</h1>
-        </div>
-        <section>
-            <h1>Registrati</h1>
+        <div></div><section>
+            <header>
+                <a href="index.php" title="Homepage"><img src="./public/img/logoRosso.png" alt="" /></a>
+                <h1>Unibo Vinyl</h1>
+            </header>
+            <h2>Registrati</h2>
             <form name="formRegister">
                 <ul>
                     <li>
@@ -48,6 +48,9 @@
                     </li>
                 </ul>
             </form>
+            <p>Sei già regitrato? <a href="userLogin.php">Accedi</a></p>
+        </section>
+            
             <!-- <form name="formRegister">
             	<input type="text" name="txtName" id="txtName" placeholder="Nome" value="" required><br/>
             	<input type="text" name="txtSurname" id="txtSurname" placeholder="Cognome" value="" required><br/>
@@ -57,8 +60,7 @@
             	<input type="password" name="txtPasswordConfirm" id="txtPasswordConfirm" placeholder="Conferma password" value="" required><br/>
             	<input type="button" name="btnNewUser" id="SubmitRegister" name="SubmitRegister" value="Iscriviti">
             </form> -->
-            <p>Sei già regitrato? <a href="userLogin.php">Accedi</a></p>
-        </section>
+            
     </main>
     <script type="text/javascript" src="./public/js/RequestHelper.js"></script>
     <script type="text/javascript" src="./public/js/myjwtclass.js"></script>

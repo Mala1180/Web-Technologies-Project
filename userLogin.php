@@ -11,11 +11,11 @@
 </head>
 <body>
     <main>
-        <div>
-            <a href="index.php" title="Homepage"><img src="./public/img/logoRosso.png" alt="" /></a>
-            <h1>Unibo Vinyl</h1>
-        </div>
-        <section>
+        <div></div><section>
+            <header>
+                <a href="index.php" title="Homepage"><img src="./public/img/logoRosso.png" alt="" /></a>
+                <h1>Unibo Vinyl</h1>
+            </header>
             <h2>Accedi</h2>
             <form name="formLogin">
                 <ul>

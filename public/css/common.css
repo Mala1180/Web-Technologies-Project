@@ -1,12 +1,17 @@
 :root {
     --nav-height: 8vh;
 }
-
 * {
     margin: 0;
     box-sizing: border-box;
     font-weight: normal;
     font-family: lato-light;
+}
+
+html,
+body {
+    height: 100%;
+    width: 100%;
 }
 
 a {

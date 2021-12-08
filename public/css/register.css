@@ -1,16 +1,18 @@
 main > div {
-    text-align: center;
-    margin: 10% 0;
+    display: none;
 }
 
-main > div img {
+main > section header {
+    text-align: center;
+}
+
+main > section header img {
     width: 33%;
 }
 
 section {
     margin: 20px 5%;
 }
-
 section p {
     text-align: center;
 }
@@ -71,4 +73,36 @@ section form label {
     overflow: hidden;
     height: 0;
     width: 0;
+}
+
+@media screen and (min-width: 768px) {
+    main {
+        min-height: 100vh;
+    }
+    main > div,
+    main > section {
+        vertical-align: top;
+    }
+
+    main > div {
+        display: inline-block;
+        width: 66%;
+        min-height: 100vh; /* ask help :) */
+        background-image: url("/public/img/vinile1.jpg");
+        background-size: cover;
+        margin: 0;
+    }
+
+    main > section {
+        margin: 0;
+        margin-top: 20px;
+        display: inline-block;
+        height: 100%;
+        width: 34%;
+    }
+
+    main > section > form,
+    main > section > h2 {
+        margin: 20px 10% 0;
+    }
 }
