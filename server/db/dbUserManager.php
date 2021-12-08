@@ -22,7 +22,8 @@ class DBUserMgr {
 		return execute_query($this->db, $query, array($name, $surname, $email, $username, $password));
  	}
 
-     public function getUserInfo($username) {
+	/* TODO: we have to manage cases with no results...*/ 
+    public function getUserInfo($username) {
 		$query = "SELECT idCustomer, name, surname, email, username FROM customer WHERE username=?";
 		return execute_query($this->db, $query, array($username));
  	}
