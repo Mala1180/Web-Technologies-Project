@@ -15,7 +15,7 @@
     </header>
     <main>
         <div>
-            <img src="./public/img/logoRosso.png" alt="" />
+            <a href="index.php" title="Homepage"><img src="./public/img/logoRosso.png" alt="" /></a>
             <h1>Unibo Vinyl</h1>
         </div>
         <section>
@@ -36,7 +36,7 @@
                     </li>
                 </ul>
             </form>
-            <p>Non sei ancora regitrato? <a href="#">Registrati</a></p>
+            <p>Non sei ancora regitrato? <a href="userRegister.php">Registrati</a></p>
         </section>
         
 <!-- 
