@@ -4,7 +4,7 @@
 const BASE_URL = "./server/";
 
 function getDefaultHeaders() {
-	authorizationToken = localStorage.getItem("AuthToken");
+	let authorizationToken = jwt.getJWT();
 	const headers = {};
 	if (authorizationToken != null) {
 		headers.Authorization = "Bearer " + authorizationToken;
@@ -18,36 +18,25 @@ function makeUrl(name) {
 
 class RequestHelper {
 	constructor() { }
-
-	makeRequest(method, action, myHeaders, parameters = []) {
-		return fetch(BASE_URL + action + '.php', {
-			method: method,
-			headers: myHeaders,
-			body: JSON.stringify(parameters)
-		});
-	}
 	/* We need to add Authorization header for every request */
-	get(url, action, data, callback) {
+	makeRequest(method, url, action, data, callback = function () { }) {
 		data.action = action;
 		$.ajax({
+			method: method,
 			url: makeUrl(url),
 			data: data,
 			success: callback,
 			dataType: "json",
 			headers: getDefaultHeaders()
 		});
+	}
+
+	get(url, action, data, callback) {
+		this.makeRequest("GET", url, action, data, callback);
 	}
 
 	post(url, action, data, callback) {
-		data.action = action;
-		$.ajax({
-			method: "POST",
-			url: makeUrl(url),
-			data: data,
-			success: callback,
-			dataType: "json",
-			headers: getDefaultHeaders()
-		})
+		this.makeRequest("POST", url, action, data, callback);
 	}
 }
 const reqHelper = new RequestHelper();

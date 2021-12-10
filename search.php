@@ -126,5 +126,6 @@
                 <span class="material-icons-outlined">east</span>
             </footer>
         </aside>
+        <script src="./public/js/page-header.js"></script>
     </body>
 </html>

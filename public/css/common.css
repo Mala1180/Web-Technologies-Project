@@ -1,7 +1,6 @@
 :root {
     --nav-height: 8vh;
 }
-
 * {
     margin: 0;
     box-sizing: border-box;
@@ -9,6 +8,13 @@
     font-family: lato-light;
 }
 
+html,
+body {
+    height: 100%;
+    width: 100%;
+}
+
 a {
     text-decoration: none;
+    color: #bb2e29;
 }

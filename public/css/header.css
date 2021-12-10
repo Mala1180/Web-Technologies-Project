@@ -13,7 +13,9 @@ body > header {
 /**
  *  if backdrop-filter supported
  */
-@supports ((-webkit-backdrop-filter: blur(25px)) or (backdrop-filter: blur(25px))) {
+@supports (
+    (-webkit-backdrop-filter: blur(25px)) or (backdrop-filter: blur(25px))
+) {
     body > header {
         -webkit-backdrop-filter: blur(25px);
         backdrop-filter: blur(25px);
@@ -112,6 +114,12 @@ body > header section div label {
 /**
  *   Menu section in header
  */
+body > header section:last-of-type span {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 body > header section a {
     letter-spacing: 0.35em;
     color: white;

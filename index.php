@@ -23,5 +23,6 @@
                 <h1>Bundle</h1> 
             </section>
         </main>
+        <script src="./public/js/page-header.js"></script>
     </body>
 </html>

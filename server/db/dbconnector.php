@@ -1,13 +1,14 @@
 <?php
+	require_once("functions.php");
 	/*
 	 *	TODO: move to a config file!
 	 */
 	header('Content-Type: application/json; charset=utf-8');
-	$servername = "192.168.64.2";
+	$servername = "localhost";
 	$database = "UniboVinyl";
-	$username = "prova";
-	$password = "prova";
+	$username = "root";
+	$password = "";
 	$port = 3306;
 
-	$db = new mysqli($servername, $username, $password, $dbname, $port);
+	$db = new mysqli($servername, $username, $password, $database, $port);
  ?>

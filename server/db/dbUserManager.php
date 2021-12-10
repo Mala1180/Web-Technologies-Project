@@ -1,9 +1,7 @@
 <?php
-
 require_once("db/dbconnector.php");
 
-class DBUserMgr
- {
+class DBUserMgr {
  	private $db;
  	
  	public function __construct($dbConnection) {
@@ -15,74 +13,47 @@ class DBUserMgr
  	}
 
  	public function login($username) {
- 		$query = "SELECT name, password FROM `customer` WHERE username=?";
- 		$stmt = $this->db->prepare($query);
- 		$stmt->bind_param("s", $username);
- 		$stmt->execute();
- 		$result = $stmt->get_result();
- 		return $result->fetch_all(MYSQLI_ASSOC);
+		$query = "SELECT name, password FROM `customer` WHERE username=?";
+		return execute_query($this->db, $query, array($username));
  	}
 
  	public function register($name, $surname, $email, $username, $password) {
-		
- 		$query = "INSERT INTO `customer` (`name`, `surname`, `email`, `username`, `password`, `idCard`) VALUES (?, ?, ?, ?, ?, NULL)";
- 		$stmt = $this->db->prepare($query);
- 		$stmt->bind_param("sssss", $name, $surname, $email, $username, $password);
- 		$stmt->execute();
- 		if($stmt->error) {
- 			return false;
- 		}
- 		return true;
+		$query = "INSERT INTO `customer` (`name`, `surname`, `email`, `username`, `password`, `idCard`) VALUES (?, ?, ?, ?, ?, NULL)";
+		return execute_query($this->db, $query, array($name, $surname, $email, $username, $password));
  	}
 
-     public function getUserInfo($username) {
+	/* TODO: we have to manage cases with no results...*/ 
+    public function getUserInfo($username) {
 		$query = "SELECT idCustomer, name, surname, email, username FROM customer WHERE username=?";
-		$stmt = $this->db->prepare($query);
-		$stmt->bind_param("s", $username);
-		$stmt->execute();
- 		$result = $stmt->get_result();
- 		return $result->fetch_all(MYSQLI_ASSOC);
+		return execute_query($this->db, $query, array($username));
  	}
 
 
 	public function addCardToUser($username, $cardNumber, $circuit, $expiryDate, $isDefault) {
-		$query = "INSERT INTO `creditCard` (`cardNumber`, `circuit`, `expiryDate`, `isDeleted`, `idCustomer`) VALUES (?, ?, ?, ?, ?)";	
-		$stmt = $this->db->prepare($query);
+		$query = "INSERT INTO `creditCard` (`cardNumber`, `circuit`, `expiryDate`, `isDeleted`, `idCustomer`) VALUES (?, ?, ?, ?, ?)";
 		$idCustomer = $this->getUserInfo($username)[0]["idCustomer"];
 		$isDeleted = 0;
-		$stmt->bind_param("sssii", $cardNumber, $circuit, $expiryDate, $isDeleted, $idCustomer);
-		$stmt->execute();
-		if($stmt->error) {
-			return false;
-		}
-		
-		if($isDefault == 1){
-			//la voglio impostare anche come predefinita.
+		execute_query($this->db, $query, array($cardNumber, $circuit, $expiryDate, $isDeleted, $idCustomer));
+		if($isDefault == true){
+			/**
+			 * User is setting this card as default.
+			 */
 			$this->setDefaultCard($username, $cardNumber, $circuit, $expiryDate);
 		} 
 		return true;
  	}
 
 	public function setDefaultCard($username, $cardNumber, $circuit, $expiryDate) {
-		
+		/* Remove default  */
 		$query = "SELECT idCard FROM creditCard WHERE cardNumber=? AND circuit=? AND expiryDate=? AND idCustomer=?";
-		$stmt = $this->db->prepare($query);
 		$idCustomer = $this->getUserInfo($username)[0]["idCustomer"];
-		$stmt->bind_param("sssi", $cardNumber, $circuit, $expiryDate, $idCustomer);
-		$stmt->execute();
- 		$result = $stmt->get_result();
-		$idCard = $result->fetch_array();
+		$idCard = execute_query($this->db, $query, array($cardNumber, $circuit, $expiryDate, $idCustomer))[0];
 		$idCard = intval($idCard['idCard']);
-
 		$query = "UPDATE `customer` SET idCard=? WHERE idCustomer=?";
-		$stmt = $this->db->prepare($query);
-		$stmt->bind_param("ii", $idCard, $idCustomer);
-		$stmt->execute();
-		if($stmt->error) {
-			return false;
-		}
-		return true;
+		return execute_query($this->db, $query, array($idCard, $idCustomer));
 	}
- }
+}
+
+$dbUserMgr = new DBUserMgr($db);
 
 ?>
