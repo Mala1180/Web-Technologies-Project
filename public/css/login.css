@@ -81,22 +81,22 @@ section form label {
     }
     main > div,
     main > section {
-        vertical-align: top;
+        float: left;
     }
 
     main > div {
-        display: inline-block;
+        display: block;
         width: 66%;
         min-height: 100vh; /* ask help :) */
-        background-image: url("/public/img/vinile1.jpg");
+        background-image: url(../img/vinile1.jpg);
         background-size: cover;
+        background-position: center;
         margin: 0;
     }
 
     main > section {
         margin: 0;
         margin-top: 20px;
-        display: inline-block;
         height: 100%;
         width: 34%;
     }

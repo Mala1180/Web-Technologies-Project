@@ -11,7 +11,8 @@
 </head>
 <body>
     <main>
-        <div></div><section>
+        <div></div>
+        <section>
             <header>
                 <a href="index.php" title="Homepage"><img src="./public/img/logoRosso.png" alt="" /></a>
                 <h1>Unibo Vinyl</h1>
