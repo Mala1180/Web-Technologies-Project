@@ -6,12 +6,12 @@ $(document).ready(function () {
     // close / open cart preview
     $closePreview.click(function () {
         $cartPreview.css("bottom", $cartPreview.height() * -1 + 80);
-        $closePreview.hide();
+        $closePreview.fadeOut();
     });
 
     $previewTitle.click(function () {
         $cartPreview.css("bottom", 0);
-        $closePreview.show();
+        $closePreview.fadeIn();
     });
 
     // go to cart
