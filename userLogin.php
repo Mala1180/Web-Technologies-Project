@@ -57,12 +57,6 @@
         </section>
 -->
     </main>
-    <script type="text/javascript" src="./public/js/RequestHelper.js"></script>
-    <script type="text/javascript" src="./public/js/myjwtclass.js"></script>
     <script type="text/javascript" src="./public/js/login.js"></script>
-    <script type="text/javascript" src="./public/js/logout.js"></script>
-    <script type="text/javascript" src="./public/js/profile.js"></script>
-    <script type="text/javascript" src="./public/js/creditCard.js"></script>
-
 </body>
 </html>

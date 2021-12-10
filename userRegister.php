@@ -62,8 +62,6 @@
             </form> -->
             
     </main>
-    <script type="text/javascript" src="./public/js/RequestHelper.js"></script>
-    <script type="text/javascript" src="./public/js/myjwtclass.js"></script>
     <script type="text/javascript" src="./public/js/register.js"></script>
 </body>
 </html>

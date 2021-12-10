@@ -19,3 +19,5 @@
 <script src="./public/libraries/select2.min.js"></script>
 <script src="./public/libraries/sweetalert2.min.js"></script>
 <script src="./public/js/header.js"></script>
+<script src="./public/js/myjwtclass.js"></script>
+<script type="text/javascript" src="./public/js/RequestHelper.js"></script>
