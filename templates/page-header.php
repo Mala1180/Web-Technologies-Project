@@ -17,6 +17,7 @@
             <img src="./public/img/logoBianco.png" alt="unibo logo" />
         </a>
         <section>
+            <!-- TODO: input, selects, ... must be in a form tag -->
             <div>
                 <img src="./public/img/icons/search.png" alt="search icon" />
                 <input type="text" />
