@@ -9,3 +9,8 @@ report/*
 # ignore zip files
 *.zip
 
+# rest files
+*.http
+
+# dbconnector file
+server/db/dbconnector.php

@@ -7,7 +7,7 @@
 	$servername = "localhost";
 	$database = "UniboVinyl";
 	$username = "root";
-	$password = "";
+	$password = "root";
 	$port = 3306;
 
 	$db = new mysqli($servername, $username, $password, $database, $port);
