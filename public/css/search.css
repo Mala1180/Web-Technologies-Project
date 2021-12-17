@@ -17,9 +17,7 @@ body > header > div.container {
 /**
  *  if backdrop-filter supported
  */
-@supports (
-    (-webkit-backdrop-filter: blur(5px)) or (backdrop-filter: blur(5px))
-) {
+@supports ((-webkit-backdrop-filter: blur(5px)) or (backdrop-filter: blur(5px))) {
     body > header > div.container {
         -webkit-backdrop-filter: blur(5px);
         backdrop-filter: blur(5px);
@@ -67,7 +65,7 @@ main section aside {
     justify-content: space-between;
 }
 
-main section aside h1 {
+main section aside h2 {
     font-family: lato-regular;
     font-size: 22px;
     margin-bottom: 5px;
@@ -121,7 +119,7 @@ body > aside > header {
     align-items: center;
 }
 
-body > aside > header > h1 {
+body > aside > header > h2 {
     font-family: lato-light;
     flex-grow: 1;
     font-size: 20px;
@@ -148,7 +146,7 @@ body > aside footer > span:last-of-type {
 }
 
 body > aside footer > span:first-of-type {
-    font-family: lato-regular;
+    font-family: lato-light;
     font-size: 15px;
     letter-spacing: 0.2em;
     margin: 10px 5px;
@@ -183,13 +181,13 @@ body > aside div section img {
     border-radius: 10px;
 }
 
-body > aside div section h1 {
+body > aside div section h2 {
     font-size: 16px;
     margin-left: 10px;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
-    -webkit-line-clamp: 2; /* number of lines to show */
+    -webkit-line-clamp: 1; /* number of lines to show */
     -webkit-box-orient: vertical;
 }
 
@@ -208,9 +206,7 @@ span.material-icons-outlined {
 /**
  *  if backdrop-filter supported
  */
-@supports (
-    (-webkit-backdrop-filter: blur(30px)) or (backdrop-filter: blur(30px))
-) {
+@supports ((-webkit-backdrop-filter: blur(30px)) or (backdrop-filter: blur(30px))) {
     body > aside {
         -webkit-backdrop-filter: blur(30px);
         backdrop-filter: blur(30px);

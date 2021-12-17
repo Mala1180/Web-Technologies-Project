@@ -17,20 +17,22 @@
             <img src="./public/img/logoBianco.png" alt="unibo logo" />
         </a>
         <section>
-            <!-- TODO: input, selects, ... must be in a form tag -->
-            <div>
-                <img src="./public/img/icons/search.png" alt="search icon" />
-                <input type="text" />
-            </div>
-            <div>
-                <label for="filter">Filtra: </label>
-                <select id="filter" name="filter">
-                    <option value="Vinile">Vinile</option>
-                    <option value="CD">CD</option>
-                    <option value="Giradischi">Giradischi</option>
-                    <option value="Bundle">Bundle</option>
-                </select>
-            </div>
+            <form>
+                <div>
+                    <img src="./public/img/icons/search.png" alt="search icon" />
+                    <input type="text" placeholder="Cerca..."/>
+                </div>
+                <div>
+                    <label for="filter">Filtro: </label>
+                    <select id="filter" name="filter">
+                        <option value="Nessuno">Nessuno</option>
+                        <option value="Vinile">Vinile</option>
+                        <option value="CD">CD</option>
+                        <option value="Giradischi">Giradischi</option>
+                        <option value="Bundle">Bundle</option>
+                    </select>
+                </div>
+            </form>
         </section>
         <section>
             <span>

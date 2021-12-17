@@ -13,9 +13,7 @@ body > header {
 /**
  *  if backdrop-filter supported
  */
-@supports (
-    (-webkit-backdrop-filter: blur(25px)) or (backdrop-filter: blur(25px))
-) {
+@supports ((-webkit-backdrop-filter: blur(25px)) or (backdrop-filter: blur(25px))) {
     body > header {
         -webkit-backdrop-filter: blur(25px);
         backdrop-filter: blur(25px);
@@ -71,7 +69,7 @@ body > header section div {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 10px 0;
+    margin: 20px 0;
 }
 
 body > header section div img {
@@ -99,6 +97,11 @@ body > header section div select option {
 body > header section div input {
     letter-spacing: 0;
     width: 60%;
+}
+
+body > header section div input::placeholder {
+    color: white;
+    letter-spacing: 0.2em;
 }
 
 body > header section div select {
