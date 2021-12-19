@@ -39,7 +39,6 @@ body > header nav ul li:nth-child(2) {
     margin-right: 20px;
 }
 
-body > header nav ul li a,
 body > header nav ul li a img {
     width: 6.5vh;
     height: 6.5vh;
@@ -75,6 +74,7 @@ body > header section div {
 body > header section div img {
     width: 30px;
     height: 30px;
+    cursor: pointer;
 }
 
 body > header section div input,

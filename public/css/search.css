@@ -44,13 +44,33 @@ body > main {
     margin-bottom: 60px;
 }
 
-main section {
-    padding: 10px;
+main details {
+    border-bottom: 1px rgba(0, 0, 0, 0.3) solid;
 }
 
-main section img {
+/* product summary */
+main details summary {
+    padding: 10px;
+    cursor: pointer;
+}
+
+main details summary:focus {
+    outline: none;
+}
+
+details summary {
+    list-style-type: none;
+}
+
+/* Chrome and Firefox */
+details summary::marker,
+details summary::-webkit-details-marker {
+    display: none;
+}
+
+main details summary img {
     float: left;
-    width: 40vw;
+    width: 40%;
     height: var(--image-height);
     object-fit: cover;
     object-position: center;
@@ -58,16 +78,16 @@ main section img {
     border-radius: 10px;
 }
 
-main section aside {
+main details summary aside {
     height: var(--image-height);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
-main section aside h2 {
+main details summary aside h2 {
     font-family: lato-regular;
-    font-size: 22px;
+    font-size: 18px;
     margin-bottom: 5px;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -76,18 +96,24 @@ main section aside h2 {
     -webkit-box-orient: vertical;
 }
 
-main section aside div:nth-of-type(2) {
+main details summary aside div:nth-of-type(2) {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-main section aside div:last-of-type span {
+/* product type (es: vinyl, cd, ecc) */
+main details summary aside div:first-of-type span {
+    font-size: 16px;
+}
+
+/* product price */
+main details summary aside div:last-of-type span {
     font-family: lato-regular;
     font-size: 18px;
 }
 
-main section aside input[type="button"] {
+main details summary aside input[type="button"] {
     border-radius: 5px;
     background-color: #777;
     border: none;
@@ -96,6 +122,48 @@ main section aside input[type="button"] {
     cursor: pointer;
     font-family: lato-regular;
     font-size: 15px;
+}
+
+/* description and tracklist of product */
+main details > div {
+    padding: 10px;
+    padding-top: 0;
+    -webkit-animation: fadeIn 0.5s;
+    animation: fadeIn 0.5s;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+}
+
+@-webkit-keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+}
+
+details[open] > *:not(summary) {
+    animation: fadeIn 0.5s ease;
+}
+
+main details > div > p {
+    margin-bottom: 5px;
+}
+
+main details > div > h3 {
+    font-family: "lato-regular";
+    margin-left: 5px;
+}
+
+main details > div > ol > li {
+    padding-left: 5px;
+    margin: 3px 0;
+}
+
+main details > div > ol > li::marker {
+    color: #9e889a;
 }
 
 /**
@@ -217,5 +285,98 @@ span.material-icons-outlined {
         -webkit-backdrop-filter: blur(30px);
         backdrop-filter: blur(30px);
         background-color: rgba(0, 0, 0, 0.5);
+    }
+}
+
+@media screen and (min-width: 576px) {
+    :root {
+        --image-height: 150px;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    :root {
+        --image-height: 180px;
+    }
+
+    body > aside {
+        width: 80vw;
+        margin-left: 10%;
+    }
+
+    main details summary img {
+        width: 35%;
+    }
+    main details summary aside {
+        justify-content: space-around;
+    }
+
+    main details summary aside h2 {
+        font-size: 22px;
+    }
+
+    main details summary aside div:last-of-type span {
+        font-size: 20px;
+    }
+
+    main details summary aside div:first-of-type span {
+        font-size: 18px;
+    }
+}
+
+/**
+ *  Large Screens
+ */
+@media screen and (min-width: 992px) {
+    :root {
+        --header-height: 32vh;
+    }
+
+    main {
+        width: 70%;
+        float: left;
+    }
+
+    main details summary img {
+        width: 30vw;
+    }
+
+    body > aside {
+        position: unset;
+        margin-left: calc(70% - 5px);
+        width: 30%;
+    }
+
+    body > aside > header > img {
+        display: none;
+    }
+
+    body > header div.container {
+        height: var(--header-height);
+        display: flex;
+        justify-content: space-between;
+    }
+
+    body > header nav {
+        display: none;
+    }
+
+    body > header > div > a img {
+        display: block;
+        height: 100%;
+        padding: 10%;
+    }
+
+    body > header section {
+        display: flex !important;
+        align-self: center;
+    }
+
+    body > header section:first-of-type {
+        flex: 1 0 50%;
+    }
+
+    body > header section:last-of-type {
+        margin-right: 20px;
     }
 }

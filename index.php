@@ -8,7 +8,7 @@
         <title>Unibo Vinyl</title>
     </head>
     <body>
-        <?php require("./templates/page-header.php"); ?>
+        <?php require("./templates/header.php"); ?>
         <main>
             <section>
                 <h1>Vinili</h1>

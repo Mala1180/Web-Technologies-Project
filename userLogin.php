@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <?php require_once("templates/head-section.php"); ?>
     <link rel="stylesheet" href="./public/css/login.css" />
-    <!-- Consider removing My from project name :) -->
-    <title>My Unibo Vinyl - Login</title>
+
+    <title>Unibo Vinyl - Login</title>
 </head>
 <body>
     <main>

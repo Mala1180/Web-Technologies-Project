@@ -17,10 +17,10 @@
             <img src="./public/img/logoBianco.png" alt="unibo logo" />
         </a>
         <section>
-            <form>
+            <form method="GET" action="userSearch.php">
                 <div>
                     <img src="./public/img/icons/search.png" alt="search icon" />
-                    <input type="text" placeholder="Cerca..."/>
+                    <input type="text" name="query" placeholder="Cerca..."/>
                 </div>
                 <div>
                     <label for="filter">Filtro: </label>

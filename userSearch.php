@@ -6,12 +6,15 @@
         <link rel="stylesheet" href="./public/css/search.css" />
 
         <script src="./public/js/search.js"></script>
-        <title>Unibo Vinyl</title>
+        <title>Unibo Vinyl - Cerca</title>
     </head>
     <body>
-        <?php require("./templates/page-header.php"); ?>
+        <?php require("./templates/header.php"); ?>
         <main>
-            <?php require("./templates/article.php"); ?>
+            <!-- There will be the searched products -->
+            <?php require("./templates/article.php") ?>
+            <?php require("./templates/article.php") ?>
+            <?php require("./templates/article.php") ?>
         </main>
         <aside>
             <header>
@@ -19,8 +22,9 @@
                 <img src="public/img/icons/cancel.png" alt="close cart preview image" />
             </header>
             <div>
-                <?php require("./templates/preview-cart-article.php"); ?>
-                <?php require("./templates/preview-cart-article.php"); ?>
+                <?php require("./templates/preview-cart-article.php") ?>
+                <?php require("./templates/preview-cart-article.php") ?>
+
             </div>
             <footer>
                 <span>Visualizza tutto</span>
