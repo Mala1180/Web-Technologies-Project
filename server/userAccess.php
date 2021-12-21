@@ -4,6 +4,7 @@ require_once("db/dbconnector.php");
 require_once("db/dbUserManager.php");
 require_once("../vendor/autoload.php");
 require_once('validate.php');
+require_once('mail.php');
 
 use Firebase\JWT\JWT;
 
@@ -56,7 +57,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			break;
 		case "register":
 			checkParams($_POST, array("name", "surname", "email", "username", "password"));
-			send_success($dbUserMgr->register($_POST["name"], $_POST["surname"], $_POST["email"], $_POST["username"], password_hash($_POST['password'], PASSWORD_BCRYPT)));
+			/*composeMail($_POST["email"], "register", array("username" => $_POST["username"]));*/
+            send_success($dbUserMgr->register($_POST["name"], $_POST["surname"], $_POST["email"], $_POST["username"], password_hash($_POST['password'], PASSWORD_BCRYPT)));
 			break;
 		default:
 			send_error("Unknown action");

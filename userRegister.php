@@ -48,7 +48,7 @@
                     </li>
                 </ul>
             </form>
-            <p>Sei già regitrato? <a href="userLogin.php">Accedi</a></p>
+            <p>Sei già registrato? <a href="userLogin.php">Accedi</a></p>
         </section>
             
             <!-- <form name="formRegister">

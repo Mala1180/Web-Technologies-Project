@@ -10,6 +10,7 @@ $(document).ready(function () {
             /*
              * TODO: Unset AuthToken from localStorage
              */
+            jwt.unsetJWT();
         });
     }
 });
