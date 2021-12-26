@@ -15,6 +15,7 @@
     </summary>
     <div>
         <h3>Autore: Eminem</h3>
+        <p>prova</p>
         <h3>Generi: Hip-Hop</h3>
         <p>
             Descrizione lunga ed esaustiva del vinile, 15 tracce, 5 featuring, molto bello davvero lo consiglio.
