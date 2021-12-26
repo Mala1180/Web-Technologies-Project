@@ -32,16 +32,12 @@ body > header section:first-of-type {
     display: flex;
 }
 
-main {
-    /* This is for when the preview is down */
-    margin-bottom: 60px;
-}
-
 /**
  * Article section
  */
 body > main {
-    margin-bottom: 60px;
+    /* This is for when the preview is closed */
+    padding-bottom: 60px;
 }
 
 main details {
@@ -87,7 +83,7 @@ main details summary aside {
 
 main details summary aside h2 {
     font-family: lato-regular;
-    font-size: 18px;
+    font-size: clamp(18px, 1.7vw, 28px);
     margin-bottom: 5px;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -104,13 +100,13 @@ main details summary aside div:nth-of-type(2) {
 
 /* product type (es: vinyl, cd, ecc) */
 main details summary aside div:first-of-type span {
-    font-size: 16px;
+    font-size: clamp(16px, 1.7vw, 24px);
 }
 
 /* product price */
 main details summary aside div:last-of-type span {
     font-family: lato-regular;
-    font-size: 18px;
+    font-size: clamp(18px, 1.7vw, 26px);
 }
 
 main details summary aside input[type="button"] {
@@ -121,7 +117,7 @@ main details summary aside input[type="button"] {
     color: #fff;
     cursor: pointer;
     font-family: lato-regular;
-    font-size: 15px;
+    font-size: clamp(15px, 1.5vw, 26px);
 }
 
 /* description and tracklist of product */
@@ -150,20 +146,34 @@ details[open] > *:not(summary) {
 
 main details > div > p {
     margin-bottom: 5px;
+    font-size: clamp(15px, 1.7vw, 20px);
 }
 
 main details > div > h3 {
+    display: inline;
     font-family: "lato-regular";
+    font-size: clamp(18px, 1.7vw, 26px);
+}
+
+main details > div > span {
+    font-family: "lato-regular";
+    font-size: clamp(16px, 1.5vw, 22px);
+}
+
+main details > div > h3:last-of-type {
+    display: block;
     margin-left: 5px;
+    font-size: clamp(18px, 1.7vw, 26px);
 }
 
 main details > div > ol > li {
     padding-left: 5px;
     margin: 3px 0;
+    font-size: clamp(16px, 1.5vw, 22px);
 }
 
 main details > div > ol > li::marker {
-    color: #9e889a;
+    color: #008e99;
 }
 
 /**
@@ -174,7 +184,7 @@ body > aside {
     bottom: 0;
     left: 0;
     right: 0;
-    transition: bottom 0.3s ease-in-out;
+    transition: bottom 0.5s linear;
     background-color: rgb(80, 80, 80);
     margin: 5px;
     border-radius: 10px;
@@ -189,10 +199,15 @@ body > aside > header {
 
 body > aside > header > h2 {
     font-family: lato-light;
-    flex-grow: 1;
-    font-size: 20px;
+    /* flex-grow: 1; */
+    font-size: clamp(20px, 1.8vw, 32px);
     margin: 15px 20px;
     letter-spacing: 0.2em;
+    /* next properties are for text alignment transition */
+    text-align: center;
+    white-space: nowrap;
+    width: 0;
+    transition: width 0.5s linear;
 }
 
 body > aside > header > img {
@@ -215,7 +230,7 @@ body > aside footer > span:last-of-type {
 
 body > aside footer > span:first-of-type {
     font-family: lato-light;
-    font-size: 15px;
+    font-size: clamp(15px, 1.7vw, 24px);
     letter-spacing: 0.2em;
     margin: 10px 5px;
 }
@@ -311,7 +326,7 @@ span.material-icons-outlined {
         justify-content: space-around;
     }
 
-    main details summary aside h2 {
+    /* main details summary aside h2 {
         font-size: 22px;
     }
 
@@ -321,7 +336,7 @@ span.material-icons-outlined {
 
     main details summary aside div:first-of-type span {
         font-size: 18px;
-    }
+    } */
 }
 
 /**
@@ -333,7 +348,7 @@ span.material-icons-outlined {
     }
 
     main {
-        width: 70%;
+        width: 69%;
         float: left;
     }
 
@@ -341,10 +356,15 @@ span.material-icons-outlined {
         width: 30vw;
     }
 
+    /* Cart Preview */
     body > aside {
         position: unset;
         margin-left: calc(70% - 5px);
         width: 30%;
+    }
+
+    body > aside > header > h2 {
+        width: 100%;
     }
 
     body > aside > header > img {
