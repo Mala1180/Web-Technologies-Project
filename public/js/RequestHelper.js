@@ -1,6 +1,3 @@
-/**
- *	Simple class for making ajax requests.
- */
 const BASE_URL = "./server/";
 
 function getDefaultHeaders() {
@@ -16,8 +13,12 @@ function makeUrl(name) {
     return BASE_URL + name + ".php";
 }
 
+/**
+ * Simple class for making ajax requests.
+ */
 class RequestHelper {
     constructor() {}
+
     /* We need to add Authorization header for every request */
     makeRequest(method, url, action, data, callback = function () {}) {
         data.action = action;
