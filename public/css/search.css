@@ -17,7 +17,9 @@ body > header > div.container {
 /**
  *  if backdrop-filter supported
  */
-@supports ((-webkit-backdrop-filter: blur(5px)) or (backdrop-filter: blur(5px))) {
+@supports (
+    (-webkit-backdrop-filter: blur(5px)) or (backdrop-filter: blur(5px))
+) {
     body > header > div.container {
         -webkit-backdrop-filter: blur(5px);
         backdrop-filter: blur(5px);
@@ -237,7 +239,7 @@ body > aside footer > span:first-of-type {
 
 body > aside > div {
     max-height: 30vh;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 body > aside div section {
@@ -289,7 +291,9 @@ span.material-icons-outlined {
 /**
  *  if backdrop-filter supported
  */
-@supports ((-webkit-backdrop-filter: blur(30px)) or (backdrop-filter: blur(30px))) {
+@supports (
+    (-webkit-backdrop-filter: blur(30px)) or (backdrop-filter: blur(30px))
+) {
     body > aside {
         -webkit-backdrop-filter: blur(30px);
         backdrop-filter: blur(30px);
