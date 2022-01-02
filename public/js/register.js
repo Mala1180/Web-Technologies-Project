@@ -10,9 +10,7 @@ $(document).ready(function () {
                 username: txtUsername.value,
                 password: txtPassword.value
             }, function (data) {
-                let newUrl = location.href.replace("Register.php", "Login.php");
-                location.href = newUrl;
-                console.log(data);
+                location.href = "index.php";
             }
         );
     });

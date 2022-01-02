@@ -17,8 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		case "login":
             checkParams($_POST, array("username", "password"));
             $user = $dbUserMgr->login($_POST["username"]);
-            $password = $user[0]["password"];
-            if ($user[0] && password_verify($_POST["password"], $password)) {
+            if (count($user) > 0 && password_verify($_POST["password"], $user[0]["password"])) {
                 /**
                  * Successful Login. Opinion: Refactor for the token adding a method to ourjwtclass :D, whad do you think?
                  */	

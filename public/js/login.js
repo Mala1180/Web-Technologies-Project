@@ -5,11 +5,17 @@ $(document).ready(function () {
     });
 
     function login(username, password) {
+        $("section > p:first-of-type").hide();
         reqHelper.post("userAccess", "login", {
             "username": username,
             "password": password
         }, function (data) {
-            jwt.setJWT(data.data);
+            if (data.success) {
+                jwt.setJWT(data.data);
+                location.href = "index.php";
+            } else {
+                $("section > p:first-of-type").show();
+            }
         });
     }
 });

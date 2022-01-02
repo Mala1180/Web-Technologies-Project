@@ -74,6 +74,11 @@ section form label {
     height: 0;
     width: 0;
 }
+section > p:first-of-type {
+    color: #bb2e29;
+    font-weight: bold;
+    display: none;
+}
 
 @media screen and (min-width: 768px) {
     main {

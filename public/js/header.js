@@ -24,4 +24,10 @@ $(document).ready(function () {
             $searchSection.hide();
         }
     });
+
+    $("#logoutBtn").click(function (e) {
+        e.preventDefault();
+        jwt.unsetJWT();
+        location.href = "index.php";
+    })
 });

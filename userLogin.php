@@ -18,6 +18,7 @@
                 <h1>Unibo Vinyl</h1>
             </header>
             <h2>Accedi</h2>
+            <p>Username o password non corretti</p>
             <form name="formLogin">
                 <ul>
                     <li>
@@ -36,27 +37,6 @@
             </form>
             <p>Non sei ancora regitrato? <a href="userRegister.php">Registrati</a></p>
         </section>
-        
-<!-- 
-        <section>
-            <input type="button" name="SubmitLogout" id="SubmitLogout" value="Logout">
-            <input id="btnMyProfile" type="button" value="Il mio profilo">
-        </section>
-
-        <section><br><br>
-            <form name="formCreditCard">
-                <h1>Aggiungi carta di credito</h1>
-                <input type="text" name="txtCardNumber" id="txtCardNumber" placeholder="Numero Carta" value="" required><br/>
-                <input type="text" name="txtCircuit" id="txtCircuit" placeholder="Circuito (ES. Visa, Mastercard, ...)" value="" required><br/>
-                <input type="date" name="expiryDateCreditCard" id="expiryDateCreditCard" placeholder="Data di scadenza" value="" required><br/>
-
-                <label for="cmbDefault">Vuoi impostare la carta come predefinita?</label>
-                <input type="checkbox" id="cmbDefault" name="cmbDefault" value="Default">
-                <br>
-                <input type="button" name="btnAddCard" id="btnAddCard" value="Aggiungi">
-            </form>
-        </section>
--->
     </main>
     <script type="text/javascript" src="./public/js/login.js"></script>
 </body>

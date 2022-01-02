@@ -9,7 +9,7 @@
                     <img src="./public/img/icons/search.png" alt="search icon" />
                 </li>
                 <li>
-                    <img src="./public/img/icons/menu.png" alt="search icon" />
+                    <img src="./public/img/icons/menu.png" alt="menu icon" />
                 </li>
             </ul>
         </nav>
@@ -43,7 +43,7 @@
             <span>
                 <a href="./profile.php">Il mio profilo</a>
                 <a href="./terms.php">Informativa sui dati</a>
-                <a href="./logout.php">Logout</a>
+                <a id="logoutBtn" href="./logout.php">Logout</a>
             </span>
         </section>
     </div>
