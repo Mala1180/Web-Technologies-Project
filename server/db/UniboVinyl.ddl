@@ -59,6 +59,7 @@ create table transaction (
 create table album (
      idAlbum int not null auto_increment,
      name varchar(50) not null,
+     description varchar(280) not null,
      idAuthor int not null,
      duration int not null,
      constraint IDalbum_ID primary key (idAlbum),
@@ -75,7 +76,7 @@ create table genre (
 
 create table author (
      idAuthor int not null auto_increment,
-     artName char(1) not null,
+     artName varchar(50) not null,
      email varchar(50) not null,
      username varchar(16) not null,
      password varchar(150) not null,
@@ -94,7 +95,6 @@ create table product (
      description varchar(280) not null,
      type tinyint not null,
      idAuthor int,
-     name varchar(50),
      idAlbum int,
      constraint IDproduct primary key (idProduct));
 
@@ -115,10 +115,11 @@ create table customerOrder (
      constraint IDorder_ID primary key (idOrder));
 
 create table cartEntry (
+     idCartEntry int not null auto_increment,
      idProduct int not null,
      idCustomer int not null,
      quantity int not null,
-     constraint IDcartEntry primary key (idCustomer, idProduct));
+     constraint IDcartEntry primary key (idCartEntry));
 
 create table notification (
      idNotification int not null auto_increment,
