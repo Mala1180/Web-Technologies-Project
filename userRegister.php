@@ -18,6 +18,13 @@
             </header>
             <h2>Registrati</h2>
             <form name="formRegister">
+                <fieldset>
+                    <legend>Sono un</legend>
+                    <input type="radio" id="cliente" name="type" value="cliente" checked="checked"/> 
+                    <label for="cliente">Cliente</label>
+                    <input type="radio" id="artista" name="type" value="artista" />
+                    <label for="artista">Artista</label>
+                </fieldset>
                 <ul>
                     <li>
                         <label for="txtName">Nome</label>
@@ -26,6 +33,10 @@
                     <li>
                         <label for="txtSurname">Cognome</label>
                         <img src="./public/img/icons/person_black.png" alt=""><input type="text" name="txtSurname" id="txtSurname" placeholder="Cognome" required />
+                    </li>
+                    <li>
+                        <label for="txtArtName">Nome d'arte</label>
+                        <img src="./public/img/icons/person_black.png" alt=""><input type="text" name="txtArtName" id="txtArtName" placeholder="Nome d'arte" required />
                     </li>
                     <li>
                         <label for="txtUsername">Username</label>
@@ -49,18 +60,7 @@
                 </ul>
             </form>
             <p>Sei già registrato? <a href="userLogin.php">Accedi</a></p>
-        </section>
-            
-            <!-- <form name="formRegister">
-            	<input type="text" name="txtName" id="txtName" placeholder="Nome" value="" required><br/>
-            	<input type="text" name="txtSurname" id="txtSurname" placeholder="Cognome" value="" required><br/>
-            	<input type="text" name="txtUsername" id="txtUsername" placeholder="Nome utente" value="" required><br/>
-            	<input type="email" name="txtEmail" id="txtEmail" placeholder="Email" value="" required><br/>
-            	<input type="password" name="txtPassword" id="txtPassword" placeholder="Password" value="" required><br/>
-            	<input type="password" name="txtPasswordConfirm" id="txtPasswordConfirm" placeholder="Conferma password" value="" required><br/>
-            	<input type="button" name="btnNewUser" id="SubmitRegister" name="SubmitRegister" value="Iscriviti">
-            </form> -->
-            
+        </section>            
     </main>
     <script type="text/javascript" src="./public/js/register.js"></script>
 </body>
