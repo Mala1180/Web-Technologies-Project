@@ -26,9 +26,26 @@ body > header > div.container {
 /* description and tracklist of product */
 main {
     padding: 10px;
+    padding-bottom: 80px;
 }
 
-main h1 {
+main > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+main > div > img {
+    width: 60%;
+    max-height: 150px;
+    max-width: 400px;
+    margin: 0 20%;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 5px;
+}
+
+main > div > h1 {
     font-family: "lato-regular";
     font-size: clamp(24px, 1.7vw, 30px);
     text-align: center;
@@ -38,6 +55,7 @@ main h1 {
 main section:first-of-type {
     display: flex;
     flex-direction: column;
+    margin: 20px 0;
 }
 
 main section:first-of-type > div{
@@ -97,5 +115,54 @@ main input[type="button"] {
     font-size: clamp(18px, 1.5vw, 22px);
     border: none;
     border-radius: 5px;
+}
+
+
+@media screen and (min-width: 576px) {
+
+    main > div {
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+
+    main > div > img {
+        margin: 10px;
+        width: 40%;
+        max-height: 250px;
+    }
+
+    main section:first-of-type {
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
     
+}
+
+@media screen and (min-width: 992px) {
+    
+    main > div {
+        justify-content: center;
+    }
+
+    main > div h1 {
+        margin-left: 50px;
+    }
+
+    main section:nth-of-type(2) p {
+        text-align: center;
+    }
+
+    main section:nth-of-type(2) h2,
+    main section:nth-of-type(2) ol {
+        margin-left: 33vw;
+    }
+
+    main > input[type="button"] {
+        position: unset;
+        width: 40%;
+        margin-top: 30px;
+        margin-left: 30%;
+    }
+
 }

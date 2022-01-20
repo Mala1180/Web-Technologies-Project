@@ -11,7 +11,11 @@
     <body>
         <?php require("./templates/header.php"); ?>
         <main>
-            <h1>Vinile 1 prova nome lungo</h1>
+            <div>
+                <img src="./public/img/vinile1.jpg" alt="">
+                <h1>Vinile 1 prova nome lungo</h1>
+            </div>
+            
             <section>
                 <div>
                     <em>Autore:</em>
