@@ -8,8 +8,7 @@ require_once("db/dbProductManager.php");
 require_once("db/dbAlbumManager.php");
 require_once("../vendor/autoload.php");
 require_once('validate.php');
-//DA CAMBIARE IN POST
-print_r($_POST);
+
     if($_SERVER["REQUEST_METHOD"] == "GET") {
         if(!isset($_GET["action"])) {
             send_error("An action is required");
@@ -49,7 +48,7 @@ print_r($_POST);
                 send_data($data);
                 break;
             case "getMyOrder":
-                $data = $dbOrderMgr->getProduct($_POST["idProduct"]);
+                $data = $dbOrderMgr->getOrders($_POST["idVendor"]);
                 send_data($data);
                 break;
             default:
