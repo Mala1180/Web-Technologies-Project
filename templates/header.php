@@ -6,10 +6,14 @@
                     <a href="index.php"><img src="./public/img/logoBianco.png" alt="unibo logo"></a>
                 </li>
                 <li>
-                    <img src="./public/img/icons/search.png" alt="search icon" />
+                    <a href="#" role="button">
+                        <img src="./public/img/icons/search.png" alt="search icon" />
+                    </a>
                 </li>
                 <li>
-                    <img src="./public/img/icons/menu.png" alt="menu icon" />
+                    <a href="#" role="button">
+                        <img src="./public/img/icons/menu.png" alt="menu icon" />
+                    </a>
                 </li>
             </ul>
         </nav>
@@ -25,7 +29,7 @@
                 <div>
                     <label for="filter">Filtro: </label>
                     <select id="filter" name="filter">
-                        <option value="Nessuno">Nessuno</option>
+                        <option value="">Seleziona...</option>
                         <option value="Vinile">Vinile</option>
                         <option value="CD">CD</option>
                         <option value="Giradischi">Giradischi</option>
