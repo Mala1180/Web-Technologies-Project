@@ -134,8 +134,7 @@ main > section > form > fieldset > label:last-of-type {
 
     main > section {
         margin: 0;
-        margin-top: 20px;
-        height: 100%;
+        margin-top: 50px;
         width: 34%;
     }
 
