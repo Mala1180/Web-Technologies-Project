@@ -11,16 +11,16 @@
         <?php require("./templates/header.php"); ?>
         <main>
             <section>
-                <h1>Vinili</h1>
+                <a href="./userSearch.php?query=&filter=Vinile">Vinili</a>
             </section>
             <section>
-                <h1>CD</h1>
+                <a href="./userSearch.php?query=&filter=CD">CD</a>
             </section>
             <section>
-                <h1>Giradischi</h1>
+                <a href="./userSearch.php?query=&filter=Giradischi">Giradischi</a>
             </section>
             <section>
-                <h1>Bundle</h1> 
+                <a href="./userSearch.php?query=&filter=Bundle">Bundle</a> 
             </section>
         </main>
         <script src="./public/js/page-header.js"></script>
