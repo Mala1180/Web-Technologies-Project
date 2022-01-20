@@ -6,10 +6,6 @@ $(document).ready(function () {
 
     function logout() {
         reqHelper.post("userAccess", "logout", {}, function (data) {
-            console.log(data);
-            /*
-             * TODO: Unset AuthToken from localStorage
-             */
             jwt.unsetJWT();
         });
     }
