@@ -17,7 +17,9 @@
      */
     function query_execution($db, $query, $params) {
         $statement = $db->prepare($query);
-        $statement->bind_param(getBindingString($params), ...$params);
+        if (count($params)) {
+            $statement->bind_param(getBindingString($params), ...$params);
+        }
         $statement->execute();
         return $statement;
     }
@@ -56,7 +58,7 @@
      * This function executes the given query and return records if it selection
      * or a boolean in any other case 
      */
-    function execute_query($db, $query, $params) {
+    function execute_query($db, $query, $params=array()) {
         /*
          * try to understand the type of query 
          */

@@ -46,6 +46,11 @@ class DBProductMgr {
 		$query = "SELECT artName FROM `product`, `author` WHERE idProduct=? AND product.idAuthor=author.idAuthor";
 		return execute_query($this->db, $query, array($idProduct));
  	}
+	
+	public function getProducts() {
+		$query = "SELECT * FROM product";
+		return execute_query($this->db, $query);
+	}
 }
 
 $dbProductMgr = new DBProductMgr($db);
