@@ -33,15 +33,15 @@ require_once('validate.php');
         //è un post.
         switch ($_POST["action"]) {
             case "readnotification":
-                checkParams($_POST, array("notificationId")); // Should it be more specific?
+                checkParams($_POST, array("notificationId")); // Should it be more specific? no
                 send_success($dbNotificationMgr->readNotification($_POST["notificationId"]));
                 break;
             case "unreadnotification":
-                checkParams($_POST, array("notificationId")); // Should it be more specific?
+                checkParams($_POST, array("notificationId")); // Should it be more specific? no
                 send_success($dbNotificationMgr->unreadNotification($_POST["notificationId"]));
                 break;
             case "deletenotification":
-                checkParams($_POST, array("notificationId")); // Should it be more specific?
+                checkParams($_POST, array("notificationId")); // Should it be more specific? no
                 send_success($dbNotificationMgr->deleteNotification($_POST["notificationId"]));
                 break;
             default:
