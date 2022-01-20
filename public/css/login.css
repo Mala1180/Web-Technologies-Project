@@ -7,7 +7,7 @@ main > section header {
 }
 
 main > section header img {
-    width: 33%;
+    width: 15%;
 }
 
 section {
@@ -22,7 +22,7 @@ section form {
 }
 
 section form li {
-    margin-bottom: 25px;
+    margin-bottom: 15px;
 }
 
 section form li img {
@@ -31,13 +31,13 @@ section form li img {
     margin-right: 5%;
 }
 
-section form input {
+section form li input {
     width: 85%;
     border: none;
     line-height: 2;
 }
 
-section form input:focus {
+section form li input:focus {
     outline: none;
 }
 
@@ -67,7 +67,7 @@ section form ul {
     list-style: none;
 }
 
-section form label {
+section form ul label {
     /* Accessibility */
     display: block;
     overflow: hidden;
@@ -78,6 +78,39 @@ section > p:first-of-type {
     color: #bb2e29;
     font-weight: bold;
     display: none;
+}
+
+main > section > form > fieldset {
+    border: none;
+    padding: 20px 0;
+    margin-bottom: 20px;
+}
+
+main > section > form > fieldset > input[type="radio"] {
+    display: none;
+}
+
+main > section > form > fieldset:first-of-type {
+    text-align: center;
+}
+
+main > section > form > fieldset > label {
+    border: 1px solid black;
+    margin: 0 0 30px 0;
+    padding: 10px 5%;
+}
+
+main > section > form > fieldset > input[type="radio"]:checked + label {
+    background-color: #bb2e29;
+    color: white;
+}
+
+main > section > form > fieldset > label:first-of-type {
+    border-radius: 10px 0 0 10px;
+}
+
+main > section > form > fieldset > label:last-of-type {
+    border-radius: 0 10px 10px 0;
 }
 
 @media screen and (min-width: 768px) {

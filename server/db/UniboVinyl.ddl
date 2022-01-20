@@ -76,6 +76,9 @@ create table genre (
 create table author (
      idAuthor int not null auto_increment,
      artName char(1) not null,
+     email varchar(50) not null,
+     username varchar(16) not null,
+     password varchar(150) not null,
      constraint IDauthor primary key (idAuthor));
 
 create table song (

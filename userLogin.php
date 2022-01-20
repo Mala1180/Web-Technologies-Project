@@ -20,6 +20,13 @@
             <h2>Accedi</h2>
             <p>Username o password non corretti</p>
             <form name="formLogin">
+                <fieldset>
+                    <legend>Sono un</legend>
+                    <input type="radio" id="cliente" name="type" value="cliente" checked="checked"/> 
+                    <label for="cliente">Cliente</label>
+                    <input type="radio" id="artista" name="type" value="artista" />
+                    <label for="artista">Artista</label>
+                </fieldset>
                 <ul>
                     <li>
                         <label for="txtUsername">Username</label>

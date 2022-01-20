@@ -15,9 +15,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	}
 	switch ($_POST["action"]) {
 		case "login":
-            checkParams($_POST, array("username", "password"));
-            $user = $dbUserMgr->login($_POST["username"]);
-            if (count($user) > 0 && password_verify($_POST["password"], $user[0]["password"])) {
+            checkParams($_POST, array("username", "password", "type"));
+            if ($dbUserMgr->login($_POST["username"], $_POST["password"], $_POST["type"])) {
                 /**
                  * Successful Login. Opinion: Refactor for the token adding a method to ourjwtclass :D, whad do you think?
                  */	
@@ -55,9 +54,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             send_success(true);
 			break;
 		case "register":
-			checkParams($_POST, array("name", "surname", "email", "username", "password"));
+            checkParams($_POST, array("type", "email", "username", "password"));
+            if ($_POST["type"] == "cliente") {
+                checkParams($_POST, array("name", "surname"));
+                send_success($dbUserMgr->registerCustomer($_POST["name"], $_POST["surname"], $_POST["email"], $_POST["username"], $_POST["password"]));
+            } else if ($_POST["type"] == "artista") {
+                checkParams($_POST, array("artName"));
+                send_success($dbUserMgr->registerAuthor($_POST["artName"], $_POST["email"], $_POST["username"], $_POST["password"]));
+            }
 			/*composeMail($_POST["email"], "register", array("username" => $_POST["username"]));*/
-            send_success($dbUserMgr->register($_POST["name"], $_POST["surname"], $_POST["email"], $_POST["username"], password_hash($_POST['password'], PASSWORD_BCRYPT)));
 			break;
 		default:
 			send_error("Unknown action");
