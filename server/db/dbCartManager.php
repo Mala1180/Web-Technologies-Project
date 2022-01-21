@@ -1,7 +1,7 @@
 <?php
 require_once("db/dbconnector.php");
 
-class DBAuthorMgr {
+class DBCartMgr {
  	private $db;
  	
  	public function __construct($dbConnection) {
@@ -17,16 +17,26 @@ class DBAuthorMgr {
 		return execute_query($this->db, $query, array($idProduct, $idCustomer, $quantity));
  	}
 
- 	public function removeFromChart($idProduct, $idCustomer) {
- 		$query = "DELETE FROM `cartEntry` WHERE idProduct=? AND idCustomer=?";
-		return execute_query($this->db, $query, array($idProduct, $idCustomer));
+ 	public function removeCartEntry($idCartEntry) {
+ 		$query = "DELETE FROM `cartEntry` WHERE idCartEntry=?";
+		return execute_query($this->db, $query, array($idCartEntry));
  	}
 
-    public function modifyQuantityProduct($idProduct, $idCustomer, $quantity) {
-        $query = "UPDATE `cartEntry` SET quantity=? WHERE idProduct=? AND idCustomer=?";
-		return execute_query($this->db, $query, array($quantity, $idProduct, $idCustomer));
- 	}
+	public function editProductQuantity($idCartEntry, $quantity) {
+		$query = "UPDATE `cartEntry` SET quantity=? WHERE idCartEntry=?";
+		return execute_query($this->db, $query, array($quantity, $idCartEntry));
+	}
+
+	public function getCart($idCustomer) {
+		$query = "SELECT idCartEntry, ce.idProduct, ce.quantity, price, p.type, name, artName, imgPath 
+					FROM product p, album a, cartentry ce, author au
+					WHERE ce.idProduct = p.idProduct
+					AND p.idAlbum = a.idAlbum
+					AND a.idAuthor = au.idAuthor
+					AND ce.idCustomer = ?";
+		return execute_query($this->db, $query, array($idCustomer));
+	}
 }
 
- $dbAuthorMgr = new DBAuthorMgr($db);
+ $dbCartMgr = new DBCartMgr($db);
 ?>

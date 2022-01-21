@@ -1,0 +1,47 @@
+.cart-item {
+    display: flex;
+    margin: 0 5% 10px;
+    border-radius: 10px;
+    align-items: center;
+    background-color: #bdb7b7;
+    padding: 10px 5%;
+}
+.cart-item > section > header > h2 {
+    font-size: 1em;
+}
+.cart-item > img {
+    width: 30vw;
+    height: 30vw;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 5px;
+}
+.cart-item > section {
+    margin: 0 0 0 2vh;
+    width: 58vh;
+}
+.cart-item > section > header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 10px;
+}
+
+.cart-item > section > p {
+    margin-bottom: 5px;
+    font-size: 0.8em;
+}
+.cart-item footer form {
+    display: none;
+}
+
+@media screen and (min-width: 768px) {
+    .cart-item {
+        margin: 0 20% 10px;
+    }
+
+    .cart-item > img {
+        width: 7vw;
+        height: 7vw;
+    }
+}
