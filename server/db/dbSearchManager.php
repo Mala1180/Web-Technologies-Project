@@ -1,6 +1,5 @@
 <?php
 require_once("db/dbconnector.php");
-
 class DBSearchMgr {
     private $db;
 
@@ -13,7 +12,7 @@ class DBSearchMgr {
     }
 
     public function searchProducts($name, $filter) {
-        if ($filter == "Nessuno") {
+        if ($filter == "") {
             $query = "SELECT `name`, `description`
                   FROM `product`
                   WHERE `name` LIKE ?";

@@ -51,6 +51,10 @@ require_once('validate.php');
                 $data = $dbOrderMgr->getOrders($_POST["idVendor"]);
                 send_data($data);
                 break;
+            case "getAllGenre":
+                    $data = $dbAlbumMgr->getAllGenre();
+                    send_data($data);
+                    break;
             default:
                 send_error("Unknown action");
                 break;

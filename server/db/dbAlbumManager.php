@@ -37,6 +37,11 @@ class DBAlbumMgr {
        return execute_query($this->db, $query, array($idSong));
     }
 
+	public function getAllGenre() {
+		$query = "SELECT * FROM genre";
+		return execute_query($this->db, $query);
+ 	}
+
 }
 
 $dbAlbumMgr = new DBAlbumMgr($db);

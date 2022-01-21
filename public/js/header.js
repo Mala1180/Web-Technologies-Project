@@ -1,4 +1,5 @@
 $(document).ready(function () {
+
     const $searchSection = $("#search-section");
     const $menuSection = $("#menu-section");
     const $searchIcon = $("#search-icon");
