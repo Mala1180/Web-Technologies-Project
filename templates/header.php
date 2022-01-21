@@ -31,10 +31,10 @@
                     <label for="filter">Filtro: </label>
                     <select id="filter" name="filter">
                         <option value="">Seleziona...</option>
-                        <option value="Vinile">Vinile</option>
-                        <option value="CD">CD</option>
-                        <option value="Giradischi">Giradischi</option>
-                        <option value="Bundle">Bundle</option>
+                        <option value="1">Vinile</option>
+                        <option value="0">CD</option>
+                        <!-- <option value="2">Giradischi</option>
+                        <option value="3">Bundle</option> -->
                     </select>
                 </div>
             </form>
