@@ -6,6 +6,7 @@ require_once("db/dbconnector.php");
 require_once("db/dbVendorManager.php");
 require_once("db/dbProductManager.php");
 require_once("db/dbAlbumManager.php");
+require_once("db/dbUserManager.php");
 require_once("../vendor/autoload.php");
 require_once('validate.php');
 
@@ -28,15 +29,19 @@ require_once('validate.php');
         //è un post.
         switch ($_POST["action"]) {
             case "addAlbum":
-                $data = $dbAlbumMgr->addAlbum($_POST["name"], $_POST["description"], $_POST["idAuthor"], $_POST["duration"]);
+                $idAuthor = $dbUserMgr->getUserInfoForToken(get_token_data()->username, "artista")[0]["idAuthor"];
+                $data = $dbAlbumMgr->addAlbum($_POST["name"], $_POST["description"], $idAuthor, $_POST["duration"]);
                 send_data($data);
                 break;
             case "addProduct":
-                $data = $dbProductMgr->addProduct($_POST["name"], $_POST["quantity"], $_POST["price"], $_POST["description"], $_POST["type"], $_POST["idAuthor"], $_POST["idAlbum"]);
+                $idAuthor = $dbUserMgr->getUserInfoForToken(get_token_data()->username, "artista")[0]["idAuthor"];
+                $idAlbum = $dbAlbumMgr->getIdFromTitleAndIdAuthor($idAuthor, $_POST["albumTitle"])[0]["idAlbum"];
+                $data = $dbProductMgr->addProduct($_POST["quantity"], $_POST["price"], $_POST["description"], $_POST["type"], $idAuthor, $idAlbum);
                 send_data($data);
                 break;
             case "addSongToAlbum":
-                $data = $dbAlbumMgr->addSongToAlbum($_POST["idAlbum"], $_POST["name"], $_POST["duration"]);
+                $idAlbum = $dbAlbumMgr->getIdFromTitleAndIdAuthor($dbUserMgr->getUserInfoForToken(get_token_data()->username, "artista")[0]["idAuthor"], $_POST["albumTitle"])[0]["idAlbum"];
+                $data = $dbAlbumMgr->addSongToAlbum($idAlbum, $_POST["name"], $_POST["duration"]);
                 send_data($data);
                 break;
             case "removeProduct":
@@ -52,9 +57,15 @@ require_once('validate.php');
                 send_data($data);
                 break;
             case "getAllGenre":
-                    $data = $dbAlbumMgr->getAllGenre();
-                    send_data($data);
-                    break;
+                $data = $dbAlbumMgr->getAllGenre();
+                send_data($data);
+                break;
+            case "setAlbumGenre":
+                $idAuthor = $dbUserMgr->getUserInfoForToken(get_token_data()->username, "artista")[0]["idAuthor"];
+                $idAlbum = $dbAlbumMgr->getIdFromTitleAndIdAuthor($idAuthor, $_POST["albumTitle"])[0]["idAlbum"];
+                $data = $dbAlbumMgr->setAlbumGenre($idAlbum, $_POST["genre"]);
+                send_data($data);
+                break;
             default:
                 send_error("Unknown action");
                 break;

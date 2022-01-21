@@ -23,7 +23,7 @@
             //             <aside>
             //                 <div>
             //                     <h2></h2>
-            //                     <p style="display: none;">Lorem ipsum dolor sit amet  jd ffu eufgfugefugf ue gudw dwu gu expedita.</p>
+            //                     <p style="display: none;">Lorem ipsum dolor sit amet jd ffu eufgfugefugf ue gudw dwu gu expedita.</p>
             //                     <span>Tipologia: Vinile</span>
             //                 </div>
             //                 <div>
