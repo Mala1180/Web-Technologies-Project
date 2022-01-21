@@ -19,7 +19,7 @@
         <section>
             <form method="GET" action="userSearch.php">
                 <div>
-                    <img src="./public/img/icons/search.png" alt="search icon" />
+                    <img src="./public/img/icons/search.png" alt="" />
                     <input type="text" name="query" placeholder="Cerca..."/>
                 </div>
                 <div>
