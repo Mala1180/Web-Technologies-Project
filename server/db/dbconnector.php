@@ -4,7 +4,7 @@
 	 *	TODO: move to a config file!
 	 */
 	header('Content-Type: application/json; charset=utf-8');
-	$servername = "192.168.64.2";
+	$servername = "localhost";
 	$database = "UniboVinyl";
 	$username = "root";
 	$password = "root";
