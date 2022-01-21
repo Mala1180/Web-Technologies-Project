@@ -20,9 +20,9 @@
             <form name="formRegister">
                 <fieldset>
                     <legend>Sono un</legend>
-                    <input type="radio" id="cliente" name="type" value="cliente" checked="checked"/> 
+                    <input type="radio" id="cliente" name="type" value="cliente" checked="checked" tabindex="0"/> 
                     <label for="cliente">Cliente</label>
-                    <input type="radio" id="artista" name="type" value="artista" />
+                    <input type="radio" id="artista" name="type" value="artista" tabindex="1" />
                     <label for="artista">Artista</label>
                 </fieldset>
                 <ul>

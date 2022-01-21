@@ -7,12 +7,12 @@
                 </li>
                 <li>
                     <a href="#" role="button">
-                        <img src="./public/img/icons/search.png" alt="search icon" />
+                        <img id="search-icon" src="./public/img/icons/search.png" alt="search icon" />
                     </a>
                 </li>
                 <li>
                     <a href="#" role="button">
-                        <img src="./public/img/icons/menu.png" alt="menu icon" />
+                        <img id="menu-icon" src="./public/img/icons/menu.png" alt="menu icon" />
                     </a>
                 </li>
             </ul>
@@ -20,11 +20,11 @@
         <a href="index.php">
             <img src="./public/img/logoBianco.png" alt="unibo logo" />
         </a>
-        <section>
+        <section id="search-section">
             <form method="GET" action="userSearch.php">
                 <div>
                     <img src="./public/img/icons/search.png" alt="search icon" />
-                    <input type="text" name="query" placeholder="Cerca..."/>
+                    <input type="text" name="query" placeholder="Cerca..." />
                 </div>
                 <div>
                     <label for="filter">Filtro: </label>
@@ -38,7 +38,7 @@
                 </div>
             </form>
         </section>
-        <section>
+        <section id="menu-section">
             <span>
                 <a href="./userRegister.php">Registrati</a>
                 <a href="./userLogin.php">Login</a>
@@ -46,8 +46,8 @@
             </span> 
             <span>
                 <a href="./profile.php">Il mio profilo</a>
-                <a href="./terms.php">Informativa sui dati</a>
-                <a id="logoutBtn" href="./logout.php">Logout</a>
+                <a href="./cart.php">Carrello</a>
+                <a href="./logout.php" id="logoutBtn">Logout</a>
             </span>
         </section>
     </div>

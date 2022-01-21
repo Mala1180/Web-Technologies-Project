@@ -2,6 +2,9 @@
     --image-height: 120px;
 }
 
+/**
+ *  Header common styles (not home)
+ */
 body > header {
     position: unset;
     /* Default image without filter in reasearch */
