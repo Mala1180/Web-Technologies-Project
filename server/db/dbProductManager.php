@@ -22,12 +22,12 @@ class DBProductMgr {
 		return execute_query($this->db, $query, array($idProduct));
  	}
 
-     public function getProduct($idProduct) {
+    public function getProduct($idProduct) {
 		$query = "SELECT * FROM `product` WHERE idProduct=?";
 		return execute_query($this->db, $query, array($idProduct));
  	}
 
-	public function modifyArticle($idProduct, $name, $quantity, $price, $description, $type, $idAuthor, $idAlbum) {
+	public function modifyProduct($idProduct, $name, $quantity, $price, $description, $type, $idAuthor, $idAlbum) {
 		$query = "UPDATE `product` SET name=?, quantity=?, price=?, description=?, type=?, idAuthor=?, idAlbum=? WHERE idProduct=?";
 		return execute_query($this->db, $query, array($name, $quantity, $price, $description, $type, $idAuthor, $idAlbum, $idProduct));
  	}

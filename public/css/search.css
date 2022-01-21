@@ -1,7 +1,10 @@
-:root {
+:root { 
     --image-height: 120px;
 }
 
+/**
+ *  Header common styles (not home)
+ */
 body > header {
     position: unset;
     /* Default image without filter in reasearch */
@@ -42,31 +45,16 @@ body > main {
     padding-bottom: 60px;
 }
 
-main details {
-    border-bottom: 1px rgba(0, 0, 0, 0.3) solid;
-}
-
 /* product summary */
-main details summary {
+main section {
     padding: 10px;
-    cursor: pointer;
 }
 
-main details summary:focus {
+main section:focus {
     outline: none;
 }
 
-details summary {
-    list-style-type: none;
-}
-
-/* Chrome and Firefox */
-details summary::marker,
-details summary::-webkit-details-marker {
-    display: none;
-}
-
-main details summary img {
+main section img {
     float: left;
     width: 40%;
     height: var(--image-height);
@@ -74,108 +62,54 @@ main details summary img {
     object-position: center;
     margin-right: 10px;
     border-radius: 10px;
+    cursor: pointer;
 }
 
-main details summary aside {
+main section aside {
     height: var(--image-height);
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
-main details summary aside h2 {
+main section aside h2 {
     font-family: lato-regular;
-    font-size: clamp(18px, 1.7vw, 28px);
+    font-size: clamp(18px, 1.7vw, 25px);
     margin-bottom: 5px;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-line-clamp: 2; /* number of lines to show */
     -webkit-box-orient: vertical;
+    cursor: pointer;
 }
 
-main details summary aside div:nth-of-type(2) {
+main section aside div:nth-of-type(2) {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
 /* product type (es: vinyl, cd, ecc) */
-main details summary aside div:first-of-type span {
-    font-size: clamp(16px, 1.7vw, 24px);
+main section aside div:first-of-type span {
+    font-size: clamp(16px, 1.7vw, 21px);
 }
 
 /* product price */
-main details summary aside div:last-of-type span {
+main section aside div:last-of-type span {
     font-family: lato-regular;
-    font-size: clamp(18px, 1.7vw, 26px);
+    font-size: clamp(18px, 1.7vw, 23px);
 }
 
-main details summary aside input[type="button"] {
+main section aside input[type="button"] {
     border-radius: 5px;
     background-color: #777;
     border: none;
     padding: 8px 10px;
     color: #fff;
     cursor: pointer;
-    font-family: lato-regular;
-    font-size: clamp(15px, 1.5vw, 26px);
-}
-
-/* description and tracklist of product */
-main details > div {
-    padding: 10px;
-    padding-top: 0;
-    -webkit-animation: fadeIn 0.5s;
-    animation: fadeIn 0.5s;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-}
-
-@-webkit-keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-}
-
-details[open] > *:not(summary) {
-    animation: fadeIn 0.5s ease;
-}
-
-main details > div > p {
-    margin-bottom: 5px;
-    font-size: clamp(15px, 1.7vw, 20px);
-}
-
-main details > div > h3 {
-    display: inline;
     font-family: "lato-regular";
-    font-size: clamp(18px, 1.7vw, 26px);
-}
-
-main details > div > span {
-    font-family: "lato-regular";
-    font-size: clamp(16px, 1.5vw, 22px);
-}
-
-main details > div > h3:last-of-type {
-    display: block;
-    margin-left: 5px;
-    font-size: clamp(18px, 1.7vw, 26px);
-}
-
-main details > div > ol > li {
-    padding-left: 5px;
-    margin: 3px 0;
-    font-size: clamp(16px, 1.5vw, 22px);
-}
-
-main details > div > ol > li::marker {
-    color: #008e99;
+    font-size: clamp(15px, 1.5vw, 20px);
 }
 
 /**
@@ -314,51 +248,38 @@ span.material-icons-outlined {
 }
 
 @media screen and (min-width: 768px) {
-    :root {
-        --image-height: 180px;
-    }
 
     body > aside {
-        width: 80vw;
-        margin-left: 10%;
+        display: none;
+        /* width: 80vw;
+        margin-left: 10%; */
     }
 
-    main details summary img {
-        width: 35%;
-    }
-    main details summary aside {
-        justify-content: space-around;
-    }
-
-    /* main details summary aside h2 {
-        font-size: 22px;
+    main {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
     }
 
-    main details summary aside div:last-of-type span {
-        font-size: 20px;
+    main section {
+        flex: 1 0 50%;
+        max-width: 50%;
     }
-
-    main details summary aside div:first-of-type span {
-        font-size: 18px;
-    } */
 }
 
 /**
  *  Large Screens
  */
 @media screen and (min-width: 992px) {
-    :root {
-        --header-height: 32vh;
-    }
 
-    main {
+    /* main {
         width: 69%;
         float: left;
-    }
+    } */
 
-    main details summary img {
+    /* main section img {
         width: 30vw;
-    }
+    } */
 
     /* Cart Preview */
     body > aside {
@@ -375,32 +296,16 @@ span.material-icons-outlined {
         display: none;
     }
 
-    body > header div.container {
-        height: var(--header-height);
-        display: flex;
-        justify-content: space-between;
-    }
 
-    body > header nav {
-        display: none;
-    }
+}
 
-    body > header > div > a img {
-        display: block;
-        height: 100%;
-        padding: 10%;
-    }
+/**
+ *  Extra Large Screens
+ */
+ @media screen and (min-width: 1200px) {
 
-    body > header section {
-        display: flex !important;
-        align-self: center;
+    :root {
+        --image-height: 170px;
     }
-
-    body > header section:first-of-type {
-        flex: 1 0 50%;
-    }
-
-    body > header section:last-of-type {
-        margin-right: 20px;
-    }
+    
 }

@@ -1,0 +1,92 @@
+/**
+ *  Header common styles (not home)
+ */
+body > header {
+    position: unset;
+    /* Default image without filter in reasearch */
+    background-image: url(../img/vinile2.jpg);
+    background-size: cover;
+    background-position: center;
+}
+
+body > header > div.container {
+    background-color: rgba(70, 70, 70, 0.8);
+}
+
+/**
+ *  if backdrop-filter supported
+ */
+ @supports (
+    (-webkit-backdrop-filter: blur(5px)) or (backdrop-filter: blur(5px))
+) {
+    body > header > div.container {
+        -webkit-backdrop-filter: blur(5px);
+        backdrop-filter: blur(5px);
+        background-color: unset;
+    }
+}
+
+header h1 {
+    font-size: 2.5em;
+    text-align: center;
+    letter-spacing: 00.2em;
+    color: white;
+    padding-top: 30px;
+    padding-bottom: 60px;
+}
+
+body > header section {
+    height: 20vh;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+main > section {
+    margin-bottom: 20px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 5px;
+}
+
+main > section > a {
+    display: block;
+    width: 100%;
+    height: 100px;
+    line-height: 100px; /* Center the text vertically */
+    color: white;
+    font-size: 1.5em;
+    text-align: center;
+    letter-spacing: 0.2em;
+    border-radius: 5px;
+}
+
+/**
+ *  if backdrop-filter supported
+ */
+ @supports ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+    main > section > a {
+        -webkit-backdrop-filter: blur(1px);
+        backdrop-filter: blur(1px);
+    }
+}
+
+main > section:nth-of-type(1) {
+    background-image: url(../img/ordini.jpg);
+}
+
+main > section:nth-of-type(2) {
+    background-image: url(../img/notifiche.jpg);
+}
+
+main > section:nth-of-type(3) {
+    background-image: url(../img/impostazioni.jpg);
+    background-position: unset;
+}
+
+main > section:nth-of-type(4) {
+    background-image: url(../img/pagamento.jpg);
+}

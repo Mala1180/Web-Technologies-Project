@@ -24,7 +24,7 @@
         return $statement;
     }
     /*
-     * Returns query recors
+     * Returns query records
      */
     function statement_records($statement) {
         $result = $statement->get_result();

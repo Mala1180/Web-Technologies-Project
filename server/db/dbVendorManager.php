@@ -12,7 +12,7 @@ class DBVendorMgr {
  		}
  	}
 
-     public function getVendorInfo() {
+    public function getVendorInfo() {
 		$query = "";
 		return execute_query($this->db, $query, array());
  	}

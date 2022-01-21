@@ -1,5 +1,5 @@
 /**
- *  Header and Navbar
+ *  Header and Navbar (home)
  */
 body > header {
     position: fixed;
@@ -7,7 +7,6 @@ body > header {
     background-color: rgba(70, 70, 70, 0.95);
     /* over respect the main */
     z-index: 1;
-    transition: top 0.3s; /* Transition effect when sliding down (and up) */
 }
 
 /**
@@ -21,6 +20,9 @@ body > header {
     }
 }
 
+/**
+ *  Header common styles (all pages)
+ */
 body > header nav ul {
     height: var(--nav-height);
     padding: 5px;
@@ -38,13 +40,13 @@ body > header nav ul li:nth-child(2) {
     margin-left: auto;
     margin-right: 20px;
 }
-
+/* 
 body > header nav ul li a img {
     width: 6.5vh;
     height: 6.5vh;
-}
+} */
 
-body > header nav ul li img {
+body > header nav ul li a img {
     width: 5vh;
     height: 5vh;
 }
@@ -134,10 +136,45 @@ body > header section a {
 /**
  *  Large Screens
  */
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 992px) {
     :root {
         --header-height: 32vh;
     }
+
+    body > header div.container {
+        height: var(--header-height);
+        display: flex;
+        justify-content: space-between;
+    }
+
+    body > header nav {
+        display: none;
+    }
+
+    body > header > div > a img {
+        display: block;
+        height: 100%;
+        padding: 10%;
+    }
+
+    body > header section {
+        display: flex !important;
+        align-self: center;
+    }
+
+    body > header section:first-of-type {
+        flex: 1 0 50%;
+    }
+
+    body > header section:last-of-type {
+        margin-right: 20px;
+    }
+}
+
+/**
+ *  Extra Large Screens
+ */
+@media screen and (min-width: 1200px) {
 
     body > header div.container {
         height: var(--header-height);

@@ -22,7 +22,7 @@ class DBAuthorMgr {
 		return execute_query($this->db, $query, array($idAuthor));
  	}
 
-     public function getAuthorName($idAuthor) {
+    public function getAuthorName($idAuthor) {
 		$query = "SELECT artName FROM `author` WHERE idAuthor=?";
 		return execute_query($this->db, $query, array($idAuthor));
  	}

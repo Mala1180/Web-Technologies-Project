@@ -1,0 +1,168 @@
+body > header {
+    position: unset;
+    /* Default image without filter in reasearch */
+    background-image: url(../img/vinile2.jpg);
+    background-size: cover;
+    background-position: center;
+}
+
+body > header > div.container {
+    background-color: rgba(70, 70, 70, 0.8);
+}
+
+/**
+ *  if backdrop-filter supported
+ */
+@supports (
+    (-webkit-backdrop-filter: blur(5px)) or (backdrop-filter: blur(5px))
+) {
+    body > header > div.container {
+        -webkit-backdrop-filter: blur(5px);
+        backdrop-filter: blur(5px);
+        background-color: unset;
+    }
+}
+
+/* description and tracklist of product */
+main {
+    padding: 10px;
+    padding-bottom: 80px;
+}
+
+main > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+main > div > img {
+    width: 60%;
+    max-height: 150px;
+    max-width: 400px;
+    margin: 0 20%;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 5px;
+}
+
+main > div > h1 {
+    font-family: "lato-regular";
+    font-size: clamp(24px, 1.7vw, 30px);
+    text-align: center;
+    margin: 10px 0;
+}
+
+main section:first-of-type {
+    display: flex;
+    flex-direction: column;
+    margin: 20px 0;
+}
+
+main section:first-of-type > div{
+    display: flex;
+    align-items: center;
+}
+
+main section:first-of-type em {
+    font-family: "lato-regular";
+    margin-right: 10px;
+}
+
+main section:first-of-type span,
+main section:first-of-type em {
+    font-size: clamp(18px, 1.5vw, 22px);
+}
+
+main section:nth-of-type(2) p {
+    margin: 10px 0;
+    font-size: clamp(16px, 1.7vw, 20px);
+}
+
+/* tracklist */
+main section:nth-of-type(2) h2 {
+    font-family: "lato-regular";
+    font-style: italic;
+    font-size: clamp(20px, 1.7vw, 24px);
+    margin: 5px 0;
+}
+
+main h2:last-of-type {
+    display: block;
+    font-size: clamp(20px, 1.7vw, 26px);
+}
+
+main ol > li {
+    padding-left: 5px;
+    margin: 3px 0;
+    font-size: clamp(18px, 1.5vw, 22px);
+}
+
+main ol > li::marker {
+    color: #008e99;
+}
+
+main input[type="button"] {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    padding: 5px 10px;
+    margin: 0 10px 10px;
+    width: calc(100% - 20px);
+    height: 50px;
+    background-color: #777;
+    color: white;
+    font-family: "lato-regular";
+    font-size: clamp(18px, 1.5vw, 22px);
+    border: none;
+    border-radius: 5px;
+}
+
+
+@media screen and (min-width: 576px) {
+
+    main > div {
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+
+    main > div > img {
+        margin: 10px;
+        width: 40%;
+        max-height: 250px;
+    }
+
+    main section:first-of-type {
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
+    
+}
+
+@media screen and (min-width: 992px) {
+    
+    main > div {
+        justify-content: center;
+    }
+
+    main > div h1 {
+        margin-left: 50px;
+    }
+
+    main section:nth-of-type(2) p {
+        text-align: center;
+    }
+
+    main section:nth-of-type(2) h2,
+    main section:nth-of-type(2) ol {
+        margin-left: 33vw;
+    }
+
+    main > input[type="button"] {
+        position: unset;
+        width: 40%;
+        margin-top: 30px;
+        margin-left: 30%;
+    }
+
+}
