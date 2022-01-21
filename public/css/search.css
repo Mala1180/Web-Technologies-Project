@@ -84,18 +84,12 @@ main section aside h2 {
 }
 
 /* text overflow on name and description */
-main section aside h2,
-main section aside p {
+main section aside h2 {
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-line-clamp: 2; /* number of lines to show */
     -webkit-box-orient: vertical;
-}
-
-/* product description */
-main section aside p {
-    display: none;
 }
 
 main section aside span {
@@ -269,11 +263,6 @@ span.material-icons-outlined {
 
 @media screen and (min-width: 576px) {
 
-    main section aside p {
-        /* -webkit-box for text overflow */
-        display: -webkit-box;
-    }
-
     main section aside div:nth-of-type(2) {
         flex-direction: row;
         align-items: center;
@@ -341,9 +330,6 @@ span.material-icons-outlined {
     body > aside > header > img {
         display: none;
     }
-
-    
-
 }
 
 /**

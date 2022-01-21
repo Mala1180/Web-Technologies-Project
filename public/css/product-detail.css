@@ -29,13 +29,19 @@ main {
     padding-bottom: 80px;
 }
 
-main > div {
+main > section:first-of-type {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
-main > div > img {
+main > section:first-of-type > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+main > section > img {
     width: 60%;
     max-height: 150px;
     max-width: 400px;
@@ -45,41 +51,41 @@ main > div > img {
     border-radius: 5px;
 }
 
-main > div > h1 {
+main > section h1 {
     font-family: "lato-regular";
     font-size: clamp(24px, 1.7vw, 30px);
     text-align: center;
     margin: 10px 0;
 }
 
-main section:first-of-type {
+main > section p {
+    font-size: clamp(18px, 1.5vw, 22px);
+    margin: 10px 0;
+}
+
+
+main section:nth-of-type(2) {
     display: flex;
-    flex-direction: column;
     margin: 20px 0;
 }
 
-main section:first-of-type > div{
+main section:nth-of-type(2) > div{
     display: flex;
     align-items: center;
 }
 
-main section:first-of-type em {
+main section:nth-of-type(2) em {
     font-family: "lato-regular";
     margin-right: 10px;
 }
 
-main section:first-of-type span,
-main section:first-of-type em {
+main section:nth-of-type(2) span,
+main section:nth-of-type(2) em {
     font-size: clamp(18px, 1.5vw, 22px);
 }
 
-main section:nth-of-type(2) p {
-    margin: 10px 0;
-    font-size: clamp(16px, 1.7vw, 20px);
-}
-
 /* tracklist */
-main section:nth-of-type(2) h2 {
+main section:last-of-type h2 {
     font-family: "lato-regular";
     font-style: italic;
     font-size: clamp(20px, 1.7vw, 24px);
@@ -120,19 +126,19 @@ main input[type="button"] {
 
 @media screen and (min-width: 576px) {
 
-    main > div {
+    main > section {
         flex-direction: row;
         justify-content: space-evenly;
         align-items: center;
     }
 
-    main > div > img {
+    main > section > img {
         margin: 10px;
         width: 40%;
         max-height: 250px;
     }
 
-    main section:first-of-type {
+    main section:nth-of-type(2) {
         flex-direction: row;
         justify-content: space-evenly;
     }
@@ -141,20 +147,16 @@ main input[type="button"] {
 
 @media screen and (min-width: 992px) {
     
-    main > div {
+    main > section {
         justify-content: center;
     }
 
-    main > div h1 {
+    main > section h1 {
         margin-left: 50px;
     }
 
-    main section:nth-of-type(2) p {
-        text-align: center;
-    }
-
-    main section:nth-of-type(2) h2,
-    main section:nth-of-type(2) ol {
+    main section:last-of-type h2,
+    main section:last-of-type ol {
         margin-left: 33vw;
     }
 

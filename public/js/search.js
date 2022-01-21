@@ -37,7 +37,7 @@ $(document).ready(function () {
 
     // search products
     $searchIcon.click(function () {
-        search($searchInput.val(), $searchFilter.find(":selected").text());
+        searchProducts($searchInput.val(), $searchFilter.find(":selected").val());
     });
 
     // go to cart
@@ -80,6 +80,7 @@ function searchProducts(query, filter) {
  */
 function displayProducts(products) {
     if (products) {
+        $("main").empty();
         for (let i = 0; i < products.length; i++) {
             const product = products[i];
             const $product = $(`
@@ -88,7 +89,7 @@ function displayProducts(products) {
                 <aside>
                     <div>
                         <h2>${product.name}</h2>
-                        <p>Lorem ipsum dolor sit amet  jd ffu eufgfugefugf ue gudw dwu gu expedita.</p>
+                        <span>Autore: ${product.name}</span>
                         <span>Tipologia: ${product.type == 0 ? "CD" : "Vinile"}</span>
                         <span>Disponibilità: ${product.quantity}</span>
                     </div>
@@ -99,8 +100,12 @@ function displayProducts(products) {
                 </aside>
             </section>`);
 
-            $product.click(function () {
-                location.href = `articleDetail.php?id=${product.idProduct}`;
+            const DETAILS_LINK = `productDetail.php?id=${product.idProduct}`;
+            $product.children().eq(0).click(function () {
+                location.href = DETAILS_LINK;
+            });
+            $product.find("h2").click(function () {
+                location.href = DETAILS_LINK;
             });
 
             $("main").append($product);
