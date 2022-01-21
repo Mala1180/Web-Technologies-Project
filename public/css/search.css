@@ -1,5 +1,5 @@
 :root { 
-    --image-height: 120px;
+    --image-size: 40vw;
 }
 
 /**
@@ -47,6 +47,7 @@ body > main {
 
 /* product summary */
 main section {
+    display: flex;
     padding: 10px;
 }
 
@@ -55,9 +56,8 @@ main section:focus {
 }
 
 main section img {
-    float: left;
-    width: 40%;
-    height: var(--image-height);
+    flex-basis: var(--image-size);
+    height: var(--image-size);
     object-fit: cover;
     object-position: center;
     margin-right: 10px;
@@ -65,8 +65,13 @@ main section img {
     cursor: pointer;
 }
 
+main section aside div * {
+    margin: 5px 0;
+}
+
 main section aside {
-    height: var(--image-height);
+    height: var(--image-size);
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -75,24 +80,44 @@ main section aside {
 main section aside h2 {
     font-family: lato-regular;
     font-size: clamp(18px, 1.7vw, 25px);
-    margin-bottom: 5px;
+    cursor: pointer;
+}
+
+/* text overflow on name and description */
+main section aside h2,
+main section aside p {
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-line-clamp: 2; /* number of lines to show */
     -webkit-box-orient: vertical;
-    cursor: pointer;
 }
 
+/* product description */
+main section aside p {
+    display: none;
+}
+
+main section aside span {
+    display: block;
+}
+
+/* product name */
 main section aside div:nth-of-type(2) {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
 }
 
 /* product type (es: vinyl, cd, ecc) */
 main section aside div:first-of-type span {
-    font-size: clamp(16px, 1.7vw, 21px);
+    font-size: clamp(16px, 1.7vw, 18px);
+}
+
+/* product quantity */
+main section aside div:first-of-type span:last-child {
+    display: none;
 }
 
 /* product price */
@@ -101,6 +126,7 @@ main section aside div:last-of-type span {
     font-size: clamp(18px, 1.7vw, 23px);
 }
 
+/* add to cart */
 main section aside input[type="button"] {
     border-radius: 5px;
     background-color: #777;
@@ -242,12 +268,23 @@ span.material-icons-outlined {
 }
 
 @media screen and (min-width: 576px) {
-    :root {
-        --image-height: 150px;
+
+    main section aside p {
+        /* -webkit-box for text overflow */
+        display: -webkit-box;
     }
+
+    main section aside div:nth-of-type(2) {
+        flex-direction: row;
+        align-items: center;
+    }
+
 }
 
 @media screen and (min-width: 768px) {
+    :root {
+        --image-size: 18vw;
+    }
 
     body > aside {
         display: none;
@@ -265,6 +302,7 @@ span.material-icons-outlined {
         flex: 1 0 50%;
         max-width: 50%;
     }
+
 }
 
 /**
@@ -272,14 +310,22 @@ span.material-icons-outlined {
  */
 @media screen and (min-width: 992px) {
 
-    /* main {
-        width: 69%;
-        float: left;
-    } */
+    :root {
+        --image-size: 15vw;
+    }
 
-    /* main section img {
-        width: 30vw;
-    } */
+    main section {
+        padding: 20px;
+    }
+
+    main section img {
+        width: 20vw;
+    }
+
+    /* product quantity */
+    main section aside div:first-of-type span:last-child {
+        display: block;
+    }
 
     /* Cart Preview */
     body > aside {
@@ -296,6 +342,7 @@ span.material-icons-outlined {
         display: none;
     }
 
+    
 
 }
 
@@ -304,8 +351,8 @@ span.material-icons-outlined {
  */
  @media screen and (min-width: 1200px) {
 
-    :root {
-        --image-height: 170px;
+    main section aside div * {
+        margin: 10px 0;
     }
     
 }

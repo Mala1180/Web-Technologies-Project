@@ -62,6 +62,7 @@ create table album (
      description varchar(280) not null,
      idAuthor int not null,
      duration int not null,
+     imgPath varchar(50) not null,
      constraint IDalbum_ID primary key (idAlbum),
      constraint IDalbum_1 unique (idAuthor, name));
 
@@ -94,7 +95,6 @@ create table product (
      price decimal(4,2) not null,
      description varchar(280) not null,
      type tinyint not null,
-     idAuthor int,
      idAlbum int,
      constraint IDproduct primary key (idProduct));
 

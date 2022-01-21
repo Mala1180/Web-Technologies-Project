@@ -12,9 +12,6 @@
         <?php require("./templates/header.php"); ?>
         <main>
             <!-- There will be the searched products -->
-            <?php require("./templates/article.php") ?>
-            <?php require("./templates/article.php") ?>
-            <?php require("./templates/article.php") ?>
         </main>
         <aside>
             <header>
