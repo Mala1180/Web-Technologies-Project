@@ -2,19 +2,22 @@
     <head>
         <?php require("./templates/head-section.php"); ?>
         <link rel="stylesheet" href="./public/css/header.css" />
-        <link rel="stylesheet" href="./public/css/article-detail.css" />
+        <link rel="stylesheet" href="./public/css/product-detail.css" />
 
-        <script src="./public/js/search.js"></script>
+        <script src="./public/js/productDetail.js"></script>
 
         <title>Unibo Vinyl - Dettagli Articolo</title>
     </head>
     <body>
         <?php require("./templates/header.php"); ?>
         <main>
-            <div>
+            <section>
                 <img src="./public/img/vinile1.jpg" alt="">
-                <h1>Vinile 1 prova nome lungo</h1>
-            </div>
+                <div>
+                    <h1>Nome prodotto</h1>
+                    <p>Descrizione prodotto</p>
+                </div> 
+            </section>
             
             <section>
                 <div>
@@ -31,9 +34,7 @@
                 </div>
             </section>
             <section>
-                <p>
-                    Descrizione lunga ed esaustiva del vinile, 15 tracce, 5 featuring, molto bello davvero lo consiglio.
-                </p>
+                <p>Descrizione Album</p>
                 <h2>Tracce:</h2>
                 <ol>
                     <li>1 axjfio ihr obh</li>

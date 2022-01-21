@@ -13,18 +13,32 @@ class DBSearchMgr {
 
     public function searchProducts($name, $filter) {
         if ($filter == "") {
-            $query = "SELECT `name`, `description`
-                  FROM `product`
-                  WHERE `name` LIKE ?";
+            $query = "SELECT idProduct, name, type, quantity, author.artName AS author, price, imgPath
+                      FROM product
+                      INNER JOIN album ON product.idAlbum = album.idAlbum
+                      INNER JOIN author ON album.idAuthor = author.idAuthor
+                      AND name LIKE ?";
             return execute_query($this->db, $query, array("%".$name."%"));
         } else {
-            $query = "SELECT `name`, `description`
-                  FROM `product`
-                  WHERE `name` LIKE ?
-                  AND `type` = ?";
+            $query = "SELECT idProduct, name, type, quantity, author.artName AS author, price, imgPath
+                      FROM product
+                      INNER JOIN album ON product.idAlbum = album.idAlbum
+                      INNER JOIN author ON album.idAuthor = author.idAuthor
+                      AND name LIKE ?
+                      AND type = ?";
             return execute_query($this->db, $query, array("%".$name."%", $filter));
         }
     
+    }
+
+    public function getProductDetails($idProduct) {
+        $query = "SELECT name, type, quantity, product.description AS productDescription, 
+                  album.description AS albumDescription, author.artName AS author, duration, price, imgPath
+                  FROM product
+                  INNER JOIN album ON product.idAlbum = album.idAlbum
+                  INNER JOIN author ON album.idAuthor = author.idAuthor
+                  WHERE idProduct = ?";
+        return execute_query($this->db, $query, array($idProduct));
     }
 
 }
