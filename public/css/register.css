@@ -125,7 +125,7 @@ main > section > form > fieldset > label:last-of-type {
         display: inline-block;
         width: 66%;
         min-height: 100vh; /* ask help :) */
-        background-image: url("/public/img/vinile1.jpg");
+        background-image: url("../img/vinile1.jpg");
         background-size: cover;
         margin: 0;
     }
