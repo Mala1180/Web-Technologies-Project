@@ -1,8 +1,11 @@
 $(document).ready(function () {
     const $searchSection = $("header section:first-of-type");
+    const $searchBar = $("header section:first-of-type input[type=text]");
+    const $searchForm = $("header section:first-of-type form")
     const $menuSection = $("header section:last-of-type");
     const $searchIcon = $("header nav ul li:nth-child(2) img");
 
+    
     $("header nav ul li:nth-child(2)").click(function () {
         if ($searchSection.css("display") === "none") {
             $searchSection.fadeIn(100).css("display", "flex");
@@ -24,6 +27,11 @@ $(document).ready(function () {
             $searchSection.hide();
         }
     });
+
+    // $searchForm.submit(function(e) {
+    //     e.preventDefault();
+    //     console.log("CIaoo");
+    // })
 
     $("#logoutBtn").click(function (e) {
         e.preventDefault();

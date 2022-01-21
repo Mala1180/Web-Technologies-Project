@@ -23,6 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $tokenId    = base64_encode(random_bytes(16));
                 $createdAt   = new DateTimeImmutable();
                 $username = $_POST["username"];
+                $type = $_POST["type"];
                 $data = [
                     'createdAt'  => $createdAt->getTimestamp(),    // Issued at: time when the token was generated
                     'jti'  => $tokenId,                     		// Json Token Id: an unique identifier for the token
@@ -30,6 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     'nbf'  => $createdAt->getTimestamp(),  			  // Not before
                     'data' => [                            			    // Data related to the signer user
                         'username' => $username,           				 // Username
+                        'type' => $type
                     ]
                 ];
                 send_data(JWT::encode(

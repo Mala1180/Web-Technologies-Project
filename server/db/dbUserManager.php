@@ -39,6 +39,16 @@ class DBUserMgr {
 		return execute_query($this->db, $query, array($username));
  	}
 
+	 public function getUserInfoForToken($username, $type) {
+		 if($type == "cliente") {
+			$query = "SELECT idCustomer, name, surname FROM customer WHERE username=?";
+		 }
+		 else if ($type =="artista"){
+			$query = "SELECT idAuthor, artName FROM author WHERE username=?";
+		 }
+		return execute_query($this->db, $query, array($username));
+ 	}
+
 	public function addCardToUser($username, $cardNumber, $circuit, $expiryDate, $isDefault) {
 		$query = "INSERT INTO `creditCard` (`cardNumber`, `circuit`, `expiryDate`, `isDeleted`, `idCustomer`) VALUES (?, ?, ?, ?, ?)";
 		$idCustomer = $this->getUserInfo($username)[0]["idCustomer"];
