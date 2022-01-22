@@ -2,8 +2,8 @@
 <html lang="it">
     <head>
         <?php require("./templates/head-section.php"); ?>
-        <link rel="stylesheet" href="./public/css/index.css" />
         <link rel="stylesheet" href="./public/css/header.css" />
+        <link rel="stylesheet" href="./public/css/index.css" />
 
         <title>Unibo Vinyl</title>
     </head>

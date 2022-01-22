@@ -21,7 +21,6 @@
             <div>
                 <?php require("./templates/preview-cart-article.php") ?>
                 <?php require("./templates/preview-cart-article.php") ?>
-
             </div>
             <footer>
                 <span>Visualizza tutto</span>

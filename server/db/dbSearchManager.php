@@ -33,12 +33,27 @@ class DBSearchMgr {
 
     public function getProductDetails($idProduct) {
         $query = "SELECT name, type, quantity, product.description AS productDescription, 
-                  album.description AS albumDescription, author.artName AS author, duration, price, imgPath
+                  album.description AS albumDescription, author.artName AS author, 
+                  album.duration AS albumDuration, price, imgPath
                   FROM product
                   INNER JOIN album ON product.idAlbum = album.idAlbum
                   INNER JOIN author ON album.idAuthor = author.idAuthor
                   WHERE idProduct = ?";
-        return execute_query($this->db, $query, array($idProduct));
+        $productDetails = execute_query($this->db, $query, array($idProduct));
+
+        $query = "SELECT song.duration AS duration, song.name AS name
+                  FROM product
+                  INNER JOIN album ON product.idAlbum = album.idAlbum
+                  INNER JOIN song ON product.idAlbum = song.idAlbum
+                  WHERE idProduct = ?";
+        $songs = execute_query($this->db, $query, array($idProduct));
+        $query = "SELECT genre
+                  FROM product
+                  INNER JOIN album ON product.idAlbum = album.idAlbum
+                  INNER JOIN album_genre ON product.idAlbum = album_genre.album
+                  WHERE idProduct = ?";
+        $genres = execute_query($this->db, $query, array($idProduct));
+        return array($productDetails, $songs, $genres);
     }
 
 }
