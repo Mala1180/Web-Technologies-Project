@@ -28,7 +28,6 @@
                             <label for="txtGenre">Genere</label>
                             <select id="selectGenre" required>
                                 <option value="">Genere...</option>
-                                <option value="vedo">gatto</option>
                             </select>
                         </li>
                     </ul>
@@ -37,6 +36,11 @@
                     <legend>Brani</legend>
                     <ul></ul>
                     <input type="button" id="addSong" value="Aggiungi brano" />
+                </fieldset>
+                <fieldset>
+                    <legend>Copertina</legend>
+                    <ul></ul>
+                    <input type="file" id="uploadfile" name="uploadfile"/>
                 </fieldset>
                 <fieldset>
                     <legend>Opzioni di vendita</legend>
@@ -60,11 +64,10 @@
                         <li>
                             <label for="numVinylCopy">Numero copie Vinili</label>
                             <input type="number" placeholder="Copie vinile" id="numVinylCopy">
-                            <label for="priceVinyl">Prezzo vinile</label>
-                            <input type="number" placeholder="Prezzo vinile" id="priceVinyl">
+                            <label for="priceVinylCopy">Prezzo vinile</label>
+                            <input type="number" placeholder="Prezzo vinile" id="priceVinylCopy">
                             <label for="txtVinylProductDescription">Descrizione vinile</label>
                             <textarea id="txtVinylProductDescription" placeholder="descrizione"></textarea>
-                            <input type="file" id="uploadfile" name="uploadfile" value="Scegli copertina" />
                         </li>
                         <li>
                             <input type="button" id="btnConfirm" value="Metti in vendita"/>
