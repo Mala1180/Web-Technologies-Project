@@ -29,7 +29,7 @@ class DBCartMgr {
 
 	public function getCart($idCustomer) {
 		$query = "SELECT idCartEntry, ce.idProduct, ce.quantity, price, p.type, name, artName, imgPath 
-					FROM product p, album a, cartentry ce, author au
+					FROM product p, album a, cartEntry ce, author au
 					WHERE ce.idProduct = p.idProduct
 					AND p.idAlbum = a.idAlbum
 					AND a.idAuthor = au.idAuthor

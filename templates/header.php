@@ -3,7 +3,7 @@
         <nav>
             <ul>
                 <li>
-                    <a href="index.php"><img src="./public/img/logoBianco.png" alt="unibo logo"></a>
+                    <a href="index.php"><img src="./public/img/logoBianco.png" alt="logo"></a>
                 </li>
                 <li>
                     <a href="#" role="button">
@@ -23,9 +23,9 @@
         <section id="search-section">
             <form method="GET" action="userSearch.php">
                 <div>
+                    <label for="query">Cerca: </label>
+                    <input id="query" name="query" type="text" placeholder="Album..."/>
                     <img src="./public/img/icons/search.png" alt="" />
-                    <input type="text" name="query" placeholder="Cerca..."/>
-
                 </div>
                 <div>
                     <label for="filter">Filtro: </label>

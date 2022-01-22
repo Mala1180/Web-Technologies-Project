@@ -21,14 +21,6 @@ use Firebase\JWT\JWT;
         }
     } else if ($_SERVER["REQUEST_METHOD"] == "POST") {
         switch ($_POST["action"]) {
-            case "addcard":
-                $data = get_token_data();
-                send_success($dbUserMgr->addCardToUser($data->username, 
-                            $_POST["cardNumber"], 
-                            $_POST["circuit"], 
-                            $_POST["expiryDate"], 
-                            $_POST["isDefault"]));
-                break;
             case "requireUserInfo":
                 $data = get_token_data();
                 send_success($dbUserMgr->getUserInfo($data->username));

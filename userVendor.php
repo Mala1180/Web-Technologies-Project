@@ -77,8 +77,3 @@
     <script type="text/javascript" src="./public/js/vendor.js"></script>
 </body>
 </html>
-
-
-<?php
-
-?>

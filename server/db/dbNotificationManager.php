@@ -13,16 +13,16 @@ class DBNotificationMgr {
     }
 
     public function getNotifications($customerId) {
-        $query = "SELECT `idNotification`, `subject`, `message`, notificationDate, isRead
+        $query = "SELECT `idNotification`, `subject`, `message`, `notificationDate`, `isRead`
                 FROM `notification`
                 WHERE isDeleted = ? AND idCustomer = ?";
         return execute_query($this->db, $query, array("0", $customerId));
     }
     
-    public function sendNotification($customerId, $subject, $message) {
-        $query = "INSERT INTO `notification` (`subject`, `message`, notificationDate, isRead, isDeleted, customerId) 
+    public function sendNotification($idCustomer, $subject, $message) {
+        $query = "INSERT INTO `notification` (`subject`, `message`, `notificationDate`, `isRead`, `isDeleted`, `idCustomer`) 
                 VALUES (?,?,?,?,?,?)";
-        return execute_query($this->db, $query, array($subject, $message, date("Y-m-d"), 0, 0, $customerId));
+        return execute_query($this->db, $query, array($subject, $message, date("Y-m-d"), "0", "0", $idCustomer));
     }
 
     public function readNotification($notificationId) {

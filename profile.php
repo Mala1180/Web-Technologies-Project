@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="it">
     <head>
         <?php require("./templates/head-section.php"); ?>
@@ -8,12 +9,13 @@
         <title>Unibo Vinyl - Profilo</title>
     </head>
     <body>
-        <header>
+        <?php require_once("./templates/header.php"); ?>
+        <!-- <header>
             <div class="container">
                 <nav>
                     <ul>
                         <li>
-                            <a href="index.php"><img src="./public/img/logoBianco.png" alt="unibo logo"></a>
+                            <a href="index.php"><img src="./public/img/logoBianco.png" alt="logo"></a>
                         </li>
                         <li>
                             <a href="#" role="button">
@@ -39,7 +41,7 @@
                     </span>
                 </section>
             </div>
-        </header>
+        </header> -->
         <main>
             <section><a href="orders.php">I miei ordini</a></section>
             <section><a href="notifications.php">Notifiche</a></section>

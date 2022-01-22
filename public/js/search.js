@@ -52,7 +52,6 @@ $(document).ready(function () {
  * @author Mattia Matteini <matteinimattia@gmail.com>
  * @param {String} query string with the query to be searched
  * @param {String} filter string with the filter to be used (0 = cd, 1 = vinyl)
- * @return {Array} array of products
  */
 function searchProducts(query, filter) {
     if (query.length == 0 && filter.length == 0) return;
@@ -76,7 +75,6 @@ function searchProducts(query, filter) {
  *
  * @author Mattia Matteini <matteinimattia@gmail.com>
  * @param {Number} products array of products to be displayed
- * @return {None}
  */
 function displayProducts(products) {
     if (products) {
