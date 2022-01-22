@@ -1,0 +1,63 @@
+section {
+    margin: 0 10%;
+}
+section form {
+    margin-top: 20px;
+    padding: 0 5%;
+}
+
+section form li {
+    margin-bottom: 15px;
+}
+
+section form input[type="submit"] {
+    background-color: #000;
+    color: #fff;
+    border-radius: 10px;
+}
+
+section form input[type="submit"]:focus {
+    background-color: #333;
+}
+
+section form ul {
+    padding: 0;
+    list-style: none;
+}
+
+section form ul input:not([type="checkbox"]),
+section form ul textarea {
+    width: 100%;
+    margin: 0 2%;
+}
+
+section form ul textarea {
+    margin-top: 10px;
+}
+
+section form ul label:not(.visible) {
+    float: left;
+    display: block;
+    overflow: hidden;
+    height: 0;
+    width: 0;
+}
+
+main > section > form > fieldset {
+    border: none;
+    padding: 20px 0;
+    margin-bottom: 20px;
+}
+
+main > section > form > fieldset:nth-child(2) li input {
+    width: 45%;
+    margin: 0;
+}
+
+main > section > form > fieldset:nth-child(3) input:not([type="checkbox"]) {
+    width: 45%;
+}
+
+main > section > form > fieldset:nth-child(3) li:nth-child(even) {
+    display: none;
+}
