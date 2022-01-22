@@ -35,6 +35,22 @@
     display: none;
 }
 
+form > label {
+    display: none;
+}
+
+form input {
+    border-radius: 5px;
+    padding: 8px 10px;
+    font-family: "lato-regular";
+    border: none;
+    font-size: clamp(15px, 1.5vw, 20px);
+}
+
+main > footer {
+    text-align: center;
+}
+
 @media screen and (min-width: 768px) {
     .cart-item {
         margin: 0 20% 10px;

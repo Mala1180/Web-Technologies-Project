@@ -92,8 +92,7 @@ main > section > form > fieldset {
 }
 
 main > section > form > fieldset > input[type="radio"] {
-    appearance: none;
-    -webkit-appearance: none;
+    display: none;
 }
 
 main > section > form > fieldset:first-of-type {
@@ -106,8 +105,8 @@ main > section > form > fieldset > label {
     padding: 10px 5%;
 }
 
-main > section > form > fieldset > input[type="radio"]:focus + label{
-    border-color: #C82D54;
+main > section > form > fieldset > input[type="radio"]:focus + label {
+    border-color: #c82d54;
 }
 
 main > section > form > fieldset > input[type="radio"]:checked + label {
