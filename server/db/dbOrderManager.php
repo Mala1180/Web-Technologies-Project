@@ -12,9 +12,10 @@ class DBOrderMgr {
  		}
  	}
 
- 	public function addOrder($state, $orderDate, $shippingDate, $deliveryDate, $idCustomer) {
-		$query = "INSERT INTO `customerOrder` (`state`, `orderDate`, `shippingDate`, `deliveryDate`, `idCustomer`) VALUES (?, ?, ?, ?, ?)";
-		return execute_query($this->db, $query, array($state, $orderDate, $shippingDate, $deliveryDate, $idCustomer));
+	//PROBLEMA DATABASE, AUTO INCREMENT
+ 	public function addOrder($orderDate, $idCustomer) {
+		$query = "INSERT INTO `customerOrder` (`state`, `orderDate`, `idCustomer`) VALUES (?, ?, ?)";
+		return execute_query($this->db, $query, array("effettuato", "2222-02-02",  $idCustomer));
  	}
 
     public function setShippingDate($idOrder, $shippingDate) {

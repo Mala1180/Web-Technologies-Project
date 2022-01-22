@@ -40,9 +40,11 @@ create table customer (
 
 create table creditCard (
      idCard int not null auto_increment,
+     holder varchar(100) not null,
      cardNumber varchar(16) not null,
      circuit varchar(10) not null,
      expiryDate date not null,
+     cvv varchar(10) not null,
      isDeleted tinyint not null,
      idCustomer int not null,
      constraint IDcreditCard primary key (idCard),
@@ -99,18 +101,17 @@ create table product (
      constraint IDproduct primary key (idProduct));
 
 create table orderDetail (
-     idProduct int not null,
      idOrder int not null,
      quantity int not null,
      subprice decimal(4,2) not null,
      constraint IDorderDetail primary key (idOrder, idProduct));
 
 create table customerOrder (
-     idOrder int not null,
+     idOrder int not null auto_increment,
      state tinyint not null,
      orderDate date not null,
-     shippingDate date not null,
-     deliveryDate date not null,
+     shippingDate date,
+     deliveryDate date,
      idCustomer int not null,
      constraint IDorder_ID primary key (idOrder));
 

@@ -20,12 +20,12 @@
                     <ul>
                         <li><label for="selectCard">Seleziona una carta</label><select id="selectCard" name="selectCard"></select></li>
                     </ul>
-                    <input type="button" id="btnSelectCard" value="Seleziona carta">
+                    <input type="button" id="btnSelectCard" value="Procedi all'ordine">
                 </form>
                 <form>
                 <h1>Nuova carta</h1>
                     <ul>
-                        <li><label for="cardHolder">Intestatario</label><input type="text" id="cardHolder" name="cardHolder"/></li>
+                        <li><label for="cardHolder">Titolare</label><input type="text" id="cardHolder" name="cardHolder"/></li>
                         <li><label for="cardNumber">Numero carta</label><input type="text" id="cardNumber" name="cardNumber"/></li>
                         <li><label for="cardCircuit">Circuito</label><input type="text" id="cardCircuit" name="cardCircuit"/></li>
                         <li><label for="cardExpiration">Data scadenza</label><input type="month" id="cardExpiration" name="cardExpiration"/></li>
@@ -36,7 +36,7 @@
                 </form>
             </section>
             <footer>
-                <button>Procedi all'ordine</button>
+                <input type="button" id="btnProceed" value="Procedi all'ordine">
             </footer>
         </main>
         <script src="./public/js/checkout.js"></script>
