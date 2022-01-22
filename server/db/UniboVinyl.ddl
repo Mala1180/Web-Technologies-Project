@@ -101,6 +101,7 @@ create table product (
      constraint IDproduct primary key (idProduct));
 
 create table orderDetail (
+     idProduct int not null,
      idOrder int not null,
      quantity int not null,
      subprice decimal(4,2) not null,
