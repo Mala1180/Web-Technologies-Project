@@ -1,21 +1,27 @@
 /**
- *  Header and Navbar (home)
+ *  Header common styles (not home)
  */
-body > header {
-    position: fixed;
-    width: 100%;
-    background-color: rgba(70, 70, 70, 0.95);
-    /* over respect the main */
-    z-index: 1;
+ body > header {
+    position: unset;
+    /* Default image without filter in reasearch */
+    background-image: url(../img/vinile2.jpg);
+    background-size: cover;
+    background-position: center;
+}
+
+body > header > div.container {
+    background-color: #bb2e29dd;
 }
 
 /**
  *  if backdrop-filter supported
  */
-@supports ((-webkit-backdrop-filter: blur(25px)) or (backdrop-filter: blur(25px))) {
-    body > header {
-        -webkit-backdrop-filter: blur(25px);
-        backdrop-filter: blur(25px);
+@supports (
+    (-webkit-backdrop-filter: blur(5px)) or (backdrop-filter: blur(5px))
+) {
+    body > header > div.container {
+        -webkit-backdrop-filter: blur(5px);
+        backdrop-filter: blur(5px);
         background-color: unset;
     }
 }
@@ -77,6 +83,7 @@ body > header section div img {
     width: 30px;
     height: 30px;
     cursor: pointer;
+    margin-left: 10px;
 }
 
 body > header section div input,
@@ -89,7 +96,7 @@ body > header section div select {
     background-color: transparent;
     border: 1px solid white;
     border-radius: 10px;
-    margin-left: 10px;
+    margin-left: 5px;
 }
 
 body > header section div select option {

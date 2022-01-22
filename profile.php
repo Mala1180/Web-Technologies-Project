@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="it">
     <head>
         <?php require("./templates/head-section.php"); ?>
@@ -13,7 +14,7 @@
                 <nav>
                     <ul>
                         <li>
-                            <a href="index.php"><img src="./public/img/logoBianco.png" alt="unibo logo"></a>
+                            <a href="index.php"><img src="./public/img/logoBianco.png" alt="logo"></a>
                         </li>
                         <li>
                             <a href="#" role="button">

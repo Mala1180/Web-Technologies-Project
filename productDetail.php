@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="it">
     <head>
         <?php require("./templates/head-section.php"); ?>
