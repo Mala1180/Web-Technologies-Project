@@ -23,7 +23,6 @@ body > header > div.container {
     }
 }
 
-/* description and tracklist of product */
 main {
     padding: 10px;
     padding-bottom: 80px;
@@ -35,11 +34,34 @@ main > section:first-of-type {
     justify-content: space-between;
 }
 
-main > section:first-of-type > div {
+main > section:first-of-type > div:first-of-type {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    align-items: center;
 }
+
+main > section:first-of-type > div {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    margin-bottom: 5px;
+}
+
+/* Type and quantity */
+main > section:first-of-type > div span {
+    margin-left: 10px;
+}
+
+main > section:first-of-type > div em {
+    font-family: lato-regular;
+}
+
+main > section:first-of-type > div em,
+main > section:first-of-type > div span {
+    font-size: clamp(18px, 1.5vw, 22px);
+}
+/* --------- */
 
 main > section > img {
     width: 60%;
@@ -58,18 +80,19 @@ main > section h1 {
     margin: 10px 0;
 }
 
+/* album and product descriptions */
 main > section p {
     font-size: clamp(18px, 1.5vw, 22px);
     margin: 10px 0;
 }
 
-
 main section:nth-of-type(2) {
     display: flex;
+    flex-direction: column;
     margin: 20px 0;
 }
 
-main section:nth-of-type(2) > div{
+main section:nth-of-type(2) > div {
     display: flex;
     align-items: center;
 }
@@ -115,7 +138,7 @@ main input[type="button"] {
     margin: 0 10px 10px;
     width: calc(100% - 20px);
     height: 50px;
-    background-color: #777;
+    background-color: #008e99;
     color: white;
     font-family: "lato-regular";
     font-size: clamp(18px, 1.5vw, 22px);
@@ -143,6 +166,15 @@ main input[type="button"] {
         justify-content: space-evenly;
     }
     
+}
+
+@media screen and (min-width: 992px) {
+
+    /* album and product descriptions */
+    main > section p {
+        margin: 10px 10%;
+        max-width: 90vw;   
+    }
 }
 
 @media screen and (min-width: 992px) {

@@ -9,7 +9,8 @@
         <title>Unibo Vinyl - Profilo</title>
     </head>
     <body>
-        <header>
+        <?php require_once("./templates/header.php"); ?>
+        <!-- <header>
             <div class="container">
                 <nav>
                     <ul>
@@ -40,7 +41,7 @@
                     </span>
                 </section>
             </div>
-        </header>
+        </header> -->
         <main>
             <section><a href="orders.php">I miei ordini</a></section>
             <section><a href="notifications.php">Notifiche</a></section>

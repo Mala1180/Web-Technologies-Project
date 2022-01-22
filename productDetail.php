@@ -13,41 +13,43 @@
         <?php require("./templates/header.php"); ?>
         <main>
             <section>
-                <img src="./public/img/vinile1.jpg" alt="">
+                <img class="album-img" src="./public/img/vinile1.jpg" alt="">
                 <div>
-                    <h1>Nome prodotto</h1>
-                    <p>Descrizione prodotto</p>
+                    <h1 class="name">Nome prodotto</h1>
+                    <p class="product-description"></p>
+                </div> 
+                <div>
+                    <em>Tipologia:</em>
+                    <span class="type"></span>
+                </div>
+                <div>
+                    <em>Disponibilità:</em>
+                    <span class="quantity"></span>
                 </div> 
             </section>
-            
             <section>
                 <div>
                     <em>Autore:</em>
-                    <span>Eminem</span>
+                    <span class="author"></span>
                 </div>
                 <div>
                     <em>Generi:</em>
-                    <span>Hip-Hop</span>
+                    <span class="genres"></span>
                 </div>
                 <div>
                     <em>Prezzo:</em>
-                    <span>€ 25</span>
+                    <span class="price"></span>
+                </div>
+                <div>
+                    <em>Durata:</em>
+                    <span class="album-duration"></span>
                 </div>
             </section>
             <section>
-                <p>Descrizione Album</p>
+                <p class="album-description">Descrizione Album</p>
                 <h2>Tracce:</h2>
-                <ol>
-                    <li>1 axjfio ihr obh</li>
-                    <li>dcjfvoe oeo</li>
-                    <li>loremeo eif i</li>
-                    <li>gggiuu u</li>
-                    <li> guig uigugiug </li>
-                    <li> gigiugiugi i</li>
-                    <li>guigi iuggiugug guig</li>
-                    <li>guigiuuiu giiu u</li>
-                    <li>ugi gui gugi gugiu giugui gig ig iuggiu</li>
-                    <li>g iguig ugggug i</li>
+                <ol class="track-list">
+                    <!-- There will be the alubm songs -->
                 </ol>
             </section>
             

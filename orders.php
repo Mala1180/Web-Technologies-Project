@@ -5,7 +5,6 @@
         <link rel="stylesheet" href="./public/css/header.css" />
         <link rel="stylesheet" href="./public/css/orders.css" />
 
-
         <title>Unibo Vinyl - Ordini</title>
     </head>
     <body>

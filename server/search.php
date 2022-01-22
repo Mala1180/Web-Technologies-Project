@@ -7,8 +7,8 @@
     require_once("../vendor/autoload.php");
     require_once('validate.php');
 
-    if($_SERVER["REQUEST_METHOD"] == "GET") {
-        if(!isset($_GET["action"])) {
+    if ($_SERVER["REQUEST_METHOD"] == "GET") {
+        if (!isset($_GET["action"])) {
             send_error("An action is required");
             exit();
         } 
