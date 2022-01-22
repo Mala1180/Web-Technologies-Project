@@ -127,8 +127,8 @@ create table notification (
      subject varchar(50) not null,
      message varchar(280) not null,
      notificationDate date not null,
-     isRead char not null,
-     isDeleted char not null,
+     isRead tinyint not null,
+     isDeleted tinyint not null,
      idCustomer int not null,
      constraint IDnotification primary key (idNotification));
 

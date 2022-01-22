@@ -16,12 +16,15 @@ function composeMail($to, $type, $arguments) {
         case "register":
             checkParams(array("username"), $arguments);
             $subject = "Registrazione avvenuta";
-            $txt = "Grazie ".$arguments["username"]." per esserti registrato a UniboVynil, il nuovo servizio di UniBo per la spedizione di cd e vinili è a tua disposizione, non perderti le nuove uscite su https://www.unibovynil.altervista.org/index.php";
+            //$txt = "prova";
+            //$txt = "Grazie ".$arguments["username"]." per esserti registrato a UniboVynil, il nuovo servizio di UniBo per la spedizione di cd e vinili è a tua disposizione, non perderti le nuove uscite su https://www.unibovynil.altervista.org/index.php";
             break;
         case "orderCreated": 
-            checkParams(array("orderNumber", "username", ), $arguments);
+            //checkParams(array("orderNumber", "username"), $arguments);
+
             $subject = "Ordine effettuato con successo";
-            $txt = "Grazie ".$arguments["username"]." per aver effettuato l'ordine ".$arguments["orderNumber"]. ". Sarai ricontattato tramite mail quando l'ordine verrà spedito. Per maggiori informazioni https://www.unibovynil.altervista.org/index.php";
+            $txt = "prova";
+            //$txt = "Grazie ".$arguments["username"]." per aver effettuato l'ordine ".$arguments["orderNumber"]. ". Sarai ricontattato tramite mail quando l'ordine verrà spedito. Per maggiori informazioni https://www.unibovynil.altervista.org/index.php";
             break;
         case "orderSent": 
             $subject = "Il tuo ordine è stato spedito";
