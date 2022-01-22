@@ -59,9 +59,9 @@ function searchProducts(query, filter) {
     reqHelper.get("search", "search", {
         "query": query,
         "filter": filter,
-    }, function (data) {
-        if (data.success) {
-            products = data.data;
+    }, function (res) {
+        if (res.success) {
+            products = res.data;
             console.log(products);
             displayProducts(products);
         } else {
@@ -93,7 +93,7 @@ function displayProducts(products) {
                     </div>
                     <div>
                         <span>€ ${product.price}</span>
-                        <input type="button" value="Aggiungi al carrello" />
+                        <button>Aggiungi al carrello</button>
                     </div>
                 </aside>
             </section>`);

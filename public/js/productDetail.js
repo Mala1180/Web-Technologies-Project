@@ -21,9 +21,9 @@ $(document).ready(function () {
     if (idProduct) {
         reqHelper.get("search", "productDetails", {
             "idProduct": idProduct,
-        }, function (data) {
-            if (data.success) {
-                summary = data.data;
+        }, function (res) {
+            if (res.success) {
+                summary = res.data;
                 details = summary[0][0];
                 songs = summary[1];
                 genres = summary[2];
@@ -63,8 +63,8 @@ $(document).ready(function () {
         $("main .album-description").text(details.albumDescription);
         if (songs) {
             songs.forEach(function (song) {
-                const songElement = $(`<li>${song.name} <em>[${secondsToTime(song.duration)}]</em></li>`);
-                $("main .track-list").append(songElement);
+                const $song = $(`<li>${song.name} <em>[${secondsToTime(song.duration)}]</em></li>`);
+                $("main .track-list").append($song);
             });
         }
     }

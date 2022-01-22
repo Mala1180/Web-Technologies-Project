@@ -92,18 +92,6 @@ main section aside div:last-of-type span {
     font-size: clamp(18px, 1.7vw, 23px);
 }
 
-/* add to cart */
-main section aside input[type="button"] {
-    border-radius: 5px;
-    background-color: #008e99;
-    border: none;
-    padding: 8px 10px;
-    color: #fff;
-    cursor: pointer;
-    font-family: "lato-regular";
-    font-size: clamp(15px, 1.5vw, 20px);
-}
-
 /**
  *  Cart Preview
  */
