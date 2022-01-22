@@ -30,17 +30,16 @@
                                 <option value="">Genere...</option>
                             </select>
                         </li>
+                        <li>
+                            <label for="uploadfile">Copertina</label>
+                            <input type="file" id="uploadfile" name="uploadfile"/>
+                        </li>
                     </ul>
                 </fieldset>
                 <fieldset>
                     <legend>Brani</legend>
                     <ul></ul>
                     <input type="button" id="addSong" value="Aggiungi brano" />
-                </fieldset>
-                <fieldset>
-                    <legend>Copertina</legend>
-                    <ul></ul>
-                    <input type="file" id="uploadfile" name="uploadfile"/>
                 </fieldset>
                 <fieldset>
                     <legend>Opzioni di vendita</legend>
