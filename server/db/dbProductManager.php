@@ -12,9 +12,9 @@ class DBProductMgr {
  		}
  	}
 
- 	public function addProduct($quantity, $price, $description, $type, $idAuthor, $idAlbum) {
-		$query = "INSERT INTO `product` (`quantity`, `price`, `description`, `type`, `idAuthor`, `idAlbum`) VALUES (?, ?, ?, ?, ?, ?)";
-		return execute_query($this->db, $query, array($quantity, $price, $description, $type, $idAuthor, $idAlbum));
+ 	public function addProduct($quantity, $price, $description, $type, $idAlbum) {
+		$query = "INSERT INTO `product` (`quantity`, `price`, `description`, `type`, `idAlbum`) VALUES (?, ?, ?, ?, ?)";
+		return execute_query($this->db, $query, array($quantity, $price, $description, $type, $idAlbum));
  	}
 
  	public function removeProduct($idProduct) {
