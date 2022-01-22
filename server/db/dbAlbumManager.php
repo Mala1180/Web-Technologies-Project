@@ -12,9 +12,9 @@ class DBAlbumMgr {
  		}
  	}
 
- 	public function addAlbum($name, $description, $idAuthor, $duration) {
+ 	public function addAlbum($name, $description, $idAuthor, $duration, $imgPath) {
 		$query = "INSERT INTO `album` (`name`, `description`, `idAuthor`, `duration`, `imgPath`) VALUES (?, ?, ?, ?, ?)";
-		return execute_query($this->db, $query, array($name, $description, $idAuthor, $duration, "prova"));
+		return execute_query($this->db, $query, array($name, $description, $idAuthor, $duration,  $imgPath));
  	}
 
  	public function removeAlbum($idAlbum) {

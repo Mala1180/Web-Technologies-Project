@@ -51,6 +51,7 @@
             <label for="priceVinyl">Prezzo vinile</label>
             <input type="number" placeholder="Prezzo vinile" id="priceVinylCopy"><br>
 
+            <input type="file" id="uploadfile" name="uploadfile" value="Scegli copertina" />
             <input type="button" id="btnConfirm" value="Metti in vendita"/><br>
             
         </section>

@@ -12,6 +12,7 @@ $(document).ready(function () {
 
 //quando clicco su metti in vendita, da finire durata sommatta dalle canzoni.
 function createAlbum(){
+    //addAlbum(txtTitle.value, txtDescription.value, songs[1], selectGenre.value, songs[0], products);
     if(txtTitle.value != "" && selectGenre.value != "") {
         let songs = readSongs();
         let products = readProducts();
@@ -46,17 +47,18 @@ function readProducts() {
         priceVinyl = Math.round(priceVinylCopy.value * 100) / 100;
         vinylProducts.push({"copy": numVinylCopy.value, "price": priceVinyl, "type" : 1, "description": txtVinylProductDescription.value})
     }   
-    return [cdProducts, vinylProducts]; 
+    return [cdProducts, vinylProducts];
 }
 
-function addAlbum(name, description, duration, genre, songs, products) {
+async function addAlbum(name, description, duration, genre, songs, products) {
     reqHelper.post("vendor", "addAlbum", {
         name: name,
         description: description,
         duration: duration,
         genre: genre,
         songs: songs,
-        products: products
+        products: products,
+        image: await toBase64(uploadfile.files[0])
     }, function (data) {
         console.log(data);
         if (data.success) {
@@ -65,6 +67,14 @@ function addAlbum(name, description, duration, genre, songs, products) {
         }
    });
 }
+
+const toBase64 = file => new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = error => reject(error);
+});
+
 
 function addProduct(quantity, price, description, type) {
     reqHelper.post("vendor", "addProduct", {

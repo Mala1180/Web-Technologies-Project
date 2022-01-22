@@ -14,8 +14,8 @@ require_once('validate.php');
         } 
         switch($_GET["action"]) {
             /*
-                * Get list of all notifications
-                */
+            * Get list of all notifications
+            */
             case "getnotifications":
                 $data = $dbNotificationMgr->getNotifications(1); // TODO: customer id must be taken from jwt
                 send_data($data);
