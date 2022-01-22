@@ -43,7 +43,7 @@ class DBUserMgr {
 		 if($type == "cliente") {
 			$query = "SELECT idCustomer, name, surname FROM customer WHERE username=?";
 		 }
-		 else if ($type =="artista"){
+		 else if ($type == "artista"){
 			$query = "SELECT idAuthor, artName FROM author WHERE username=?";
 		 }
 		return execute_query($this->db, $query, array($username));

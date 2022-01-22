@@ -12,9 +12,9 @@ class DBProductMgr {
  		}
  	}
 
- 	public function addProduct($name, $quantity, $price, $description, $type, $idAuthor, $idAlbum) {
-		$query = "INSERT INTO `product` (`name`, `quantity`, `price`, `description`, `type`, `idAuthor`, `idAlbum`) VALUES (?, ?, ?, ?, ?, ?, ?)";
-		return execute_query($this->db, $query, array($name, $quantity, $price, $description, $type, $idAuthor, $idAlbum));
+ 	public function addProduct($quantity, $price, $description, $type, $idAuthor, $idAlbum) {
+		$query = "INSERT INTO `product` (`quantity`, `price`, `description`, `type`, `idAuthor`, `idAlbum`) VALUES (?, ?, ?, ?, ?, ?)";
+		return execute_query($this->db, $query, array($quantity, $price, $description, $type, $idAuthor, $idAlbum));
  	}
 
  	public function removeProduct($idProduct) {
@@ -27,9 +27,9 @@ class DBProductMgr {
 		return execute_query($this->db, $query, array($idProduct));
  	}
 
-	public function modifyProduct($idProduct, $name, $quantity, $price, $description, $type, $idAuthor, $idAlbum) {
-		$query = "UPDATE `product` SET name=?, quantity=?, price=?, description=?, type=?, idAuthor=?, idAlbum=? WHERE idProduct=?";
-		return execute_query($this->db, $query, array($name, $quantity, $price, $description, $type, $idAuthor, $idAlbum, $idProduct));
+	public function modifyProduct($idProduct, $quantity, $price, $description, $type, $idAuthor, $idAlbum) {
+		$query = "UPDATE `product` SET quantity=?, price=?, description=?, type=?, idAuthor=?, idAlbum=? WHERE idProduct=?";
+		return execute_query($this->db, $query, array($quantity, $price, $description, $type, $idAuthor, $idAlbum, $idProduct));
  	}
 
 	public function getCurrentQuantity($idProduct) {
