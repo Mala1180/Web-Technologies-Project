@@ -17,6 +17,11 @@ class DBCardMgr {
 		return execute_query($this->db, $query, array($idCustomer));
     }
 
+    public function getCardId($idCustomer, $cardNumber) {
+        $query = "SELECT idCard FROM creditCard WHERE idCustomer=? AND cardNumber=?";
+		return execute_query($this->db, $query, array($idCustomer, $cardNumber));
+    }
+
 	public function addCard($idCustomer, $holder, $cardNumber, $circuit, $expiryDate, $cvv, $isDefault) {
 		$query = "INSERT INTO `creditCard` (`holder`, `cardNumber`, `circuit`, `expiryDate`, `cvv`, `isDeleted`, `idCustomer`) VALUES (?, ?, ?, ?, ?, ?, ?)";
 		$isDeleted = 0;

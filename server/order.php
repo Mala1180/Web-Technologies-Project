@@ -4,7 +4,9 @@ require_once("db/dbconnector.php");
 require_once("db/dbOrderManager.php");
 require_once("db/dbUserManager.php");
 require_once("db/dbNotificationManager.php");
+require_once("db/dbTransactionManager.php");
 require_once("db/dbCartManager.php");
+require_once("db/dbCardManager.php");
 require_once("../vendor/autoload.php");
 require_once('validate.php');
 require_once('mail.php');
@@ -28,9 +30,6 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 	}
 	switch ($_POST["action"]) {
 		case "addOrder":
-            //leggo data, creo ordine, leggo linee di carrello, 
-            //sposto le linee di carrello in linee d'ordine dopo averlo creato, setto lo stato effettuato.
-            //$state, $orderDate, $shippingDate, $deliveryDate, $idCustomer
             $idCustomer = $dbUserMgr->getUserInfoForToken(get_token_data()->username, "cliente")[0]["idCustomer"];
             $idOrder = $dbOrderMgr->addOrder(date("Y-m-d"), $idCustomer);
             if($idOrder > 0) {
@@ -41,7 +40,13 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
                     $tmpSubprice = intval($cartElem["quantity"]) * floatval($cartElem["price"]);
                     $data = $dbOrderMgr->addOrderDetail($cartElem["idProduct"], $idOrder, $cartElem["quantity"], $tmpSubprice);
                 }
-                send_data($data);
+                $idCard = $dbCardMgr->getCardId($idCustomer, $_POST["cardNumber"])[0]["idCard"];
+                if($idCard > 0){
+                    $dbTransactionMgr->addTransaction($idOrder, date("Y-m-d"), $idCard);
+                    send_data($data);
+                }else {
+                    send_data(false);
+                }
             } else {
                 $dbNotificationMgr->sendNotification($idCustomer, "Qualcosa è andato storto", "La preghiamo di effettuare nuovamente l'ordine, qualcosa è andato storto con il suo precedente ordine.");
                 send_data(false);
