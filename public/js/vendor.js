@@ -1,73 +1,71 @@
 //selectGenre
 
 $(document).ready(function () {
-
     $("#confirmSongs").click((e) => {  
         displaySongField(parseInt(numSongs.value));
     });
-
     $("#btnConfirm").click((e) => {  
         createAlbum();
     });
-
     getAllGenre();
-
 });
 
 //quando clicco su metti in vendita, da finire durata sommatta dalle canzoni.
 function createAlbum(){
     if(txtTitle.value != "" && selectGenre.value != "") {
-        addAlbum(txtTitle.value, txtDescription.value, 0);
+        let songs = readSongs();
+        let products = readProducts();
+        addAlbum(txtTitle.value, txtDescription.value, songs[1], selectGenre.value, songs[0], products);    
     } 
-    // addProduct()
 }
 
-
-
-function addSongs(){
+function readSongs() {
+    let newSongs = {};
     let songsTitle = document.getElementsByClassName('songTitle');
     let songsDuration = document.getElementsByClassName('songDuration');
+    let totDuration = 0;
+    newSongs = [];
 
     for (let i = 0; i < songsTitle.length; i++){
         let tmpTitle = songsTitle[i].value;
         let tmpDuration = convertToSec(songsDuration[i].value);
-        addSongToAlbum(txtTitle.value, tmpTitle, tmpDuration);
+        totDuration += tmpDuration;
+        newSongs.push({"title": tmpTitle, "duration" : tmpDuration});
     }
+    return [newSongs, totDuration];
 }
 
-//non provata
-function addAlbum(name, description, duration) {
+function readProducts() {
+    let cdProducts = [], vinylProducts = [];
+    let priceCD, priceVinyl;
+    if(checkCD.checked && numCDCopy.value != "" && priceCDCopy.value != "") {
+        priceCD = Math.round(priceCDCopy.value * 100) / 100;
+        cdProducts.push({"copy": numCDCopy.value, "price": priceCD, "type": 0, "description": txtCDProductDescription.value})
+    }
+    if(checkVinyl.checked && numVinylCopy.value != "" && priceVinylCopy.value != "") { 
+        priceVinyl = Math.round(priceVinylCopy.value * 100) / 100;
+        vinylProducts.push({"copy": numVinylCopy.value, "price": priceVinyl, "type" : 1, "description": txtVinylProductDescription.value})
+    }   
+    return [cdProducts, vinylProducts]; 
+}
+
+function addAlbum(name, description, duration, genre, songs, products) {
     reqHelper.post("vendor", "addAlbum", {
         name: name,
         description: description,
-        duration: duration
+        duration: duration,
+        genre: genre,
+        songs: songs,
+        products: products
     }, function (data) {
         console.log(data);
         if (data.success) {
-            setAlbumGenre(txtTitle.value, selectGenre.value);
-            addSongs();
-            checkProducts();
+            //alert("Album creato con successo :D");
+            console.log("Album creato con successo");
         }
    });
 }
 
-
-function checkProducts() {
-    let numCDs, numVinyls, priceCD, priceVinyl;
-    if(checkCD.checked && numCDCopy.value != "" && priceCDCopy.value != "") {
-        numCDs = numCDCopy.value;
-        priceCD = Math.round(priceCDCopy.value * 100) / 100;
-        addProduct(numCDs, priceCD, txtCDProductDescription.value, 0)
-    }
-    if(checkVinyl.checked && numVinylCopy.value != "" && priceVinylCopy.value != "") { 
-        numVinyls = numVinylCopy.value;
-        priceVinyl = Math.round(priceVinylCopy.value * 100) / 100;
-        addProduct(numVinyls, priceVinyl, txtVinylProductDescription.value, 1)
-    }    
-}
-
-//non provata 0 == CD, 1 == Vinile.
-//$name, $quantity, $price, $description, $type, $idAuthor, $idAlbum
 function addProduct(quantity, price, description, type) {
     reqHelper.post("vendor", "addProduct", {
         albumTitle: txtTitle.value,
@@ -84,15 +82,6 @@ function addProduct(quantity, price, description, type) {
    });
 }
 
-function addSongToAlbum(albumTitle, name, duration) {
-    reqHelper.post("vendor", "addSongToAlbum", {
-        albumTitle: albumTitle,
-        name: name, 
-        duration: duration
-    });
-}
-
-
 function setAlbumGenre(albumTitle, genre) {
     reqHelper.post("vendor", "setAlbumGenre", {
         albumTitle: albumTitle,
@@ -100,8 +89,6 @@ function setAlbumGenre(albumTitle, genre) {
     });
 }
 
-
-//non funziona
 function getAllGenre() {
     reqHelper.post("vendor", "getAllGenre", {},
     function (data) {
@@ -115,8 +102,6 @@ function getAllGenre() {
        }
    });
 }
-
-
 
 function displaySongField(n) {
     if(isNumber(n)) {
@@ -167,24 +152,4 @@ function convertToSec(time) {
 function isNumber(value) {
     return typeof value === 'number' && isFinite(value);
 }
-
-// $(".checkbox").change(function() {
-//     switch (this.value) {
-//         case "CD":
-//             if(this.checked) {
-//                 numCDCopy.display = block;
-//             } else {
-//                 numCDCopy.visibility = hidden;
-//             }
-//             break;
-//         case "Vinile":
-//             if(this.checked) {
-//                 numVinylCopy.visibility = visible;
-//             } else {
-//                 numVinylCopy.visibility = hidden;
-//             }
-//             break;
-//     }
-// });
-
 

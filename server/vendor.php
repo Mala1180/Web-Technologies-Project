@@ -31,7 +31,19 @@ require_once('validate.php');
             case "addAlbum":
                 $idAuthor = $dbUserMgr->getUserInfoForToken(get_token_data()->username, "artista")[0]["idAuthor"];
                 $data = $dbAlbumMgr->addAlbum($_POST["name"], $_POST["description"], $idAuthor, $_POST["duration"]);
-                send_data($data);
+                if($data){                
+                    $idAlbum = $dbAlbumMgr->getIdFromTitleAndIdAuthor($idAuthor, $_POST["name"])[0]["idAlbum"];
+                    //$dbAlbumMgr->setAlbumGenre($idAlbum, $_POST["genre"]);
+                    $songs = $_POST["songs"];
+                    foreach ($songs as $song) {
+                        $dbAlbumMgr->addSongToAlbum($idAlbum, $song["title"], $song["duration"]);
+                    }  
+                    $products = $_POST["products"];
+                    foreach ($products as $product) {
+                        $dbProductMgr->addProduct($product[0]["copy"], $product[0]["price"], $product[0]["description"], $product[0]["type"], $idAuthor, $idAlbum);
+                    }
+                    send_data($data);
+                }
                 break;
             case "addProduct":
                 $idAuthor = $dbUserMgr->getUserInfoForToken(get_token_data()->username, "artista")[0]["idAuthor"];
