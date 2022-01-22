@@ -1,64 +1,78 @@
 //selectGenre
 
 $(document).ready(function () {
-    // $("#getGenreBtn").click((e) => {
-
-    //     e.preventDefault();
-    //     getAllGenre();
-    //     console.log("ciao");
-
-    // });
-
     $("#confirmSongs").click((e) => {  
-        //displaySongField(parseInt(numSongs.value));
-        getAllGenre();
+        displaySongField(parseInt(numSongs.value));
     });
-
     $("#btnConfirm").click((e) => {  
-        alert("ok");
-        
+        createAlbum();
     });
-
-    
-    
-    
-    //richiedo i generi disponibili
-    //riempio select generi
-    
-
-    
-
-
+    getAllGenre();
 });
 
-//non provata
-function addAlbum(name, description, duration) {
+//quando clicco su metti in vendita, da finire durata sommatta dalle canzoni.
+function createAlbum(){
+    if(txtTitle.value != "" && selectGenre.value != "") {
+        let songs = readSongs();
+        let products = readProducts();
+        addAlbum(txtTitle.value, txtDescription.value, songs[1], selectGenre.value, songs[0], products);    
+    } 
+}
+
+function readSongs() {
+    let newSongs = {};
+    let songsTitle = document.getElementsByClassName('songTitle');
+    let songsDuration = document.getElementsByClassName('songDuration');
+    let totDuration = 0;
+    newSongs = [];
+
+    for (let i = 0; i < songsTitle.length; i++){
+        let tmpTitle = songsTitle[i].value;
+        let tmpDuration = convertToSec(songsDuration[i].value);
+        totDuration += tmpDuration;
+        newSongs.push({"title": tmpTitle, "duration" : tmpDuration});
+    }
+    return [newSongs, totDuration];
+}
+
+function readProducts() {
+    let cdProducts = [], vinylProducts = [];
+    let priceCD, priceVinyl;
+    if(checkCD.checked && numCDCopy.value != "" && priceCDCopy.value != "") {
+        priceCD = Math.round(priceCDCopy.value * 100) / 100;
+        cdProducts.push({"copy": numCDCopy.value, "price": priceCD, "type": 0, "description": txtCDProductDescription.value})
+    }
+    if(checkVinyl.checked && numVinylCopy.value != "" && priceVinylCopy.value != "") { 
+        priceVinyl = Math.round(priceVinylCopy.value * 100) / 100;
+        vinylProducts.push({"copy": numVinylCopy.value, "price": priceVinyl, "type" : 1, "description": txtVinylProductDescription.value})
+    }   
+    return [cdProducts, vinylProducts]; 
+}
+
+function addAlbum(name, description, duration, genre, songs, products) {
     reqHelper.post("vendor", "addAlbum", {
-        jwt: jwt.getJWT(),
         name: name,
         description: description,
-        duration: duration
-    },
-    function (data) {
+        duration: duration,
+        genre: genre,
+        songs: songs,
+        products: products
+    }, function (data) {
         console.log(data);
-       if (data.success) {
-           console.log(data)
-       }
+        if (data.success) {
+            //alert("Album creato con successo :D");
+            console.log("Album creato con successo");
+        }
    });
 }
 
-//non provata 0 == CD, 1 == Vinile.
-//$name, $quantity, $price, $description, $type, $idAuthor, $idAlbum
-function addProduct(name, quantity, price, description, type, idAuthor, idAlbum) {
+function addProduct(quantity, price, description, type) {
     reqHelper.post("vendor", "addProduct", {
-        jwt: jwt.getJWT(),
-        name: name,
+        albumTitle: txtTitle.value,
         quantity: quantity,
         price: price,
         description: description,
-        type:type,
-        idAuthor: idAuthor,
-        idAlbum: idAlbum
+        type: type
     },
     function (data) {
         console.log(data);
@@ -68,74 +82,74 @@ function addProduct(name, quantity, price, description, type, idAuthor, idAlbum)
    });
 }
 
-function addSongAlbum(idAlbum, name, duration) {
-    reqHelper.post("vendor", "addSongToAlbum", {
-        jwt: jwt.getJWT(),
-        idAlbum: idAlbum,
-        name:name, 
-        duration: duration
-    },
-    function (data) {
-        console.log(data);
-       if (data.success) {
-           console.log(data)
-       }
-   });
+function setAlbumGenre(albumTitle, genre) {
+    reqHelper.post("vendor", "setAlbumGenre", {
+        albumTitle: albumTitle,
+        genre: genre
+    });
 }
 
-
-//non funziona
 function getAllGenre() {
     reqHelper.post("vendor", "getAllGenre", {},
     function (data) {
-        console.log(data);
        if (data.success) {
-           console.log(data)
+        for (let i = 0; i < data.data.length; i++){
+            var opt = document.createElement('option');
+            opt.value = data.data[i].name;
+            opt.innerHTML = data.data[i].name;
+            selectGenre.appendChild(opt);
+        }
        }
    });
 }
 
-
-
 function displaySongField(n) {
     if(isNumber(n)) {
-        //creo n slot brani, non so in che modo sia meglio farlo
-        console.log(n)
+        sectionSongs.innerHTML = "";
+        for (var i = 0; i < n; i++){
+            let tmpSongId = "song-" + i;
+            let tmpDurId = "duration-" + i;
+
+            let lblTitle = document.createElement('label');
+            lblTitle.setAttribute("for", tmpSongId);
+            lblTitle.innerHTML = "Titolo canzone " + i;
+
+            let inpTitle = document.createElement('input');
+            inpTitle.type = "text"
+            inpTitle.classList.add("songTitle");
+            inpTitle.setAttribute("id", tmpSongId);
+
+            let lblDurata = document.createElement('label');
+            lblDurata.setAttribute("for", tmpDurId);
+            lblDurata.innerHTML = "Durata (MM:SS)";
+
+            let inpDurata = document.createElement('input');
+            inpDurata.type = "text"
+            inpDurata.classList.add("songDuration");
+            inpDurata.setAttribute("id", tmpDurId);
+
+
+            sectionSongs.appendChild(lblTitle);
+            sectionSongs.appendChild(inpTitle);
+            sectionSongs.appendChild(document.createElement('br'));
+            sectionSongs.appendChild(lblDurata);
+            sectionSongs.appendChild(inpDurata);
+            sectionSongs.appendChild(document.createElement('br'));
+        }
+        sectionSongs.appendChild(document.createElement('br'));
     }
 }
 
 //input in formato MM:SS
 function convertToSec(time) {
 
-    let min = time.split(":")[0]
-    let sec = time.split(":")[1]
+    let min = time.split(":")[0];
+    let sec = time.split(":")[1];
 
-    if(isNumber(min) && isNumber(sec)){
-        return min * 60 + sec
-    }
+    return parseInt(min) * 60 + parseInt(sec)
 }
 
 function isNumber(value) {
     return typeof value === 'number' && isFinite(value);
 }
-
-$(".checkbox").change(function() {
-    switch (this.value) {
-        case "CD":
-            if(this.checked) {
-                numCDCopy.display = block;
-            } else {
-                numCDCopy.visibility = hidden;
-            }
-            break;
-        case "Vinile":
-            if(this.checked) {
-                numVinylCopy.visibility = visible;
-            } else {
-                numVinylCopy.visibility = hidden;
-            }
-            break;
-    }
-});
-
 

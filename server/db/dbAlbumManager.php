@@ -42,6 +42,16 @@ class DBAlbumMgr {
 		return execute_query($this->db, $query);
  	}
 
+	public function getIdFromTitleAndIdAuthor($idAuthor, $title) {
+		$query = "SELECT idAlbum FROM album WHERE idAuthor=? AND name=? LIMIT 1";
+		return execute_query($this->db, $query, array($idAuthor, $title));
+ 	}
+
+	public function setAlbumGenre($idAlbum, $genre) {
+		$query = "INSERT INTO `album_genre` (`idAlbum`, `genre`) VALUES (?, ?)";
+		return execute_query($this->db, $query, array($idAlbum, $genre));
+ 	}
+
 }
 
 $dbAlbumMgr = new DBAlbumMgr($db);
