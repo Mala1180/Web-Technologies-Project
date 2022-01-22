@@ -4,20 +4,27 @@ declare(strict_types=1);
 require_once('utils.php');
 require_once("db/dbconnector.php");
 require_once("db/dbNotificationManager.php");
+require_once("db/dbUserManager.php");
 require_once("../vendor/autoload.php");
 require_once('validate.php');
 
-    if($_SERVER["REQUEST_METHOD"] == "GET") {
-        if(!isset($_GET["action"])) {
+    if ($_SERVER["REQUEST_METHOD"] == "GET") {
+        if (!isset($_GET["action"])) {
             send_error("An action is required");
             exit();
         } 
-        switch($_GET["action"]) {
+        switch ($_GET["action"]) {
             /*
+<<<<<<< HEAD
             * Get list of all notifications
             */
+=======
+             * Get list of all notifications
+             */
+>>>>>>> mala
             case "getnotifications":
-                $data = $dbNotificationMgr->getNotifications(1); // TODO: customer id must be taken from jwt
+                $idCustomer = $dbUserMgr->getUserInfoForToken(get_token_data()->username, "cliente")[0]["idCustomer"];
+                $data = $dbNotificationMgr->getNotifications($idCustomer); // TODO: customer id must be taken from jwt
                 send_data($data);
                 break;
             default:
@@ -26,7 +33,7 @@ require_once('validate.php');
 
         }
     } else if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        if(!isset($_POST["action"])) {
+        if (!isset($_POST["action"])) {
             send_error("An action is required");
             exit();
         }
