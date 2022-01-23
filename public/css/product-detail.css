@@ -130,7 +130,7 @@ main ol > li::marker {
     color: #008e99;
 }
 
-main input[type="button"] {
+main button {
     position: fixed;
     bottom: 0;
     left: 0;
@@ -146,9 +146,7 @@ main input[type="button"] {
     border-radius: 5px;
 }
 
-
 @media screen and (min-width: 576px) {
-
     main > section {
         flex-direction: row;
         justify-content: space-evenly;
@@ -165,20 +163,17 @@ main input[type="button"] {
         flex-direction: row;
         justify-content: space-evenly;
     }
-    
 }
 
 @media screen and (min-width: 992px) {
-
     /* album and product descriptions */
     main > section p {
         margin: 10px 10%;
-        max-width: 90vw;   
+        max-width: 90vw;
     }
 }
 
 @media screen and (min-width: 992px) {
-    
     main > section {
         justify-content: center;
     }
@@ -192,11 +187,10 @@ main input[type="button"] {
         margin-left: 33vw;
     }
 
-    main > input[type="button"] {
+    main > button {
         position: unset;
         width: 40%;
         margin-top: 30px;
         margin-left: 30%;
     }
-
 }
