@@ -34,7 +34,7 @@ class DBOrderMgr {
  	}
 
 	public function getOrderDetails($idOrder) {
-		$query = "SELECT idProduct, quantity FROM orderDetail WHERE idOrder=?";
+		$query = "SELECT idProduct, quantity, subprice FROM orderDetail WHERE idOrder=?";
 		return execute_query($this->db, $query, array($idOrder));
  	}
 

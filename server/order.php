@@ -84,8 +84,19 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
             break;
         case "getOrder":
             //check if is one shipper get_token_data()->id or username.
-            $data = $dbOrderMgr->getOrders();
-            send_data($data);
+            $orders = $dbOrderMgr->getOrders();
+            $ordersDetails = [];
+            $tot = [];  
+            foreach($orders as $order) {
+                $tmpOrder = [];
+                $tmpOrder["order"] = [];
+                $tmpOrder["products"] = [];
+                $orderDetails = $dbOrderMgr->getOrderDetails($order["idOrder"]);
+                array_push($tmpOrder["order"], $order);
+                array_push($tmpOrder["products"], $orderDetails);
+                array_push($tot, $tmpOrder);
+            }
+            send_data($tot);
             break;
         case "getCustomerOrders":
             $idCustomer = $dbUserMgr->getUserInfoForToken(get_token_data()->username, "cliente")[0]["idCustomer"];
