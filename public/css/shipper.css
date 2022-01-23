@@ -55,7 +55,6 @@ main > ul > li .total {
     font-size: clamp(1em, 1.4vw, 1.3em);
 }
 
-
 main > ul > li > section.order-details {
     display: block;
 }

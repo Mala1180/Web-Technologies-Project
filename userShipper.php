@@ -4,7 +4,7 @@
     <head>
         <?php require("./templates/head-section.php"); ?>
         <link rel="stylesheet" href="./public/css/header.css" />
-        <link rel="stylesheet" href="./public/css/orders.css" />
+        <link rel="stylesheet" href="./public/css/shipper.css" />
 
         <title>Unibo Vinyl - Ordini</title>
     </head>
@@ -12,7 +12,7 @@
         <main>
             <h1>Ordini</h1>
             <ul class="orders-list">
-                <li>
+                <!-- <li>
                     <section class="order-header">
                         <div>
                             <h2 class="date">Ordine del 20/02/2020</h2>
@@ -36,7 +36,7 @@
                             </li>
                         </ul>
                     </section>
-                </li>
+                </li> -->
             </ul>
         </main>
         <script src="./public/js/page-header.js"></script>
