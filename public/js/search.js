@@ -93,7 +93,7 @@ function displayProducts(products) {
                     </div>
                     <div>
                         <span>€ ${product.price}</span>
-                        <button>Aggiungi al carrello</button>
+                        <button value="${product.idProduct}">Aggiungi al carrello</button>
                     </div>
                 </aside>
             </section>`);
@@ -105,7 +105,9 @@ function displayProducts(products) {
             $product.find("h2").click(function () {
                 location.href = DETAILS_LINK;
             });
-
+            $product.find("button").click(function () {
+                addToCart($(this).val());
+            });
             $("main").append($product);
         }
     }
@@ -131,5 +133,20 @@ function togglePreview(bottom, titleWidth) {
         }, 500);
     } else {
         $closePreview.fadeOut(50);
+    }
+}
+
+
+//function that populate the cart client side
+function addToCart(idProduct) {
+    if (idProduct > 0) {
+        reqHelper.post("cart", "addEntry", {
+            idProduct: idProduct
+        },
+        function (data) {
+            if (data.success) {
+                console.log(data)
+            }
+        });
     }
 }
