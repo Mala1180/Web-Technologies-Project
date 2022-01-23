@@ -34,7 +34,8 @@ class DBProductMgr {
 
 	public function getCurrentQuantity($idProduct) {
 		$query = "SELECT quantity FROM `product` WHERE idProduct=?";
-		return execute_query($this->db, $query, array($idProduct));
+		$results = execute_query($this->db, $query, array($idProduct));
+		return count($results) > 0 ? $results[0]["quantity"] : 0;
  	}
 
 	public function decreaseQuantity($idProduct, $quantity) {
