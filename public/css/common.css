@@ -44,3 +44,9 @@ input[type="input"] {
     font-family: "lato-regular";
     font-size: clamp(15px, 1.5vw, 20px);
 }
+
+button:focus-visible,
+input[type="submit"]:focus-visible,
+input[type="input"]:focus-visible {
+    outline-offset: 1px;
+}

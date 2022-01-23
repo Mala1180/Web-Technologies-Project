@@ -13,7 +13,7 @@
         <main>
             <h1>Il mio profilo</h1>
             <section><a href="orders.php">I miei ordini</a></section>
-            <section><a href="notifications.php">Notifiche</a></section>
+            <section><a href="userNotifications.php">Notifiche</a></section>
             <section><a href="settings.php">Impostazioni</a></section>
             <section><a href="payments.php">Pagamenti</a></section>
         </main>

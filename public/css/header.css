@@ -46,13 +46,20 @@ body > header nav ul li:nth-child(2) {
     margin-left: auto;
     margin-right: 20px;
 }
-/* 
-body > header nav ul li a img {
-    width: 6.5vh;
-    height: 6.5vh;
-} */
 
-body > header nav ul li a img {
+body > header nav ul li button {
+    padding: 0;
+    border: 0;
+    background: none;
+    width: 5vh;
+    height: 5vh;
+}
+
+body > header nav ul li button:focus-visible {
+    outline-offset: 1px;
+}
+
+body > header nav ul li img {
     width: 5vh;
     height: 5vh;
 }
@@ -68,7 +75,7 @@ body > header section {
     padding-bottom: 25px;
 }
 
-body > header > div > a img {
+body > header > div > a {
     display: none;
 }
 
@@ -97,6 +104,7 @@ body > header section div select {
     border: 1px solid white;
     border-radius: 10px;
     margin-left: 5px;
+    cursor: pointer;
 }
 
 body > header section div select option {
@@ -158,8 +166,11 @@ body > header section a {
         display: none;
     }
 
-    body > header > div > a img {
+    body > header > div > a {
         display: block;
+    }
+
+    body > header > div > a img {
         height: 100%;
         padding: 10%;
     }
@@ -190,12 +201,6 @@ body > header section a {
 
     body > header nav {
         display: none;
-    }
-
-    body > header > div > a img {
-        display: block;
-        height: 100%;
-        padding: 10%;
     }
 
     body > header section {

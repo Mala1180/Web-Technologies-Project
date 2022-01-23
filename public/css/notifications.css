@@ -84,11 +84,18 @@ main > ul > li button {
     cursor: pointer;
 }
 
-main > ul > li .trash-icon {
+main > ul > li .trash-button {
+    padding: 0;
+    border: 0;
+    background: none;
     height: 30px;
     width: 30px;
     float: right;
-    cursor: pointer;
+}
+
+main > ul > li .trash-button img {
+    height: 30px;
+    width: 30px;
 }
 
 /**
