@@ -16,7 +16,8 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 	}
 	switch ($_GET["action"]) {
 		case "getcart":
-            send_data($dbCartMgr->getCart(1));
+			$idCustomer = $dbUserMgr->getUserInfoForToken(get_token_data()->username, "cliente")[0]["idCustomer"];
+            send_data($dbCartMgr->getCart($idCustomer));
             break;
 		default:
 			send_error("Unknown action");
@@ -33,9 +34,9 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
             send_success($dbCartMgr->editProductQuantity($_POST["idCartEntry"], $_POST["quantity"]));
             break;
 		case "addEntry":
-				checkParams($_POST, array("idProduct", "quantity"));
+				checkParams($_POST, array("idProduct"));
 				$idCustomer = $dbUserMgr->getUserInfoForToken(get_token_data()->username, "cliente")[0]["idCustomer"];
-				send_success($dbCartMgr->addToCart($_POST["idProduct"], $_POST["quantity"], $idCustomer));
+				send_success($dbCartMgr->addToCart($_POST["idProduct"], $idCustomer, 1));
 				break;
         case "removeentry":
             checkParams($_POST, array("idCartEntry"));

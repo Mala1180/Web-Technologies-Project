@@ -93,7 +93,7 @@ function displayProducts(products) {
                     </div>
                     <div>
                         <span>€ ${product.price}</span>
-                        <button>Aggiungi al carrello</button>
+                        <button value="${product.idProduct}">Aggiungi al carrello</button>
                     </div>
                 </aside>
             </section>`);
@@ -105,7 +105,9 @@ function displayProducts(products) {
             $product.find("h2").click(function () {
                 location.href = DETAILS_LINK;
             });
-
+            $product.find("button").click(function () {
+                addToCart($(this).val());
+            });
             $("main").append($product);
         }
     }
@@ -135,19 +137,11 @@ function togglePreview(bottom, titleWidth) {
 }
 
 
-function readProduct() {
-    let product;
-
-    //legge prodotto dal bottone, accordo con malachia
-    addToCart(products[0].idProduct, 5);
-}
-
 //function that populate the cart client side
-function addToCart(idProduct, quantity) {
-    if(quantity > 0 && idProduct > 0){
+function addToCart(idProduct) {
+    if (idProduct > 0) {
         reqHelper.post("cart", "addEntry", {
-            idProduct: idProduct,
-            quantity: quantity
+            idProduct: idProduct
         },
         function (data) {
             if (data.success) {
