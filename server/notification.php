@@ -15,13 +15,8 @@ require_once('validate.php');
         } 
         switch ($_GET["action"]) {
             /*
-<<<<<<< HEAD
-            * Get list of all notifications
-            */
-=======
              * Get list of all notifications
              */
->>>>>>> mala
             case "getnotifications":
                 $idCustomer = $dbUserMgr->getUserInfoForToken(get_token_data()->username, "cliente")[0]["idCustomer"];
                 $data = $dbNotificationMgr->getNotifications($idCustomer); // TODO: customer id must be taken from jwt
