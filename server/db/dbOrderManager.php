@@ -17,21 +17,30 @@ class DBOrderMgr {
 		execute_query($this->db, $query, array("effettuato", $orderDate,  $idCustomer));
 		return $this->db->insert_id;
  	}
+
+	public function getOrders() {
+		$query = "SELECT idOrder, state, orderDate, shippingDate, deliveryDate FROM `customerOrder`";
+		return execute_query($this->db, $query);
+ 	}
 	
 	public function addOrderDetail($idProduct, $idOrder, $quantity, $subprice) {
 		$query = "INSERT INTO `orderDetail` (`idProduct`, `idOrder`, `quantity`, `subprice`) VALUES (?, ?, ?, ?)";
 		return execute_query($this->db, $query, array($idProduct, $idOrder, $quantity, $subprice));
  	}
 
-    public function setShippingDate($idOrder, $shippingDate) {
-        $query = "UPDATE `customerOrder` SET shippingDate=? WHERE idOrder=?";
-		return execute_query($this->db, $query, array($shippingDate, $idOrder));
+	public function getOrderDetails($idOrder) {
+		$query = "SELECT idProduct, quantity FROM orderDetail WHERE idOrder=?";
+		return execute_query($this->db, $query, array($idOrder));
  	}
 
-     public function setDeliveryDate($idOrder, $deliveryDate) {
-        $query = "UPDATE `customerOrder` SET deliveryDate=? WHERE idOrder=?";
-		return execute_query($this->db, $query, array($deliveryDate, $idOrder));
- 	}
+	public function setDate($idOrder, $type, $date) {
+		if($type == "spedito") {
+			$query = "UPDATE `customerOrder` SET shippingDate=? WHERE idOrder=?";
+		} else if ($type == "consegnato"){
+			$query = "UPDATE `customerOrder` SET deliveryDate=? WHERE idOrder=?";
+		}
+		return execute_query($this->db, $query, array($date, $idOrder));
+	}
 
     public function changeState($idOrder, $state) {
         $query = "UPDATE `customerOrder` SET state=? WHERE idOrder=?";

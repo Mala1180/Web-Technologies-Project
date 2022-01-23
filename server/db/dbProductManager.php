@@ -37,6 +37,25 @@ class DBProductMgr {
 		return execute_query($this->db, $query, array($idProduct));
  	}
 
+	public function decreaseQuantity($idProduct, $quantity) {
+		$currentQuantity = $this->getCurrentQuantity($idProduct)[0]["quantity"];
+		if($currentQuantity >= $quantity) {
+			$query = "UPDATE `product` SET quantity=? WHERE idProduct=?";
+			return execute_query($this->db, $query, array($currentQuantity - $quantity, $idProduct));
+		}
+		return false;
+	}
+
+	// public function changeOrderQuantity($idOrder) {
+
+	// 	$query = "SELECT idProduct, quantity FROM orderDetail WHERE idOrder=?";
+	// 	// $currentQuantity = $this->getCurrentQuantity($idProduct)[0]["quantity"];
+	// 	// if($currentQuantity >= $quantity) {
+	// 	// 	$query = "UPDATE `product` SET quantity=? WHERE idProduct=?";
+	// 	// }
+	// 	return execute_query($this->db, $query, array($idOrder));
+	// }
+
 	public function getProductIdAuthor($idProduct) {
 		$query = "SELECT idAuthor FROM `product` WHERE idProduct=?";
 		return execute_query($this->db, $query, array($idProduct));
