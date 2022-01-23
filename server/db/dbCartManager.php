@@ -27,7 +27,7 @@ class DBCartMgr {
  	public function addToCart($idProduct, $idCustomer, $quantity) {
 		global $dbProductMgr;
 		$currentQuantity = $this->getCurrentQuantity($idProduct, $idCustomer);
-		if ($quantity > $currentQuantity + $dbProductMgr->getCurrentQuantity($idProduct)) {
+		if ($quantity + $currentQuantity > $dbProductMgr->getCurrentQuantity($idProduct)) {
 			return false;
 		} else if ($currentQuantity > 0) {
 			return $this->updateProductQuantity($idProduct, $idCustomer, $currentQuantity + $quantity);

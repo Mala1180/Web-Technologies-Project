@@ -17,7 +17,7 @@ $(document).ready(function () {
  * @author Mattia Matteini <matteinimattia@gmail.com>
  * @param {String} idProduct string with the id of the product to be searched
  */
- function getProductDetails(idProduct) {
+function getProductDetails(idProduct) {
     if (idProduct) {
         reqHelper.get("search", "productDetails", {
             "idProduct": idProduct,
@@ -30,10 +30,29 @@ $(document).ready(function () {
                 console.log(summary);
                 console.log(details, songs, genres);
                 displayProductDetails(details, songs, genres);
+                $("#addToCart").click(function () {
+                    addToCart(idProduct);
+                });
             } else {
                 console.error("An error occurred while searching the product details.");
             }
         });
+    }
+}
+
+function addToCart(idProduct) {
+    if (idProduct > 0) {
+        reqHelper.post("cart", "addEntry", {
+            idProduct: idProduct
+        },
+            function (data) {
+                if (data.success) {
+                    Swal.fire("", "prodotto aggiunto al carrello", "success");
+                } else {
+                    Swal.fire("", "Verifica la disponibilità del prodotto", "error");
+                }
+            }
+        );
     }
 }
 
@@ -45,7 +64,7 @@ $(document).ready(function () {
  * @param {Array} genres array with the genres of the album
  * @param {Array} songs array with the songs of the album
  */
- function displayProductDetails(details, songs, genres) {
+function displayProductDetails(details, songs, genres) {
     if (details) {
         $("main .album-img").attr("src", `public/img/products/${details.imgPath}`);
         $("main .name").text(details.name);
@@ -82,6 +101,6 @@ function secondsToTime(seconds) {
     let _minutes = Math.floor((seconds - (_hours * 3600)) / 60);
     let _seconds = seconds - (_hours * 3600) - (_minutes * 60);
     return (_hours > 0 ? _hours + ":" : "") +
-           (_minutes < 10 && _hours > 0 ? "0" + _minutes : _minutes) + 
-           ":" + (_seconds < 10 ? "0" + _seconds : _seconds);
+        (_minutes < 10 && _hours > 0 ? "0" + _minutes : _minutes) +
+        ":" + (_seconds < 10 ? "0" + _seconds : _seconds);
 }

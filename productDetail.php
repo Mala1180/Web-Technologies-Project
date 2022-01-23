@@ -53,7 +53,7 @@
                 </ol>
             </section>
             
-            <input type="button" value="Aggiungi al carrello" />
+            <input id="addToCart" type="button" value="Aggiungi al carrello" />
         </main>
         <script src="./public/js/page-header.js"></script>
     </body>

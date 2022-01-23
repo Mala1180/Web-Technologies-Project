@@ -28,5 +28,6 @@
             </footer>
         </aside>
         <script src="./public/js/page-header.js"></script>
+        <script src=".public/js/libraries/sweetalert2.min.js"></script>
     </body>
 </html>

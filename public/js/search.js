@@ -143,10 +143,12 @@ function addToCart(idProduct) {
         reqHelper.post("cart", "addEntry", {
             idProduct: idProduct
         },
-        function (data) {
-            if (data.success) {
-                console.log(data)
-            }
-        });
+            function (data) {
+                if (data.success) {
+                    Swal.fire("", "prodotto aggiunto al carrello", "success");
+                } else {
+                    Swal.fire("", "Verifica la disponibilità del prodotto", "error");
+                }
+            });
     }
 }
