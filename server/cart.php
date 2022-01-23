@@ -2,6 +2,7 @@
 require_once('utils.php');
 require_once("db/dbconnector.php");
 require_once("db/dbCartManager.php");
+require_once("db/dbUserManager.php");
 require_once("../vendor/autoload.php");
 require_once('validate.php');
 require_once('mail.php');
@@ -31,7 +32,11 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
             checkParams($_POST, array("idCartEntry", "quantity"));
             send_success($dbCartMgr->editProductQuantity($_POST["idCartEntry"], $_POST["quantity"]));
             break;
-
+		case "addEntry":
+				checkParams($_POST, array("idProduct", "quantity"));
+				$idCustomer = $dbUserMgr->getUserInfoForToken(get_token_data()->username, "cliente")[0]["idCustomer"];
+				send_success($dbCartMgr->addToCart($_POST["idProduct"], $_POST["quantity"], $idCustomer));
+				break;
         case "removeentry":
             checkParams($_POST, array("idCartEntry"));
             send_success($dbCartMgr->removeCartEntry($_POST["idCartEntry"]));
