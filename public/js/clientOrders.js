@@ -30,12 +30,13 @@ function displayOrders(orders) {
         $("main > .orders-list").empty();
         for (let i = 0; i < orders.length; i++) {
             const order = orders[i];
+            const summary = order.order[0];
             const $order = $(`
-            <li id="${order.id}">
+            <li id="${summary.id}">
                 <section class="order-header">
                     <div>
-                        <h2 class="date">Ordine del ${order.orderDate}</h2>
-                        <span class="total">Totale: € 30</span>
+                        <h2 class="date">Ordine del ${summary.orderDate}</h2>
+                        <span class="total"></span>
                     </div>
                     <button>Dettagli</button>
                 </section>
@@ -53,25 +54,54 @@ function displayOrders(orders) {
                 </section>
                 <section class="order-details">
                     <ul>
-                        <li>
-                            <img src="./public/img/products/TheEminemShow.png" alt="immagine dell'album">
-                            <div>
-                                <h3>The Eminem Show</h3>
-                                <span>Prezzo: € 30</span>
-                                <span>Quantità: 2</span>
-                                <span>Totale: € 60</span>
-                            </div>
-                        </li>
                     </ul>
                 </section>
             </li>
             `);
             $("main > .orders-list").append($order);
             // solve accessibility problem
-            $order.find("." + order.state).siblings().attr("aria-hidden", "true");
+            $order.find("." + summary.state).siblings().attr("aria-hidden", "true");
+            if (summary.state === 1) {
+                $order.find(".order-storyline")
+                     .children()
+                     .eq(3).prevAll()
+                     .css("background", "#3a71ea")
+                     .css("border-color", "#3a71ea");
+            }
+            if (summary.state === 2) {
+                $order.find(".order-storyline").children().css("background", "#3a71ea")
+                                                          .css("border-color", "#3a71ea");
+            }
             $order.find("button").click(function () {
                 $order.find(".order-details").slideToggle("fast");
             });
+
+            const products = order.products[0];
+            let orderTotal = 0;
+            for (const product of products) {
+                let productTotal = product.subprice * product.quantity;
+                const $product = $(`
+                <li id="${product.idProduct}">
+                    <img src="./public/img/products/${product.imgPath}" alt="immagine dell'album">
+                    <div>
+                        <h3>${product.name}</h3>
+                        <span>Prezzo: € ${product.subprice}</span>
+                        <span>Quantità: ${product.quantity}</span>
+                        <span>Totale: € ${productTotal}</span>
+                    </div>
+                </li>`);
+                $(".order-details > ul").append($product);
+
+                $product.find("img").click(function () {
+                    location.href = `./productDetail.php?id=${product.idProduct}`;
+                });
+                $product.find("h3").click(function () {
+                    location.href = `./productDetail.php?id=${product.idProduct}`;
+                });
+                orderTotal += productTotal;
+            }
+            $order.find(".total").text(`Totale: € ${orderTotal}`);
+
         }
     }
 }
