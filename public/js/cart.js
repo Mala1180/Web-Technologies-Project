@@ -12,7 +12,7 @@ function populateCart() {
                     <p>${e.type == 0 ? "CD" : "Vinile"} di ${e.artName} - ${e.quantity} pezzi</p>
                     <footer>
                         <form id="form_${e.idCartEntry}"method="POST" action="#">
-                            <label for="quantity">Quantità</label><input id="quantity_${e.idCartEntry}" type="number" min="1" max="99" name="quantity" value="${e.quantity}"/> <input id="saveQuantity_${e.idCartEntry}" type="submit" value="Salva"/>
+                            <label for="quantity">Quantità</label><input id="quantity_${e.idCartEntry}" type="number" min="1" name="quantity" value="${e.quantity}"/> <input id="saveQuantity_${e.idCartEntry}" type="submit" value="Salva"/>
                         </form>
                         <button id="editQuantity_${e.idCartEntry}">Modifica quantità</button> <button id="remove_${e.idCartEntry}">Rimuovi</button>
                     </footer>

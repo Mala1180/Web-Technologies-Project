@@ -38,8 +38,8 @@
                 </fieldset>
                 <fieldset>
                     <legend>Brani</legend>
-                    <ul></ul>
                     <input type="button" id="addSong" value="Aggiungi brano" />
+                    <ul></ul>
                 </fieldset>
                 <fieldset>
                     <legend>Opzioni di vendita</legend>

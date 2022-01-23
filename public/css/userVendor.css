@@ -7,7 +7,7 @@ section form {
 }
 
 section form li {
-    margin-bottom: 15px;
+    margin-bottom: 5px;
 }
 
 section form input[type="submit"] {
@@ -26,7 +26,8 @@ section form ul {
 }
 
 section form ul input:not([type="checkbox"]),
-section form ul textarea {
+section form ul textarea,
+section form ul select {
     width: 100%;
     margin: 0 2%;
 }
@@ -45,8 +46,8 @@ section form ul label:not(.visible) {
 
 main > section > form > fieldset {
     border: none;
-    padding: 20px 0;
-    margin-bottom: 20px;
+    padding: 20px 0 0;
+    margin-bottom: 15px;
 }
 
 main > section > form > fieldset:nth-child(2) li input {
@@ -60,4 +61,24 @@ main > section > form > fieldset:nth-child(3) input:not([type="checkbox"]) {
 
 main > section > form > fieldset:nth-child(3) li:nth-child(even) {
     display: none;
+}
+
+form input,
+form textarea,
+form select {
+    border-radius: 5px;
+    padding: 8px 10px;
+    font-family: "lato-regular";
+    border: 1px solid grey;
+    font-size: clamp(15px, 1.5vw, 20px);
+}
+
+@media screen and (min-width: 768px) {
+    section {
+        margin: 0 20%;
+    }
+
+    section > form {
+        margin: 0 20%;
+    }
 }
