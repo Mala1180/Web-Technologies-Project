@@ -53,7 +53,9 @@ $(document).ready(function () {
                     </div>
                     <div>
                         <button>Leggi</button>
-                        <img class="trash-icon" src="./public/img/icons/bin.png" alt="trash bin icon" tabindex="0">
+                        <button class="trash-button">
+                            <img src="./public/img/icons/bin.png" alt="cestino elimina notifica">
+                        </button>
                     </div>
                 </div>
                 <p class="message">${notification.message}</p>
@@ -82,7 +84,7 @@ $(document).ready(function () {
             });
 
             // add listener to the icon to delete the notification
-            $notification.find(".trash-icon").click(function (event) {
+            $notification.find(".trash-button").click(function (event) {
                 if (!$(".confirm-modal").hasClass("hidden")) {
                     $(".confirm-modal").addClass("hidden");
                     return;
