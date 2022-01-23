@@ -67,9 +67,9 @@ function getTotalFromOrder(products){
                 const $orderDetail = $(`<li>
                                         <div>
                                         <h3>NomeProdotto</h3>
-                                        <span>Prezzo: € ${order.products[0][i].price}</span>
-                                        <span>Quantità: ${order.products[0][i].quantity}</span>
-                                        <span>Totale: € ${order.products[0][i].subprice}</span>
+                                        <span>Prezzo: € ${order.products[0][j].price}</span>
+                                        <span>Quantità: ${order.products[0][j].quantity}</span>
+                                        <span>Totale: € ${order.products[0][j].subprice}</span>
                                     </div>
                                 </li>`);
                 $orderDetails.append($orderDetail);
@@ -77,7 +77,6 @@ function getTotalFromOrder(products){
 
             console.log($orderDetails.children());
 
-            
             const $order = $(`
             <li>
                     <section class="order-header">
