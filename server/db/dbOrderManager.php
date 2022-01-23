@@ -14,7 +14,7 @@ class DBOrderMgr {
 
  	public function addOrder($orderDate, $idCustomer) {
 		$query = "INSERT INTO `customerOrder` (`state`, `orderDate`, `idCustomer`) VALUES (?, ?, ?)";
-		execute_query($this->db, $query, array("effettuato", $orderDate,  $idCustomer));
+		execute_query($this->db, $query, array(0, $orderDate,  $idCustomer));
 		return $this->db->insert_id;
  	}
 

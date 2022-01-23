@@ -42,12 +42,17 @@ $(document).ready(function () {
     });
 }
 
-function getTotalFromOrder(products){
+function getTotalFromOrder(products) {
     let total = 0;
     products.forEach(product => {
         total += product.subprice;
     });
     return total;
+}
+
+//from Y-m-d to d-m-Y
+function toITString(date) {
+    return date.split("-")[2] + "-" + date.split("-")[1] + "-" + date.split("-")[0];
 }
 
 
@@ -62,76 +67,86 @@ function getTotalFromOrder(products){
         $("main > .orders-list").empty();
         for (let i = 0; i < orders.length; i++) {
             const order = orders[i];
-            const $orderDetails = $('<ul/>');
-            for (let j = 0; j < order.products[0].length; j++) {
-                const $orderDetail = $(`<li>
-                                        <div>
-                                        <h3>NomeProdotto</h3>
-                                        <span>Prezzo: € ${order.products[0][j].price}</span>
-                                        <span>Quantità: ${order.products[0][j].quantity}</span>
-                                        <span>Totale: € ${order.products[0][j].subprice}</span>
-                                    </div>
-                                </li>`);
-                $orderDetails.append($orderDetail);
-            }
-
-            console.log($orderDetails.children());
-
             const $order = $(`
             <li>
                     <section class="order-header">
                         <div>
-                            <h2 class="date">Ordine del ${order.orderDate}</h2>
-                            <span class="total">Totale: € ${getTotalFromOrder(order.products)}</span>
+                            <h2 class="date">Ordine del ${toITString(order["order"][0]["orderDate"])}</h2>
+                            <span class="total">Totale: € ${getTotalFromOrder(order.products[0])}</span>
+                            <span class="total">Stato: ${getStringState(order["order"][0]["state"])}</span>
                         </div>
                     </section>
                     <section>
-                        <button id="btnChangeState" value="${order.idOrder}"></button>
-                        <button id="btnChangeDate" value="${order.idOrder}"></button>
+                        <button id="btnChangeState" value="${order["order"][0]["idOrder"]}"></button>
                     </section>
                     <section class="order-details">
                         <h2>Linee d'ordine</h2>
-                        ${$orderDetails}
+                        <ul class="order-details-list">
+                            
+                        </ul>
                     </section>
                 </li>`);
-            
-             $("main > .notifications-list").append($order);
 
+            $("main > .orders-list").append($order);
+
+            for (let j = 0; j < order.products[0].length; j++) {
+                const $orderDetail = $(`<li>
+                                        <div>
+                                        <h3>NomeProdotto</h3>
+                                        <span>Prezzo: € ${Math.round(order.products[0][j].subprice / order.products[0][j].quantity * 100) / 100}</span>
+                                        <span>Quantità: ${order.products[0][j].quantity}</span>
+                                        <span>Totale: € ${order.products[0][j].subprice}</span>
+                                    </div>
+                                </li>`);
+                $(".order-details-list").append($orderDetail);
+            }
+
+            switch (order["order"][0]["state"]) {
+                case 0: 
+                $order.find("#btnChangeState").html("Spedisci");
+                $order.find("#btnChangeState").click(function() {acceptOrder($order.find("#btnChangeState").val())});
+                break;
+                case 1: 
+                $order.find("#btnChangeState").html("Consegna");
+                $order.find("#btnChangeState").click(function() {deliverOrder($order.find("#btnChangeState").val())});
+                break;
+                case 2: 
+                $order.find("#btnChangeState").remove();
+                break;
+            }
 
         }
     }
 }
 
-            // // hide the dot if notification is read
-            // $notification.find(".dot").css("visibility", notification.isRead === 1 ? "hidden" : "");
 
-            // // add listener to the button to open the notification
-            // $notification.find("button").click(function () {
-            //     $notification.find(".message").slideToggle("fast");
-            //     $(this).text($(this).text() === "Leggi" ? "Chiudi" : "Leggi");
-            //     // notification is not read, update it on db
-            //     if (notification.isRead === 0) {
-            //         $notification.find(".dot").css("visibility", "hidden");
-            //         reqHelper.post("notification", "readnotification", {
-            //             notificationId: notification.id
-            //         }, function (res) {
-            //             if (!res.success) {
-            //                 console.error("An error occurred while marking notification as read.");
-            //             }
-            //         });
-            //     }
-            // });
+function getStringState(state) {
+    switch(state){
+        case 0:
+        return "Effettuato";
+        break;
+        case 1:
+        return "In consegna";
+        break;
+        case 2:
+        return "Consegnato";
+        break;
+    }
+}
+//se stato === 0 effettuato
+//se stato === 1 accettato / in transito
+//se stato === 2 consegnato
 
-            // // add listener to the icon to delete the notification
-            // $notification.find(".trash-icon").click(function (event) {
-            //     if (!$(".confirm-modal").hasClass("hidden")) {
-            //         $(".confirm-modal").addClass("hidden");
-            //         return;
-            //     }
-            //     event.stopPropagation();
-            //     $(".confirm-modal").removeClass("hidden");
-            //     $(".confirm-modal #yes").val(notification.id);
-            // });
+function acceptOrder(value){
+    changeOrderState(value, 1);
+    changeOrderDate(value, "spedito");
+}
+
+function deliverOrder(value) {
+    changeOrderState(value, 2);
+    changeOrderDate(value, "consegnato");
+    getOrders();
+}
 
 /**
  * Executes a POST request to server for accept or decline an order.
@@ -146,7 +161,7 @@ function getTotalFromOrder(products){
         }, function (res) {
         if (res.success) {
             //change graphic to accettato
-            //$("#" + notificationId).remove();
+            getOrders();
         } else {
             console.error("An error occurred while changing order state.");
         }
