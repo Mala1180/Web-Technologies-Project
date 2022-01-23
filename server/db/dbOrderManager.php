@@ -23,6 +23,11 @@ class DBOrderMgr {
 		return execute_query($this->db, $query);
  	}
 	
+	public function getCustomerOrders($idCustomer) {
+		$query = "SELECT idOrder AS id, state, orderDate, shippingDate, deliveryDate FROM `customerOrder` WHERE idCustomer = ?";
+		return execute_query($this->db, $query, array($idCustomer));
+ 	}
+	
 	public function addOrderDetail($idProduct, $idOrder, $quantity, $subprice) {
 		$query = "INSERT INTO `orderDetail` (`idProduct`, `idOrder`, `quantity`, `subprice`) VALUES (?, ?, ?, ?)";
 		return execute_query($this->db, $query, array($idProduct, $idOrder, $quantity, $subprice));

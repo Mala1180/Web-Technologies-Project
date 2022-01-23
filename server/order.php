@@ -87,6 +87,11 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
             $data = $dbOrderMgr->getOrders();
             send_data($data);
             break;
+        case "getCustomerOrders":
+            $idCustomer = $dbUserMgr->getUserInfoForToken(get_token_data()->username, "cliente")[0]["idCustomer"];
+            $data = $dbOrderMgr->getCustomerOrders($idCustomer);
+            send_data($data);
+            break;
 		default:
 			send_error("Unknown action");
 			break;

@@ -91,22 +91,23 @@ main > ul > li > section.order-steps {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin-bottom: 15px;
 }
 
-main > ul > li > section.order-steps *{
+main > ul > li > section.order-steps * {
     flex: 0 0 33.333333%;
     text-align: center;
 }
 
 main > ul > li > section.order-details {
-    display: block;
+    display: none;
 }
 
 main > ul > li > section.order-details ul > li {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 10px 0;
+    margin-bottom: 10px;
 }
 
 main > ul > li > section.order-details img {
@@ -123,7 +124,38 @@ main > ul > li > section.order-details div {
     justify-content: space-between;
 }
 
+/* Product name */
 main > ul > li > section.order-details ul > li h3 {
     flex-basis: 100%;
     margin-bottom: 5px;
+    font-size: clamp(1.1em, 1.75vw, 1.8em);
+}
+
+/* product info (quantity, price...) */
+main > ul > li > section.order-details ul > li span {
+    font-size: clamp(1em, 1.4vw, 1.3em);
+}
+
+@media screen and (min-width: 768px) {
+    
+    main > ul > li {
+        padding: 2% 5%;
+    }
+
+    /* last section, storyline steps */
+    main > ul > li > section.order-storyline,
+    main > ul > li > section.order-steps {
+        max-width: 70%;
+        margin-left: 15%;
+    }
+
+    main > ul > li > section.order-details img {
+        flex-basis: 10vw;
+        height: 10vw;
+    }
+
+    main > ul > li > section.order-details ul > li h3 {
+        flex-basis: 50%;
+    }
+    
 }
