@@ -46,7 +46,7 @@ main > ul > li > div > div > div {
 main > ul > li span.dot {
     height: 15px;
     width: 15px;
-    background-color: #3A71EA;
+    background-color: #3a71ea;
     border-radius: 50%;
     display: inline-block;
     margin-right: 5px;
@@ -55,9 +55,9 @@ main > ul > li span.dot {
 main > ul > li .subject {
     font-size: clamp(1.3em, 1.75vw, 2em);
     width: 90%;
-    white-space: nowrap; 
+    white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis; 
+    text-overflow: ellipsis;
 }
 
 main > ul > li .date {
@@ -77,7 +77,7 @@ main > ul > li button {
     padding: 5px 1em;
     font-size: clamp(1em, 1.25vw, 1.5em);
     border: none;
-    background-color: #3A71EA;
+    background-color: #3a71ea;
     color: #fff;
     border-radius: 5px;
     margin-right: 10px;
@@ -90,8 +90,6 @@ main > ul > li .trash-icon {
     float: right;
     cursor: pointer;
 }
-
-
 
 /**
  * Confirm modal by mala
@@ -109,8 +107,9 @@ div.confirm-modal {
 }
 
 div.confirm-modal.hidden {
+    display: none;
     top: 20vh;
-    opacity: 0;    
+    opacity: 0;
 }
 
 div.confirm-modal h2 {
@@ -140,10 +139,9 @@ div.confirm-modal button#yes:hover {
     background-color: #c52722;
 }
 
-div.confirm-modal button#no{
-    background-color: #6FA629;
+div.confirm-modal button#no {
+    background-color: #6fa629;
 }
-
 
 @media screen and (min-width: 576px) {
     div.confirm-modal {
