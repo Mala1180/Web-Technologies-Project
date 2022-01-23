@@ -36,34 +36,14 @@ function addCardToUser(cardHolder, cardNumber, circuit, expiryDate, cvv, isDefau
     });
 }
 
-// function componeOrder() {
 
-
-
-// }
 function addOrder(){
     reqHelper.post("order", "addOrder", {
         "cardNumber" : selectCard.value
-        //"orderDate": new Date().toISOString().split("T")[0]
     }, function (data) {
         console.log(data);
-        //getMyCards();
     });
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 function getMyCards() {

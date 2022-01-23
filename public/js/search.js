@@ -133,3 +133,26 @@ function togglePreview(bottom, titleWidth) {
         $closePreview.fadeOut(50);
     }
 }
+
+
+function readProduct() {
+    let product;
+
+    //legge prodotto dal bottone, accordo con malachia
+    addToCart(products[0].idProduct, 5);
+}
+
+//function that populate the cart client side
+function addToCart(idProduct, quantity) {
+    if(quantity > 0 && idProduct > 0){
+        reqHelper.post("cart", "addEntry", {
+            idProduct: idProduct,
+            quantity: quantity
+        },
+        function (data) {
+            if (data.success) {
+                console.log(data)
+            }
+        });
+    }
+}
