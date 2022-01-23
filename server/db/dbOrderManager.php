@@ -24,7 +24,7 @@ class DBOrderMgr {
  	}
 	
 	public function getCustomerOrders($idCustomer) {
-		$query = "SELECT idOrder AS id, state, orderDate, shippingDate, deliveryDate FROM `customerOrder` WHERE idCustomer = ?";
+		$query = "SELECT idOrder, state, orderDate, shippingDate, deliveryDate FROM `customerOrder` WHERE idCustomer = ?";
 		return execute_query($this->db, $query, array($idCustomer));
  	}
 	
@@ -34,7 +34,11 @@ class DBOrderMgr {
  	}
 
 	public function getOrderDetails($idOrder) {
-		$query = "SELECT idProduct, quantity, subprice FROM orderDetail WHERE idOrder=?";
+		$query = "SELECT orderDetail.idProduct AS idProduct, orderDetail.quantity AS quantity, subprice, type, name, imgPath
+				  FROM orderDetail
+				  INNER JOIN product ON orderDetail.idProduct = product.idProduct
+				  INNER JOIN album ON product.idAlbum = album.idAlbum
+				  WHERE idOrder = ?";
 		return execute_query($this->db, $query, array($idOrder));
  	}
 

@@ -65,6 +65,7 @@ main > ul > li > section.order-storyline {
 /* first dot */
 main > ul > li > section.order-storyline span.dot:first-child {
     margin-left: 16.666666%;
+    background-color: #3a71ea;
 }
 
 /* last dot */
@@ -114,6 +115,7 @@ main > ul > li > section.order-details img {
     flex-basis: 15vw;
     height: 15vw;
     border-radius: 5px;
+    cursor: pointer;
 }
 
 main > ul > li > section.order-details div {
@@ -129,6 +131,8 @@ main > ul > li > section.order-details ul > li h3 {
     flex-basis: 100%;
     margin-bottom: 5px;
     font-size: clamp(1.1em, 1.75vw, 1.8em);
+    cursor: pointer;
+    font-family: lato-regular;
 }
 
 /* product info (quantity, price...) */
