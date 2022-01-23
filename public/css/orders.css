@@ -1,0 +1,129 @@
+main {
+    padding: 10px;
+}
+
+main h1 {
+    font-family: lato-regular;
+    text-align: center;
+    margin: 10px 0 20px 0;
+    letter-spacing: 0.1em;
+    font-size: clamp(2em, 2.5vw, 3em);
+}
+
+main ul {
+    list-style: none;
+    padding: 0;
+}
+
+main > ul > li {
+    width: 100%;
+    margin: 0;
+    padding: 5px;
+    border-top: 1px solid #ccc;
+}
+
+main > ul > li:last-child {
+    border-bottom: 1px solid #ccc;
+}
+
+/* first section, order date and total */
+main > ul > li > section.order-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 5px 0 20px;
+}
+
+main > ul > li > section.order-header button {
+    padding: 5px 1em;
+    font-size: clamp(1em, 1.25vw, 1.5em);
+    border: none;
+    background-color: #3a71ea;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    max-height: 30px;
+}
+
+main > ul > li .date {
+    font-size: clamp(1.3em, 1.75vw, 2em);
+}
+
+main > ul > li .total {
+    display: block;
+    margin-top: 5px;
+    font-size: clamp(1em, 1.4vw, 1.3em);
+}
+
+/* second section, lines and dots storyline */
+main > ul > li > section.order-storyline {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+/* first dot */
+main > ul > li > section.order-storyline span.dot:first-child {
+    margin-left: 16.666666%;
+}
+
+/* last dot */
+main > ul > li > section.order-storyline span.dot:last-child {
+    margin-right: 16.666666%;
+}
+
+main > ul > li span.dot {
+    height: 15px;
+    min-width: 15px;
+    background-color: #ccc;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+main > ul > li span.line {
+    flex-grow: 1;
+    border-top: 1px solid #ccc;
+    margin: 0 5px;
+}
+
+/* last section, storyline steps */
+main > ul > li > section.order-steps {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+main > ul > li > section.order-steps *{
+    flex: 0 0 33.333333%;
+    text-align: center;
+}
+
+main > ul > li > section.order-details {
+    display: block;
+}
+
+main > ul > li > section.order-details ul > li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0;
+}
+
+main > ul > li > section.order-details img {
+    flex-basis: 15vw;
+    height: 15vw;
+    border-radius: 5px;
+}
+
+main > ul > li > section.order-details div {
+    flex-grow: 1;
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+main > ul > li > section.order-details ul > li h3 {
+    flex-basis: 100%;
+    margin-bottom: 5px;
+}

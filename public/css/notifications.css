@@ -85,6 +85,9 @@ main > ul > li button {
 }
 
 main > ul > li .trash-button {
+    padding: 0;
+    border: 0;
+    background: none;
     height: 30px;
     width: 30px;
     float: right;
