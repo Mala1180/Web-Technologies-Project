@@ -7,6 +7,7 @@ require_once("db/dbNotificationManager.php");
 require_once("db/dbTransactionManager.php");
 require_once("db/dbCartManager.php");
 require_once("db/dbCardManager.php");
+require_once("db/dbProductManager.php");
 require_once("../vendor/autoload.php");
 require_once('validate.php');
 require_once('mail.php');
@@ -33,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
             $idCustomer = $dbUserMgr->getUserInfoForToken(get_token_data()->username, "cliente")[0]["idCustomer"];
             $idOrder = $dbOrderMgr->addOrder(date("Y-m-d"), $idCustomer);
             if($idOrder > 0) {
-                $dbNotificationMgr->sendNotification($idCustomer, "Ordine effettuato!", "La ringraziamo per aver utilizzato UniboVinyl");
+                $dbNotificationMgr->sendNotification($idCustomer, "Ordine effettuato", "La ringraziamo per aver utilizzato UniboVinyl");
                 $cartElements = $dbCartMgr->getCart($idCustomer);
                 foreach($cartElements as $cartElem) {
                     $dbCartMgr->removeCartEntry($cartElem["idCartEntry"]);
@@ -52,9 +53,38 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
                 send_data(false);
             }
             break;
+        case "changeState":
+            //check if is one shipper get_token_data()->id or username.
+            if($_POST["state"] == "accettato" || $_POST["state"] == "declinato") {
+                $idCustomer = $dbOrderMgr->getCustomerId($_POST["idOrder"])[0]["idCustomer"];
+                if($_POST["state"] == "accettato") {
+                    $orderDetails = $dbOrderMgr->getOrderDetails($_POST["idOrder"]);
+                    foreach($orderDetails as $orderDetail){
+                        $esito = $dbProductMgr->decreaseQuantity($orderDetail["idProduct"], $orderDetail["quantity"]);
+                        if(!$esito){
+                            send_data(false);
+                        }
+                    }
+                    $dbNotificationMgr->sendNotification($idCustomer, "Ordine accettato", "Il suo ordine è andato a buon fine, le segnaleremo quando verrà spedito.");
+                } else {
+                    $dbNotificationMgr->sendNotification($idCustomer, "Ordine rifiutato", "Qualcosa è andato storto con il suo ordine, ci scusiamo per il disagio");
+                }   
+                $data = $dbOrderMgr->changeState($_POST["idOrder"], $_POST["state"]);
+            }
+            send_data($data);
+            break;
+        case "setDate":
+            //check if is one shipper get_token_data()->id or username.
+            if($_POST["type"] == "spedito" || $_POST["type"] == "consegnato") {
+                $idCustomer = $dbOrderMgr->getCustomerId($_POST["idOrder"])[0]["idCustomer"];
+                $dbNotificationMgr->sendNotification($idCustomer, "Ordine ".$_POST["type"], "La ringraziamo per aver utilizzato UniboVinyl.");
+                $data = $dbOrderMgr->setDate($_POST["idOrder"], $_POST["type"], date("Y-m-d"));
+            }
+            send_data($data);
+            break;
         case "getOrder":
-            $idCustomer = $dbUserMgr->getUserInfoForToken(get_token_data()->username, "cliente")[0]["idCustomer"];
-            $data = $dbCardMgr->addCard($idCustomer, $_POST["holder"], $_POST["cardNumber"], $_POST["circuit"], $_POST["expiryDate"], $_POST["cvv"], $_POST["isDefault"]);
+            //check if is one shipper get_token_data()->id or username.
+            $data = $dbOrderMgr->getOrders();
             send_data($data);
             break;
 		default:

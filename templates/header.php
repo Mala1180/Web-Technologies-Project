@@ -3,17 +3,17 @@
         <nav>
             <ul>
                 <li>
-                    <a href="index.php"><img src="./public/img/logoBianco.png" alt="logo"></a>
+                    <a href="index.php"><img src="./public/img/logoBianco.png" alt="logo home"></a>
                 </li>
                 <li>
-                    <a href="#" role="button">
-                        <img id="search-icon" src="./public/img/icons/search.png" alt="search icon" />
-                    </a>
+                    <button id="search-button">
+                        <img src="./public/img/icons/search.png" alt="icona che apre menu di ricerca" />
+                    </button>
                 </li>
                 <li>
-                    <a href="#" role="button">
-                        <img id="menu-icon" src="./public/img/icons/menu.png" alt="menu icon" />
-                    </a>
+                    <button id="menu-button">
+                        <img src="./public/img/icons/menu.png" alt="icona che apre menu utente" />
+                    </button>
                 </li>
             </ul>
         </nav>
@@ -37,6 +37,7 @@
                         <option value="3">Bundle</option> -->
                     </select>
                 </div>
+                <!-- <input type="submit" value="Cerca" /> -->
             </form>
         </section>
         <section id="menu-section">

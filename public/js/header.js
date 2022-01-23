@@ -2,10 +2,10 @@ $(document).ready(function () {
 
     const $searchSection = $("#search-section");
     const $menuSection = $("#menu-section");
-    const $searchIcon = $("#search-icon");
-    const $menuIcon = $("#menu-icon");
+    const $searchButton = $("#search-button");
+    const $menuButton = $("#menu-button");
 
-    $searchIcon.click(function () {
+    $searchButton.click(function () {
         if ($searchSection.css("display") === "none") {
             $searchSection.fadeIn(100).css("display", "flex");
         } else {
@@ -16,7 +16,7 @@ $(document).ready(function () {
         }
     });
 
-    $menuIcon.click(function () {
+    $menuButton.click(function () {
         if ($menuSection.css("display") === "none") {
             $menuSection.fadeIn(100).css("display", "flex");
         } else {

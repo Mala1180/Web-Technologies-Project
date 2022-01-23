@@ -19,14 +19,13 @@ use UniboVinyl;
 -- Tables Section
 -- _____________ 
 
-create table vendor (
-     idVendor int not null auto_increment,
-     name varchar(25) not null,
-     surname varchar(25) not null,
+create table shipper (
+     idShipper int not null auto_increment,
+     company varchar(25) not null,
      email varchar(50) not null,
      username varchar(16) not null,
      password varchar(150) not null,
-     constraint IDvendor primary key (idVendor));
+     constraint IDShipper primary key (idShipper));
 
 create table customer (
      idCustomer int not null auto_increment,
@@ -36,7 +35,7 @@ create table customer (
      username varchar(16) not null,
      password varchar(150) not null,
      idCard int,
-     constraint IDvendor primary key (idCustomer));
+     constraint IDCustomer primary key (idCustomer));
 
 create table creditCard (
      idCard int not null auto_increment,

@@ -1,43 +1,43 @@
 $(document).ready(function () {
-    getNotifications();
+    getOrders();
 
     // setup confirm modal
-    $(".confirm-modal h2").text("Vuoi eliminare questa notifica?");
-    $(".confirm-modal #yes").click(function () {
-        deleteNotification($(this).val());
-    });
-    $(".confirm-modal #no").click(function () {
-        $(".confirm-modal").addClass("hidden");
-    });
+    //$(".confirm-modal h2").text("Vuoi eliminare questa notifica?");
+    // $(".confirm-modal #yes").click(function () {
+    //     deleteNotification($(this).val());
+    // });
+    // $(".confirm-modal #no").click(function () {
+    //     $(".confirm-modal").addClass("hidden");
+    // });
 });
 
 
 /**
- * Executes a GET request to server for get user notifications. Then calls displayNotifications.
+ * Executes a GET request to server for get user orders. Then calls displayOrders.
  *
- * @author Mattia Matteini <matteinimattia@gmail.com>
+ * @author Alberto Paganelli <albi1600@gmail.com>
  */
- function getNotifications() {
-    reqHelper.get("notification", "getnotifications", {}, function (res) {
+ function getOrders() {
+    reqHelper.post("order", "getOrder", {}, function (res) {
         if (res.success) {
-            notifications = res.data;
-            console.log(notifications);
-            displayNotifications(notifications);
+            orders = res.data;
+            console.log(orders);
+            //displayOrders(orders);
         } else {
-            console.error("An error occurred while getting notifications.");
+            console.error("An error occurred while getting orders.");
         }
     });
 }
 
 
 /**
- * Appends notifications in the list.
+ * Appends orders in the list.
  *
- * @author Mattia Matteini <matteinimattia@gmail.com>
- * @param {Array} notifications array of notifications to be displayed
+ * @author Alberto Paganelli <albi1600@gmail.com>
+ * @param {Array} orders array of orders to be displayed
  */
- function displayNotifications(notifications) {
-    if (notifications) {
+ function displayOrders(orders) {
+    if (orders) {
         $("main > .notifications-list").empty();
         for (let i = 0; i < notifications.length; i++) {
             const notification = notifications[i];
@@ -53,9 +53,7 @@ $(document).ready(function () {
                     </div>
                     <div>
                         <button>Leggi</button>
-                        <button class="trash-button">
-                            <img src="./public/img/icons/bin.png" alt="cestino elimina notifica">
-                        </button>
+                        <img class="trash-icon" src="./public/img/icons/bin.png" alt="trash bin icon" tabindex="0">
                     </div>
                 </div>
                 <p class="message">${notification.message}</p>
@@ -84,7 +82,7 @@ $(document).ready(function () {
             });
 
             // add listener to the icon to delete the notification
-            $notification.find(".trash-button").click(function (event) {
+            $notification.find(".trash-icon").click(function (event) {
                 if (!$(".confirm-modal").hasClass("hidden")) {
                     $(".confirm-modal").addClass("hidden");
                     return;
@@ -98,20 +96,42 @@ $(document).ready(function () {
 }
 
 /**
- * Executes a POST request to server for delete a notification and remove the item from list.
+ * Executes a POST request to server for accept or decline an order.
  *
- * @author Mattia Matteini <matteinimattia@gmail.com>
- * @param {Number} notificationId id of the notification to be deleted
+ * @author Alberto Paganelli <albi1600@gmail.com>
+ * @param {Number} idOrder id of the order to be accepted or declined
  */
-function deleteNotification(notificationId) {
-    reqHelper.post("notification", "deletenotification", {
-        notificationId: notificationId
-    }, function (res) {
+ function changeOrderState(idOrder, state) {
+    reqHelper.post("order", "changeState", {
+        idOrder: idOrder,
+        state: state
+        }, function (res) {
         if (res.success) {
-            $("#" + notificationId).remove();
+            //change graphic to accettato
+            //$("#" + notificationId).remove();
         } else {
-            console.error("An error occurred while deleting notification.");
+            console.error("An error occurred while changing order state.");
         }
     });
-    $(".confirm-modal").addClass("hidden");
+}
+
+
+/**
+ * Executes a POST request to server for changing order date.
+ *
+ * @author Alberto Paganelli <albi1600@gmail.com>
+ * @param {Number} orderId id of the order
+ */
+//spedito o consegnato // da cambiare in numeri.
+ function changeOrderDate(idOrder, type) {
+    reqHelper.post("order", "setDate", {
+        idOrder: idOrder,
+        type: type
+    }, function (res) {
+        if (res.success) {
+            //change graphic con data di spedizione o consegna.
+        } else {
+            console.error("An error occurred while changing order date.");
+        }
+    });
 }
