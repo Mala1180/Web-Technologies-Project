@@ -12,6 +12,7 @@ $(document).ready(function () {
         e.preventDefault();
         addOrder();
     });
+
     getMyCards();
 });
 
@@ -35,7 +36,6 @@ function addCardToUser(cardHolder, cardNumber, circuit, expiryDate, cvv, isDefau
     });
 }
 
-
 function addOrder() {
     reqHelper.post("order", "addOrder", {
         "cardNumber": selectCard.value
@@ -43,7 +43,6 @@ function addOrder() {
         Swal.fire("", "Ordine effettuato correttamente", "success");
     });
 }
-
 
 function getMyCards() {
     reqHelper.post("card", "getCard", {},
