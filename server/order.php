@@ -55,7 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
                 $idCard = $dbCardMgr->getCardId($idCustomer, $_POST["cardNumber"])[0]["idCard"];
                 if($idCard > 0){
                     $dbTransactionMgr->addTransaction($idOrder, date("Y-m-d"), $idCard);
-                    send_data($data);
+                    send_success($data);
                 }
                 send_success(false);
             } else {
