@@ -3,12 +3,6 @@ require_once("db/dbconnector.php");
 require_once('../vendor/autoload.php');
 require_once('mail.php');
 
-// require '../vendor/phpmailer/phpmailer/src/Exception.php';
-// require '../vendor/phpmailer/phpmailer/src/PHPMailer.php';
-// require '../vendor/phpmailer/phpmailer/src/SMTP.php';
-// use PHPMailer\PHPMailer\PHPMailer;
-// use PHPMailer\PHPMailer\Exception;
-
 class DBUserMgr {
 	private $db;
  	

@@ -7,7 +7,6 @@ $(document).ready(function () {
         e.preventDefault();
         readCardData();
     });
-
     $("#btnProceed").click((e) => {
         e.preventDefault();
         addOrder();
@@ -36,7 +35,6 @@ function addCardToUser(cardHolder, cardNumber, circuit, expiryDate, cvv, isDefau
     });
 }
 
-
 function addOrder() {
     reqHelper.post("order", "addOrder", {
         "cardNumber": selectCard.value
@@ -50,7 +48,6 @@ function addOrder() {
         }
     });
 }
-
 
 function getMyCards() {
     reqHelper.post("card", "getCard", {},

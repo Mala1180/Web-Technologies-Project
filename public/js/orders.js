@@ -1,8 +1,6 @@
 $(document).ready(function () {
     getOrders();
-
 });
-
 
 /**
  * Executes a POST request to server for get user orders. Then calls displayOrders.
@@ -12,9 +10,7 @@ $(document).ready(function () {
  function getOrders() {
     reqHelper.post("order", "getOrder", {}, function (res) {
         if (res.success) {
-            orders = res.data;
-            console.log(res.data);
-            displayOrders(orders);
+            displayOrders(res.data);
         } else {
             console.error("An error occurred while getting orders.");
         }
@@ -85,15 +81,6 @@ $(document).ready(function () {
     }
 }
 
-
-function getStringState(state) {
-    switch(state){
-        case 0: return "Effettuato";
-        case 1: return "In consegna";
-        case 2: return "Consegnato";
-    }
-}
-
 /**
  * Executes a POST request to server for accept or decline an order.
  *
@@ -116,16 +103,26 @@ function getStringState(state) {
 }
 
 /** Utilities */
-
 function getTotalFromOrder(products) {
     let total = 0;
     products.forEach(product => {
         total += product.subprice;
     });
-    return total;
+    return Math.round(total * 100) / 100;
 }
 
 //from Y-m-d to d-m-Y
-function toITString(date) {
+function toITString(date) {
     return date.split("-")[2] + "-" + date.split("-")[1] + "-" + date.split("-")[0];
+}
+
+function getStringState(state) {
+    switch(state){
+        case 0:
+        return "Effettuato";
+        case 1:
+        return "In consegna";
+        case 2:
+        return "Consegnato";
+    }
 }
