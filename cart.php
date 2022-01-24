@@ -4,17 +4,19 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Unibo Vinyl - Cart</title>
+        <title>Unibo Vinyl - Carrello</title>
         <?php require_once("templates/head-section.php") ?>
-        <!--<link rel="stylesheet" href="./public/css/register.css" />-->
+
         <link rel="stylesheet" href="./public/css/header.css" />
-        <link rel="stylesheet" href="public/css/cart.css"> 
+        <link rel="stylesheet" href="public/css/cart.css" /> 
     </head>
     <body>
-        <?php //require("./templates/header.php"); ?>
+        <?php require("./templates/header.php"); ?>
         <main>
             <h1>Il tuo carrello</h1>
-            <div></div>
+            <ul>
+                
+            </ul>
             <p>Nessun articolo aggiunto al carrello</p>
             <footer>
                 <a href="checkout.php">Procedi all'ordine</a>
