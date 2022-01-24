@@ -47,9 +47,7 @@
                             <input type="checkbox" id="isDefault" name="isDefault"/>
                         </li>
                     </ul>
-                    <div>
-                        <input type="button" id="btnAddCard" value="Aggiungi carta">
-                    </div>
+                    <input type="button" id="btnAddCard" value="Aggiungi carta">    
                 </form>
             </section>
             <section>

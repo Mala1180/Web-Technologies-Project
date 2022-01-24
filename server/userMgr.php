@@ -21,9 +21,22 @@ use Firebase\JWT\JWT;
         }
     } else if ($_SERVER["REQUEST_METHOD"] == "POST") {
         switch ($_POST["action"]) {
-            case "requireUserInfo":
-                $data = get_token_data();
-                send_success($dbUserMgr->getUserInfo($data->username));
+            // case "requireUserInfo":
+            //     $data = get_token_data();
+            //     send_success($dbUserMgr->getUserInfo($data->username));
+            //     break;
+            case "getUserInfo":
+                $data = $dbUserMgr->getUserInfo(get_token_data()->userId, get_token_data()->type);
+                send_data($data);
+                break;
+            case "updateUserInfo":
+                $data = $dbUserMgr->updateUserInfo(get_token_data()->userId,
+                                                   get_token_data()->type,
+                                                   $_POST["name"],
+                                                   $_POST["surname"],
+                                                   $_POST["username"],
+                                                   $_POST["email"]);
+                send_data($data);
                 break;
             default:
                 break;
