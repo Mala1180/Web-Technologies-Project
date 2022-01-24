@@ -13,7 +13,10 @@ class DBCardMgr {
  	}
 
     public function getCard($idCustomer) {
-        $query = "SELECT cardNumber FROM creditCard WHERE idCustomer=?";
+        $query = "SELECT idCard AS id, cardNumber AS number, holder, circuit, expiryDate
+				  FROM creditCard
+				  WHERE idCustomer = ?
+				  AND isDeleted = 0";
 		return execute_query($this->db, $query, array($idCustomer));
     }
 
@@ -23,10 +26,11 @@ class DBCardMgr {
     }
 
 	public function addCard($idCustomer, $holder, $cardNumber, $circuit, $expiryDate, $cvv, $isDefault) {
-		$query = "INSERT INTO `creditCard` (`holder`, `cardNumber`, `circuit`, `expiryDate`, `cvv`, `isDeleted`, `idCustomer`) VALUES (?, ?, ?, ?, ?, ?, ?)";
+		$query = "INSERT INTO `creditCard` (`holder`, `cardNumber`, `circuit`, `expiryDate`, `cvv`, `isDeleted`, `idCustomer`)
+				  VALUES (?, ?, ?, ?, ?, ?, ?)";
 		$isDeleted = 0;
 		execute_query($this->db, $query, array($holder, $cardNumber, $circuit, $expiryDate, $cvv, $isDeleted, $idCustomer));
-		if($isDefault == true) {
+		if ($isDefault == true) {
 			/**
 			 * User is setting this card as default.
 			 */
@@ -39,6 +43,7 @@ class DBCardMgr {
 		/* Remove default  */
 		$query = "SELECT idCard FROM creditCard WHERE holder=? AND cardNumber=? AND circuit=? AND cvv=? AND expiryDate=? AND idCustomer=?";
 		$idCard = execute_query($this->db, $query, array($holder, $cardNumber, $circuit, $cvv, $expiryDate, $idCustomer))[0];
+		send_data(var_dump($idCard['idCard']));
 		$idCard = intval($idCard['idCard']);
 		$query = "UPDATE `customer` SET idCard=? WHERE idCustomer=?";
 		return execute_query($this->db, $query, array($idCard, $idCustomer));

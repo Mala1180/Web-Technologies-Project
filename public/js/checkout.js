@@ -48,28 +48,15 @@ function addOrder() {
 
 function getMyCards() {
     reqHelper.post("card", "getCard", {},
-        function (data) {
-            if (data.success) {
-                document.getElementById("selectCard").options.length = 0;
-                for (let i = 0; i < data.data.length; i++) {
-                    var opt = document.createElement('option');
-                    opt.value = data.data[i]["cardNumber"];
-                    opt.innerHTML = data.data[i]["cardNumber"];
-                    selectCard.appendChild(opt);
-                }
-            }
-        });
-}
-
-function getPaymentDetails() {
-    reqHelper.get("order", "paymentDetails", {},
-        function (data) {
-            if (!data.success) {
-                Swal.fire("Nulla da pagare", "Non hai inserito nessun articolo nel carrello", "error")
-                    .then((result) => {
-                        location.href = "index.php";
-                    });
-            }
-            console.log(data);
-        });
+    function(data) {
+       if (data.success) {
+        document.getElementById("selectCard").options.length = 0;
+        for (let i = 0; i < data.data.length; i++){
+            var opt = document.createElement('option');
+            opt.value = data.data[i]["number"];
+            opt.innerHTML = data.data[i]["number"];
+            selectCard.appendChild(opt);
+        }
+       }
+   });
 }

@@ -52,7 +52,7 @@ $(document).ready(function () {
                         <span class="date">${notification.date}</span>
                     </div>
                     <div>
-                        <button>Leggi</button>
+                        <button class="read-button">Leggi</button>
                         <button class="trash-button">
                             <img src="./public/img/icons/bin.png" alt="cestino elimina notifica">
                         </button>
@@ -67,7 +67,7 @@ $(document).ready(function () {
             $notification.find(".dot").css("visibility", notification.isRead === 1 ? "hidden" : "");
 
             // add listener to the button to open the notification
-            $notification.find("button").click(function () {
+            $notification.find(".read-button").click(function () {
                 $notification.find(".message").slideToggle("fast");
                 $(this).text($(this).text() === "Leggi" ? "Chiudi" : "Leggi");
                 // notification is not read, update it on db
