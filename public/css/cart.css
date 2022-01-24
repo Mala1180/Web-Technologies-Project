@@ -1,38 +1,94 @@
-.cart-item {
+main {
+    padding: 10px;
+}
+
+main h1 {
+    font-family: lato-regular;
+    text-align: center;
+    margin: 10px 0 20px 0;
+    letter-spacing: 0.1em;
+    font-size: clamp(2em, 2.5vw, 3em);
+}
+
+main h2 {
+    font-family: lato-regular;
+    margin-bottom: 5px;
+    letter-spacing: 0.05em;
+    font-size: clamp(1em, 1.7vw, 2em);
+}
+
+li.cart-item {
     display: flex;
-    margin: 0 5% 10px;
-    border-radius: 10px;
     align-items: center;
-    background-color: #bdb7b7;
-    padding: 10px 5%;
+    padding: 10px;
+    border-top: 1px solid #ccc;
 }
-.cart-item > section > header > h2 {
-    font-size: 1em;
+
+li.cart-item:last-child {
+    border-bottom: 1px solid #ccc;
 }
-.cart-item > img {
-    width: 30vw;
-    height: 30vw;
+
+li.cart-item > img {
+    width: 25vw;
+    height: 25vw;
     object-fit: cover;
     object-position: center;
     border-radius: 5px;
 }
-.cart-item > section {
-    margin: 0 0 0 2vh;
-    width: 58vh;
+
+li.cart-item > section {
+    margin-left: 3vw;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
 }
-.cart-item > section > header {
+
+li.cart-item > section > header {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    margin-bottom: 10px;
 }
 
-.cart-item > section > p {
-    margin-bottom: 5px;
-    font-size: 0.8em;
+/* price */
+li.cart-item > section > header span {
+    font-size: clamp(0.8em, 1.4vw, 1.6em);
 }
-.cart-item footer form {
+
+li.cart-item > section > p {
+    margin-bottom: 5px;
+    font-size: clamp(0.8em, 1.4vw, 1.6em);
+}
+
+li.cart-item footer {
+    display: flex;
+    justify-content: space-between;
+}
+
+li.cart-item footer form {
     display: none;
+}
+
+li.cart-item footer form input {
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+}
+
+li.cart-item footer form input[name="quantity"] {
+    width: 80px;
+}
+
+li.cart-item footer form input[type="submit"] {
+    margin-left: 10px;
+}
+
+li.cart-item footer button,
+li.cart-item footer input {
+    font-size: clamp(0.8em, 1.4vw, 1.3em);
+}
+
+li.cart-item footer button:last-of-type {
+    background-color: crimson;
 }
 
 form > label {
@@ -49,6 +105,18 @@ form input {
 
 main > footer {
     text-align: center;
+    margin-top: 40px;
+}
+
+main > footer > a {
+    border-radius: 5px;
+    background-color: #008e99;
+    border: none;
+    padding: 8px 10px;
+    color: #fff;
+    cursor: pointer;
+    font-family: "lato-regular";
+    font-size: clamp(15px, 1.5vw, 20px);
 }
 
 main > p {
@@ -58,13 +126,23 @@ main > p {
     margin: 5%;
 }
 
-@media screen and (min-width: 768px) {
-    .cart-item {
-        margin: 0 20% 10px;
+@media screen and (min-width: 576px) {
+    main {
+        padding: 30px;
     }
 
-    .cart-item > img {
-        width: 7vw;
-        height: 7vw;
+    li.cart-item > img {
+        width: 15vw;
+        height: 15vw;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    main {
+        padding: 20px 70px;
+    }
+
+    li.cart-item > section > footer {
+        margin: 20px 0;
     }
 }

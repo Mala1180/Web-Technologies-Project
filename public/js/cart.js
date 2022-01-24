@@ -1,37 +1,38 @@
 function populateCart() {
     reqHelper.get("cart", "getcart", {}, function (data) {
-        if (data.data.length) {
+        const cartEntries = data.data;
+        if (cartEntries.length) {
             $("main > p").hide();
             $("main > footer").show();
         } else {
             $("main > footer").hide();
             $("main > p").show();
         }
-        data.data.forEach(e => {
-            let cartHtml = `
-            <section class="cart-item">  
-                <img src="public/img/ordini.jpg" alt="" />
+        console.log(cartEntries);
+        cartEntries.forEach(cartEntry => {
+            let $cartHtml = $(`
+            <li class="cart-item">  
+                <img src="./public/img/products/${cartEntry.imgPath}" alt="" />
                 <section>
                     <header>
-                        <h2>${e.name}</h2>
-                        <span>€${e.price}</span>
+                        <h2>${cartEntry.name}</h2>
+                        <span>€${cartEntry.price}</span>
                     </header>
-                    <p>${e.type == 0 ? "CD" : "Vinile"} di ${e.artName} - ${e.quantity} pezzi</p>
+                    <p>${cartEntry.type == 0 ? "CD" : "Vinile"} di ${cartEntry.artName} - ${cartEntry.quantity} pezzi</p>
                     <footer>
-                        <form id="form_${e.idCartEntry}"method="POST" action="#">
-                            <label for="quantity">Quantità</label><input id="quantity_${e.idCartEntry}" type="number" min="1" name="quantity" value="${e.quantity}"/> <input id="saveQuantity_${e.idCartEntry}" type="submit" value="Salva"/>
+                        <form id="form_${cartEntry.idCartEntry}"method="POST" action="#">
+                            <label for="quantity">Quantità</label><input id="quantity_${cartEntry.idCartEntry}" type="number" min="1" name="quantity" value="${cartEntry.quantity}"/> <input id="saveQuantity_${cartEntry.idCartEntry}" type="submit" value="Salva"/>
                         </form>
-                        <button id="editQuantity_${e.idCartEntry}">Modifica quantità</button> <button id="remove_${e.idCartEntry}">Rimuovi</button>
+                        <button id="editQuantity_${cartEntry.idCartEntry}">Modifica quantità</button> <button id="remove_${cartEntry.idCartEntry}">Rimuovi</button>
                     </footer>
                 </section>
-            </section>
-            `
-            $("main > div").append(cartHtml);
-            $("#form_" + e.idCartEntry).submit(function (event) {
+            </li>`);
+            $("main > ul").append($cartHtml);
+            $("#form_" + cartEntry.idCartEntry).submit(function (event) {
                 event.preventDefault();
                 reqHelper.post("cart", "setquantity", {
-                    idCartEntry: e.idCartEntry,
-                    quantity: $("#quantity_" + e.idCartEntry).val()
+                    idCartEntry: cartEntry.idCartEntry,
+                    quantity: $("#quantity_" + cartEntry.idCartEntry).val()
                 }, function (data) {
                     if (data.success) {
                         $(".cart-item").remove();
@@ -43,7 +44,7 @@ function populateCart() {
                 });
             })
 
-            $("#remove_" + e.idCartEntry).click(function () {
+            $("#remove_" + cartEntry.idCartEntry).click(function () {
                 reqHelper.post("cart", "removeentry", {
                     idCartEntry: e.idCartEntry
                 }, function (data) {
@@ -54,8 +55,8 @@ function populateCart() {
                 });
             });
 
-            $("#editQuantity_" + e.idCartEntry).click(function () {
-                $("#form_" + e.idCartEntry).show();
+            $("#editQuantity_" + cartEntry.idCartEntry).click(function () {
+                $("#form_" + cartEntry.idCartEntry).show();
                 $(this).hide().next().hide();
             });
         });
