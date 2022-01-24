@@ -86,7 +86,7 @@ function displayOrders(orders) {
                         <h3>${product.name}</h3>
                         <span>Prezzo: € ${product.subprice}</span>
                         <span>Quantità: ${product.quantity}</span>
-                        <span>Totale: € ${product.subprice * product.quantity}</span>
+                        <span>Totale: € ${Math.round(product.subprice / product.quantity * 100) / 100}</span>
                     </div>
                 </li>`);
                 $order.find(".order-details > ul").append($product);
@@ -97,9 +97,9 @@ function displayOrders(orders) {
                 $product.find("h3").click(function () {
                     location.href = `./productDetail.php?id=${product.idProduct}`;
                 });
-                orderTotal += product.subprice * product.quantity;
+                orderTotal += product.subprice;
             }
-            $order.find(".total").text(`Totale: € ${orderTotal}`);
+            $order.find(".total").text(`Totale: € ${Math.round(orderTotal * 100) / 100}`);
 
         }
     }
