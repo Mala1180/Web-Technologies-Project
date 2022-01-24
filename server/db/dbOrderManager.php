@@ -19,7 +19,8 @@ class DBOrderMgr {
  	}
 
 	public function getOrders() {
-		$query = "SELECT idOrder, state, orderDate, shippingDate, deliveryDate FROM `customerOrder`";
+		$query = "SELECT idOrder, state, orderDate, shippingDate, deliveryDate FROM `customerOrder`
+			ORDER BY orderDate DESC, idOrder DESC";
 		return execute_query($this->db, $query);
  	}
 	

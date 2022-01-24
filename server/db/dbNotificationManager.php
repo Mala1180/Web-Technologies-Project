@@ -16,7 +16,7 @@ class DBNotificationMgr {
         $query = "SELECT idNotification AS id, `subject`, `message`, notificationDate AS date, isRead
                 FROM `notification`
                 WHERE isDeleted = ? AND idCustomer = ?
-                ORDER BY notificationDate DESC";
+                ORDER BY notificationDate DESC, idNotification DESC";
         return execute_query($this->db, $query, array("0", $customerId));
     }
     
