@@ -56,25 +56,23 @@ class DBCardMgr {
 	}
 
 	public function deleteCard($idCard) {
-		$query = "SELECT `idCard` FROM creditCard WHERE idCustomer = ?";
-		//$cards = execute_query($this->db, $query, array(get_token_data()->userId));
-
 		if ($this->checkCardOwner($idCard, get_token_data()->userId)) {
+            //controllo se è quella predefinita e se lo è setto NULL il campo 
+            $query = "SELECT idCard FROM `customer` WHERE `idCustomer` = ?";
+            $res = execute_query($this->db, $query, array(get_token_data()->userId));
+            if(count($res) > 0){
+                $idDefaultCard = $res[0]["idCard"];
+                if($idCard == $idDefaultCard) {
+                    $query = "UPDATE `customer` SET `idCard` = NULL WHERE `idCustomer` = ?";
+			        execute_query($this->db, $query, array(get_token_data()->userId));
+                }
+            }
 			$query = "UPDATE `creditCard` SET `isDeleted` = 1 WHERE `idCard` = ?";
 			execute_query($this->db, $query, array($idCard));
 			return true;
 		} else {
 			return false;
 		}
-
-		// foreach ($cards as $card) {
-		// 	if ($card['idCard'] == $idCard) {
-		// 		$query = "UPDATE `creditCard` SET `isDeleted`=1 WHERE idCard=?";
-		// 		execute_query($this->db, $query, array($idCard));
-		// 		return true;
-		// 	}
-		// }
-		// return false;
 	}
 
 	/**
