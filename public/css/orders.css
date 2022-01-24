@@ -42,7 +42,6 @@ main > ul > li > section.order-header button {
     color: #fff;
     border-radius: 5px;
     cursor: pointer;
-    max-height: 30px;
 }
 
 main > ul > li .date {
