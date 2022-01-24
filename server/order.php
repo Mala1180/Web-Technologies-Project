@@ -76,14 +76,17 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
                                 send_success(false);
                             }
                         }
+                        $type = "spedito";
                         $dbNotificationMgr->sendNotification($idCustomer, "Ordine spedito", "Il suo ordine è stato spedito, le segnaleremo quando verrà consegnato.");
                     break;
                     //ordine spedito, da consegnare
                     case 2: 
+                        $type = "consegnato";
                         $dbNotificationMgr->sendNotification($idCustomer, "Ordine consegnato", "Il suo ordine è stato consegnato, la ringraziamo per aver utilizzato UniboVinyl.");        
                     break;
                 }
                 $data = $dbOrderMgr->changeState($_POST["idOrder"], $state);
+                $dbOrderMgr->setDate($_POST["idOrder"], $type, date("Y-m-d"));
                 send_data($data);
             }
             send_success(false);

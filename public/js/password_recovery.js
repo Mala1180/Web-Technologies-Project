@@ -1,4 +1,10 @@
 $(document).ready(function () {
+    if (getCode() === undefined) {
+        $("#formRecover").hide();      
+    }
+    else {
+        $("#formRequestRecover").hide();
+    }
     $("#btnRequestChange").click((e) => {
         e.preventDefault();
         requestChangePassword();
@@ -20,7 +26,11 @@ function changePassword() {
             "code": getCode(),
             "newPassword": txtNewPassword.value
         }, function (data) {
-            console.log(data);
+            if(data.data){
+                location.href = "./userLogin.php"
+            } else {
+                console.log("Ops... qualcosa è andato storto");
+            }
         });
     }   
 }
@@ -29,8 +39,13 @@ function changePassword() {
 function requestChangePassword() {
     reqHelper.get("password_recovery", "requestChange", {
         "mail": txtMail.value,
-        "type": "cliente"
+        "type": $("input[type=radio]:checked").val()
     }, function (data) {
-        console.log(data);
+        if(data.data){
+            //location.href = "./userLogin.php"
+            console.log("Ti è stata inviata una mail per il recupero password all'indirizzo " + txtMail.value);
+        } else {
+            console.log("Ops... qualcosa è andato storto");
+        }
     });
 }

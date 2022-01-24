@@ -38,10 +38,20 @@ class DBUserMgr {
 		if ($type == "cliente" || $type == "artista") {
 			if ($type == "cliente") {
 				$query = "SELECT idCustomer FROM `customer` WHERE email=?";
-				$idUser = execute_query($this->db, $query, array($mail))[0]["idCustomer"];
+				$result = execute_query($this->db, $query, array($mail));
+				if(count($result) > 0){
+					$idUser = $result[0]["idCustomer"];
+				} else {
+					return false;
+				}
 			} else if ($type == "artista") {
 				$query = "SELECT idAuthor FROM `author` WHERE email=?";
-				$idUser = execute_query($this->db, $query, array($mail))[0]["idAuthor"];
+				$result = execute_query($this->db, $query, array($mail));
+				if(count($result) > 0){
+					$idUser = $result[0]["idAuthor"];
+				} else {
+					return false;
+				}
 			}			
 			if($idUser > 0) {
 				$tmpCode = uniqid();
@@ -58,6 +68,7 @@ class DBUserMgr {
 					return true;
 				}
 			}
+			return false;
 		}
 		return false;
  	}

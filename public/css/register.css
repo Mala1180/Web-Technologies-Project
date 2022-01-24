@@ -25,7 +25,7 @@ section form li {
     margin-bottom: 15px;
 }
 
-section form > ul > li:nth-child(3) {
+section form[name="formRegister"] > ul > li:nth-child(3) {
     display: none;
 }
 
