@@ -1,0 +1,39 @@
+main {
+    padding: 20px;
+}
+
+main h1 {
+    font-family: lato-regular;
+    text-align: center;
+    margin: 10px 0 40px 0;
+    letter-spacing: 0.1em;
+    font-size: clamp(2em, 2.5vw, 3em);
+}
+
+main ul li {
+    margin: 20px 0px;
+}
+
+main form label {
+    font-size: clamp(1.2em, 1.6vw, 2em);
+}
+
+main form input {
+    font-size: clamp(1.2em, 1.6vw, 2em);
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    margin-left: 10px;
+}
+
+main form input[type="button"] {
+    font-size: clamp(1.3em, 1.6vw, 2em);
+    display: block;
+    margin: auto;
+}
+
+@media screen and (min-width: 576px) {
+    main form input {
+        margin-left: 10px;
+    }
+}

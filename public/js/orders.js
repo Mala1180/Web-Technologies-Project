@@ -48,35 +48,36 @@ function toITString(date) {
             const order = orders[i];
             const $order = $(`
             <li>
-                    <section class="order-header">
-                        <div>
-                            <h2 class="date">Ordine del ${toITString(order["order"][0]["orderDate"])}</h2>
-                            <span class="total">Totale: € ${getTotalFromOrder(order.products[0])}</span>
-                            <span class="total">Stato: ${getStringState(order["order"][0]["state"])}</span>
-                        </div>
-                    </section>
-                    <section>
-                        <button id="btnChangeState" value="${order["order"][0]["idOrder"]}"></button>
-                    </section>
-                    <section class="order-details">
-                        <h2>Linee d'ordine</h2>
-                        <ul class="order-details-list">
-                            
-                        </ul>
-                    </section>
-                </li>`);
+                <section class="order-header">
+                    <div>
+                        <h2 class="date">Ordine del ${toITString(order["order"][0]["orderDate"])}</h2>
+                        <span class="total">Totale: € ${getTotalFromOrder(order.products[0])}</span>
+                        <span class="total">Stato: ${getStringState(order["order"][0]["state"])}</span>
+                    </div>
+                </section>
+                <section>
+                    <button id="btnChangeState" value="${order["order"][0]["idOrder"]}"></button>
+                </section>
+                <section class="order-details">
+                    <h2>Linee d'ordine</h2>
+                    <ul class="order-details-list">
+                        
+                    </ul>
+                </section>
+            </li>`);
 
             $("main > .orders-list").append($order);
 
             for (let j = 0; j < order.products[0].length; j++) {
-                const $orderDetail = $(`<li>
-                                        <div>
-                                        <h3>${order.products[0][j].name}</h3>
-                                        <span>Prezzo: € ${Math.round(order.products[0][j].subprice / order.products[0][j].quantity * 100) / 100}</span>
-                                        <span>Quantità: ${order.products[0][j].quantity}</span>
-                                        <span>Totale: € ${order.products[0][j].subprice}</span>
-                                    </div>
-                                </li>`);
+                const $orderDetail = $(`
+                <li>
+                    <div>
+                        <h3>${order.products[0][j].name}</h3>
+                        <span>Prezzo: € ${Math.round(order.products[0][j].subprice / order.products[0][j].quantity * 100) / 100}</span>
+                        <span>Quantità: ${order.products[0][j].quantity}</span>
+                        <span>Totale: € ${order.products[0][j].subprice}</span>
+                    </div>
+                </li>`);
                 $order.find(".order-details-list").append($orderDetail);
             }
 
@@ -101,12 +102,9 @@ function toITString(date) {
 
 function getStringState(state) {
     switch(state){
-        case 0:
-        return "Effettuato";
-        case 1:
-        return "In consegna";
-        case 2:
-        return "Consegnato";
+        case 0: return "Effettuato";
+        case 1: return "In consegna";
+        case 2: return "Consegnato";
     }
 }
 //se stato === 0 effettuato

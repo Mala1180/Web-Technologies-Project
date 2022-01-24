@@ -10,7 +10,7 @@ require_once('mail.php');
 // use PHPMailer\PHPMailer\Exception;
 
 class DBUserMgr {
- 	private $db;
+	private $db;
  	
  	public function __construct($dbConnection) {
  		$this->db = $dbConnection;
@@ -62,8 +62,6 @@ class DBUserMgr {
 		return false;
  	}
 
-	 
-
 	public function changePassword($code, $newPassword) {
 		//read id, type from code record
 		//if exist set to 1 the done attribute on password_recover
@@ -102,20 +100,48 @@ class DBUserMgr {
 	}
 
 	/* TODO: we have to manage cases with no results...*/ 
-    public function getUserInfo($username) {
-		$query = "SELECT idCustomer, name, surname, email, username FROM customer WHERE username=?";
-		return execute_query($this->db, $query, array($username));
+    public function getUserInfo($id, $type) {
+		$query = "";
+		switch ($type) {
+			case "cliente":
+				$query = "SELECT name, surname, email, username FROM `customer` WHERE idCustomer=?";
+				break;
+			case "artista":
+				$query = "SELECT artName, email, username FROM `author` WHERE idAuthor=?";
+				break;
+			default:
+				break;
+		}
+		return execute_query($this->db, $query, array($id));
  	}
 
-	 public function getUserInfoForToken($username, $type) {
-		 if($type == "cliente") {
+	public function getUserInfoForToken($username, $type) {
+		if($type == "cliente") {
 			$query = "SELECT idCustomer, name, surname FROM customer WHERE username=?";
-		 }
-		 else if ($type == "artista"){
+		}
+		else if ($type == "artista") {
 			$query = "SELECT idAuthor, artName FROM author WHERE username=?";
-		 }
+		}
 		return execute_query($this->db, $query, array($username))[0];
  	}
+    
+	public function updateUserInfo($id, $type, $name, $surname, $username, $email) {
+		$query = "";
+		switch ($type) {
+			case "cliente":
+				$query = "UPDATE `customer` SET name=?, surname=?, email=?, username=? WHERE idCustomer=?";
+				$params = array($name, $surname, $email, $username, $id);
+				break;
+			case "artista":
+				$query = "UPDATE `author` SET artName=?, email=?, username=? WHERE idAuthor=?";
+				$params = array($name, $email, $username, $id);
+				break;
+			default:
+				break;
+		}
+		return execute_query($this->db, $query, $params);
+ 	}
+	
 }
 
 $dbUserMgr = new DBUserMgr($db);
