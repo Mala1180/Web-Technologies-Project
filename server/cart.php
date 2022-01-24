@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 	}
 	switch ($_GET["action"]) {
 		case "getcart":
-			$idCustomer = $dbUserMgr->getUserInfoForToken(get_token_data()->username, "cliente")[0]["idCustomer"];
+			$idCustomer = $dbUserMgr->getUserInfoForToken(get_token_data()->username, "cliente")["idCustomer"];
             send_data($dbCartMgr->getCart($idCustomer));
             break;
 		default:

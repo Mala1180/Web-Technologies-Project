@@ -24,13 +24,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $createdAt   = new DateTimeImmutable();
                 $username = $_POST["username"];
                 $type = $_POST["type"];
+                $userId = 0;
+                switch($type) {
+                    case "cliente":
+                        $userId = $dbUserMgr->getUserInfoForToken($username, $type)["idCustomer"];
+                        break;
+                    case "artista":
+                        $userId = $dbUserMgr->getUserInfoForToken($username, $type)["idAuthor"];
+                        break;
+
+                }
                 $data = [
                     'createdAt'  => $createdAt->getTimestamp(),    // Issued at: time when the token was generated
                     'jti'  => $tokenId,                     		// Json Token Id: an unique identifier for the token
                     'iss'  => SERVER_NAME,                 			 // Issuer
                     'nbf'  => $createdAt->getTimestamp(),  			  // Not before
                     'data' => [                            			    // Data related to the signer user
-                        'username' => $username,           				 // Username
+                        'username' => $username,
+                        'userId' => $userId,         				 // Username
                         'type' => $type
                     ]
                 ];

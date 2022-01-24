@@ -21,8 +21,9 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 	}
 	switch ($_GET["action"]) {
         case "paymentDetails":
-            if ($dbCartMgr->hasProductsInCart(1)) {
-                send_data(array("totale"=>$dbCartMgr->getTotalCartPrice(1)));
+            $userId = get_token_data()->userId;
+            if ($dbCartMgr->hasProductsInCart($userId)) {
+                send_data(array("totale"=>$dbCartMgr->getTotalCartPrice($userId)));
             } else {
                 send_error("Nulla da pagare");
             }

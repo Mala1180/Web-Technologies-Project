@@ -46,7 +46,7 @@ class DBUserMgr {
 		 else if ($type == "artista"){
 			$query = "SELECT idAuthor, artName FROM author WHERE username=?";
 		 }
-		return execute_query($this->db, $query, array($username));
+		return execute_query($this->db, $query, array($username))[0];
  	}
 
 	public function addCardToUser($username, $cardNumber, $circuit, $expiryDate, $isDefault) {
