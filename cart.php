@@ -17,7 +17,7 @@
             <div></div>
             <p>Nessun articolo aggiunto al carrello</p>
             <footer>
-                <button id="checkout">Procedi all'ordine</button>
+                <a href="checkout.php">Procedi all'ordine</a>
             </footer>
         </main>
         <script src="./public/js/cart.js"></script>
