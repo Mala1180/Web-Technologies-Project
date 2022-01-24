@@ -33,9 +33,9 @@ class DBUserMgr {
 
 	public function addPasswordChangeReq($mail, $type) {
 		$query = "";
-		$idUser=-1;
+		$idUser = -1;
 		$done = 0;
-		if($type="cliente" || $type=="artista") {
+		if ($type == "cliente" || $type == "artista") {
 			if ($type == "cliente") {
 				$query = "SELECT idCustomer FROM `customer` WHERE email=?";
 				$idUser = execute_query($this->db, $query, array($mail))[0]["idCustomer"];
@@ -44,7 +44,7 @@ class DBUserMgr {
 				$idUser = execute_query($this->db, $query, array($mail))[0]["idAuthor"];
 			}			
 			if($idUser > 0) {
-				$tmpCode = "codicerandom";
+				$tmpCode = uniqid();
 				$query = "SELECT `idRecovery` FROM password_recovery WHERE idUser=? AND type=? AND done=?";
 				$exist = execute_query($this->db, $query, array($idUser, $type, $done));
 				if(count($exist) > 0) {
@@ -53,9 +53,8 @@ class DBUserMgr {
 				}
 				$query = "INSERT INTO `password_recovery` (`idUser`, `type`, `code`, `done`) VALUES (?, ?, ?, ?)";
 				if(execute_query($this->db, $query, array($idUser, $type, $tmpCode, $done))) {
-					$link = "";
-					//da mettere mail al posto della mia $mail
-					sendMail("albi1600@gmail.com", "Recupero password", "Clicca sul seguente link per generare una nuova password ".$link);
+					$link = "https://link.it?code=".$tmpCode;
+					sendMail($mail, "Recupero password", "Clicca sul seguente link per generare una nuova password ".$link);
 					return true;
 				}
 			}
@@ -70,10 +69,10 @@ class DBUserMgr {
 		//if exist set to 1 the done attribute on password_recover
 		//and update the customer or author password
 		$query = "";
-		$query = "SELECT idUser, type FROM `password_recovery` WHERE code=?";
+		$query = "SELECT idUser, type FROM `password_recovery` WHERE code=? AND done=0";
 		$result = execute_query($this->db, $query, array($code));
 		$done = 1;
-		if(count($result) > 0){
+		if(count($result) > 0) {
 			$idUser = $result[0]["idUser"];
 			$type = $result[0]["type"];
 			$query = "UPDATE `password_recovery` SET done=? WHERE idUser=? AND type=?";

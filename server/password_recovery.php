@@ -11,6 +11,7 @@ require_once("../vendor/autoload.php");
 require_once('validate.php');
 
     if($_SERVER["REQUEST_METHOD"] == "GET") {
+        var_dump($_GET);
         if(!isset($_GET["action"])) {
             send_error("An action is required");
             exit();
@@ -22,7 +23,8 @@ require_once('validate.php');
                 break;
             case "recover":
                 $data = $dbUserMgr->changePassword($_GET["code"], $_GET["newPassword"]);
-                var_dump($_GET["code"]);
+                send_data($data);
+                //var_dump($_GET["code"]);
                 break;
             default:
             send_error("Unknown action");

@@ -17,7 +17,7 @@
             <section>
                 <form>
                     <ul>
-                        <li><label for="txtMail">Inserisci mail</label><input type="mail" id="txtMail" name="txtMail" value="cliente@gmail.com"/></li>
+                        <li><label for="txtMail">Inserisci mail</label><input type="mail" id="txtMail" name="txtMail" value="albi1600@gmail.com"/></li>
                     </ul>
                     <input type="button" id="btnRequestChange" value="Conferma">
                 </form>
