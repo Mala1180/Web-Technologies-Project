@@ -1,5 +1,13 @@
 <?php
 require_once("db/dbconnector.php");
+require_once('../vendor/autoload.php');
+require_once('mail.php');
+
+// require '../vendor/phpmailer/phpmailer/src/Exception.php';
+// require '../vendor/phpmailer/phpmailer/src/PHPMailer.php';
+// require '../vendor/phpmailer/phpmailer/src/SMTP.php';
+// use PHPMailer\PHPMailer\PHPMailer;
+// use PHPMailer\PHPMailer\Exception;
 
 class DBUserMgr {
  	private $db;
@@ -21,6 +29,66 @@ class DBUserMgr {
 		}
 		$result = execute_query($this->db, $query, array($username));
 		return count($result) && password_verify($password, $result[0]["password"]);
+ 	}
+
+	public function addPasswordChangeReq($mail, $type) {
+		$query = "";
+		$idUser = -1;
+		$done = 0;
+		if ($type == "cliente" || $type == "artista") {
+			if ($type == "cliente") {
+				$query = "SELECT idCustomer FROM `customer` WHERE email=?";
+				$idUser = execute_query($this->db, $query, array($mail))[0]["idCustomer"];
+			} else if ($type == "artista") {
+				$query = "SELECT idAuthor FROM `author` WHERE email=?";
+				$idUser = execute_query($this->db, $query, array($mail))[0]["idAuthor"];
+			}			
+			if($idUser > 0) {
+				$tmpCode = uniqid();
+				$query = "SELECT `idRecovery` FROM password_recovery WHERE idUser=? AND type=? AND done=?";
+				$exist = execute_query($this->db, $query, array($idUser, $type, $done));
+				if(count($exist) > 0) {
+					//c'è gia una richiesta aperta.
+					return false;
+				}
+				$query = "INSERT INTO `password_recovery` (`idUser`, `type`, `code`, `done`) VALUES (?, ?, ?, ?)";
+				if(execute_query($this->db, $query, array($idUser, $type, $tmpCode, $done))) {
+					$link = "https://link.it?code=".$tmpCode;
+					sendMail($mail, "Recupero password", "Clicca sul seguente link per generare una nuova password ".$link);
+					return true;
+				}
+			}
+		}
+		return false;
+ 	}
+
+	 
+
+	public function changePassword($code, $newPassword) {
+		//read id, type from code record
+		//if exist set to 1 the done attribute on password_recover
+		//and update the customer or author password
+		$query = "";
+		$query = "SELECT idUser, type FROM `password_recovery` WHERE code=? AND done=0";
+		$result = execute_query($this->db, $query, array($code));
+		$done = 1;
+		if(count($result) > 0) {
+			$idUser = $result[0]["idUser"];
+			$type = $result[0]["type"];
+			$query = "UPDATE `password_recovery` SET done=? WHERE idUser=? AND type=?";
+			$result = execute_query($this->db, $query, array($done, $idUser, $type));
+			switch ($type) {
+				case "cliente":
+				$query = "UPDATE `customer` SET password=? WHERE idCustomer=?";
+				$result = execute_query($this->db, $query, array(password_hash($newPassword, PASSWORD_BCRYPT), $idUser));
+				break;
+				case "artista":
+				$query = "UPDATE `author` SET password=? WHERE idAuthor=?";
+				$result = execute_query($this->db, $query, array(password_hash($newPassword, PASSWORD_BCRYPT), $idUser));
+				break;
+			}
+		}
+		return $result;
  	}
 
  	public function registerCustomer($name, $surname, $email, $username, $password) {
@@ -48,30 +116,6 @@ class DBUserMgr {
 		 }
 		return execute_query($this->db, $query, array($username))[0];
  	}
-
-	public function addCardToUser($username, $cardNumber, $circuit, $expiryDate, $isDefault) {
-		$query = "INSERT INTO `creditCard` (`cardNumber`, `circuit`, `expiryDate`, `isDeleted`, `idCustomer`) VALUES (?, ?, ?, ?, ?)";
-		$idCustomer = $this->getUserInfo($username)[0]["idCustomer"];
-		$isDeleted = 0;
-		execute_query($this->db, $query, array($cardNumber, $circuit, $expiryDate, $isDeleted, $idCustomer));
-		if($isDefault == true){
-			/**
-			 * User is setting this card as default.
-			 */
-			$this->setDefaultCard($username, $cardNumber, $circuit, $expiryDate);
-		} 
-		return true;
- 	}
-
-	public function setDefaultCard($username, $cardNumber, $circuit, $expiryDate) {
-		/* Remove default  */
-		$query = "SELECT idCard FROM creditCard WHERE cardNumber=? AND circuit=? AND expiryDate=? AND idCustomer=?";
-		$idCustomer = $this->getUserInfo($username)[0]["idCustomer"];
-		$idCard = execute_query($this->db, $query, array($cardNumber, $circuit, $expiryDate, $idCustomer))[0];
-		$idCard = intval($idCard['idCard']);
-		$query = "UPDATE `customer` SET idCard=? WHERE idCustomer=?";
-		return execute_query($this->db, $query, array($idCard, $idCustomer));
-	}
 }
 
 $dbUserMgr = new DBUserMgr($db);
