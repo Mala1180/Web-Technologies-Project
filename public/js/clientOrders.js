@@ -32,7 +32,7 @@ function displayOrders(orders) {
             const order = orders[i];
             const summary = order.order[0];
             const $order = $(`
-            <li id="${summary.id}">
+            <li>
                 <section class="order-header">
                     <div>
                         <h2 class="date">Ordine del ${summary.orderDate}</h2>
@@ -90,7 +90,7 @@ function displayOrders(orders) {
                         <span>Totale: € ${productTotal}</span>
                     </div>
                 </li>`);
-                $(".order-details > ul").append($product);
+                $order.find(".order-details > ul").append($product);
 
                 $product.find("img").click(function () {
                     location.href = `./productDetail.php?id=${product.idProduct}`;
