@@ -32,7 +32,7 @@
                         </li>
                         <li>
                             <label for="uploadfile">Copertina</label>
-                            <input type="file" id="uploadfile" name="uploadfile"/>
+                            <input type="file" accept="image/png" id="uploadfile" name="uploadfile"/>
                         </li>
                     </ul>
                 </fieldset>

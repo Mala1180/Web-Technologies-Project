@@ -29,8 +29,7 @@ require_once('validate.php');
         //è un post.
         switch ($_POST["action"]) {
             case "addAlbum":
-                $imgName = preg_replace('/\s+/', '_', $_POST["name"]);
-                
+                $imgName = preg_replace('/\s+/', '_', $_POST["name"]);      
                 $imgData = $_POST["image"];
                 list($type, $imgData) = explode(';', $imgData);
                 list(, $imgData)      = explode(',', $imgData);
@@ -42,14 +41,13 @@ require_once('validate.php');
 
                 if($data) {
                     $idAlbum = $dbAlbumMgr->getIdFromTitleAndIdAuthor($idAuthor, $_POST["name"])[0]["idAlbum"];
-                    //$dbAlbumMgr->setAlbumGenre($idAlbum, $_POST["genre"]);
+                    $dbAlbumMgr->setAlbumGenre($idAlbum, $_POST["genre"]);
                     $songs = $_POST["songs"];
                     foreach ($songs as $song) {
                         $dbAlbumMgr->addSongToAlbum($idAlbum, $song["title"], $song["duration"]);
                     }  
                     $products = $_POST["products"];
                     foreach ($products as $product) {
-                        var_dump($product);
                         $dbProductMgr->addProduct($product[0]["copy"], $product[0]["price"], $product[0]["description"], $product[0]["type"], $idAlbum);
                 
                     }
