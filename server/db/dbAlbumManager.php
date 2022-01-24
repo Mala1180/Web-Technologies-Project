@@ -48,7 +48,7 @@ class DBAlbumMgr {
  	}
 
 	public function setAlbumGenre($idAlbum, $genre) {
-		$query = "INSERT INTO `album_genre` (`idAlbum`, `genre`) VALUES (?, ?)";
+		$query = "INSERT INTO `album_genre` VALUES (?, ?)";
 		return execute_query($this->db, $query, array($idAlbum, $genre));
  	}
 

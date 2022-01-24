@@ -86,7 +86,6 @@ async function addAlbum(name, description, duration, genre, songs, products) {
     }, function (data) {
         console.log(data);
         if (data.success) {
-            //alert("Album creato con successo :D");
             console.log("Album creato con successo");
         }
     });
