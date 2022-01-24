@@ -15,7 +15,7 @@
         <main>
             <h1>Pagamento</h1>
             <section>
-                <h1>Carta esistente</h1>
+                <h2>Carta esistente</h2>
                 <form>
                     <ul>
                         <li><label for="selectCard">Seleziona una carta</label><select id="selectCard" name="selectCard"></select></li>
@@ -23,7 +23,7 @@
                     <input type="button" id="btnSelectCard" value="Procedi all'ordine">
                 </form>
                 <form>
-                <h1>Nuova carta</h1>
+                <h2>Nuova carta</h2>
                     <ul>
                         <li><label for="cardHolder">Titolare</label><input type="text" id="cardHolder" name="cardHolder"/></li>
                         <li><label for="cardNumber">Numero carta</label><input type="text" id="cardNumber" name="cardNumber"/></li>

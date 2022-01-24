@@ -32,9 +32,14 @@ table th {
     padding: 5px 0;
 }
 
+ul {
+    list-style: none;
+    padding: 0;
+}
+
 button,
 input[type="submit"],
-input[type="input"] {
+input[type="button"] {
     border-radius: 5px;
     background-color: #008e99;
     border: none;
@@ -47,6 +52,6 @@ input[type="input"] {
 
 button:focus-visible,
 input[type="submit"]:focus-visible,
-input[type="input"]:focus-visible {
+input[type="button"]:focus-visible {
     outline-offset: 1px;
 }

@@ -4,6 +4,7 @@
         <?php require("./templates/head-section.php"); ?>
         <link rel="stylesheet" href="./public/css/header.css" />
         <link rel="stylesheet" href="./public/css/notifications.css" />
+        <link rel="stylesheet" href="./public/css/confirm-modal.css" />
 
         <script src="./public/js/notifications.js"></script>
 

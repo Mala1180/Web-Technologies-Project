@@ -17,7 +17,7 @@ $(document).ready(function () {
 });
 
 function readCardData() {
-    if(cardHolder.value != "" && cardNumber.value !="" && cardCircuit.value !="" && cardExpiration.value != "" && cardCvv.value != ""){
+    if (cardHolder.value != "" && cardNumber.value !="" && cardCircuit.value !="" && cardExpiration.value != "" && cardCvv.value != ""){
         addCardToUser(cardHolder.value, cardNumber.value, cardCircuit.value, cardExpiration.value + "-01", cardCvv.value, isDefault.checked);
     }
 }
@@ -48,13 +48,13 @@ function addOrder(){
 
 function getMyCards() {
     reqHelper.post("card", "getCard", {},
-    function (data) {
+    function(data) {
        if (data.success) {
         document.getElementById("selectCard").options.length = 0;
         for (let i = 0; i < data.data.length; i++){
             var opt = document.createElement('option');
-            opt.value = data.data[i]["cardNumber"];
-            opt.innerHTML = data.data[i]["cardNumber"];
+            opt.value = data.data[i]["number"];
+            opt.innerHTML = data.data[i]["number"];
             selectCard.appendChild(opt);
         }
        }
