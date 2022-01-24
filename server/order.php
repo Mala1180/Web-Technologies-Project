@@ -44,6 +44,9 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
             if($idOrder > 0) {
                 $dbNotificationMgr->sendNotification($idCustomer, "Ordine effettuato", "La ringraziamo per aver utilizzato UniboVinyl, verrà ricontattato quando spediremo il suo ordine.");
                 $cartElements = $dbCartMgr->getCart($idCustomer);
+                if (count($cartElements) <= 0) {
+                    send_error("Nessun articolo in carrello");
+                }
                 foreach($cartElements as $cartElem) {
                     $dbCartMgr->removeCartEntry($cartElem["idCartEntry"]);
                     $tmpSubprice = intval($cartElem["quantity"]) * floatval($cartElem["price"]);
@@ -53,12 +56,11 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
                 if($idCard > 0){
                     $dbTransactionMgr->addTransaction($idOrder, date("Y-m-d"), $idCard);
                     send_data($data);
-                }else {
-                    send_data(false);
                 }
+                send_success(false);
             } else {
                 $dbNotificationMgr->sendNotification($idCustomer, "Qualcosa è andato storto", "La preghiamo di effettuare nuovamente l'ordine, qualcosa è andato storto con il suo precedente ordine.");
-                send_data(false);
+                send_success(false);
             }
             break;
         case "changeState":
@@ -71,7 +73,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
                         foreach($orderDetails as $orderDetail) {
                             $esito = $dbProductMgr->decreaseQuantity($orderDetail["idProduct"], $orderDetail["quantity"]);
                             if(!$esito){
-                                send_data(false);
+                                send_success(false);
                             }
                         }
                         $dbNotificationMgr->sendNotification($idCustomer, "Ordine spedito", "Il suo ordine è stato spedito, le segnaleremo quando verrà consegnato.");
@@ -84,7 +86,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
                 $data = $dbOrderMgr->changeState($_POST["idOrder"], $state);
                 send_data($data);
             }
-            send_data(false);
+            send_success(false);
             break;
         case "setDate":
             //check if is one shipper get_token_data()->id or username.
