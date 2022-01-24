@@ -60,7 +60,7 @@ function toITString(date) {
                     </section>
                     <section class="order-details">
                         <h2>Linee d'ordine</h2>
-                        <ul class="order-details-list-${order["order"][0]["idOrder"]}">
+                        <ul class="order-details-list">
                             
                         </ul>
                     </section>
@@ -77,7 +77,7 @@ function toITString(date) {
                                         <span>Totale: € ${order.products[0][j].subprice}</span>
                                     </div>
                                 </li>`);
-                $(".order-details-list-" + order["order"][0]["idOrder"]).append($orderDetail);
+                $order.find(".order-details-list").append($orderDetail);
             }
 
             switch (order["order"][0]["state"]) {
