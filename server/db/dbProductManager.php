@@ -39,7 +39,7 @@ class DBProductMgr {
  	}
 
 	public function decreaseQuantity($idProduct, $quantity) {
-		$currentQuantity = $this->getCurrentQuantity($idProduct)[0]["quantity"];
+		$currentQuantity = $this->getCurrentQuantity($idProduct);
 		if($currentQuantity >= $quantity) {
 			$query = "UPDATE `product` SET quantity=? WHERE idProduct=?";
 			return execute_query($this->db, $query, array($currentQuantity - $quantity, $idProduct));

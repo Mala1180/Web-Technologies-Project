@@ -28,7 +28,10 @@ function populateCart() {
                 }, function (data) {
                     if (data.success) {
                         $(".cart-item").remove();
+                        Swal.fire("", "Quantità modificata con successo", "success");
                         populateCart();
+                    } else {
+                        Swal.fire("", "Verifica la disponibilità del prodotto", "error");
                     }
                 });
             })
