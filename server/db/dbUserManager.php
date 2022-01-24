@@ -1,6 +1,13 @@
 <?php
 require_once("db/dbconnector.php");
-include_once('phpmailer.php');
+require_once('../vendor/autoload.php');
+require_once('mail.php');
+
+// require '../vendor/phpmailer/phpmailer/src/Exception.php';
+// require '../vendor/phpmailer/phpmailer/src/PHPMailer.php';
+// require '../vendor/phpmailer/phpmailer/src/SMTP.php';
+// use PHPMailer\PHPMailer\PHPMailer;
+// use PHPMailer\PHPMailer\Exception;
 
 class DBUserMgr {
  	private $db;
@@ -45,52 +52,10 @@ class DBUserMgr {
 					return false;
 				}
 				$query = "INSERT INTO `password_recovery` (`idUser`, `type`, `code`, `done`) VALUES (?, ?, ?, ?)";
-				if(execute_query($this->db, $query, array($idUser, $type, $tmpCode, $done))){
-					//albi1600@gmail.com
-					//;
-					//composer require phpmailer/phpmailer
-					// $mail = new PHPMailer();
-					// $mail->From = $email_rif;
-					// $mail->FromName = $cliente;
-					// $mail->Subject = $subject;
-					// ////////// COSTRUISCE IL CORPO DELLA MAIL //////////
-					// $body="<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0 Transitional//EN\">
-					// \n<html>\n<head>\n<meta content=\"text/html;charset=ISO-8859-15\" http-
-					// equiv=\"Content-Type\">\n<title>" .
-					// "Registrazione su mio sito</title>\n</head>\n<body>\n" .
-					// "<div style=\"border: 2px solid silver; padding: 2px; font-
-					// family: Arial, Verdana; font-size: 12px; width: 500px;\">\n" .
-					// " <div style=\"border: 1px solid #3FA9DE; padding: 2px;\">
-					// \n" .
-					// " <div style=\"border: 2px solid silver; padding: 2px;
-					// \">" .
-					// " <div style=\"text-align: center; padding-bottom: 5px;
-					// \">" .
-					// " <img style=\"margin-top: 5px; border: 1px solid silver;
-					// \" src=\"http://www.sito.eu/it/images_web/logo_mail.jpg\" alt=\"MIO
-					// SITO\">\n" .
-					// " </div>" .
-					// " <div>\n" .
-					// " testo del messaggio\n" .
-					// " </div>" .
-					// " </div>\n" .
-					// " </div>\n" .
-					// "</div>\n" .
-					// "</body>\n</html>";
-					// $mail->Body = $body;
-					// $mail->AltBody = strip_tags($body2);
-					// $mail->Sender = $email_rif;
-					// $mail->AddReplyTo($email_rif,$email_rif);
-					// $mail->IsSMTP(); // telling the class to use SMTP
-					// $mail->Host = $smtp_rif; // SMTP server
-					// $mail->SMTPAuth = true; // turn on SMTP authentication
-					// $mail->Username = $smtp_user; // SMTP username
-					// $mail->Password = $smtp_pwd; // SMTP password
-					// $mail->AddAddress($to);
-					// @$mail->Send();
-					// $mail->SmtpClose();
-					// unset($mail);
-
+				if(execute_query($this->db, $query, array($idUser, $type, $tmpCode, $done))) {
+					$link = "";
+					//da mettere mail al posto della mia $mail
+					sendMail("albi1600@gmail.com", "Recupero password", "Clicca sul seguente link per generare una nuova password ".$link);
 					return true;
 				}
 			}
@@ -100,14 +65,31 @@ class DBUserMgr {
 
 	 
 
-	public function getMailFromCode($idUser, $type) {
+	public function changePassword($code, $newPassword) {
+		//read id, type from code record
+		//if exist set to 1 the done attribute on password_recover
+		//and update the customer or author password
 		$query = "";
-		$query = "SELECT code FROM `password_recovery` WHERE idUser=? AND type=?";
-		$result = execute_query($this->db, $query, array($idUser, $type));
+		$query = "SELECT idUser, type FROM `password_recovery` WHERE code=?";
+		$result = execute_query($this->db, $query, array($code));
+		$done = 1;
 		if(count($result) > 0){
-
+			$idUser = $result[0]["idUser"];
+			$type = $result[0]["type"];
+			$query = "UPDATE `password_recovery` SET done=? WHERE idUser=? AND type=?";
+			$result = execute_query($this->db, $query, array($done, $idUser, $type));
+			switch ($type) {
+				case "cliente":
+				$query = "UPDATE `customer` SET password=? WHERE idCustomer=?";
+				$result = execute_query($this->db, $query, array(password_hash($newPassword, PASSWORD_BCRYPT), $idUser));
+				break;
+				case "artista":
+				$query = "UPDATE `author` SET password=? WHERE idAuthor=?";
+				$result = execute_query($this->db, $query, array(password_hash($newPassword, PASSWORD_BCRYPT), $idUser));
+				break;
+			}
 		}
-		return count($result) > 0 ? $result[0]["code"] : "";
+		return $result;
  	}
 
  	public function registerCustomer($name, $surname, $email, $username, $password) {
