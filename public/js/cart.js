@@ -2,8 +2,10 @@ function populateCart() {
     reqHelper.get("cart", "getcart", {}, function (data) {
         if (data.data.length) {
             $("main > p").hide();
+            $("main > footer").show();
         } else {
             $("main > footer").hide();
+            $("main > p").show();
         }
         data.data.forEach(e => {
             let cartHtml = `

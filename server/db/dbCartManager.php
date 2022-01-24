@@ -56,6 +56,19 @@ class DBCartMgr {
 		return execute_query($this->db, $query, array($quantity, $idCartEntry));
 	}
 
+	public function hasProductsInCart($idCustomer) {
+		$query = "SELECT idCartEntry FROM cartEntry WHERE idCustomer = ?";
+		return count(execute_query($this->db, $query, array($idCustomer))) > 0;
+	}
+
+	public function getTotalCartPrice($idCustomer) {
+		$query = "SELECT SUM(price) as total FROM cartEntry ce, product p 
+					WHERE ce.idProduct = p.idProduct
+					AND idCustomer = ?
+					GROUP BY idCustomer";
+		return execute_query($this->db, $query, array($idCustomer))[0]["total"];
+	}
+
 	public function getCart($idCustomer) {
 		$query = "SELECT idCartEntry, ce.idProduct, ce.quantity, price, p.type, name, artName, imgPath 
 					FROM product p, album a, cartEntry ce, author au

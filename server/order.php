@@ -20,6 +20,13 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 		exit();
 	}
 	switch ($_GET["action"]) {
+        case "paymentDetails":
+            if ($dbCartMgr->hasProductsInCart(1)) {
+                send_data(array("totale"=>$dbCartMgr->getTotalCartPrice(1)));
+            } else {
+                send_error("Nulla da pagare");
+            }
+            break;
 		default:
 			send_error("Unknown action");
 			break;
