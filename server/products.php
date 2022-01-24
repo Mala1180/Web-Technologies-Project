@@ -31,8 +31,6 @@ require_once('validate.php');
         }
         //è un post.
         switch ($_POST["action"]) {
-            case "readnotification":
-                break;
             default:
                 send_error("Unknown action");
                 break;

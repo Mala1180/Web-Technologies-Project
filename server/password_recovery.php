@@ -24,7 +24,6 @@ require_once('validate.php');
             case "recover":
                 $data = $dbUserMgr->changePassword($_GET["code"], $_GET["newPassword"]);
                 send_data($data);
-                //var_dump($_GET["code"]);
                 break;
             default:
             send_error("Unknown action");
@@ -36,11 +35,7 @@ require_once('validate.php');
             send_error("An action is required");
             exit();
         }
-        //è un post.
         switch ($_POST["action"]) {
-            // case "recover":
-            //     print_r($_POST["tempcode"]);
-            //     break;
             default:
                 send_error("Unknown action");
                 break;

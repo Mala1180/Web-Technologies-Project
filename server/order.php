@@ -39,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 	}
 	switch ($_POST["action"]) {
 		case "addOrder":
-            $idCustomer = $dbUserMgr->getUserInfoForToken(get_token_data()->username, "cliente")[0]["idCustomer"];
+            $idCustomer = get_token_data()->userId;
             $idOrder = $dbOrderMgr->addOrder(date("Y-m-d"), $idCustomer);
             if($idOrder > 0) {
                 $dbNotificationMgr->sendNotification($idCustomer, "Ordine effettuato", "La ringraziamo per aver utilizzato UniboVinyl, verrà ricontattato quando spediremo il suo ordine.");
@@ -64,7 +64,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
         case "changeState":
             $state = intval($_POST["state"]);
             if($state >= 0 && $state <= 2) {
-                $idCustomer = $dbOrderMgr->getCustomerId($_POST["idOrder"])[0]["idCustomer"];
+                $idCustomer = get_token_data()->userId;
                 switch($state) {
                     case 1: 
                         $orderDetails = $dbOrderMgr->getOrderDetails($_POST["idOrder"]);
@@ -85,27 +85,6 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
                 send_data($data);
             }
             send_data(false);
-
-
-
-
-            // if($state >= 0 && $state <= 2) {
-            //     $idCustomer = $dbOrderMgr->getCustomerId($_POST["idOrder"])[0]["idCustomer"];
-            //     if($state == 1) {
-            //         $orderDetails = $dbOrderMgr->getOrderDetails($_POST["idOrder"]);
-            //         foreach($orderDetails as $orderDetail) {
-            //             $esito = $dbProductMgr->decreaseQuantity($orderDetail["idProduct"], $orderDetail["quantity"]);
-            //             if(!$esito){
-            //                 send_data(false);
-            //             }
-            //         }
-            //         //$dbNotificationMgr->sendNotification($idCustomer, "Ordine accettato", "Il suo ordine è andato a buon fine, le segnaleremo quando verrà spedito.");
-            //     } else {
-            //         $dbNotificationMgr->sendNotification($idCustomer, "Ordine rifiutato", "Qualcosa è andato storto con il suo ordine, ci scusiamo per il disagio");
-            //     }   
-            //     $data = $dbOrderMgr->changeState($_POST["idOrder"], $state);
-            // }
-            // send_data($data);
             break;
         case "setDate":
             //check if is one shipper get_token_data()->id or username.
@@ -131,7 +110,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
             send_data($tot);
             break;
         case "getCustomerOrders":
-            $idCustomer = $dbUserMgr->getUserInfoForToken(get_token_data()->username, "cliente")[0]["idCustomer"];
+            $idCustomer = get_token_data()->userId;
             $orders = $dbOrderMgr->getCustomerOrders($idCustomer);
             $ordersDetails = [];
             $tot = [];  

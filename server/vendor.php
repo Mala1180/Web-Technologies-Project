@@ -37,7 +37,7 @@ require_once('validate.php');
                 $imgData = base64_decode($imgData);
                 file_put_contents('../public/img/products/'.$imgName.'.png', $imgData);
 
-                $idAuthor = $dbUserMgr->getUserInfoForToken(get_token_data()->username, "artista")[0]["idAuthor"];
+                $idAuthor = get_token_data()->userId;
                 $data = $dbAlbumMgr->addAlbum($_POST["name"], $_POST["description"], $idAuthor, $_POST["duration"], $imgName.'.png');
 
                 if($data) {
@@ -57,7 +57,7 @@ require_once('validate.php');
                 }
                 break;
             case "addProduct":
-                $idAuthor = $dbUserMgr->getUserInfoForToken(get_token_data()->username, "artista")[0]["idAuthor"];
+                $idAuthor = get_token_data()->userId;
                 $idAlbum = $dbAlbumMgr->getIdFromTitleAndIdAuthor($idAuthor, $_POST["albumTitle"])[0]["idAlbum"];
                 $data = $dbProductMgr->addProduct($_POST["quantity"], $_POST["price"], $_POST["description"], $_POST["type"], $idAuthor, $idAlbum);
                 send_data($data);
@@ -84,7 +84,7 @@ require_once('validate.php');
                 send_data($data);
                 break;
             case "setAlbumGenre":
-                $idAuthor = $dbUserMgr->getUserInfoForToken(get_token_data()->username, "artista")[0]["idAuthor"];
+                $idAuthor = get_token_data()->userId;
                 $idAlbum = $dbAlbumMgr->getIdFromTitleAndIdAuthor($idAuthor, $_POST["albumTitle"])[0]["idAlbum"];
                 $data = $dbAlbumMgr->setAlbumGenre($idAlbum, $_POST["genre"]);
                 send_data($data);

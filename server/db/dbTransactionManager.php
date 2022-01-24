@@ -21,7 +21,6 @@ class DBTransactionMgr {
  		$query = "DELETE FROM `product` WHERE idProduct=?";
 		return execute_query($this->db, $query, array($idProduct));
  	}
-
 }
 
 $dbTransactionMgr = new DBTransactionMgr($db);

@@ -26,12 +26,12 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 	}
 	switch ($_POST["action"]) {
 		case "getCard":
-            $idCustomer = $dbUserMgr->getUserInfoForToken(get_token_data()->username, "cliente")[0]["idCustomer"];
+            $idCustomer = get_token_data()->userId;
             $data = $dbCardMgr->getCard($idCustomer);
             send_data($data);
             break;
         case "addCard":
-            $idCustomer = $dbUserMgr->getUserInfoForToken(get_token_data()->username, "cliente")[0]["idCustomer"];
+            $idCustomer = get_token_data()->userId;
             $data = $dbCardMgr->addCard($idCustomer, $_POST["holder"], $_POST["cardNumber"], $_POST["circuit"], $_POST["expiryDate"], $_POST["cvv"], $_POST["isDefault"]);
             send_data($data);
             break;
