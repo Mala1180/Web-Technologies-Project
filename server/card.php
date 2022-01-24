@@ -27,14 +27,21 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 	switch ($_POST["action"]) {
 		case "getCard":
             $idCustomer = get_token_data()->userId;
-            $data = $dbCardMgr->getCard($idCustomer);
-            send_data($data);
+            $cards = $dbCardMgr->getCard($idCustomer);
+			for ($i=0; $i < count($cards); $i++) { 
+				$cards[$i]['isDefault'] = $dbCardMgr->isDefaultCard($cards[$i]['id'], $idCustomer);
+			}
+            send_data($cards);
             break;
         case "addCard":
             $idCustomer = get_token_data()->userId;
             $data = $dbCardMgr->addCard($idCustomer, $_POST["holder"], $_POST["cardNumber"], $_POST["circuit"], $_POST["expiryDate"], $_POST["cvv"], $_POST["isDefault"]);
             send_data($data);
             break;
+		case "deleteCard":
+			$data = $dbCardMgr->deleteCard($_POST["idCard"]);
+			send_success($data);
+			break;
 		default:
 			send_error("Unknown action");
 			break;
