@@ -11,10 +11,10 @@
         <?php require("./templates/header.php"); ?>
         <main>
             <section>
-                <a href="./userSearch.php?query=&filter=Vinile">Vinili</a>
+                <a href="./userSearch.php?query=&filter=1">Vinili</a>
             </section>
             <section>
-                <a href="./userSearch.php?query=&filter=CD">CD</a>
+                <a href="./userSearch.php?query=&filter=0">CD</a>
             </section>
             <!-- <section>
                 <a href="./userSearch.php?query=&filter=Giradischi">Giradischi</a>

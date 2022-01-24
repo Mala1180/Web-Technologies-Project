@@ -16,15 +16,12 @@
         <aside>
             <header>
                 <h2>Il tuo carrello</h2>
-                <img src="public/img/icons/cancel.png" alt="close cart preview image" />
+                <button tabindex="0"><img src="public/img/icons/cancel.png" alt="chiudi anteprima carrello" /></button>
             </header>
-            <div>
-                <?php require("./templates/preview-cart-article.php") ?>
-                <?php require("./templates/preview-cart-article.php") ?>
-            </div>
+            <ul>
+            </ul>
             <footer>
-                <span>Visualizza tutto</span>
-                <span class="material-icons-outlined">east</span>
+                <a href="cart.php">Visualizza tutto <span class="material-icons-outlined">east</span></a>
             </footer>
         </aside>
         <script src="./public/js/page-header.js"></script>
