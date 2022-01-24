@@ -42,6 +42,10 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 			$data = $dbCardMgr->deleteCard($_POST["idCard"]);
 			send_success($data);
 			break;
+		case "setDefaultCard":
+			$data = $dbCardMgr->setDefaultCard($_POST["idCard"], get_token_data()->userId);
+			send_success($data);
+			break;
 		default:
 			send_error("Unknown action");
 			break;

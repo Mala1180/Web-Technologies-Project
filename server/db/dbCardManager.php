@@ -30,23 +30,23 @@ class DBCardMgr {
 				  VALUES (?, ?, ?, ?, ?, ?, ?)";
 		$isDeleted = 0;
 		execute_query($this->db, $query, array($holder, $cardNumber, $circuit, $expiryDate, $cvv, $isDeleted, $idCustomer));
-		var_dump($isDefault);
-        if ($isDefault == "true") {
+        $idCard = $this->db->insert_id;
+		if ($isDefault == "true") {
 			/**
 			 * User is setting this card as default.
 			 */
-			$this->setDefaultCard($idCustomer, $holder, $cardNumber, $circuit, $cvv, $expiryDate);
+			$this->setDefaultCard($idCard, $idCustomer);
 		} 
 		return true;
  	}
 
-	public function setDefaultCard($idCustomer, $holder, $cardNumber, $circuit, $cvv, $expiryDate) {
+	public function setDefaultCard($idCard, $idCustomer) {
 		/* Remove default  */
-		$query = "SELECT idCard FROM creditCard WHERE holder=? AND cardNumber=? AND circuit=? AND cvv=? AND expiryDate=? AND idCustomer=?";
-		$idCard = execute_query($this->db, $query, array($holder, $cardNumber, $circuit, $cvv, $expiryDate, $idCustomer))[0];
-		$idCard = intval($idCard['idCard']);
-		$query = "UPDATE `customer` SET idCard=? WHERE idCustomer=?";
-		return execute_query($this->db, $query, array($idCard, $idCustomer));
+		if ($this->checkCardOwner($idCard, $idCustomer)) {
+			$query = "UPDATE `customer` SET idCard = ? WHERE idCustomer = ?";
+			execute_query($this->db, $query, array($idCard, $idCustomer));
+			return true;
+		}
 	}
 
 	public function isDefaultCard($idCard, $idCustomer) {
@@ -57,15 +57,37 @@ class DBCardMgr {
 
 	public function deleteCard($idCard) {
 		$query = "SELECT `idCard` FROM creditCard WHERE idCustomer = ?";
-		$cards = execute_query($this->db, $query, array(get_token_data()->userId));
-		foreach ($cards as $card) {
-			if ($card['idCard'] == $idCard) {
-				$query = "UPDATE `creditCard` SET `isDeleted`=1 WHERE idCard=?";
-				execute_query($this->db, $query, array($idCard));
-				return true;
-			}
+		//$cards = execute_query($this->db, $query, array(get_token_data()->userId));
+
+		if ($this->checkCardOwner($idCard, get_token_data()->userId)) {
+			$query = "UPDATE `creditCard` SET `isDeleted` = 1 WHERE `idCard` = ?";
+			execute_query($this->db, $query, array($idCard));
+			return true;
+		} else {
+			return false;
 		}
-		return false;
+
+		// foreach ($cards as $card) {
+		// 	if ($card['idCard'] == $idCard) {
+		// 		$query = "UPDATE `creditCard` SET `isDeleted`=1 WHERE idCard=?";
+		// 		execute_query($this->db, $query, array($idCard));
+		// 		return true;
+		// 	}
+		// }
+		// return false;
+	}
+
+	/**
+	 * Check if the card is owned by the customer.
+	 * 
+	 * @param  int $idCard
+	 * @param  int $idCustomer
+	 * @return bool
+	 */
+	public function checkCardOwner($idCard, $idCustomer) {
+		$query = "SELECT idCard FROM creditCard WHERE idCard=? AND idCustomer=?";
+		$result = execute_query($this->db, $query, array($idCard, $idCustomer));
+		return count($result) > 0;
 	}
 
 }

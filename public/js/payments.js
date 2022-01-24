@@ -97,7 +97,7 @@ function displayCards(cards) {
                     <span class="card-circuit">${card.circuit}</span>
                     <p>Data di scadenza</p>
                     <span class="card-expiry-date">${card.expiryDate}</span>
-                    <button class="favourite-button" value="${card.id}">Imposta come predefinita</button>
+                    <button class="favourite-button">Imposta come predefinita</button>
                     <button class="trash-button">Rimuovi</button>
                 </div>
             </li>
@@ -107,6 +107,10 @@ function displayCards(cards) {
             if (card.isDefault) {
                 $card.find(".card-header > div").append(`<em class="favourite">Predefinita</em>`);
                 $card.find(".card-details .favourite-button").remove();
+            } else {
+                $card.find(".card-details .favourite-button").click(function() {
+                    setDefaultCard(card.id);
+                });
             }
 
             $card.find(".details-button").click(function () {
@@ -126,7 +130,7 @@ function displayCards(cards) {
 }
 
 /**
- * Deletes a card from the server.
+ * Deletes a card from the server. Then calls getCards function.
  * 
  * @author Mattia Matteini <matteinimattia@gmail.com>
  * @param {String} idCard id of card to delete
@@ -140,6 +144,26 @@ function deleteCard(idCard) {
             getCards();
         } else {
             console.error("Error while deleting card");
+        }
+    });
+}
+
+
+/**
+ * Sets a card as default. Then calls getCards function.
+ * 
+ * @author Mattia Matteini <matteinimattia@gmail.com>
+ * @param {String} idCard id of card to delete
+ */
+ function setDefaultCard(idCard) {
+    console.log(idCard);
+    reqHelper.post("card", "setDefaultCard", {
+        "idCard": idCard
+    }, function (data) {
+        if (data.success) {
+            getCards();
+        } else {
+            console.error("Error setting card as default");
         }
     });
 }
