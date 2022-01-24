@@ -16,12 +16,12 @@
             <section>
                 <a href="./userSearch.php?query=&filter=CD">CD</a>
             </section>
-            <section>
+            <!-- <section>
                 <a href="./userSearch.php?query=&filter=Giradischi">Giradischi</a>
             </section>
             <section>
                 <a href="./userSearch.php?query=&filter=Bundle">Bundle</a> 
-            </section>
+            </section> -->
         </main>
         <script src="./public/js/page-header.js"></script>
     </body>
