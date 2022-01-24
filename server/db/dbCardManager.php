@@ -30,7 +30,8 @@ class DBCardMgr {
 				  VALUES (?, ?, ?, ?, ?, ?, ?)";
 		$isDeleted = 0;
 		execute_query($this->db, $query, array($holder, $cardNumber, $circuit, $expiryDate, $cvv, $isDeleted, $idCustomer));
-		if ($isDefault == true) {
+		var_dump($isDefault);
+        if ($isDefault == "true") {
 			/**
 			 * User is setting this card as default.
 			 */
@@ -43,7 +44,6 @@ class DBCardMgr {
 		/* Remove default  */
 		$query = "SELECT idCard FROM creditCard WHERE holder=? AND cardNumber=? AND circuit=? AND cvv=? AND expiryDate=? AND idCustomer=?";
 		$idCard = execute_query($this->db, $query, array($holder, $cardNumber, $circuit, $cvv, $expiryDate, $idCustomer))[0];
-		send_data(var_dump($idCard['idCard']));
 		$idCard = intval($idCard['idCard']);
 		$query = "UPDATE `customer` SET idCard=? WHERE idCustomer=?";
 		return execute_query($this->db, $query, array($idCard, $idCustomer));

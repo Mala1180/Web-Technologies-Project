@@ -12,7 +12,6 @@ $(document).ready(function () {
         e.preventDefault();
         addOrder();
     });
-    getPaymentDetails();
     getMyCards();
 });
 
