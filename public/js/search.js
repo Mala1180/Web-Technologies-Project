@@ -1,5 +1,4 @@
 let $cartPreview;
-let $previewTitle;
 let $closePreview;
 let products = [];
 
@@ -13,20 +12,29 @@ $(document).ready(function () {
     searchProducts(QUERY, FILTER);
 
     $cartPreview = $("body > aside");
-    $previewTitle = $("body > aside > header > h2");
-    $closePreview = $("body > aside > header > img");
+    $closePreview = $("body > aside > header > button");
 
+    if ($cartPreview.find("ul").children().length == 0) {
+        $cartPreview.hide();
+    }
+        
     const CART_PREVIEW_HEADER_HEIGHT = $("body > aside > header").outerHeight();
     const CART_PREVIEW_MARGINS = 10;
     const CLOSED_PREVIEW_BOTTOM = ($cartPreview.height() + CART_PREVIEW_MARGINS) * -1 + CART_PREVIEW_HEADER_HEIGHT;
 
     // close / open cart preview
     $closePreview.click(function () {
-        togglePreview(CLOSED_PREVIEW_BOTTOM, "100%", $closePreview);
-    });
+        if (window.innerWidth > 992) return;
 
-    $previewTitle.click(function () {
-        togglePreview(0, "0%", $closePreview);
+        const $img = $(this).find("img");
+        // if is closing
+        if ($img.attr("src") === "public/img/icons/cancel.png") {
+            $img.attr("src", "public/img/icons/up-arrow.png");
+            $cartPreview.css("bottom", CLOSED_PREVIEW_BOTTOM);
+        } else { // if is opening
+            $img.attr("src", "public/img/icons/cancel.png");
+            $cartPreview.css("bottom", 0);
+        }
     });
 
     const $searchIcon = $("header section:first-of-type img");
@@ -106,36 +114,12 @@ function displayProducts(products) {
                 location.href = DETAILS_LINK;
             });
             $product.find("button").click(function () {
-                addToCart($(this).val());
+                addToCart(parseInt($(this).val()));
             });
             $("main").append($product);
         }
     }
 }
-
-/**
- * Toggles the cart preview.
- *
- * @author Mattia Matteini <matteinimattia@gmail.com>
- * @param {Number} bottom integer value of the bottom position of the cart preview
- * @param {String} titleWidth string with the width of the title in percentage
- * @return {None}
- */
-function togglePreview(bottom, titleWidth) {
-    if (window.innerWidth > 992) return;
-
-    $cartPreview.css("bottom", bottom);
-    $previewTitle.css("width", titleWidth);
-
-    if (bottom === 0) {
-        setTimeout(() => {
-            $closePreview.fadeIn(50);
-        }, 500);
-    } else {
-        $closePreview.fadeOut(50);
-    }
-}
-
 
 //function that populate the cart client side
 function addToCart(idProduct) {
@@ -143,12 +127,60 @@ function addToCart(idProduct) {
         reqHelper.post("cart", "addEntry", {
             idProduct: idProduct
         },
-            function (data) {
-                if (data.success) {
-                    Swal.fire("", "prodotto aggiunto al carrello", "success");
-                } else {
-                    Swal.fire("", "Verifica la disponibilità del prodotto", "error");
-                }
-            });
+        function (data) {
+            if (data.success) {
+                Swal.fire("", "prodotto aggiunto al carrello", "success");
+
+                products.forEach(product => {
+                    if (product.idProduct === idProduct) {
+                        if ($cartPreview.is(":hidden")) {
+                            $cartPreview.fadeIn("medium");
+                        }
+                        const $articlePreview = $(`
+                        <li>
+                            <section>
+                                <div>
+                                    <img src="public/img/vinile1.jpg" alt="article image" />
+                                    <h2>Nome Vinile molto lungo</h2>
+                                </div>
+                                <div>
+                                    <span class="material-icons-outlined">remove</span>
+                                    <span>2</span>
+                                    <span class="material-icons-outlined">add</span>
+                                </div>
+                            </section>
+                        </li>`);
+                        $("aside ul").append($articlePreview);
+                    }
+                });
+            } else {
+                Swal.fire("", "Verifica la disponibilità del prodotto", "error");
+            }
+        });
+    }
+}
+
+
+function displayProductsInPreview(products) {
+    if (products) {
+        $("aside ul").empty();
+        for (let i = 0; i < products.length; i++) {
+            const product = products[i];
+            const $articlePreview = $(`
+            <li>
+                <section>
+                    <div>
+                        <img src="public/img/vinile1.jpg" alt="article image" />
+                        <h2>Nome Vinile molto lungo</h2>
+                    </div>
+                    <div>
+                        <span class="material-icons-outlined">remove</span>
+                        <span>2</span>
+                        <span class="material-icons-outlined">add</span>
+                    </div>
+                </section>
+            </li>`);
+            $("aside ul").append($articlePreview);
+        }
     }
 }

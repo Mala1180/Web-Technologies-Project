@@ -39,7 +39,9 @@ main > section > a {
 /**
  *  if backdrop-filter supported
  */
- @supports ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+@supports (
+    (-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))
+) {
     main > section > a {
         -webkit-backdrop-filter: blur(1px);
         backdrop-filter: blur(1px);
@@ -55,16 +57,15 @@ main > section:nth-of-type(2) {
 }
 
 main > section:nth-of-type(3) {
-    background-image: url(../img/impostazioni.jpg);
+    background-image: url(../img/pagamento.jpg);
     background-position: unset;
 }
 
 main > section:nth-of-type(4) {
-    background-image: url(../img/pagamento.jpg);
+    background-image: url(../img/impostazioni.jpg);
 }
 
 @media screen and (min-width: 768px) {
-
     :root {
         --section-height: 200px;
     }
@@ -86,7 +87,6 @@ main > section:nth-of-type(4) {
     }
 }
 @media screen and (min-width: 992px) {
-
     main > section {
         margin: 2%;
     }

@@ -1,4 +1,4 @@
-:root { 
+:root {
     --image-size: 40vw;
 }
 
@@ -100,7 +100,7 @@ body > aside {
     bottom: 0;
     left: 0;
     right: 0;
-    transition: bottom 0.5s linear;
+    transition: bottom 0.3s linear;
     background-color: rgb(80, 80, 80);
     margin: 5px;
     border-radius: 10px;
@@ -122,11 +122,19 @@ body > aside > header > h2 {
     /* next properties are for text alignment transition */
     text-align: center;
     white-space: nowrap;
-    width: 0;
-    transition: width 0.5s linear;
+    /* width: 0;
+    transition: width 0.3s linear; */
 }
 
-body > aside > header > img {
+body > aside > header > button {
+    all: unset;
+}
+
+body > aside > header > button:focus-visible {
+    outline-offset: 1px;
+}
+
+body > aside > header > button > img {
     width: 30px;
     height: 30px;
     margin: 0 20px;
@@ -140,23 +148,26 @@ body > aside footer {
     cursor: pointer;
 }
 
-body > aside footer > span:last-of-type {
-    margin: 10px 20px 10px 0;
-}
-
-body > aside footer > span:first-of-type {
+body > aside footer a {
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     font-family: lato-light;
     font-size: clamp(15px, 1.7vw, 24px);
     letter-spacing: 0.2em;
-    margin: 10px 5px;
 }
 
-body > aside > div {
+body > aside footer a span {
+    margin: 10px;
+}
+
+body > aside > ul {
     max-height: 30vh;
     overflow-y: auto;
 }
 
-body > aside div section {
+body > aside ul section {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -166,13 +177,13 @@ body > aside div section {
     background-color: rgb(35, 35, 35);
 }
 
-body > aside div section div {
+body > aside ul section div {
     display: flex;
     align-items: center;
     min-width: min-content;
 }
 
-body > aside div section img {
+body > aside ul section img {
     height: 40px;
     width: 40px;
     object-fit: cover;
@@ -180,7 +191,7 @@ body > aside div section img {
     border-radius: 10px;
 }
 
-body > aside div section h2 {
+body > aside ul section h2 {
     font-size: 16px;
     margin-left: 10px;
     overflow: hidden;
@@ -190,10 +201,10 @@ body > aside div section h2 {
     -webkit-box-orient: vertical;
 }
 
-body > aside div section div:last-of-type span {
+body > aside ul section div:last-of-type span {
     margin-left: 3px;
 }
-body > aside div section div:last-of-type span:nth-of-type(2) {
+body > aside ul section div:last-of-type span:nth-of-type(2) {
     font-family: lato-regular;
 }
 
@@ -214,7 +225,7 @@ span.material-icons-outlined {
         background-color: rgba(0, 0, 0, 0.3);
     }
 
-    body > aside div section {
+    body > aside ul section {
         -webkit-backdrop-filter: blur(30px);
         backdrop-filter: blur(30px);
         background-color: rgba(0, 0, 0, 0.5);
@@ -222,12 +233,10 @@ span.material-icons-outlined {
 }
 
 @media screen and (min-width: 576px) {
-
-    main section aside div:nth-of-type(2) {
+    /* main section aside ul:nth-of-type(2) {
         flex-direction: row;
         align-items: center;
-    }
-
+    } */
 }
 
 @media screen and (min-width: 768px) {
@@ -251,14 +260,12 @@ span.material-icons-outlined {
         flex: 1 0 50%;
         max-width: 50%;
     }
-
 }
 
 /**
  *  Large Screens
  */
-@media screen and (min-width: 992px) {
-
+/* @media screen and (min-width: 992px) {
     :root {
         --image-size: 15vw;
     }
@@ -271,12 +278,12 @@ span.material-icons-outlined {
         width: 20vw;
     }
 
-    /* product quantity */
+    /* product quantity 
     main section aside div:first-of-type span:last-child {
         display: block;
     }
 
-    /* Cart Preview */
+    /* Cart Preview 
     body > aside {
         position: unset;
         margin-left: calc(70% - 5px);
@@ -290,15 +297,13 @@ span.material-icons-outlined {
     body > aside > header > img {
         display: none;
     }
-}
+} */
 
 /**
  *  Extra Large Screens
  */
- @media screen and (min-width: 1200px) {
-
+/* @media screen and (min-width: 1200px) {
     main section aside div * {
         margin: 10px 0;
     }
-    
-}
+} */
