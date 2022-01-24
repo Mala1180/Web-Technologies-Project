@@ -46,7 +46,7 @@ function populateCart() {
 
             $("#remove_" + cartEntry.idCartEntry).click(function () {
                 reqHelper.post("cart", "removeentry", {
-                    idCartEntry: e.idCartEntry
+                    idCartEntry: cartEntry.idCartEntry
                 }, function (data) {
                     if (data.success) {
                         $(".cart-item").remove();
