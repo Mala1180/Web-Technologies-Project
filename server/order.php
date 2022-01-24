@@ -131,7 +131,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
             send_data($tot);
             break;
         case "getCustomerOrders":
-            $idCustomer = $dbUserMgr->getUserInfoForToken(get_token_data()->username, "cliente")[0]["idCustomer"];
+            $idCustomer = get_token_data()->userId;
             $orders = $dbOrderMgr->getCustomerOrders($idCustomer);
             $ordersDetails = [];
             $tot = [];  
