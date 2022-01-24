@@ -7,7 +7,6 @@ $(document).ready(function () {
         e.preventDefault();
         readCardData();
     });
-
     $("#btnProceed").click((e) => {
         e.preventDefault();
         addOrder();
