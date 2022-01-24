@@ -52,7 +52,12 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
                     $tmpSubprice = intval($cartElem["quantity"]) * floatval($cartElem["price"]);
                     $data = $dbOrderMgr->addOrderDetail($cartElem["idProduct"], $idOrder, $cartElem["quantity"], $tmpSubprice);
                 }
-                $idCard = $dbCardMgr->getCardId($idCustomer, $_POST["cardNumber"])[0]["idCard"];
+                $res = $dbCardMgr->getCardId($idCustomer, $_POST["cardNumber"]);
+                if(count($res) > 0) {
+                    $idCard = $res[0]["idCard"];
+                } else {
+                    send_success(false); 
+                }
                 if($idCard > 0){
                     $dbTransactionMgr->addTransaction($idOrder, date("Y-m-d"), $idCard);
                     send_success($data);
