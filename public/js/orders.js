@@ -108,7 +108,7 @@ function getTotalFromOrder(products) {
     products.forEach(product => {
         total += product.subprice;
     });
-    return total;
+    return Math.round(total * 100) / 100;
 }
 
 //from Y-m-d to d-m-Y
