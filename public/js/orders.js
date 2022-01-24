@@ -21,20 +21,6 @@ $(document).ready(function () {
     });
 }
 
-function getTotalFromOrder(products) {
-    let total = 0;
-    products.forEach(product => {
-        total += product.subprice;
-    });
-    return total;
-}
-
-//from Y-m-d to d-m-Y
-function toITString(date) {
-    return date.split("-")[2] + "-" + date.split("-")[1] + "-" + date.split("-")[0];
-}
-
-
 /**
  * Appends orders in the list.
  *
@@ -83,11 +69,11 @@ function toITString(date) {
             switch (order["order"][0]["state"]) {
                 case 0: 
                 $order.find("#btnChangeState").html("Spedisci");
-                $order.find("#btnChangeState").click(function() {acceptOrder($order.find("#btnChangeState").val())});
+                $order.find("#btnChangeState").click(function() {changeOrderState($order.find("#btnChangeState").val(), 1)});
                 break;
                 case 1: 
                 $order.find("#btnChangeState").html("Consegna");
-                $order.find("#btnChangeState").click(function() {deliverOrder($order.find("#btnChangeState").val())});
+                $order.find("#btnChangeState").click(function() {changeOrderState($order.find("#btnChangeState").val(), 2)});
                 break;
                 case 2: 
                 $order.find("#btnChangeState").remove();
@@ -109,26 +95,13 @@ function getStringState(state) {
         return "Consegnato";
     }
 }
-//se stato === 0 effettuato
-//se stato === 1 accettato / in transito
-//se stato === 2 consegnato
-
-function acceptOrder(value){
-    changeOrderState(value, 1);
-    changeOrderDate(value, "spedito");
-}
-
-function deliverOrder(value) {
-    changeOrderState(value, 2);
-    changeOrderDate(value, "consegnato");
-    getOrders();
-}
 
 /**
  * Executes a POST request to server for accept or decline an order.
  *
  * @author Alberto Paganelli <albi1600@gmail.com>
  * @param {Number} idOrder id of the order to be accepted or declined
+ * @param {Number} state the state that will be setted
  */
  function changeOrderState(idOrder, state) {
     reqHelper.post("order", "changeState", {
@@ -144,23 +117,17 @@ function deliverOrder(value) {
     });
 }
 
+/** Utilities */
 
-/**
- * Executes a POST request to server for changing order date.
- *
- * @author Alberto Paganelli <albi1600@gmail.com>
- * @param {Number} orderId id of the order
- */
-//spedito o consegnato // da cambiare in numeri.
- function changeOrderDate(idOrder, type) {
-    reqHelper.post("order", "setDate", {
-        idOrder: idOrder,
-        type: type
-    }, function (res) {
-        if (res.success) {
-            //change graphic con data di spedizione o consegna.
-        } else {
-            console.error("An error occurred while changing order date.");
-        }
+function getTotalFromOrder(products) {
+    let total = 0;
+    products.forEach(product => {
+        total += product.subprice;
     });
+    return total;
+}
+
+//from Y-m-d to d-m-Y
+function toITString(date) {
+    return date.split("-")[2] + "-" + date.split("-")[1] + "-" + date.split("-")[0];
 }

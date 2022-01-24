@@ -11,7 +11,6 @@ require_once("../vendor/autoload.php");
 require_once('validate.php');
 
     if($_SERVER["REQUEST_METHOD"] == "GET") {
-        var_dump($_GET);
         if(!isset($_GET["action"])) {
             send_error("An action is required");
             exit();
@@ -28,7 +27,6 @@ require_once('validate.php');
             default:
             send_error("Unknown action");
                 break;
-
         }
     } else if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if(!isset($_POST["action"])) {
