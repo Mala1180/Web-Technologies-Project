@@ -32,7 +32,8 @@ main section form label {
     font-size: clamp(1em, 1.4vw, 1.6em);
 }
 
-main section form input:not([type="button"], [type="checkbox"]) {
+main section form input:not([type="button"], [type="checkbox"]),
+main section form select {
     border-radius: 5px;
     border: 1px solid #ccc;
     padding: 5px 10px;

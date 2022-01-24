@@ -1,7 +1,7 @@
 /**
  *  Header and Navbar (home)
  */
- body > header {
+body > header {
     position: fixed;
     background-image: unset;
     width: 100%;
@@ -13,7 +13,9 @@
 /**
  *  if backdrop-filter supported
  */
-@supports ((-webkit-backdrop-filter: blur(25px)) or (backdrop-filter: blur(25px))) {
+@supports (
+    (-webkit-backdrop-filter: blur(25px)) or (backdrop-filter: blur(25px))
+) {
     body > header {
         -webkit-backdrop-filter: blur(25px);
         backdrop-filter: blur(25px);
@@ -47,11 +49,13 @@ main section a {
     color: white;
     letter-spacing: 0.35em;
     /* same of sections height */
-    line-height: calc((100vh - var(--nav-height)) / 4);
+    line-height: calc((100vh - var(--nav-height)) / 2);
     cursor: pointer;
 }
 
-@supports ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+@supports (
+    (-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))
+) {
     main section a {
         -webkit-backdrop-filter: blur(1px);
         backdrop-filter: blur(1px);
@@ -59,8 +63,10 @@ main section a {
 }
 
 main section:first-child a {
-    height: calc(((100vh - var(--nav-height)) / 4) + var(--nav-height));
-    line-height: calc(((100vh - var(--nav-height)) / 4) + 2 * var(--nav-height));
+    height: calc(((100vh - var(--nav-height)) / 2) + var(--nav-height));
+    line-height: calc(
+        ((100vh - var(--nav-height)) / 2) + 2 * var(--nav-height)
+    );
 }
 
 main section:nth-child(2) {
@@ -79,38 +85,59 @@ main section:nth-child(4) {
  *  Medium Screens
  */
 @media screen and (min-width: 768px) {
+    /* main section {
+        flex: 1 0 50%;
+    } */
+
+    /* main section:nth-child(1) a,
+    main section:nth-child(2) a {
+        height: 100vh;  calc(((100vh - var(--nav-height)) / 2) + var(--nav-height)); 
+        line-height: calc(
+            ((100vh - var(--header-height))) + 2 * var(--header-height)
+        );
+    } */
+
+    /* main section:nth-child(3) a,
+    main section:nth-child(4) a {
+        height: calc((100vh - var(--nav-height)) / 2);
+        line-height: calc((100vh - var(--nav-height)) / 2);
+    } */
+}
+
+/**
+ *  Large Screens
+ */
+@media screen and (min-width: 992px) {
     main {
         flex-direction: row;
         flex-wrap: wrap;
     }
-
     main section {
         flex: 1 0 50%;
     }
 
     main section:nth-child(1) a,
     main section:nth-child(2) a {
-        height: calc(((100vh - var(--nav-height)) / 2) + var(--nav-height));
-        line-height: calc(((100vh - var(--nav-height)) / 2) + 2 * var(--nav-height));
-    }
-
-    main section:nth-child(3) a,
-    main section:nth-child(4) a {
-        height: calc((100vh - var(--nav-height)) / 2);
-        line-height: calc((100vh - var(--nav-height)) / 2);
+        height: 100vh; /*calc(((100vh - var(--nav-height)) / 2) + var(--nav-height)); */
+        line-height: calc(
+            ((100vh - var(--header-height))) + 2 * var(--header-height)
+        );
+        font-size: 48px;
     }
 }
 
 /**
- *  Large Screens
+ *  Extra Large Screens
  */
 @media screen and (min-width: 1200px) {
-    main section {
+    /* main section {
         flex: 1 0 24%;
-    }
+    } */
 
     main section:nth-child(n) a {
         height: 100vh;
-        line-height: calc((100vh - var(--header-height)) + 2 * var(--header-height));
+        line-height: calc(
+            (100vh - var(--header-height)) + 2 * var(--header-height)
+        );
     }
 }

@@ -1,0 +1,14 @@
+main section:last-of-type select {
+    padding: 5px 8px;
+    margin-left: 10px;
+    border-radius: 5px;
+}
+
+main > footer {
+    text-align: center;
+}
+
+main > footer > input[type="button"] {
+    background-color: #3a71ea;
+    font-size: clamp(1.2em, 1.6vw, 2.2em);
+}
