@@ -41,7 +41,7 @@ create table creditCard (
      idCard int not null auto_increment,
      holder varchar(100) not null,
      cardNumber varchar(16) not null,
-     circuit varchar(10) not null,
+     circuit varchar(50) not null,
      expiryDate date not null,
      cvv varchar(10) not null,
      isDeleted tinyint not null,
@@ -63,7 +63,7 @@ create table album (
      description varchar(280) not null,
      idAuthor int not null,
      duration int not null,
-     imgPath varchar(50) not null,
+     imgPath varchar(80) not null,
      constraint IDalbum_ID primary key (idAlbum),
      constraint IDalbum_1 unique (idAuthor, name));
 
@@ -80,7 +80,7 @@ create table author (
      idAuthor int not null auto_increment,
      artName varchar(50) not null,
      email varchar(50) not null,
-     username varchar(16) not null,
+     username varchar(50) not null,
      password varchar(150) not null,
      constraint IDauthor primary key (idAuthor));
 
@@ -93,7 +93,7 @@ create table song (
 create table product (
      idProduct int not null auto_increment,
      quantity int not null,
-     price decimal(4,2) not null,
+     price double not null,
      description varchar(280) not null,
      type tinyint not null,
      idAlbum int,
@@ -103,7 +103,7 @@ create table orderDetail (
      idProduct int not null,
      idOrder int not null,
      quantity int not null,
-     subprice decimal(4,2) not null,
+     subprice double not null,
      constraint IDorderDetail primary key (idOrder, idProduct));
 
 create table customerOrder (
@@ -131,13 +131,6 @@ create table notification (
      isDeleted tinyint not null,
      idCustomer int not null,
      constraint IDnotification primary key (idNotification));
-
-create table featuring (
-     idAuthor int not null,
-     idAlbum int not null,
-     song varchar(50) not null,
-     constraint IDfeaturing primary key (idAuthor, idAlbum, song));
-
 
 -- Constraints Section
 -- ___________________ 
@@ -226,15 +219,6 @@ alter table cartEntry add constraint FKrelativeTo
 alter table notification add constraint FKto
      foreign key (idCustomer)
      references customer (idCustomer);
-
-alter table featuring add constraint FKsong
-     foreign key (idAlbum, song)
-     references song (idAlbum, name);
-
-alter table featuring add constraint FKauthor
-     foreign key (idAuthor)
-     references author (idAuthor);
-
 
 -- Index Section
 -- _____________ 
