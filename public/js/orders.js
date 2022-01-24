@@ -1,27 +1,6 @@
 $(document).ready(function () {
     getOrders();
 
-    // $("#addSong").click(function () {
-    //     console.log(readSongs());
-    //     const list = $("fieldset:nth-child(2) > ul");
-    //     let count = $(list).children().length + 1;
-    //     const songTemplate = `
-    //     <li>
-    //         <label for="songTitle_${count}">Titolo</label>
-    //         <input id="songTitle_${count}" type="text" placeholder="titolo"/>
-    //         <label for="songDuration_${count}">Durata</label>
-    //         <input id="songDuration_${count}" type="text" placeholder="mm:ss"/>
-    //     </li>`;
-    //     $(list).append(songTemplate);
-    // });
-    // setup confirm modal
-    //$(".confirm-modal h2").text("Vuoi eliminare questa notifica?");
-    // $(".confirm-modal #yes").click(function () {
-    //     deleteNotification($(this).val());
-    // });
-    // $(".confirm-modal #no").click(function () {
-    //     $(".confirm-modal").addClass("hidden");
-    // });
 });
 
 
@@ -81,7 +60,7 @@ function toITString(date) {
                     </section>
                     <section class="order-details">
                         <h2>Linee d'ordine</h2>
-                        <ul class="order-details-list">
+                        <ul class="order-details-list-${order["order"][0]["idOrder"]}">
                             
                         </ul>
                     </section>
@@ -92,13 +71,13 @@ function toITString(date) {
             for (let j = 0; j < order.products[0].length; j++) {
                 const $orderDetail = $(`<li>
                                         <div>
-                                        <h3>NomeProdotto</h3>
+                                        <h3>${order.products[0][j].name}</h3>
                                         <span>Prezzo: € ${Math.round(order.products[0][j].subprice / order.products[0][j].quantity * 100) / 100}</span>
                                         <span>Quantità: ${order.products[0][j].quantity}</span>
                                         <span>Totale: € ${order.products[0][j].subprice}</span>
                                     </div>
                                 </li>`);
-                $(".order-details-list").append($orderDetail);
+                $(".order-details-list-" + order["order"][0]["idOrder"]).append($orderDetail);
             }
 
             switch (order["order"][0]["state"]) {
@@ -124,13 +103,10 @@ function getStringState(state) {
     switch(state){
         case 0:
         return "Effettuato";
-        break;
         case 1:
         return "In consegna";
-        break;
         case 2:
         return "Consegnato";
-        break;
     }
 }
 //se stato === 0 effettuato
