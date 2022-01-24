@@ -1,5 +1,10 @@
 function populateCart() {
     reqHelper.get("cart", "getcart", {}, function (data) {
+        if (data.data.length) {
+            $("main > p").hide();
+        } else {
+            $("main > footer").hide();
+        }
         data.data.forEach(e => {
             let cartHtml = `
             <section class="cart-item">  

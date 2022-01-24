@@ -15,8 +15,9 @@
         <main>
             <h1>Il tuo carrello</h1>
             <div></div>
+            <p>Nessun articolo aggiunto al carrello</p>
             <footer>
-                <button>Procedi all'ordine</button>
+                <button id="checkout">Procedi all'ordine</button>
             </footer>
         </main>
         <script src="./public/js/cart.js"></script>
