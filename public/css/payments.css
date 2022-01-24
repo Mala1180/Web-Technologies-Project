@@ -91,6 +91,10 @@ main section ul.cards-list li > .card-details span {
     margin-bottom: 10px;
 }
 
+main section ul.cards-list li .card-details .trash-button {
+    background-color: crimson;
+}
+
 @media screen and (min-width: 768px) {
     main section {
         margin: 0;

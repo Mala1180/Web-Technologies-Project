@@ -43,11 +43,30 @@ class DBCardMgr {
 		/* Remove default  */
 		$query = "SELECT idCard FROM creditCard WHERE holder=? AND cardNumber=? AND circuit=? AND cvv=? AND expiryDate=? AND idCustomer=?";
 		$idCard = execute_query($this->db, $query, array($holder, $cardNumber, $circuit, $cvv, $expiryDate, $idCustomer))[0];
-		send_data(var_dump($idCard['idCard']));
 		$idCard = intval($idCard['idCard']);
 		$query = "UPDATE `customer` SET idCard=? WHERE idCustomer=?";
 		return execute_query($this->db, $query, array($idCard, $idCustomer));
 	}
+
+	public function isDefaultCard($idCard, $idCustomer) {
+		$query = "SELECT idCard FROM customer WHERE idCustomer=?";
+		$result = execute_query($this->db, $query, array($idCustomer));
+		return $result[0]['idCard'] == $idCard;
+	}
+
+	public function deleteCard($idCard) {
+		$query = "SELECT `idCard` FROM creditCard WHERE idCustomer = ?";
+		$cards = execute_query($this->db, $query, array(get_token_data()->userId));
+		foreach ($cards as $card) {
+			if ($card['idCard'] == $idCard) {
+				$query = "UPDATE `creditCard` SET `isDeleted`=1 WHERE idCard=?";
+				execute_query($this->db, $query, array($idCard));
+				return true;
+			}
+		}
+		return false;
+	}
+
 }
  $dbCardMgr = new DBCardMgr($db);
 ?>
