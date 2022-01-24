@@ -47,10 +47,9 @@ main section form input[type="checkbox"] {
     height: 20px;
 }
 
-main section form div:last-of-type {
-    margin-top: 20px;
-    display: flex;
-    justify-content: center;
+main section form input[type="button"] {
+    display: block;
+    margin: 20px auto 30px;
 }
 
 /* your card section */
