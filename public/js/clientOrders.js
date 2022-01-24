@@ -79,15 +79,14 @@ function displayOrders(orders) {
             const products = order.products[0];
             let orderTotal = 0;
             for (const product of products) {
-                let productTotal = product.subprice * product.quantity;
                 const $product = $(`
                 <li id="${product.idProduct}">
                     <img src="./public/img/products/${product.imgPath}" alt="immagine dell'album">
                     <div>
                         <h3>${product.name}</h3>
-                        <span>Prezzo: € ${product.subprice}</span>
+                        <span>Prezzo: € ${product.subprice / product.quantity}</span>
                         <span>Quantità: ${product.quantity}</span>
-                        <span>Totale: € ${productTotal}</span>
+                        <span>Totale: € ${product.subprice}</span>
                     </div>
                 </li>`);
                 $order.find(".order-details > ul").append($product);
@@ -98,7 +97,7 @@ function displayOrders(orders) {
                 $product.find("h3").click(function () {
                     location.href = `./productDetail.php?id=${product.idProduct}`;
                 });
-                orderTotal += productTotal;
+                orderTotal += product.subprice;
             }
             $order.find(".total").text(`Totale: € ${orderTotal}`);
 

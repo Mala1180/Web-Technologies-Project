@@ -35,7 +35,7 @@
                     <li>
                         <label for="txtPassword">Password</label>
                         <img src="./public/img/icons/key_black.png" alt=""><input type="password" name="txtPassword" id="txtPassword" placeholder="Password"required />
-                        <a href="#">Hai dimenticato la password?</a>
+                        <a href="./userPasswordRecover.php">Hai dimenticato la password?</a>
                     </li>
                     <li>
                         <input type="submit" name="btnLogin" id="SubmitLogin" value="Entra" />
