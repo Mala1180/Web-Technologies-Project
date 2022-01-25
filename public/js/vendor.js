@@ -86,7 +86,11 @@ async function addAlbum(name, description, duration, genre, songs, products) {
     }, function (data) {
         console.log(data);
         if (data.success) {
-            console.log("Album creato con successo");
+            Swal.fire("", "prodotto aggiunto correttamente", "success").then(r => {
+                location.href = "vendorDashboard.php";
+            })
+        } else {
+            Swal.fire("", "si è verificato un problema", "error");
         }
     });
 }
@@ -110,7 +114,7 @@ function addProduct(quantity, price, description, type) {
         function (data) {
             console.log(data);
             if (data.success) {
-                console.log(data)
+
             }
         });
 }
