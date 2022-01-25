@@ -1,5 +1,9 @@
 $(document).ready(function () {
     getOrders();
+
+    $("header #search-section form").remove();
+    $("header #search-section").append(`<h1>Ordini</h1>`);
+    $("header nav ul li > button#search-button").remove();
 });
 
 /**

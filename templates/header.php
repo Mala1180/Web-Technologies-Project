@@ -47,7 +47,7 @@
                 <a href="./terms.php">Informativa sui dati</a>
             </span> 
             <span>
-                <a href="./profile.php">Il mio profilo</a>
+                <a href="./profile.php">Profilo</a>
                 <a href="./cart.php">Carrello</a>
                 <a href="./userNotifications.php">Notifiche</a>
                 <a href="./logout.php" id="logoutBtn">Logout</a>

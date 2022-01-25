@@ -7,6 +7,7 @@
         <title>Unibo Vinyl - Ordini</title>
     </head>
     <body>
+        <?php require("./templates/header.php"); ?>
         <main>
             <h1>Ordini</h1>
             <ul class="orders-list">

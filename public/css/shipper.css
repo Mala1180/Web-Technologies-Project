@@ -2,12 +2,18 @@ main {
     padding: 10px;
 }
 
-main h1 {
-    font-family: lato-regular;
+h1 {
     text-align: center;
     margin: 10px 0 20px 0;
     letter-spacing: 0.1em;
+    font-size: clamp(3em, 2.5vw, 4em);
+    color: white;
+}
+
+main h1 {
+    font-family: lato-regular;
     font-size: clamp(2em, 2.5vw, 3em);
+    color: black;
 }
 
 main ul {
@@ -83,4 +89,10 @@ main > ul > li > section.order-details div {
 main > ul > li > section.order-details ul > li h3 {
     flex-basis: 100%;
     margin-bottom: 5px;
+}
+
+@media screen and (min-width: 992px) {
+    main h1 {
+        display: none;
+    }
 }
