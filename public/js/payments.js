@@ -24,9 +24,11 @@ $(document).ready(function() {
 
 
 function readCardData() {
-    if (cardHolder.value !== "" && cardNumber.value !== "" && cardCircuit.value !== "" &&
+    if (cardHolder.value !== "" && cardNumber.value !== "" && cardNumber.value.length == 16 && cardCircuit.value !== "" &&
         cardExpiration.value !== "" && cardCvv.value !== "") {
         addCardToUser(cardHolder.value, cardNumber.value, cardCircuit.value, cardExpiration.value + "-01", cardCvv.value, isDefault.checked);
+    } else {
+        Swal.fire("Controlla i dati inseriti", "Alcuni dei dati inseriti sono risultati errati", "error");
     }
 }
 
