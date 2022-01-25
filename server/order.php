@@ -39,6 +39,9 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 	}
 	switch ($_POST["action"]) {
 		case "addOrder":
+            if (!is_client_logged())) {
+                send_error("A shipper must be logged");
+            }
             $idCustomer = get_token_data()->userId;
             $idOrder = $dbOrderMgr->addOrder(date("Y-m-d"), $idCustomer);
             if($idOrder > 0) {
@@ -69,8 +72,12 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
             }
             break;
         case "changeState":
+            if (!is_shipper_logged())) {
+                send_error("A shipper must be logged");
+            }
             $state = intval($_POST["state"]);
             if($state >= 0 && $state <= 2) {
+                /* TODO: idCustomer */
                 $idCustomer = get_token_data()->userId;
                 switch($state) {
                     case 1: 
@@ -98,6 +105,10 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
             break;
         case "setDate":
             //check if is one shipper get_token_data()->id or username.
+            if (!is_shipper_logged())) {
+                send_error("A shipper must be logged");
+            }
+            
             if($_POST["type"] == "spedito" || $_POST["type"] == "consegnato") {
                 $data = $dbOrderMgr->setDate($_POST["idOrder"], $_POST["type"], date("Y-m-d"));
             }
@@ -105,6 +116,9 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
             break;
         case "getOrder":
             //check if is one shipper get_token_data()->id or username.
+            if (!is_shipper_logged())) {
+                send_error("A shipper must be logged");
+            }
             $orders = $dbOrderMgr->getOrders();
             $ordersDetails = [];
             $tot = [];  
@@ -120,6 +134,9 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
             send_data($tot);
             break;
         case "getCustomerOrders":
+            if (!is_client_logged())) {
+                send_error("A client must be logged");
+            }
             $idCustomer = get_token_data()->userId;
             $orders = $dbOrderMgr->getCustomerOrders($idCustomer);
             $ordersDetails = [];

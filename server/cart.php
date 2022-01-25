@@ -9,6 +9,11 @@ require_once('mail.php');
 
 use Firebase\JWT\JWT;
 
+
+if (!is_client_logged()) {
+	send_error("A client must be logged");
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
 	if(!isset($_GET["action"])) {
 		send_error("An action is required");

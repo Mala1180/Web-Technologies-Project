@@ -8,6 +8,11 @@ require_once("db/dbUserManager.php");
 require_once("../vendor/autoload.php");
 require_once('validate.php');
 
+
+    if (!(is_client_logged() || is_vendor_logged())) {
+        send_error("A user must be logged");
+    }
+    
     if ($_SERVER["REQUEST_METHOD"] == "GET") {
         if (!isset($_GET["action"])) {
             send_error("An action is required");

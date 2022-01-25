@@ -24,6 +24,9 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 		send_error("An action is required");
 		exit();
 	}
+	if (!is_client_logged()) {
+		send_error("A client must be logged");
+	}
 	switch ($_POST["action"]) {
 		case "getCard":
             $idCustomer = get_token_data()->userId;
