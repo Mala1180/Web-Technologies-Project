@@ -28,7 +28,7 @@ class DBNotificationMgr {
         return execute_query($this->db, $query, array("0", $userId));
     }
     
-    public function getUnreadNotificationsNumber($userId) {
+    public function getUnreadNotificationsNumber($userId, $type) {
         if($type == "cliente") {
             $query = "SELECT COUNT(*) AS unreadNotificationsNumber
                 FROM `notification`
@@ -69,8 +69,8 @@ class DBNotificationMgr {
     }
 
     public function deleteNotification($notificationId) {
-        $query = "UPDATE `notification` SET isDeleted=? WHERE idNotification=?";
-        return execute_query($this->db, $query, array(1, $notificationId));
+        $query = "UPDATE `notification` SET isDeleted=?, isRead=? WHERE idNotification=?";
+        return execute_query($this->db, $query, array(1, 1, $notificationId));
     }
 }
 

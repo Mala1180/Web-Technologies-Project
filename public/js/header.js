@@ -35,7 +35,9 @@ $(document).ready(function () {
         });
     });
 
-    getUnreadNotificationsNumber();
+    if (jwt.getJWT()) {
+        getUnreadNotificationsNumber();
+    }
 });
 
 

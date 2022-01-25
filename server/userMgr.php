@@ -29,6 +29,9 @@ use Firebase\JWT\JWT;
                 $data = $dbUserMgr->getUserInfo(get_token_data()->userId, get_token_data()->type);
                 send_data($data);
                 break;
+            case "getUserType":
+                send_data(get_token_data()->type);
+                break;
             case "updateUserInfo":
                 $data = $dbUserMgr->updateUserInfo(get_token_data()->userId,
                                                    get_token_data()->type,

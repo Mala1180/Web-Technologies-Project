@@ -13,6 +13,7 @@
         <title>Unibo Vinyl - Profilo</title>
     </head>
     <body>
+        <?php require("./templates/header.php"); ?>
         <main>
             <section><a href="userVendor.php">Nuovo prodotto</a></section>
             <section><a href="vendorProductList.php">Gestione prodotti</a></section>

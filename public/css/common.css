@@ -20,6 +20,14 @@ body {
     width: 100%;
 }
 
+main h1 {
+    font-family: lato-regular;
+    text-align: center;
+    margin: 10px 0 20px 0;
+    letter-spacing: 0.1em;
+    font-size: clamp(2em, 2.5vw, 3em);
+}
+
 a {
     text-decoration: none;
     color: #bb2e29;

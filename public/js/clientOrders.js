@@ -40,7 +40,7 @@ function displayOrders(orders) {
             <li>
                 <section class="order-header">
                     <div>
-                        <h2 class="date">Ordine #${summary.idOrder} del ${summary.orderDate}</h2>
+                        <h2 class="date">Ordine #${summary.idOrder} del ${toITString(summary.orderDate)}</h2>
                         <span class="total"></span>
                     </div>
                     <button>Dettagli</button>

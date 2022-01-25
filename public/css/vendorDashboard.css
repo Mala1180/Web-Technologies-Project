@@ -1,3 +1,11 @@
+h1 {
+    text-align: center;
+    margin: 10px 0 20px 0;
+    letter-spacing: 0.1em;
+    font-size: clamp(3em, 2.5vw, 4em);
+    color: white;
+}
+
 main {
     display: flex;
     flex-direction: column;
