@@ -18,7 +18,7 @@ class DBProductMgr {
  	}
 
  	public function removeProduct($idProduct) {
- 		$query = "DELETE FROM `product` WHERE idProduct=?";
+ 		$query = "UPDATE `product` SET isDeleted = 1 WHERE idProduct=?";
 		return execute_query($this->db, $query, array($idProduct));
  	}
 
