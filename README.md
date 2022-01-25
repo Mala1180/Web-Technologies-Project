@@ -8,4 +8,4 @@ Per una corretta configurazione svolgere i seguenti passaggi:
 Credenziali del corriere (shipper):
 
 -   Username: shipper
--   Password: shipper
+-   Password: shipper1
