@@ -98,7 +98,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
                         }
                         $authors = array_unique($authors);
                         foreach($authors as $author) {
-                            $dbNotificationMgr->sendNotification($author, "artista", "Ordine #".$idOrder." spedito", "L' ordine #".$idOrder." è stato spedito, le segnaleremo quando verrà consegnato.");
+                            $dbNotificationMgr->sendNotification($author, "artista", "Ordine #".$idOrder." spedito", "L' ordine #".$idOrder." è stato spedito.");
                         }
                         $type = "spedito";
                         $dbNotificationMgr->sendNotification($idCustomer, "cliente", "Ordine #".$idOrder." spedito", "L' ordine #".$idOrder." è stato spedito, le segnaleremo quando verrà consegnato.");
@@ -110,7 +110,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
                         }
                         $authors = array_unique($authors);
                         foreach($authors as $author) {
-                            $dbNotificationMgr->sendNotification($author, "artista", "Ordine #".$idOrder." consegnato", "L' ordine #".$idOrder." è stato consegnato, la ringraziamo per aver utilizzato UniboVinyl.");
+                            $dbNotificationMgr->sendNotification($author, "artista", "Ordine #".$idOrder." consegnato", "L' ordine #".$idOrder." è stato consegnato.");
                         }
                         $type = "consegnato";
                         $dbNotificationMgr->sendNotification($idCustomer, "cliente", "Ordine #".$idOrder." consegnato", "L' ordine #".$idOrder." è stato consegnato, la ringraziamo per aver utilizzato UniboVinyl.");        

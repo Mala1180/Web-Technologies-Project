@@ -129,7 +129,8 @@ create table notification (
      notificationDate date not null,
      isRead tinyint not null,
      isDeleted tinyint not null,
-     idCustomer int not null,
+     idCustomer int,
+     idAuthor int,
      constraint IDnotification primary key (idNotification));
 
 -- Constraints Section
