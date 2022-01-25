@@ -1,5 +1,5 @@
 let $cartPreview;
-let $closePreview;
+let $togglePreview;
 let products = [];
 
 $(document).ready(function () {
@@ -12,25 +12,21 @@ $(document).ready(function () {
     searchProducts(QUERY, FILTER);
 
     $cartPreview = $("body > aside");
-    $closePreview = $("body > aside > header > button");
-
-    if ($cartPreview.find("ul").children().length == 0) {
-        $cartPreview.hide();
-    }
-        
-    const CART_PREVIEW_HEADER_HEIGHT = $("body > aside > header").outerHeight();
-    const CART_PREVIEW_MARGINS = 10;
-    const CLOSED_PREVIEW_BOTTOM = ($cartPreview.height() + CART_PREVIEW_MARGINS) * -1 + CART_PREVIEW_HEADER_HEIGHT;
+    $togglePreview = $("body > aside > header > button");
 
     // close / open cart preview
-    $closePreview.click(function () {
+    $togglePreview.click(function () {
         if (window.innerWidth > 992) return;
+
+        const CART_PREVIEW_HEADER_HEIGHT = $("body > aside > header").outerHeight();
+        const CART_PREVIEW_MARGINS = 10;
+        const CLOSED_CART_PREVIEW_BOTTOM = ($cartPreview.height() + CART_PREVIEW_MARGINS) * -1 + CART_PREVIEW_HEADER_HEIGHT;
 
         const $img = $(this).find("img");
         // if is closing
         if ($img.attr("src") === "public/img/icons/cancel.png") {
             $img.attr("src", "public/img/icons/up-arrow.png");
-            $cartPreview.css("bottom", CLOSED_PREVIEW_BOTTOM);
+            $cartPreview.css("bottom", CLOSED_CART_PREVIEW_BOTTOM);
         } else { // if is opening
             $img.attr("src", "public/img/icons/cancel.png");
             $cartPreview.css("bottom", 0);
@@ -52,6 +48,9 @@ $(document).ready(function () {
     $goToCart.click(function () {
         location.href = "cart.php";
     });
+
+
+    getCartEntries();
 });
 
 /**
@@ -60,6 +59,7 @@ $(document).ready(function () {
  * @author Mattia Matteini <matteinimattia@gmail.com>
  * @param {String} query string with the query to be searched
  * @param {String} filter string with the filter to be used (0 = cd, 1 = vinyl)
+ * @see displayProducts
  */
 function searchProducts(query, filter) {
     if (query.length == 0 && filter.length == 0) return;
@@ -95,8 +95,8 @@ function displayProducts(products) {
                 <aside>
                     <div>
                         <h2>${product.name}</h2>
-                        <span>Autore: ${product.name}</span>
-                        <span>Tipologia: ${product.type == 0 ? "CD" : "Vinile"}</span>
+                        <span>Autore: ${product.author}</span>
+                        <span>Tipologia: ${product.type === 0 ? "CD" : "Vinile"}</span>
                         <span>Disponibilità: ${product.quantity}</span>
                     </div>
                     <div>
@@ -130,29 +130,29 @@ function addToCart(idProduct) {
         function (data) {
             if (data.success) {
                 Swal.fire("", "prodotto aggiunto al carrello", "success");
-
-                products.forEach(product => {
-                    if (product.idProduct === idProduct) {
-                        if ($cartPreview.is(":hidden")) {
-                            $cartPreview.fadeIn("medium");
-                        }
-                        const $articlePreview = $(`
-                        <li>
-                            <section>
-                                <div>
-                                    <img src="public/img/vinile1.jpg" alt="article image" />
-                                    <h2>Nome Vinile molto lungo</h2>
-                                </div>
-                                <div>
-                                    <span class="material-icons-outlined">remove</span>
-                                    <span>2</span>
-                                    <span class="material-icons-outlined">add</span>
-                                </div>
-                            </section>
-                        </li>`);
-                        $("aside ul").append($articlePreview);
-                    }
-                });
+                getCartEntries();
+                // products.forEach(product => {
+                //     if (product.idProduct === idProduct) {
+                //         if ($cartPreview.is(":hidden")) {
+                //             $cartPreview.fadeIn("medium");
+                //         }
+                //         const $articlePreview = $(`
+                //         <li>
+                //             <section>
+                //                 <div>
+                //                     <img src="public/img/vinile1.jpg" alt="article image" />
+                //                     <h2>Nome Vinile molto lungo</h2>
+                //                 </div>
+                //                 <div>
+                //                     <span class="material-icons-outlined">remove</span>
+                //                     <span>2</span>
+                //                     <span class="material-icons-outlined">add</span>
+                //                 </div>
+                //             </section>
+                //         </li>`);
+                //         $("aside ul").append($articlePreview);
+                //     }
+                // });
             } else {
                 Swal.fire("", "Verifica la disponibilità del prodotto", "error");
             }
@@ -160,27 +160,94 @@ function addToCart(idProduct) {
     }
 }
 
+/**
+ * Executes a GET request to server for getting cart entries. Then calls updateCartPreview.
+ * 
+ * @author Mattia Matteini <matteinimattia@gmail.com>
+ * @see updateCartPreview
+ */
+function getCartEntries() {
+    // get cart entries
+    reqHelper.get("cart", "getcart", {}, function (res) {
+        if (res.success) {
+            updateCartPreview(res.data);
+        }
+    });
+}
 
-function displayProductsInPreview(products) {
-    if (products) {
-        $("aside ul").empty();
-        for (let i = 0; i < products.length; i++) {
-            const product = products[i];
+
+/**
+ * Appends cart entries in the cart preview.
+ *
+ * @author Mattia Matteini <matteinimattia@gmail.com>
+ * @param {Number} cartEntries array of cart entries to be displayed
+ */
+function updateCartPreview(cartEntries) {
+    if (cartEntries) {
+        const $cartPreviewList = $("aside ul");
+        $cartPreviewList.empty();
+        for (let i = 0; i < cartEntries.length; i++) {
+            const cartEntry = cartEntries[i];
+            console.log(cartEntry);
             const $articlePreview = $(`
-            <li>
+            <li id="${cartEntry.idCartEntry}">
                 <section>
                     <div>
-                        <img src="public/img/vinile1.jpg" alt="article image" />
-                        <h2>Nome Vinile molto lungo</h2>
+                        <img src="public/img/products/${cartEntry.imgPath}" alt="" />
+                        <h2>(${cartEntry.type === 0 ? "CD" : "Vinile"}) ${cartEntry.name}</h2>
                     </div>
                     <div>
-                        <span class="material-icons-outlined">remove</span>
-                        <span>2</span>
-                        <span class="material-icons-outlined">add</span>
+                        <span class="material-icons-outlined remove">remove</span>
+                        <span>${cartEntry.quantity}</span>
+                        <span class="material-icons-outlined add">add</span>
                     </div>
                 </section>
             </li>`);
-            $("aside ul").append($articlePreview);
+            $cartPreviewList.append($articlePreview);
+            $articlePreview.find("span.remove").click(function () {
+                // if quantity is 1, remove the entry
+                if (cartEntry.quantity - 1 === 0) {
+                    reqHelper.post("cart", "removeentry", {
+                        idCartEntry: cartEntry.idCartEntry
+                    }, function (data) {
+                        if (data.success) {
+                            Swal.fire("", "Articolo rimosso correttamente", "success");
+                            getCartEntries();
+                        } else {
+                            console.error("An error occurred while removing an entry from cart.");
+                        }
+                    });
+                } else {
+                    modifyEntryCartQuantity(parseInt(cartEntry.idCartEntry), cartEntry.quantity - 1);
+                }
+            });
+            $articlePreview.find("span.add").click(function () {
+                modifyEntryCartQuantity(parseInt(cartEntry.idCartEntry), cartEntry.quantity + 1);
+            });
+        }
+        if ($cartPreviewList.children().length > 0 && $cartPreview.is(":hidden")) {
+            $cartPreview.slideDown();
         }
     }
+}
+
+/**
+ * Executes a POST request to server for modiy a cart entry quantity.
+ * 
+ * @author Mattia Matteini <matteinimattia@gmail.com>
+ * @param {Number} idCartEntry 
+ * @param {Number} quantity 
+ */
+function modifyEntryCartQuantity(idCartEntry, quantity) {
+    reqHelper.post("cart", "setquantity", {
+        idCartEntry: idCartEntry,
+        quantity: quantity
+    }, function (data) {
+        if (data.success) {
+            Swal.fire("", "Modifica effettuata correttamente", "success");
+            getCartEntries();
+        } else {
+            Swal.fire("", "Verifica la disponibilità del prodotto", "error");
+        }
+    });
 }

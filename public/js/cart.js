@@ -42,7 +42,7 @@ function populateCart() {
                         Swal.fire("", "Verifica la disponibilità del prodotto", "error");
                     }
                 });
-            })
+            });
 
             $("#remove_" + cartEntry.idCartEntry).click(function () {
                 reqHelper.post("cart", "removeentry", {
