@@ -1,13 +1,11 @@
 # Web-Technologies-Project
 
-A web technologies project for University
+Per una corretta configurazione svolgere i seguenti passaggi:
 
-## Documentation
+-   dare i permessi alla cartella public/img/products per poter caricare le immagini dei relativi album.
+-   incollare ed eseguire le ddl presenti in server/db/UniboVinyl.ddl ed incollare il contenuto di dataInsert.sql
 
-### PDF Report
+Credenziali del corriere (shipper):
 
-The report can be found [here](https://github.com/Mala1180/Web-Technologies-Project/report).
-
-### JSDoc
-
-The full JSDoc can be found [here](https://github.com/Mala1180/Web-Technologies-Project/out)
+-   Username: shipper
+-   Password: shipper
