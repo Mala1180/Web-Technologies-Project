@@ -2,7 +2,7 @@
 	/**
 	 * The secret key witch jwt library use for encode user data and token 
 	 */
-	define("SECRET_KEY", "hellomyfriendsimthemadafakalongsecret:D");
+	define("SECRET_KEY", "hellomyfriendsimthelongsecret:D");
 
 	/**
  	 * The server name
