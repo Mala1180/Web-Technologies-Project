@@ -84,7 +84,7 @@ function displayOrders(orders) {
                     <img src="./public/img/products/${product.imgPath}" alt="immagine dell'album">
                     <div>
                         <h3>${product.name}</h3>
-                        <span>Prezzo: € ${product.subprice / product.quantity}</span>
+                        <span>Prezzo: € ${Math.round(product.subprice / product.quantity * 100) / 100}</span>
                         <span>Quantità: ${product.quantity}</span>
                         <span>Totale: € ${product.subprice}</span>
                     </div>

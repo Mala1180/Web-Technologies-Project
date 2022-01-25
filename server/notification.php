@@ -27,6 +27,11 @@ require_once('validate.php');
                 $data = $dbNotificationMgr->getNotifications($idCustomer);
                 send_data($data);
                 break;
+
+            case "getunreadnotificationnumber":
+                $idCustomer = get_token_data()->userId;
+                send_data($dbNotificationMgr->getUnreadNotificationsNumber($idCustomer));
+                break;
             default:
             send_error("Unknown action");
                 break;
