@@ -21,7 +21,6 @@ $(document).ready(function () {
     reqHelper.get("notification", "getnotifications", {}, function (res) {
         if (res.success) {
             notifications = res.data;
-            console.log(notifications);
             displayNotifications(notifications);
         } else {
             console.error("An error occurred while getting notifications.");

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <?php 
     require_once("server/validate.php");
-    if (!is_client_logged(true)) {
+    if (!(is_client_logged(true) || is_vendor_logged(true))) {
         header("location: userLogin.php");
     }
 ?>
