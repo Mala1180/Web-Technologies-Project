@@ -1,5 +1,7 @@
 <?php
 require_once("db/dbconnector.php");
+require_once("db/dbNotificationManager.php");
+require_once("db/dbCartManager.php");
 
 class DBProductMgr {
  	private $db;
@@ -18,8 +20,17 @@ class DBProductMgr {
  	}
 
  	public function removeProduct($idProduct) {
- 		$query = "UPDATE `product` SET isDeleted = 1 WHERE idProduct=?";
-		return execute_query($this->db, $query, array($idProduct));
+		global $dbCartMgr;
+		global $dbNotificationMgr;
+		$query = "UPDATE `product` SET isDeleted = 1 WHERE idProduct=?";
+		execute_query($this->db, $query, array($idProduct));
+		$clients = $dbCartMgr->removeDeletedProduct($idProduct);
+		foreach($clients as $client) {
+			$dbNotificationMgr->sendNotification($client['idCustomer'], "cliente",
+			"Prodotto non disponibile", 
+			"Un venditore ha rimosso un prodotto presente del tuo carrello");
+		}
+		return true;
  	}
 
     public function getProduct($idProduct) {
@@ -33,8 +44,17 @@ class DBProductMgr {
  	}
 	
 	public function editProduct($idProduct, $price, $quantity) {
+		global $dbCartMgr;
+		global $dbNotificationMgr;
 		$query = "UPDATE `product` SET quantity=?, price=? WHERE idProduct=?";
-		return execute_query($this->db, $query, array($quantity, $price, $idProduct));
+		execute_query($this->db, $query, array($quantity, $price, $idProduct));
+		$clients = $dbCartMgr->normalizeProductQuantity($idProduct);
+		foreach($clients as $client) {
+			$dbNotificationMgr->sendNotification($client['idCustomer'], "cliente",
+			"Modifica disponibilità prodotto", 
+			"Un venditore ha modificato la quantità disponibile di un prodotto presente del tuo carrello");
+		}
+		return true;
 	}
 
 	public function getCurrentQuantity($idProduct) {
@@ -44,10 +64,24 @@ class DBProductMgr {
  	}
 
 	public function decreaseQuantity($idProduct, $quantity) {
+		global $dbNotificationMgr;
+		global $dbCartMgr;
 		$currentQuantity = $this->getCurrentQuantity($idProduct);
 		if($currentQuantity >= $quantity) {
+			if ($currentQuantity == $quantity) {
+				$idAuthor = $this->getProductAuthor($idProduct);
+				$dbNotificationMgr->sendNotification($idAuthor, "artista", "Prodotto esaurito", "Controlla la lista prodotti, uno o più prodotti sono terminati");
+			}
+			
 			$query = "UPDATE `product` SET quantity=? WHERE idProduct=?";
-			return execute_query($this->db, $query, array($currentQuantity - $quantity, $idProduct));
+			execute_query($this->db, $query, array($currentQuantity - $quantity, $idProduct));
+			$clients = $dbCartMgr->normalizeProductQuantity($idProduct);
+			foreach($clients as $client) {
+				$dbNotificationMgr->sendNotification($client['idCustomer'], "cliente",
+				"Modifica disponibilità prodotto", 
+				"La disponibilità di un prodotto presente nel tuo carrello è cambiata");
+			}
+			return true;
 		}
 		return false;
 	}

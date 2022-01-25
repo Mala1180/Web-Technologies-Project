@@ -47,6 +47,34 @@ class DBCartMgr {
 		return execute_query($this->db, $query, array($idCartEntry));
  	}
 
+	
+	/* restituisce gli id dei clienti interessati */
+	public function removeDeletedProduct($idProduct) {
+		$query = "SELECT DISTINCT idCustomer FROM cartEntry WHERE idProduct = ? ";
+		$clients = execute_query($this->db, $query, array($idProduct));
+
+		$query = "DELETE FROM cartEntry WHERE idProduct = ? ";
+		execute_query($this->db, $query, array($idProduct));
+		return $clients;
+	}
+
+	/* cambia la quantita del prodotto nel carrello quando un venditore modifica la quantita disponibile, resituisce gli id dei clienti interessati */
+	public function normalizeProductQuantity($idProduct) {
+		$query = "SELECT quantity FROM product WHERE idProduct = ? ";
+		$quantity = execute_query($this->db, $query, array($idProduct))[0]["quantity"];
+
+		$query = "SELECT idCustomer FROM cartEntry WHERE idProduct = ? AND quantity > ?";
+		$clients = execute_query($this->db, $query, array($idProduct, $quantity));
+
+		$query = "UPDATE cartEntry SET quantity = ? WHERE idProduct = ? AND quantity > ?";
+		execute_query($this->db, $query, array($quantity, $idProduct, $quantity));
+
+		/* elimina righe vuote */
+		$query = "DELETE FROM cartEntry WHERE quantity = 0";
+		execute_query($this->db, $query, array());
+		return $clients;
+	}
+
 	public function editProductQuantity($idCartEntry, $quantity) {
 		global $dbProductMgr;
 		$query = "UPDATE `cartEntry` SET quantity=? WHERE idCartEntry=?";
