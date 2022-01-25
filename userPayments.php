@@ -1,4 +1,10 @@
 <!DOCTYPE html>
+<?php 
+    require_once("server/validate.php");
+    if (!is_client_logged(true)) {
+        header("location: userLogin.php");
+    }
+?>
 <html lang="it">
     <head>
         <title>Unibo Vinyl - Pagamenti</title>

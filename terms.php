@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    
     <title>Unibo Vinyl - Termini</title>
     <?php require("templates/head-section.php"); ?> 
 </head>

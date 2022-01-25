@@ -39,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 	}
 	switch ($_POST["action"]) {
 		case "addOrder":
-            if (!is_client_logged())) {
+            if (!is_client_logged()) {
                 send_error("A shipper must be logged");
             }
             $idCustomer = get_token_data()->userId;
@@ -72,16 +72,21 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
             }
             break;
         case "changeState":
-            if (!is_shipper_logged())) {
+            if (!is_shipper_logged()) {
                 send_error("A shipper must be logged");
             }
             $state = intval($_POST["state"]);
+            $idOrder = intval($_POST["idOrder"]);
             if($state >= 0 && $state <= 2) {
-                /* TODO: idCustomer */
-                $idCustomer = get_token_data()->userId;
+                $res = $dbOrderMgr->getCustomerId($idOrder);
+                if(count($res) > 0) {
+                    $idCustomer = $res[0]["idCustomer"];
+                } else {
+                    send_success(false);
+                }
                 switch($state) {
                     case 1: 
-                        $orderDetails = $dbOrderMgr->getOrderDetails($_POST["idOrder"]);
+                        $orderDetails = $dbOrderMgr->getOrderDetails($idOrder);
                         foreach($orderDetails as $orderDetail) {
                             $esito = $dbProductMgr->decreaseQuantity($orderDetail["idProduct"], $orderDetail["quantity"]);
                             if(!$esito){
@@ -97,15 +102,14 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
                         $dbNotificationMgr->sendNotification($idCustomer, "Ordine consegnato", "Il suo ordine è stato consegnato, la ringraziamo per aver utilizzato UniboVinyl.");        
                     break;
                 }
-                $data = $dbOrderMgr->changeState($_POST["idOrder"], $state);
-                $dbOrderMgr->setDate($_POST["idOrder"], $type, date("Y-m-d"));
+                $data = $dbOrderMgr->changeState($idOrder, $state);
+                $dbOrderMgr->setDate($idOrder, $type, date("Y-m-d"));
                 send_data($data);
             }
             send_success(false);
             break;
         case "setDate":
-            //check if is one shipper get_token_data()->id or username.
-            if (!is_shipper_logged())) {
+            if (!is_shipper_logged()) {
                 send_error("A shipper must be logged");
             }
             
@@ -116,7 +120,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
             break;
         case "getOrder":
             //check if is one shipper get_token_data()->id or username.
-            if (!is_shipper_logged())) {
+            if (!is_shipper_logged()) {
                 send_error("A shipper must be logged");
             }
             $orders = $dbOrderMgr->getOrders();
@@ -134,7 +138,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
             send_data($tot);
             break;
         case "getCustomerOrders":
-            if (!is_client_logged())) {
+            if (!is_client_logged()) {
                 send_error("A client must be logged");
             }
             $idCustomer = get_token_data()->userId;

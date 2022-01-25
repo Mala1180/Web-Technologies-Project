@@ -1,4 +1,10 @@
 <!DOCTYPE html>
+<?php 
+    require_once("server/validate.php");
+    if (!is_vendor_logged(true)) {
+        header("location: userLogin.php");
+    }
+?>
 <html lang="it">
 <head>
     <?php require_once("templates/head-section.php") ?>
