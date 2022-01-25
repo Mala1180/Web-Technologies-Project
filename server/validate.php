@@ -37,4 +37,16 @@ function is_user_logged() {
 function get_token_data() {
     return JWT::decode(get_auth_token(), SECRET_KEY, [JWT_CRYPTO_ALGORITHM])->data;
 }
+
+function is_client_logged() {
+    return is_user_logged() && get_token_data()->type = "cliente";
+}
+
+function is_vendor_logged() {
+    return is_user_logged() && get_token_data()->type = "artista";
+}
+
+function is_shipper_logged() {
+    return is_user_logged() && get_token_data()->type = "shipper";
+}
 ?>
