@@ -12,7 +12,7 @@
     <body>
         <?php require_once("./templates/header.php"); ?>
         <main>
-            <h1>I miei Ordini</h1>
+            <h1>I miei ordini</h1>
             <ul class="orders-list">
             </ul>
         </main>

@@ -16,8 +16,10 @@ $(document).ready(function () {
 });
 
 function readCardData() {
-    if (cardHolder.value != "" && cardNumber.value != "" && cardCircuit.value != "" && cardExpiration.value != "" && cardCvv.value != "") {
+    if (cardHolder.value != "" && cardNumber.value != "" && cardNumber.value.length==16 && cardCircuit.value != "" && cardExpiration.value != "" && cardCvv.value != "") {
         addCardToUser(cardHolder.value, cardNumber.value, cardCircuit.value, cardExpiration.value + "-01", cardCvv.value, isDefault.checked);
+    } else {
+        Swal.fire("Controlla i dati inseriti", "Alcuni dei dati inseriti sono risultati errati", "error");
     }
 }
 
@@ -54,10 +56,12 @@ function getMyCards() {
         function (data) {
             if (data.success) {
                 document.getElementById("selectCard").options.length = 0;
+                console.log(data.data);
                 for (let i = 0; i < data.data.length; i++) {
                     var opt = document.createElement('option');
                     opt.value = data.data[i]["number"];
                     opt.innerHTML = data.data[i]["number"];
+                    if(data.data[i]["isDefault"]){opt.selected=true;}
                     selectCard.appendChild(opt);
                 }
             }
