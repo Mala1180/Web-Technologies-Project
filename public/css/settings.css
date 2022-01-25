@@ -33,7 +33,12 @@ main form input[type="button"] {
 }
 
 @media screen and (min-width: 576px) {
+    main form {
+        text-align: center;
+    }
+
     main form input {
         margin-left: 10px;
+        width: 300px;
     }
 }

@@ -1,5 +1,6 @@
 const BASE_URL = "./server/";
 
+
 function getDefaultHeaders() {
     let authorizationToken = jwt.getJWT();
     const headers = {};
@@ -27,7 +28,16 @@ function makeUrl(name) {
 class RequestHelper {
     constructor() {}
 
-    /* We need to add Authorization header for every request */
+    /**
+     * Makes an AJAX request to the server. Need to add Authorization header for every request
+     * 
+     * @param {String} method method of the request
+     * @param {String} url name of php file
+     * @param {String} action name of action to be executed
+     * @param {Object} data data to be sent to the server
+     * @param {Function} callback function to be called when the request is completed
+     * @author Kelvin Olaiya <kelvinoluwada.olaiya@studio.unibo.it>
+     */
     makeRequest(method, url, action, data, callback = function () {}) {
         data.action = action;
         $.ajax({
@@ -40,10 +50,30 @@ class RequestHelper {
         });
     }
 
+    /**
+     * Makes a GET request to the server.
+     * 
+     * @param {String} url name of php file
+     * @param {String} action name of action to be executed
+     * @param {Object} data data to be sent to the server
+     * @param {Function} callback function to be called when the request is completed
+     * @see makeRequest
+     * @author Kelvin Olaiya <kelvinoluwada.olaiya@studio.unibo.it>
+     */
     get(url, action, data, callback) {
         this.makeRequest("GET", url, action, data, callback);
     }
 
+    /**
+     * Makes a POST request to the server.
+     * 
+     * @param {String} url name of php file
+     * @param {String} action name of action to be executed
+     * @param {Object} data data to be sent to the server
+     * @param {Function} callback function to be called when the request is completed
+     * @see makeRequest
+     * @author Kelvin Olaiya <kelvinoluwada.olaiya@studio.unibo.it>
+     */
     post(url, action, data, callback) {
         this.makeRequest("POST", url, action, data, callback);
     }
