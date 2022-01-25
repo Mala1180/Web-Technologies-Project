@@ -44,7 +44,7 @@
                     </li>
                 </ul>
             </form>
-            <p>Non sei ancora regitrato? <a href="userRegister.php">Registrati</a></p>
+            <p>Non sei ancora registrato? <a href="userRegister.php">Registrati</a></p>
         </section>
     </main>
     <script type="text/javascript" src="./public/js/login.js"></script>

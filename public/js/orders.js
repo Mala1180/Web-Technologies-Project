@@ -43,7 +43,7 @@ function displayOrders(orders) {
             <li>
                 <section class="order-header">
                     <div>
-                        <h2 class="date">Ordine del ${toITString(order["order"][0]["orderDate"])}</h2>
+                        <h2 class="date">Ordine #${order["order"][0]["idOrder"]} del ${toITString(order["order"][0]["orderDate"])}</h2>
                         <span class="total">Totale: € ${getTotalFromOrder(order.products[0])}</span>
                         <span class="total">Stato: ${getStringState(order["order"][0]["state"])}</span>
                     </div>
