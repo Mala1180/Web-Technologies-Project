@@ -48,11 +48,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         'type' => $type
                     ]
                 ];
-                send_data(JWT::encode(
-                    $data,
-                    SECRET_KEY,
-                    JWT_CRYPTO_ALGORITHM
-                ));
+                $token = JWT::encode($data,SECRET_KEY,JWT_CRYPTO_ALGORITHM);
+                registerLoggedUser($token);
+                send_data($token);
             }
             else {
                 /**
@@ -62,11 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }      
 			break;
 		case "logout":
-            /*
-             * Is not mandatory (and actually useless) that client side calls this api.
-             * For the server authorization is determined by the presence of
-             * the Authorization header.
-             */
+            unregisterLoggedUser();
             send_success(true);
 			break;
 		case "register":

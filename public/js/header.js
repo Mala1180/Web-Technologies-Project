@@ -29,7 +29,9 @@ $(document).ready(function () {
 
     $("#logoutBtn").click(function (e) {
         e.preventDefault();
-        jwt.unsetJWT();
-        location.href = "index.php";
+        reqHelper.post("userAccess", "logout", {}, function () {
+            jwt.unsetJWT();
+            location.href = "index.php";
+        })
     })
 });
