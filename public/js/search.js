@@ -8,6 +8,12 @@ $(document).ready(function () {
     const FILTER = _URL.searchParams.get("filter");
     $("header #search-section input[name=query]").val(QUERY);
     $("header #search-section select[name=filter]").val(FILTER);
+
+    if (FILTER == "0") {
+        $("body > header").css("background-image", "url(public/img/cd3.jpg)");
+    } else if (FILTER == "1") {
+        $("body > header").css("background-image", "url(public/img/vinile1.jpg)");
+    }
     // do search request
     searchProducts(QUERY, FILTER);
 
