@@ -23,7 +23,7 @@ create table shipper (
      idShipper int not null auto_increment,
      company varchar(25) not null,
      email varchar(50) not null,
-     username varchar(16) not null,
+     username varchar(16) not null unique,
      password varchar(150) not null,
      constraint IDShipper primary key (idShipper));
 
@@ -80,7 +80,7 @@ create table author (
      idAuthor int not null auto_increment,
      artName varchar(50) not null,
      email varchar(50) not null,
-     username varchar(50) not null,
+     username varchar(50) not null unique,
      password varchar(150) not null,
      constraint IDauthor primary key (idAuthor));
 
@@ -96,6 +96,7 @@ create table product (
      price double not null,
      description varchar(280) not null,
      type tinyint not null,
+     isDeleted tinyint not null,
      idAlbum int,
      constraint IDproduct primary key (idProduct));
 
@@ -129,7 +130,8 @@ create table notification (
      notificationDate date not null,
      isRead tinyint not null,
      isDeleted tinyint not null,
-     idCustomer int not null,
+     idCustomer int,
+     idAuthor int,
      constraint IDnotification primary key (idNotification));
 
 -- Constraints Section

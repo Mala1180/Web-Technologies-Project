@@ -68,7 +68,7 @@ class DBProductMgr {
 		$query = "SELECT a.name, artName, p.type, p.quantity, p.price, p.idProduct
 					FROM product p, album a, author au
 					WHERE p.idAlbum = a.idAlbum
-					/*AND p.isDeleted = 0 */
+					AND p.isDeleted = 0
 					AND a.idAuthor = au.idAuthor";
 		$params = array();
 		if ($idAuthor > 0) {
