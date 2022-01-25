@@ -20,6 +20,8 @@ class DBUserMgr {
 			$query = "SELECT password FROM `customer` WHERE username=?";
 		} else if ($type == "artista") {
 			$query = "SELECT password FROM `author` WHERE username=?";
+		} else if ($type == "shipper") {
+			$query = "SELECT password FROM `shipper` WHERE username=?";
 		}
 		$result = execute_query($this->db, $query, array($username));
 		return count($result) && password_verify($password, $result[0]["password"]);
@@ -29,7 +31,7 @@ class DBUserMgr {
 		$query = "";
 		$idUser = -1;
 		$done = 0;
-		if ($type == "cliente" || $type == "artista") {
+		if ($type == "cliente" || $type == "artista" || $type == "shipper") {
 			if ($type == "cliente") {
 				$query = "SELECT idCustomer FROM `customer` WHERE email=?";
 				$result = execute_query($this->db, $query, array($mail));
@@ -43,6 +45,14 @@ class DBUserMgr {
 				$result = execute_query($this->db, $query, array($mail));
 				if(count($result) > 0){
 					$idUser = $result[0]["idAuthor"];
+				} else {
+					return false;
+				}
+			} else if ($type == "shipper") {
+				$query = "SELECT idShipper FROM `shipper` WHERE email=?";
+				$result = execute_query($this->db, $query, array($mail));
+				if(count($result) > 0){
+					$idUser = $result[0]["idShipper"];
 				} else {
 					return false;
 				}
@@ -89,6 +99,10 @@ class DBUserMgr {
 				$query = "UPDATE `author` SET password=? WHERE idAuthor=?";
 				$result = execute_query($this->db, $query, array(password_hash($newPassword, PASSWORD_BCRYPT), $idUser));
 				break;
+				case "shipper":
+				$query = "UPDATE `shipper` SET password=? WHERE idShipper=?";
+				$result = execute_query($this->db, $query, array(password_hash($newPassword, PASSWORD_BCRYPT), $idUser));
+				break;
 			}
 		}
 		return $result;
@@ -126,6 +140,9 @@ class DBUserMgr {
 		}
 		else if ($type == "artista") {
 			$query = "SELECT idAuthor, artName FROM author WHERE username=?";
+		}
+		else if ($type == "shipper") {
+			$query = "SELECT idShipper, company, email FROM shipper WHERE username=?";
 		}
 		return execute_query($this->db, $query, array($username))[0];
  	}

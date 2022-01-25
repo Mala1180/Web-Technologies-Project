@@ -24,6 +24,8 @@
                     <label for="cliente">Cliente</label>
                     <input type="radio" id="artista" name="type" value="artista" tabindex="1" />
                     <label for="artista">Artista</label>
+                    <input type="radio" id="shipper" name="type" value="shipper" tabindex="1" />
+                    <label for="shipper">Shipper</label>
                 </fieldset>
                 <ul>
                     <li>

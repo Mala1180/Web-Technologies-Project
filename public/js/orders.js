@@ -11,6 +11,7 @@ $(document).ready(function () {
     reqHelper.post("order", "getOrder", {}, function (res) {
         if (res.success) {
             displayOrders(res.data);
+            console.log(res.data)
         } else {
             console.error("An error occurred while getting orders.");
         }
@@ -55,6 +56,7 @@ $(document).ready(function () {
                 <li>
                     <div>
                         <h3>${order.products[0][j].name}</h3>
+                        <span>Tipologia: ${getStringType(order.products[0][j].type)}</span>
                         <span>Prezzo: € ${Math.round(order.products[0][j].subprice / order.products[0][j].quantity * 100) / 100}</span>
                         <span>Quantità: ${order.products[0][j].quantity}</span>
                         <span>Totale: € ${order.products[0][j].subprice}</span>
@@ -124,5 +126,14 @@ function getStringState(state) {
         return "In consegna";
         case 2:
         return "Consegnato";
+    }
+}
+
+function getStringType(type) {
+    switch(type){
+        case 0:
+        return "CD";
+        case 1:
+        return "Vinile";
     }
 }

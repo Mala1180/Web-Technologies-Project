@@ -32,6 +32,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     case "artista":
                         $userId = $dbUserMgr->getUserInfoForToken($username, $type)["idAuthor"];
                         break;
+                    case "shipper":
+                        $userId = $dbUserMgr->getUserInfoForToken($username, $type)["idShipper"];
+                        break;
 
                 }
                 $data = [
@@ -75,7 +78,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 checkParams($_POST, array("artName"));
                 send_success($dbUserMgr->registerAuthor($_POST["artName"], $_POST["email"], $_POST["username"], $_POST["password"]));
             }
-			/*composeMail($_POST["email"], "register", array("username" => $_POST["username"]));*/
 			break;
 		default:
 			send_error("Unknown action");
