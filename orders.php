@@ -21,6 +21,7 @@
             <h1>I miei ordini</h1>
             <ul class="orders-list">
             </ul>
+            <p>Nessun ordine</p>
         </main>
         <script src="./public/js/page-header.js"></script>
     </body>

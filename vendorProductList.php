@@ -33,6 +33,7 @@
             <div>
                 <table></table>
             </div>
+            <p>Non ci sono prodotti corrispondenti alla ricerca</p>
         </main>
         <script src="./public/js/vendor_product_list.js"></script>
     </body>

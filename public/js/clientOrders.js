@@ -7,7 +7,7 @@ $(document).ready(function () {
  *
  * @author Mattia Matteini <matteinimattia@gmail.com>
  */
- function getOrders() {
+function getOrders() {
     reqHelper.post("order", "getCustomerOrders", {}, function (res) {
         if (res.success) {
             orders = res.data;
@@ -26,6 +26,11 @@ $(document).ready(function () {
  * @param {Array} orders array of orders to be displayed
  */
 function displayOrders(orders) {
+    if (orders.length) {
+        $("main > p").hide();
+    } else {
+        $("main > p").show();
+    }
     if (orders) {
         $("main > .orders-list").empty();
         for (let i = 0; i < orders.length; i++) {
@@ -63,14 +68,14 @@ function displayOrders(orders) {
             $order.find("." + summary.state).siblings().attr("aria-hidden", "true");
             if (summary.state === 1) {
                 $order.find(".order-storyline")
-                     .children()
-                     .eq(3).prevAll()
-                     .css("background", "#3a71ea")
-                     .css("border-color", "#3a71ea");
+                    .children()
+                    .eq(3).prevAll()
+                    .css("background", "#3a71ea")
+                    .css("border-color", "#3a71ea");
             }
             if (summary.state === 2) {
                 $order.find(".order-storyline").children().css("background", "#3a71ea")
-                                                          .css("border-color", "#3a71ea");
+                    .css("border-color", "#3a71ea");
             }
             $order.find("button").click(function () {
                 $order.find(".order-details").slideToggle("fast");

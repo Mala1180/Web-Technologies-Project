@@ -49,6 +49,11 @@ function getProducts() {
             prezzo: "price",
             "quantità": "quantity"
         }
+        if (datiTabella.length) {
+            $("main > p").hide();
+        } else {
+            $("main > p").show();
+        }
         $("table").html(new Table(response.data, headers).build());
         datiTabella.forEach(r => {
             $("#edit_" + r.idProduct).click(async function () {

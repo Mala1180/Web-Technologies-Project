@@ -12,7 +12,7 @@ $(document).ready(function () {
  *
  * @author Alberto Paganelli <albi1600@gmail.com>
  */
- function getOrders() {
+function getOrders() {
     reqHelper.post("order", "getOrder", {}, function (res) {
         if (res.success) {
             displayOrders(res.data);
@@ -29,7 +29,12 @@ $(document).ready(function () {
  * @author Alberto Paganelli <albi1600@gmail.com>
  * @param {Array} orders array of orders to be displayed
  */
- function displayOrders(orders) {
+function displayOrders(orders) {
+    if (orders.length) {
+        $("main > p").hide();
+    } else {
+        $("main > p").show();
+    }
     if (orders) {
         $("main > .orders-list").empty();
         for (let i = 0; i < orders.length; i++) {
@@ -71,17 +76,17 @@ $(document).ready(function () {
             }
 
             switch (order["order"][0]["state"]) {
-                case 0: 
-                $order.find("#btnChangeState").html("Spedisci");
-                $order.find("#btnChangeState").click(function() {changeOrderState($order.find("#btnChangeState").val(), 1)});
-                break;
-                case 1: 
-                $order.find("#btnChangeState").html("Consegna");
-                $order.find("#btnChangeState").click(function() {changeOrderState($order.find("#btnChangeState").val(), 2)});
-                break;
-                case 2: 
-                $order.find("#btnChangeState").remove();
-                break;
+                case 0:
+                    $order.find("#btnChangeState").html("Spedisci");
+                    $order.find("#btnChangeState").click(function () { changeOrderState($order.find("#btnChangeState").val(), 1) });
+                    break;
+                case 1:
+                    $order.find("#btnChangeState").html("Consegna");
+                    $order.find("#btnChangeState").click(function () { changeOrderState($order.find("#btnChangeState").val(), 2) });
+                    break;
+                case 2:
+                    $order.find("#btnChangeState").remove();
+                    break;
             }
 
         }
@@ -95,11 +100,11 @@ $(document).ready(function () {
  * @param {Number} idOrder id of the order to be accepted or declined
  * @param {Number} state the state that will be setted
  */
- function changeOrderState(idOrder, state) {
+function changeOrderState(idOrder, state) {
     reqHelper.post("order", "changeState", {
         idOrder: idOrder,
         state: state
-        }, function (res) {
+    }, function (res) {
         if (res.success) {
             //change graphic to accettato
             getOrders();
@@ -124,21 +129,21 @@ function toITString(date) {
 }
 
 function getStringState(state) {
-    switch(state){
+    switch (state) {
         case 0:
-        return "Effettuato";
+            return "Effettuato";
         case 1:
-        return "In consegna";
+            return "In consegna";
         case 2:
-        return "Consegnato";
+            return "Consegnato";
     }
 }
 
 function getStringType(type) {
-    switch(type){
+    switch (type) {
         case 0:
-        return "CD";
+            return "CD";
         case 1:
-        return "Vinile";
+            return "Vinile";
     }
 }

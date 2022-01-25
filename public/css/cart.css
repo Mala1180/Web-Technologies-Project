@@ -119,13 +119,6 @@ main > footer > a {
     font-size: clamp(15px, 1.5vw, 20px);
 }
 
-main > p {
-    font-family: "lato-regular";
-    font-size: 150%;
-    text-align: center;
-    margin: 5%;
-}
-
 @media screen and (min-width: 576px) {
     main {
         padding: 30px;

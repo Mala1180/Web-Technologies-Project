@@ -25,6 +25,7 @@
             <ul class="notifications-list">
                <!-- There will be the notifications -->
             </ul>
+            <p>Non ci sono notifiche</p>
         </main>
         <script src="./public/js/page-header.js"></script>
     </body>

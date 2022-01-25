@@ -91,6 +91,11 @@ function searchProducts(query, filter) {
  * @param {Number} products array of products to be displayed
  */
 function displayProducts(products) {
+    if (products.length) {
+        $("main > p").hide();
+    } else {
+        $("main > p").show();
+    }
     if (products) {
         $("main").empty();
         for (let i = 0; i < products.length; i++) {
@@ -133,36 +138,36 @@ function addToCart(idProduct) {
         reqHelper.post("cart", "addEntry", {
             idProduct: idProduct
         },
-        function (data) {
-            if (data.success) {
-                Swal.fire("", "prodotto aggiunto al carrello", "success");
-                getCartEntries();
-                // products.forEach(product => {
-                //     if (product.idProduct === idProduct) {
-                //         if ($cartPreview.is(":hidden")) {
-                //             $cartPreview.fadeIn("medium");
-                //         }
-                //         const $articlePreview = $(`
-                //         <li>
-                //             <section>
-                //                 <div>
-                //                     <img src="public/img/vinile1.jpg" alt="article image" />
-                //                     <h2>Nome Vinile molto lungo</h2>
-                //                 </div>
-                //                 <div>
-                //                     <span class="material-icons-outlined">remove</span>
-                //                     <span>2</span>
-                //                     <span class="material-icons-outlined">add</span>
-                //                 </div>
-                //             </section>
-                //         </li>`);
-                //         $("aside ul").append($articlePreview);
-                //     }
-                // });
-            } else {
-                Swal.fire("", "Verifica la disponibilità del prodotto", "error");
-            }
-        });
+            function (data) {
+                if (data.success) {
+                    Swal.fire("", "prodotto aggiunto al carrello", "success");
+                    getCartEntries();
+                    // products.forEach(product => {
+                    //     if (product.idProduct === idProduct) {
+                    //         if ($cartPreview.is(":hidden")) {
+                    //             $cartPreview.fadeIn("medium");
+                    //         }
+                    //         const $articlePreview = $(`
+                    //         <li>
+                    //             <section>
+                    //                 <div>
+                    //                     <img src="public/img/vinile1.jpg" alt="article image" />
+                    //                     <h2>Nome Vinile molto lungo</h2>
+                    //                 </div>
+                    //                 <div>
+                    //                     <span class="material-icons-outlined">remove</span>
+                    //                     <span>2</span>
+                    //                     <span class="material-icons-outlined">add</span>
+                    //                 </div>
+                    //             </section>
+                    //         </li>`);
+                    //         $("aside ul").append($articlePreview);
+                    //     }
+                    // });
+                } else {
+                    Swal.fire("", "Verifica la disponibilità del prodotto", "error");
+                }
+            });
     }
 }
 

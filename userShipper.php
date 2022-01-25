@@ -18,6 +18,7 @@
             <h1>Ordini</h1>
             <ul class="orders-list">
             </ul>
+            <p>Non ci sono ordini</p>
         </main>
         <script src="./public/js/page-header.js"></script>
         <script src="./public/js/orders.js"></script>

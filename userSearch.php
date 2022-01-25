@@ -18,6 +18,7 @@
         <?php require("./templates/header.php"); ?>
         <main>
             <!-- There will be the searched products -->
+            <p>Nessun prodotto corrispondente alla tua ricerca</p>
         </main>
         <aside>
             <header>

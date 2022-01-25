@@ -17,7 +17,7 @@ $(document).ready(function () {
  *
  * @author Mattia Matteini <matteinimattia@gmail.com>
  */
- function getNotifications() {
+function getNotifications() {
     reqHelper.get("notification", "getnotifications", {}, function (res) {
         if (res.success) {
             notifications = res.data;
@@ -35,7 +35,12 @@ $(document).ready(function () {
  * @author Mattia Matteini <matteinimattia@gmail.com>
  * @param {Array} notifications array of notifications to be displayed
  */
- function displayNotifications(notifications) {
+function displayNotifications(notifications) {
+    if (notifications.length) {
+        $("main > p").hide();
+    } else {
+        $("main > p").show();
+    }
     if (notifications) {
         $("main > .notifications-list").empty();
         for (let i = 0; i < notifications.length; i++) {
@@ -59,7 +64,7 @@ $(document).ready(function () {
                 </div>
                 <p class="message">${notification.message}</p>
             </li>`);
-            
+
             $("main > .notifications-list").append($notification);
 
             // hide the dot if notification is read
