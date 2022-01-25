@@ -20,7 +20,7 @@ require_once('validate.php');
                 send_data($dbProductMgr->getProducts());
                 break;
             case "getvendorproducts":
-                if (!is_vendor_logged())) {
+                if (!is_vendor_logged()) {
                     send_error("A vendor must be logged");
                 }
                 $name = isset($_GET["name"]) ? $_GET["name"] : "";
@@ -36,7 +36,7 @@ require_once('validate.php');
             send_error("An action is required");
             exit();
         }
-        if (!is_vendor_logged())) {
+        if (!is_vendor_logged()) {
             send_error("A vendor must be logged");
         }
         //è un post.
