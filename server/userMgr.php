@@ -30,7 +30,7 @@ use Firebase\JWT\JWT;
                 send_data($data);
                 break;
             case "getUserType":
-                send_data(get_token_data()->type);
+                send_data(is_user_logged() ? get_token_data()->type : "");
                 break;
             case "updateUserInfo":
                 $data = $dbUserMgr->updateUserInfo(get_token_data()->userId,
