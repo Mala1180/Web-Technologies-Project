@@ -76,7 +76,9 @@ $(document).ready(function () {
                     reqHelper.post("notification", "readnotification", {
                         notificationId: notification.id
                     }, function (res) {
-                        if (!res.success) {
+                        if (res.success) {
+                            getUnreadNotificationsNumber();
+                        } else {
                             console.error("An error occurred while marking notification as read.");
                         }
                     });

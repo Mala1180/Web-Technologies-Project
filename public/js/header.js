@@ -31,5 +31,22 @@ $(document).ready(function () {
         e.preventDefault();
         jwt.unsetJWT();
         location.href = "index.php";
-    })
+    });
+
+    getUnreadNotificationsNumber();
 });
+
+
+
+function getUnreadNotificationsNumber() {
+    reqHelper.get("notification", "getunreadnotificationnumber", {}, function (res) {
+        if (res.success) {
+            const unreadNotificationsNumber = res.data[0].unreadNotificationsNumber;
+            if (unreadNotificationsNumber > 0) {
+                $("header #menu-section a[href='./userNotifications.php']").text("Notifiche (" + unreadNotificationsNumber + ")");
+            }
+        } else {
+            console.error("An error occurred while getting notifications.");
+        }
+    });
+}

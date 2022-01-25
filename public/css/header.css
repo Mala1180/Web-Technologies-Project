@@ -138,6 +138,7 @@ body > header section:last-of-type span {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
 }
 
 body > header section a {

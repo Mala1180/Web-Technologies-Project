@@ -20,6 +20,16 @@ class DBNotificationMgr {
         return execute_query($this->db, $query, array("0", $customerId));
     }
     
+    public function getUnreadNotificationsNumber($customerId) {
+        $query = "SELECT COUNT(*) AS unreadNotificationsNumber
+                FROM `notification`
+                WHERE isDeleted = ? 
+                AND isRead = ?
+                AND idCustomer = ?
+                ORDER BY notificationDate DESC, idNotification DESC";
+        return execute_query($this->db, $query, array("0", "0", $customerId));
+    }
+
     public function sendNotification($idCustomer, $subject, $message) {
         $query = "INSERT INTO `notification` (`subject`, `message`, `notificationDate`, `isRead`, `isDeleted`, `idCustomer`) 
                 VALUES (?,?,?,?,?,?)";
