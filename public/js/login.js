@@ -14,7 +14,19 @@ $(document).ready(function () {
         }, function (data) {
             if (data.success) {
                 jwt.setJWT(data.data);
-                location.href = "index.php";
+                setTimeout(function () {
+                    switch (type) {
+                        case "cliente":
+                            location.href = "/";
+                            break;
+                        case "artista":
+                            location.href = "vendorDashboard.php";
+                            break;
+                        case "shipper":
+                            location.href = "userShipper.php";
+                            break;
+                    }
+                }, 1000);
             } else {
                 $("section > p:first-of-type").show();
             }

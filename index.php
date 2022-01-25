@@ -1,4 +1,10 @@
 <!DOCTYPE html>
+<?php 
+    require_once("server/validate.php");
+    if (!is_client_logged(true)) {
+        header("location: userLogin.php");
+    }
+?>
 <html lang="it">
     <head>
         <?php require("./templates/head-section.php"); ?>
@@ -16,12 +22,6 @@
             <section>
                 <a href="./userSearch.php?query=&filter=0">CD</a>
             </section>
-            <!-- <section>
-                <a href="./userSearch.php?query=&filter=Giradischi">Giradischi</a>
-            </section>
-            <section>
-                <a href="./userSearch.php?query=&filter=Bundle">Bundle</a> 
-            </section> -->
         </main>
         <script src="./public/js/page-header.js"></script>
     </body>

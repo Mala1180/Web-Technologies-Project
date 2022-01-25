@@ -26,8 +26,7 @@ $(document).ready(function () {
         }
         reqHelper.post("userAccess", "register",
             payload, function (data) {
-                console.log(data);
-                //location.href = "index.php";
+                location.href = "userLogin.php";
             }
         );
     });

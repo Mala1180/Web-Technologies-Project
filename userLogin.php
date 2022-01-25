@@ -19,7 +19,7 @@
             </header>
             <h2>Accedi</h2>
             <p>Username o password non corretti</p>
-            <form name="formLogin">
+            <form name="formLogin" method="GET" action="#">
                 <fieldset>
                     <legend>Sono un</legend>
                     <input type="radio" id="cliente" name="type" value="cliente" checked="checked" tabindex="0"/> 
