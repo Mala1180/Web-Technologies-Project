@@ -15,8 +15,11 @@ $(document).ready(function () {
     getUserInfo();
 });
 
-
-
+/**
+ * Executes a POST request to server to get user info. Then display them in the page.
+ * 
+ * @author Mattia Matteini <matteinimattia@gmail.com>
+ */
 function getUserInfo() {
     reqHelper.post("userMgr", "getUserInfo", {}, function(data) {
         console.log(data);
@@ -32,7 +35,11 @@ function getUserInfo() {
     });
 }
 
-
+/**
+ * Executes a POST request to server to modify user info.
+ * 
+ * @author Mattia Matteini <matteinimattia@gmail.com>
+ */
 function modifyInfo() {
     reqHelper.post("userMgr", "updateUserInfo", {
         "name": $("#name").val(),
