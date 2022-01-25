@@ -16,7 +16,7 @@
         <aside>
             <header>
                 <h2>Il tuo carrello</h2>
-                <button tabindex="0"><img src="public/img/icons/cancel.png" alt="chiudi anteprima carrello" /></button>
+                <button><img src="public/img/icons/cancel.png" alt="chiudi/apri anteprima carrello" /></button>
             </header>
             <ul>
             </ul>
@@ -25,6 +25,5 @@
             </footer>
         </aside>
         <script src="./public/js/page-header.js"></script>
-        <script src=".public/js/libraries/sweetalert2.min.js"></script>
     </body>
 </html>

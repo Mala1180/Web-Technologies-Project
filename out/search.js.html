@@ -27,25 +27,38 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>let $cartPreview;
-let $previewTitle;
-let $closePreview;
+let $togglePreview;
+let products = [];
 
 $(document).ready(function () {
-    $cartPreview = $("body > aside");
-    $previewTitle = $("body > aside > header > h2");
-    $closePreview = $("body > aside > header > img");
+    const _URL = new URL(location.href);
+    const QUERY = _URL.searchParams.get("query");
+    const FILTER = _URL.searchParams.get("filter");
+    $("header #search-section input[name=query]").val(QUERY);
+    $("header #search-section select[name=filter]").val(FILTER);
+    // do search request
+    searchProducts(QUERY, FILTER);
 
-    const CART_PREVIEW_HEADER_HEIGHT = $("body > aside > header").outerHeight();
-    const CART_PREVIEW_MARGINS = 10;
-    const CLOSED_PREVIEW_BOTTOM = ($cartPreview.height() + CART_PREVIEW_MARGINS) * -1 + CART_PREVIEW_HEADER_HEIGHT;
+    $cartPreview = $("body > aside");
+    $togglePreview = $("body > aside > header > button");
 
     // close / open cart preview
-    $closePreview.click(function () {
-        togglePreview(CLOSED_PREVIEW_BOTTOM, "100%", $closePreview);
-    });
+    $togglePreview.click(function () {
+        if (window.innerWidth > 992) return;
 
-    $previewTitle.click(function () {
-        togglePreview(0, "0%", $closePreview);
+        const CART_PREVIEW_HEADER_HEIGHT = $("body > aside > header").outerHeight();
+        const CART_PREVIEW_MARGINS = 10;
+        const CLOSED_CART_PREVIEW_BOTTOM = ($cartPreview.height() + CART_PREVIEW_MARGINS) * -1 + CART_PREVIEW_HEADER_HEIGHT;
+
+        const $img = $(this).find("img");
+        // if is closing
+        if ($img.attr("src") === "public/img/icons/cancel.png") {
+            $img.attr("src", "public/img/icons/up-arrow.png");
+            $cartPreview.css("bottom", CLOSED_CART_PREVIEW_BOTTOM);
+        } else { // if is opening
+            $img.attr("src", "public/img/icons/cancel.png");
+            $cartPreview.css("bottom", 0);
+        }
     });
 
     const $searchIcon = $("header section:first-of-type img");
@@ -56,54 +69,196 @@ $(document).ready(function () {
 
     // search products
     $searchIcon.click(function () {
-        search($searchInput.val(), $searchFilter.find(":selected").text());
+        searchProducts($searchInput.val(), $searchFilter.find(":selected").val());
     });
-
-    // $searchInput.keypress(function (e) {
-    //     if (e.key === "Enter") {
-    //         console.log($searchInput.val());
-    //         search($searchInput.val(), $searchFilter.find(":selected").text());
-    //         e.preventDefault();
-    //     }
-    // });
 
     // go to cart
     $goToCart.click(function () {
         location.href = "cart.php";
     });
+
+
+    getCartEntries();
 });
 
-function search(query, filter) {
-    if (query.length > 0) {
-        reqHelper.get("search", "search", { query: query, filter: filter }, function (data) {
-            console.log(data);
+/**
+ * Executes a GET request to server for search products. Then calls displayProducts.
+ *
+ * @author Mattia Matteini &lt;matteinimattia@gmail.com>
+ * @param {String} query string with the query to be searched
+ * @param {String} filter string with the filter to be used (0 = cd, 1 = vinyl)
+ * @see displayProducts
+ */
+function searchProducts(query, filter) {
+    if (query.length == 0 &amp;&amp; filter.length == 0) return;
+
+    reqHelper.get("search", "search", {
+        "query": query,
+        "filter": filter,
+    }, function (res) {
+        if (res.success) {
+            products = res.data;
+            console.log(products);
+            displayProducts(products);
+        } else {
+            console.error("An error occurred while searching products.");
+        }
+    });
+}
+
+/**
+ * Appends products in the page.
+ *
+ * @author Mattia Matteini &lt;matteinimattia@gmail.com>
+ * @param {Number} products array of products to be displayed
+ */
+function displayProducts(products) {
+    if (products) {
+        $("main").empty();
+        for (let i = 0; i &lt; products.length; i++) {
+            const product = products[i];
+            const $product = $(`
+            &lt;section>
+                &lt;img src="public/img/products/${product.imgPath}" alt="article image" />
+                &lt;aside>
+                    &lt;div>
+                        &lt;h2>${product.name}&lt;/h2>
+                        &lt;span>Autore: ${product.name}&lt;/span>
+                        &lt;span>Tipologia: ${product.type == 0 ? "CD" : "Vinile"}&lt;/span>
+                        &lt;span>Disponibilità: ${product.quantity}&lt;/span>
+                    &lt;/div>
+                    &lt;div>
+                        &lt;span>€ ${product.price}&lt;/span>
+                        &lt;button value="${product.idProduct}">Aggiungi al carrello&lt;/button>
+                    &lt;/div>
+                &lt;/aside>
+            &lt;/section>`);
+
+            const DETAILS_LINK = `productDetail.php?id=${product.idProduct}`;
+            $product.children().eq(0).click(function () {
+                location.href = DETAILS_LINK;
+            });
+            $product.find("h2").click(function () {
+                location.href = DETAILS_LINK;
+            });
+            $product.find("button").click(function () {
+                addToCart(parseInt($(this).val()));
+            });
+            $("main").append($product);
+        }
+    }
+}
+
+//function that populate the cart client side
+function addToCart(idProduct) {
+    if (idProduct > 0) {
+        reqHelper.post("cart", "addEntry", {
+            idProduct: idProduct
+        },
+        function (data) {
+            if (data.success) {
+                Swal.fire("", "prodotto aggiunto al carrello", "success");
+
+                products.forEach(product => {
+                    if (product.idProduct === idProduct) {
+                        if ($cartPreview.is(":hidden")) {
+                            $cartPreview.fadeIn("medium");
+                        }
+                        const $articlePreview = $(`
+                        &lt;li>
+                            &lt;section>
+                                &lt;div>
+                                    &lt;img src="public/img/vinile1.jpg" alt="article image" />
+                                    &lt;h2>Nome Vinile molto lungo&lt;/h2>
+                                &lt;/div>
+                                &lt;div>
+                                    &lt;span class="material-icons-outlined">remove&lt;/span>
+                                    &lt;span>2&lt;/span>
+                                    &lt;span class="material-icons-outlined">add&lt;/span>
+                                &lt;/div>
+                            &lt;/section>
+                        &lt;/li>`);
+                        $("aside ul").append($articlePreview);
+                    }
+                });
+            } else {
+                Swal.fire("", "Verifica la disponibilità del prodotto", "error");
+            }
         });
     }
 }
 
 /**
- * Toggles the cart preview.
+ * Executes a GET request to server for getting cart entries. Then calls updateCartPreview.
+ * 
+ * @author Mattia Matteini &lt;matteinimattia@gmail.com>
+ * @see updateCartPreview
+ */
+function getCartEntries() {
+    // get cart entries
+    reqHelper.get("cart", "getcart", {}, function (res) {
+        if (res.success) {
+            updateCartPreview(res.data);
+        }
+    });
+}
+
+
+/**
+ * Appends cart entries in the cart preview.
  *
  * @author Mattia Matteini &lt;matteinimattia@gmail.com>
- * @param {Number} bottom integer value of the bottom position of the cart preview
- * @param {String} titleWidth string with the width of the title in percentage
- * @return {None}
+ * @param {Number} cartEntries array of cart entries to be displayed
  */
-function togglePreview(bottom, titleWidth) {
-    if (window.innerWidth > 992) return;
-
-    $cartPreview.css("bottom", bottom);
-    $previewTitle.css("width", titleWidth);
-
-    if (bottom === 0) {
-        setTimeout(() => {
-            $closePreview.fadeIn(50);
-        }, 500);
-    } else {
-        $closePreview.fadeOut(50);
+function updateCartPreview(cartEntries) {
+    if (cartEntries) {
+        const $cartPreviewList = $("aside ul");
+        $cartPreviewList.empty();
+        for (let i = 0; i &lt; cartEntries.length; i++) {
+            const cartEntry = cartEntries[i];
+            console.log(cartEntry);
+            const $articlePreview = $(`
+            &lt;li id="${cartEntry.idCartEntry}">
+                &lt;section>
+                    &lt;div>
+                        &lt;img src="public/img/products/${cartEntry.imgPath}" alt="" />
+                        &lt;h2>${cartEntry.name} (${cartEntry.type === 1 ? "CD" : "Vinile"})&lt;/h2>
+                        &lt;span>€ ${cartEntry.price}&lt;/span>
+                    &lt;/div>
+                    &lt;div>
+                        &lt;span class="material-icons-outlined">remove&lt;/span>
+                        &lt;span>${cartEntry.quantity}&lt;/span>
+                        &lt;span class="material-icons-outlined">add&lt;/span>
+                    &lt;/div>
+                &lt;/section>
+            &lt;/li>`);
+            $cartPreviewList.append($articlePreview);
+        }
+        if ($cartPreviewList.length > 0 &amp;&amp; $cartPreview.is(":hidden")) {
+            $cartPreview.slideDown();
+        }
     }
 }
-</code></pre>
+
+/**
+ * Executes a POST request to server for modiy a cart entry quantity.
+ * 
+ * @author Mattia Matteini &lt;matteinimattia@gmail.com>
+ * @param {Number} idCartEntry 
+ * @param {Number} quantity 
+ */
+function modifyEntryCartQuantity(idCartEntry, quantity) {
+    reqHelper.post("cart", "setquantity", {
+        idCartEntry: idCartEntry,
+        quantity: quantity
+    }, function (data) {
+        if (data.success) {
+            $("aside ul li#" + idCartEntry).find("span:nth-child(2)").text(quantity);
+        } else {
+            console.error("An error occurred while modifying cart entry quantity.");
+        }
+    });
+}</code></pre>
         </article>
     </section>
 
@@ -113,13 +268,13 @@ function togglePreview(bottom, titleWidth) {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="MyJWT.html">MyJWT</a></li><li><a href="RequestHelper.html">RequestHelper</a></li></ul><h3>Global</h3><ul><li><a href="global.html#makeUrl">makeUrl</a></li><li><a href="global.html#togglePreview">togglePreview</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="MyJWT.html">MyJWT</a></li><li><a href="RequestHelper.html">RequestHelper</a></li></ul><h3>Global</h3><ul><li><a href="global.html#changeOrderState">changeOrderState</a></li><li><a href="global.html#deleteCard">deleteCard</a></li><li><a href="global.html#deleteNotification">deleteNotification</a></li><li><a href="global.html#displayCards">displayCards</a></li><li><a href="global.html#displayNotifications">displayNotifications</a></li><li><a href="global.html#displayOrders">displayOrders</a></li><li><a href="global.html#displayProductDetails">displayProductDetails</a></li><li><a href="global.html#displayProducts">displayProducts</a></li><li><a href="global.html#getCards">getCards</a></li><li><a href="global.html#getCartEntries">getCartEntries</a></li><li><a href="global.html#getNotifications">getNotifications</a></li><li><a href="global.html#getOrders">getOrders</a></li><li><a href="global.html#getProductDetails">getProductDetails</a></li><li><a href="global.html#getTotalFromOrder">getTotalFromOrder</a></li><li><a href="global.html#makeUrl">makeUrl</a></li><li><a href="global.html#modifyEntryCartQuantity">modifyEntryCartQuantity</a></li><li><a href="global.html#searchProducts">searchProducts</a></li><li><a href="global.html#secondsToTime">secondsToTime</a></li><li><a href="global.html#setDefaultCard">setDefaultCard</a></li><li><a href="global.html#updateCartPreview">updateCartPreview</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Sun Dec 26 2021 17:01:18 GMT+0100 (Ora standard dell’Europa centrale)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.10</a> on Tue Jan 25 2022 11:00:44 GMT+0100 (Ora standard dell’Europa centrale)
 </footer>
 
 <script> prettyPrint(); </script>

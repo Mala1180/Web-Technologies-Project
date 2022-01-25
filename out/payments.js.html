@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: payments.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: payments.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>let cards = [];
+
+$(document).ready(function() {
+    $(".confirm-modal h2").text("Sei sicuro di voler eliminare questa carta?");
+
+    $("#btnAddCard").click((e) => {
+        e.preventDefault();
+        readCardData();
+    });
+
+    $(".confirm-modal #yes").click(function(e) {
+        e.preventDefault();
+        $(".confirm-modal").addClass("hidden");
+        deleteCard($(this).val());
+    });
+
+    $(".confirm-modal #no").click(function(e) {
+        e.preventDefault();
+        $(".confirm-modal").addClass("hidden");
+    });
+
+    getCards();
+});
+
+
+function readCardData() {
+    if (cardHolder.value !== "" &amp;&amp; cardNumber.value !== "" &amp;&amp; cardCircuit.value !== "" &amp;&amp;
+        cardExpiration.value !== "" &amp;&amp; cardCvv.value !== "") {
+        addCardToUser(cardHolder.value, cardNumber.value, cardCircuit.value, cardExpiration.value + "-01", cardCvv.value, isDefault.checked);
+    }
+}
+
+function addCardToUser(cardHolder, cardNumber, circuit, expiryDate, cvv, isDefault) {
+    reqHelper.post("card", "addCard", {
+        "holder": cardHolder,
+        "cardNumber": cardNumber,
+        "circuit": circuit,
+        "expiryDate": expiryDate,
+        "cvv": cvv,
+        "isDefault": isDefault
+    }, function (data) {
+        console.log(data);
+        getCards();
+    });
+}
+
+
+/**
+ * Gets user cards from the server. Then calls displayCards function.
+ * 
+ * @author Mattia Matteini &lt;matteinimattia@gmail.com>
+ */
+function getCards() {
+    reqHelper.post("card", "getCard", {},
+    function(data) {
+        if (data.success) {
+            // document.getElementById("selectCard").options.length = 0;
+            // for (let i = 0; i &lt; data.data.length; i++){
+            //     var opt = document.createElement('option');
+            //     opt.value = data.data[i]["cardNumber"];
+            //     opt.innerHTML = data.data[i]["cardNumber"];
+            //     selectCard.appendChild(opt);
+            // }
+            cards = data.data;
+            console.log(cards);
+            displayCards(cards);
+        }
+   });
+}
+
+/**
+ * Appends user cards in the list.
+ * 
+ * @author Mattia Matteini &lt;matteinimattia@gmail.com>
+ * @param {Array} cards array of cards
+ */
+function displayCards(cards) {
+    if (cards) {
+        $("main .cards-list").empty();
+        for (let i = 0; i &lt; cards.length; i++) {
+            const card = cards[i];
+            const cardNumber = card.number.match(/.{1,4}/g)[0] + " **** **** " + card.number.match(/.{1,4}/g)[3]
+            console.log(cardNumber);
+            const $card = $(`
+            &lt;li>
+                &lt;div class="card-header">
+                    &lt;div>
+                        &lt;span class="card-number">${cardNumber}&lt;/span>
+                    &lt;/div>
+                    &lt;button class="details-button">Dettagli&lt;/button>
+                &lt;/div>
+                
+                &lt;div class="card-details">
+                    &lt;p>Titolare&lt;/p>
+                    &lt;span class="card-holder">${card.holder}&lt;/span>
+                    &lt;p>Circuito&lt;/p>
+                    &lt;span class="card-circuit">${card.circuit}&lt;/span>
+                    &lt;p>Data di scadenza&lt;/p>
+                    &lt;span class="card-expiry-date">${card.expiryDate}&lt;/span>
+                    &lt;button class="favourite-button">Imposta come predefinita&lt;/button>
+                    &lt;button class="trash-button">Rimuovi&lt;/button>
+                &lt;/div>
+            &lt;/li>
+            `);
+            $("main .cards-list").append($card);
+
+            if (card.isDefault) {
+                $card.find(".card-header > div").append(`&lt;em class="favourite">Predefinita&lt;/em>`);
+                $card.find(".card-details .favourite-button").remove();
+            } else {
+                $card.find(".card-details .favourite-button").click(function() {
+                    setDefaultCard(card.id);
+                });
+            }
+
+            $card.find(".details-button").click(function () {
+                $card.find(".card-details").slideToggle("fast");
+            });
+            $card.find(".trash-button").click(function (event) {
+                if (!$(".confirm-modal").hasClass("hidden")) {
+                    $(".confirm-modal").addClass("hidden");
+                    return;
+                }
+                event.stopPropagation();
+                $(".confirm-modal").removeClass("hidden");
+                $(".confirm-modal #yes").val(card.id);
+            });
+        }
+    }
+}
+
+/**
+ * Deletes a card from the server. Then calls getCards function.
+ * 
+ * @author Mattia Matteini &lt;matteinimattia@gmail.com>
+ * @param {String} idCard id of card to delete
+ */
+function deleteCard(idCard) {
+    console.log(idCard);
+    reqHelper.post("card", "deleteCard", {
+        "idCard": idCard
+    }, function (data) {
+        if (data.success) {
+            getCards();
+        } else {
+            console.error("Error while deleting card");
+        }
+    });
+}
+
+
+/**
+ * Sets a card as default. Then calls getCards function.
+ * 
+ * @author Mattia Matteini &lt;matteinimattia@gmail.com>
+ * @param {String} idCard id of card to delete
+ */
+ function setDefaultCard(idCard) {
+    console.log(idCard);
+    reqHelper.post("card", "setDefaultCard", {
+        "idCard": idCard
+    }, function (data) {
+        if (data.success) {
+            getCards();
+        } else {
+            console.error("Error setting card as default");
+        }
+    });
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="MyJWT.html">MyJWT</a></li><li><a href="RequestHelper.html">RequestHelper</a></li></ul><h3>Global</h3><ul><li><a href="global.html#changeOrderState">changeOrderState</a></li><li><a href="global.html#deleteCard">deleteCard</a></li><li><a href="global.html#deleteNotification">deleteNotification</a></li><li><a href="global.html#displayCards">displayCards</a></li><li><a href="global.html#displayNotifications">displayNotifications</a></li><li><a href="global.html#displayOrders">displayOrders</a></li><li><a href="global.html#displayProductDetails">displayProductDetails</a></li><li><a href="global.html#displayProducts">displayProducts</a></li><li><a href="global.html#getCards">getCards</a></li><li><a href="global.html#getCartEntries">getCartEntries</a></li><li><a href="global.html#getNotifications">getNotifications</a></li><li><a href="global.html#getOrders">getOrders</a></li><li><a href="global.html#getProductDetails">getProductDetails</a></li><li><a href="global.html#getTotalFromOrder">getTotalFromOrder</a></li><li><a href="global.html#makeUrl">makeUrl</a></li><li><a href="global.html#modifyEntryCartQuantity">modifyEntryCartQuantity</a></li><li><a href="global.html#searchProducts">searchProducts</a></li><li><a href="global.html#secondsToTime">secondsToTime</a></li><li><a href="global.html#setDefaultCard">setDefaultCard</a></li><li><a href="global.html#updateCartPreview">updateCartPreview</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.10</a> on Tue Jan 25 2022 11:00:44 GMT+0100 (Ora standard dell’Europa centrale)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
