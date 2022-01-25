@@ -19,6 +19,10 @@ require_once('validate.php');
             case "getallproducts":
                 send_data($dbProductMgr->getProducts());
                 break;
+            case "getvendorproducts":
+                $name = isset($_GET["name"]) ? $_GET["name"] : "";
+                $type = isset($_GET["type"]) ? $_GET["type"] : "";
+                send_data($dbProductMgr->getProducts(get_token_data()->userId, $name, $type));
             default:
             send_error("Unknown action");
                 break;
@@ -31,6 +35,15 @@ require_once('validate.php');
         }
         //è un post.
         switch ($_POST["action"]) {
+            case "editProduct":
+                checkParams($_POST, array("idProduct", "price", "quantity"));
+                send_success($dbProductMgr->editProduct($_POST["idProduct"], $_POST["price"], $_POST["quantity"]));
+                break;
+            
+            case "removeProduct":
+                checkParams($_POST, array("idProduct"));
+                send_success($dbProductMgr->removeProduct($_POST["idProduct"]));
+                break;
             default:
                 send_error("Unknown action");
                 break;

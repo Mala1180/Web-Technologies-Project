@@ -31,6 +31,11 @@ class DBProductMgr {
 		$query = "UPDATE `product` SET quantity=?, price=?, description=?, type=?, idAuthor=?, idAlbum=? WHERE idProduct=?";
 		return execute_query($this->db, $query, array($quantity, $price, $description, $type, $idAuthor, $idAlbum, $idProduct));
  	}
+	
+	public function editProduct($idProduct, $price, $quantity) {
+		$query = "UPDATE `product` SET quantity=?, price=? WHERE idProduct=?";
+		return execute_query($this->db, $query, array($quantity, $price, $idProduct));
+	}
 
 	public function getCurrentQuantity($idProduct) {
 		$query = "SELECT quantity FROM `product` WHERE idProduct=?";
@@ -57,9 +62,34 @@ class DBProductMgr {
 		return execute_query($this->db, $query, array($idProduct));
  	}
 	
-	public function getProducts() {
-		$query = "SELECT * FROM product";
-		return execute_query($this->db, $query);
+	/* todo: move some bits to frontend? */
+	 public function getProducts($idAuthor=-1, $name="", $type="") {
+		$query = "SELECT a.name, artName, p.type, p.quantity, p.price, p.idProduct
+					FROM product p, album a, author au
+					WHERE p.idAlbum = a.idAlbum
+					/*AND p.isDeleted = 0 */
+					AND a.idAuthor = au.idAuthor";
+		$params = array();
+		if ($idAuthor > 0) {
+			$query .= " AND au.idAuthor = ?";
+			$params[] = $idAuthor;
+		}
+		if ($name != "") {
+			$query .= " AND a.name LIKE ?";
+			$params[] = $name;
+		}
+		if ($type != "") {
+			$query .= " AND p.type = ?";
+			$params[] = $type;
+		}
+		$results = execute_query($this->db, $query, $params);
+		$data = array();
+		foreach($results as $r) {
+			$row = $r;
+			$row["type"] = $row["type"] == 0 ? "CD" : "Vinile";
+			$data[] = $row;
+		}
+		return $data;
 	}
 }
 

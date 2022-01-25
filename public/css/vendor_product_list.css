@@ -1,0 +1,31 @@
+div {
+    padding: 0 2%;
+}
+td button {
+    margin: 1%;
+}
+td button:last-of-type {
+    background-color: crimson;
+}
+
+label {
+    display: block;
+}
+
+form {
+    margin: 0 5% 20px;
+}
+
+form fieldset {
+    border: none;
+}
+
+form ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+form ul li {
+    margin-left: 5%;
+}
