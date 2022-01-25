@@ -24,3 +24,4 @@
 <script src="./public/js/header.js"></script>
 <script src="./public/js/myjwtclass.js"></script>
 <script type="text/javascript" src="./public/js/RequestHelper.js"></script>
+<script src="./public/js/common.js"></script>

@@ -10,8 +10,10 @@
         <?php require("./templates/head-section.php"); ?>
         <title>Unibo Vinyl</title>
         <link rel="stylesheet" href="./public/css/vendor_product_list.css">
+        <link rel="stylesheet" href="./public/css/header.css">
     </head>
     <body>
+        <?php require("./templates/header.php"); ?>
         <main>
             <h1>Lista prodotti</h1>
             <form method="GET" action="#">
@@ -36,5 +38,7 @@
             <p>Non ci sono prodotti corrispondenti alla ricerca</p>
         </main>
         <script src="./public/js/vendor_product_list.js"></script>
+        <script src="./public/js/page-header.js"></script>
+
     </body>
 </html>

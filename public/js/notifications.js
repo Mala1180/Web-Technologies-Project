@@ -53,7 +53,7 @@ function displayNotifications(notifications) {
                             <span class="dot"></span>
                             <h2 class="subject">${notification.subject}</h2>
                         </div>
-                        <span class="date">${notification.date}</span>
+                        <span class="date">${toITString(notification.date)}</span>
                     </div>
                     <div>
                         <button class="read-button">Leggi</button>
@@ -114,7 +114,8 @@ function deleteNotification(notificationId) {
         notificationId: notificationId
     }, function (res) {
         if (res.success) {
-            $("#" + notificationId).remove();
+            getNotifications();
+            getUnreadNotificationsNumber();
         } else {
             console.error("An error occurred while deleting notification.");
         }

@@ -21,6 +21,6 @@
             <p>Non ci sono ordini</p>
         </main>
         <script src="./public/js/page-header.js"></script>
-        <script src="./public/js/orders.js"></script>
+        <script src="./public/js/shipperOrders.js"></script>
     </body>
 </html>

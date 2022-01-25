@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: clientOrders.js</title>
+    <title>JSDoc: Source: shipperOrders.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: clientOrders.js</h1>
+    <h1 class="page-title">Source: shipperOrders.js</h1>
 
     
 
@@ -28,19 +28,20 @@
         <article>
             <pre class="prettyprint source linenums"><code>$(document).ready(function () {
     getOrders();
+
+    
 });
 
 /**
  * Executes a POST request to server for get user orders. Then calls displayOrders.
  *
- * @author Mattia Matteini &lt;matteinimattia@gmail.com>
+ * @author Alberto Paganelli &lt;albi1600@gmail.com>
  */
 function getOrders() {
-    reqHelper.post("order", "getCustomerOrders", {}, function (res) {
+    reqHelper.post("order", "getOrder", {}, function (res) {
         if (res.success) {
-            orders = res.data;
-            console.log(orders);
-            displayOrders(orders);
+            displayOrders(res.data);
+            console.log(res.data)
         } else {
             console.error("An error occurred while getting orders.");
         }
@@ -50,7 +51,7 @@ function getOrders() {
 /**
  * Appends orders in the list.
  *
- * @author Mattia Matteini &lt;matteinimattia@gmail.com>
+ * @author Alberto Paganelli &lt;albi1600@gmail.com>
  * @param {Array} orders array of orders to be displayed
  */
 function displayOrders(orders) {
@@ -63,80 +64,115 @@ function displayOrders(orders) {
         $("main > .orders-list").empty();
         for (let i = 0; i &lt; orders.length; i++) {
             const order = orders[i];
-            const summary = order.order[0];
             const $order = $(`
             &lt;li>
                 &lt;section class="order-header">
                     &lt;div>
-                        &lt;h2 class="date">Ordine #${summary.idOrder} del ${toITString(summary.orderDate)}&lt;/h2>
-                        &lt;span class="total">&lt;/span>
+                        &lt;h2 class="date">Ordine #${order["order"][0]["idOrder"]} del ${toITString(order["order"][0]["orderDate"])}&lt;/h2>
+                        &lt;span class="total">Totale: € ${getTotalFromOrder(order.products[0])}&lt;/span>
+                        &lt;span class="total">Stato: ${getStringState(order["order"][0]["state"])}&lt;/span>
                     &lt;/div>
-                    &lt;button>Dettagli&lt;/button>
                 &lt;/section>
-                &lt;section class="order-storyline">
-                    &lt;span class="dot">&lt;/span>
-                    &lt;span class="line">&lt;/span>
-                    &lt;span class="dot">&lt;/span>
-                    &lt;span class="line">&lt;/span>
-                    &lt;span class="dot">&lt;/span>
-                &lt;/section>
-                &lt;section class="order-steps">
-                    &lt;span class="0">Ordine effettuato&lt;/span>
-                    &lt;span class="1">In transito&lt;/span>
-                    &lt;span class="2">Consegnato&lt;/span>
+                &lt;section>
+                    &lt;button id="btnChangeState" value="${order["order"][0]["idOrder"]}">&lt;/button>
                 &lt;/section>
                 &lt;section class="order-details">
-                    &lt;ul>
+                    &lt;h2>Linee d'ordine&lt;/h2>
+                    &lt;ul class="order-details-list">
+                        
                     &lt;/ul>
                 &lt;/section>
-            &lt;/li>
-            `);
-            $("main > .orders-list").append($order);
-            // solve accessibility problem
-            $order.find("." + summary.state).siblings().attr("aria-hidden", "true");
-            if (summary.state === 1) {
-                $order.find(".order-storyline")
-                    .children()
-                    .eq(3).prevAll()
-                    .css("background", "#3a71ea")
-                    .css("border-color", "#3a71ea");
-            }
-            if (summary.state === 2) {
-                $order.find(".order-storyline").children().css("background", "#3a71ea")
-                    .css("border-color", "#3a71ea");
-            }
-            $order.find("button").click(function () {
-                $order.find(".order-details").slideToggle("fast");
-            });
+            &lt;/li>`);
 
-            const products = order.products[0];
-            let orderTotal = 0;
-            for (const product of products) {
-                const $product = $(`
-                &lt;li id="${product.idProduct}">
-                    &lt;img src="./public/img/products/${product.imgPath}" alt="immagine dell'album">
+            $("main > .orders-list").append($order);
+
+            for (let j = 0; j &lt; order.products[0].length; j++) {
+                const $orderDetail = $(`
+                &lt;li>
                     &lt;div>
-                        &lt;h3>${product.name}&lt;/h3>
-                        &lt;span>Prezzo: € ${Math.round(product.subprice / product.quantity * 100) / 100}&lt;/span>
-                        &lt;span>Quantità: ${product.quantity}&lt;/span>
-                        &lt;span>Totale: € ${product.subprice}&lt;/span>
+                        &lt;h3>${order.products[0][j].name}&lt;/h3>
+                        &lt;span>Tipologia: ${getStringType(order.products[0][j].type)}&lt;/span>
+                        &lt;span>Prezzo: € ${Math.round(order.products[0][j].subprice / order.products[0][j].quantity * 100) / 100}&lt;/span>
+                        &lt;span>Quantità: ${order.products[0][j].quantity}&lt;/span>
+                        &lt;span>Totale: € ${order.products[0][j].subprice}&lt;/span>
                     &lt;/div>
                 &lt;/li>`);
-                $order.find(".order-details > ul").append($product);
-
-                $product.find("img").click(function () {
-                    location.href = `./productDetail.php?id=${product.idProduct}`;
-                });
-                $product.find("h3").click(function () {
-                    location.href = `./productDetail.php?id=${product.idProduct}`;
-                });
-                orderTotal += product.subprice;
+                $order.find(".order-details-list").append($orderDetail);
             }
-            $order.find(".total").text(`Totale: € ${Math.round(orderTotal * 100) / 100}`);
+
+            switch (order["order"][0]["state"]) {
+                case 0:
+                    $order.find("#btnChangeState").html("Spedisci");
+                    $order.find("#btnChangeState").click(function () { changeOrderState($order.find("#btnChangeState").val(), 1) });
+                    break;
+                case 1:
+                    $order.find("#btnChangeState").html("Consegna");
+                    $order.find("#btnChangeState").click(function () { changeOrderState($order.find("#btnChangeState").val(), 2) });
+                    break;
+                case 2:
+                    $order.find("#btnChangeState").remove();
+                    break;
+            }
 
         }
     }
-}</code></pre>
+}
+
+/**
+ * Executes a POST request to server for accept or decline an order.
+ *
+ * @author Alberto Paganelli &lt;albi1600@gmail.com>
+ * @param {Number} idOrder id of the order to be accepted or declined
+ * @param {Number} state the state that will be setted
+ */
+function changeOrderState(idOrder, state) {
+    reqHelper.post("order", "changeState", {
+        idOrder: idOrder,
+        state: state
+    }, function (res) {
+        if (res.success) {
+            //change graphic to accettato
+            getOrders();
+        } else {
+            console.error("An error occurred while changing order state.");
+        }
+    });
+}
+
+/** Utilities */
+function getTotalFromOrder(products) {
+    let total = 0;
+    products.forEach(product => {
+        total += product.subprice;
+    });
+    return Math.round(total * 100) / 100;
+}
+
+//from Y-m-d to d-m-Y
+function toITString(date) {
+    return date.split("-")[2] + "-" + date.split("-")[1] + "-" + date.split("-")[0];
+}
+
+function getStringState(state) {
+    switch (state) {
+        case 0:
+            return "Effettuato";
+        case 1:
+            return "In consegna";
+        case 2:
+            return "Consegnato";
+    }
+}
+
+function getStringType(type) {
+    switch (type) {
+        case 0:
+            return "CD";
+        case 1:
+            return "Vinile";
+    }
+}
+</code></pre>
         </article>
     </section>
 

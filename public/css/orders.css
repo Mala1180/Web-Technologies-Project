@@ -2,14 +2,6 @@ main {
     padding: 10px;
 }
 
-main h1 {
-    font-family: lato-regular;
-    text-align: center;
-    margin: 10px 0 20px 0;
-    letter-spacing: 0.1em;
-    font-size: clamp(2em, 2.5vw, 3em);
-}
-
 main ul {
     list-style: none;
     padding: 0;
@@ -140,7 +132,6 @@ main > ul > li > section.order-details ul > li span {
 }
 
 @media screen and (min-width: 768px) {
-    
     main > ul > li {
         padding: 2% 5%;
     }
@@ -160,5 +151,4 @@ main > ul > li > section.order-details ul > li span {
     main > ul > li > section.order-details ul > li h3 {
         flex-basis: 50%;
     }
-    
 }

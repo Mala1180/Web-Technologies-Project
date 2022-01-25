@@ -77,7 +77,7 @@ class DBProductMgr {
 		}
 		if ($name != "") {
 			$query .= " AND a.name LIKE ?";
-			$params[] = $name;
+			$params[] = "%".$name."%";
 		}
 		if ($type != "") {
 			$query .= " AND p.type = ?";

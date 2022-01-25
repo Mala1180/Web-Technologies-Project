@@ -9,9 +9,13 @@
 <head>
     <?php require_once("templates/head-section.php") ?>
     <title>Unibo Vinyl - Venditore</title>
+
+    <link rel="stylesheet" href="./public/css/header.css">
     <link rel="stylesheet" href="./public/css/userVendor.css">
 </head>
 <body>
+<?php require_once("./templates/header.php") ?>
+
     <main>  
         <section>
             <h1>Nuovo prodotto</h1>
@@ -81,5 +85,6 @@
     </main>
     <script src="./public/libraries/jquery3.6.0.js"></script>
     <script type="text/javascript" src="./public/js/vendor.js"></script>
+    <script type="text/javascript" src="./public/js/page-header.js"></script>
 </body>
 </html>

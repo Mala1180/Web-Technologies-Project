@@ -1,42 +1,42 @@
-section {
+main section {
     margin: 0 10%;
 }
-section form {
+main section form {
     margin-top: 20px;
     padding: 0 5%;
 }
 
-section form li {
+main section form li {
     margin-bottom: 5px;
 }
 
-section form input[type="submit"] {
+main section form input[type="submit"] {
     background-color: #000;
     color: #fff;
     border-radius: 10px;
 }
 
-section form input[type="submit"]:focus {
+main section form input[type="submit"]:focus {
     background-color: #333;
 }
 
-section form ul {
+main section form ul {
     padding: 0;
     list-style: none;
 }
 
-section form ul input:not([type="checkbox"]),
-section form ul textarea,
-section form ul select {
+main section form ul input:not([type="checkbox"]),
+main section form ul textarea,
+main section form ul select {
     width: 100%;
     margin: 0 2%;
 }
 
-section form ul textarea {
+main section form ul textarea {
     margin-top: 10px;
 }
 
-section form ul label:not(.visible) {
+main section form ul label:not(.visible) {
     float: left;
     display: block;
     overflow: hidden;
@@ -74,11 +74,11 @@ form select {
 }
 
 @media screen and (min-width: 768px) {
-    section {
+    main section {
         margin: 0 20%;
     }
 
-    section > form {
+    main section > form {
         margin: 0 20%;
     }
 }
