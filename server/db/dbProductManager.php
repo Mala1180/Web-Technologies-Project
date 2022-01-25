@@ -53,13 +53,14 @@ class DBProductMgr {
 	}
 
 	public function getProductIdAuthor($idProduct) {
-		$query = "SELECT idAuthor FROM `product` WHERE idProduct=?";
+		$query = "SELECT idAuthor FROM `product`, `author` WHERE idProduct=?";
 		return execute_query($this->db, $query, array($idProduct));
  	}
 
 	public function getProductAuthor($idProduct) {
-		$query = "SELECT artName FROM `product`, `author` WHERE idProduct=? AND product.idAuthor=author.idAuthor";
-		return execute_query($this->db, $query, array($idProduct));
+		$query = "SELECT idAuthor FROM product p, album a WHERE p.idAlbum=a.idAlbum AND p.idProduct=?";
+		$res = execute_query($this->db, $query, array($idProduct));
+		return count($res) > 0 ? $res[0]["idAuthor"] : count($res);
  	}
 	
 	/* todo: move some bits to frontend? */

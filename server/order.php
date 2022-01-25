@@ -45,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
             $idCustomer = get_token_data()->userId;
             $idOrder = $dbOrderMgr->addOrder(date("Y-m-d"), $idCustomer);
             if($idOrder > 0) {
-                $dbNotificationMgr->sendNotification($idCustomer, "Ordine effettuato", "La ringraziamo per aver utilizzato UniboVinyl, verrà ricontattato quando spediremo il suo ordine.");
+                $dbNotificationMgr->sendNotification($idCustomer, "cliente", "Ordine effettuato", "La ringraziamo per aver utilizzato UniboVinyl, verrà ricontattato quando spediremo il suo ordine.");
                 $cartElements = $dbCartMgr->getCart($idCustomer);
                 if (count($cartElements) <= 0) {
                     send_error("Nessun articolo in carrello");
@@ -67,7 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
                 }
                 send_success(false);
             } else {
-                $dbNotificationMgr->sendNotification($idCustomer, "Qualcosa è andato storto", "La preghiamo di effettuare nuovamente l'ordine, qualcosa è andato storto con il suo precedente ordine.");
+                $dbNotificationMgr->sendNotification($idCustomer, "cliente", "Qualcosa è andato storto", "La preghiamo di effettuare nuovamente l'ordine, qualcosa è andato storto con il suo precedente ordine.");
                 send_success(false);
             }
             break;
@@ -77,6 +77,8 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
             }
             $state = intval($_POST["state"]);
             $idOrder = intval($_POST["idOrder"]);
+            $authors = [];
+            $authors1 = [];
             if($state >= 0 && $state <= 2) {
                 $res = $dbOrderMgr->getCustomerId($idOrder);
                 if(count($res) > 0) {
@@ -88,18 +90,30 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
                     case 1: 
                         $orderDetails = $dbOrderMgr->getOrderDetails($idOrder);
                         foreach($orderDetails as $orderDetail) {
-                            $esito = $dbProductMgr->decreaseQuantity($orderDetail["idProduct"], $orderDetail["quantity"]);
+                            $esito = $dbProductMgr->decreaseQuantity($orderDetail["idProduct"], $orderDetail["quantity"]);                  
                             if(!$esito){
                                 send_success(false);
                             }
+                            array_push($authors, $dbProductMgr->getProductAuthor($orderDetail["idProduct"]));
+                        }
+                        $authors = array_unique($authors);
+                        foreach($authors as $author) {
+                            $dbNotificationMgr->sendNotification($author, "artista", "Ordine #".$idOrder." spedito", "L' ordine #".$idOrder." è stato spedito, le segnaleremo quando verrà consegnato.");
                         }
                         $type = "spedito";
-                        $dbNotificationMgr->sendNotification($idCustomer, "Ordine spedito", "Il suo ordine è stato spedito, le segnaleremo quando verrà consegnato.");
+                        $dbNotificationMgr->sendNotification($idCustomer, "cliente", "Ordine #".$idOrder." spedito", "L' ordine #".$idOrder." è stato spedito, le segnaleremo quando verrà consegnato.");
                     break;
-                    //ordine spedito, da consegnare
                     case 2: 
+                        $orderDetails = $dbOrderMgr->getOrderDetails($idOrder);
+                        foreach($orderDetails as $orderDetail) {
+                            array_push($authors, $dbProductMgr->getProductAuthor($orderDetail["idProduct"]));
+                        }
+                        $authors = array_unique($authors);
+                        foreach($authors as $author) {
+                            $dbNotificationMgr->sendNotification($author, "artista", "Ordine #".$idOrder." consegnato", "L' ordine #".$idOrder." è stato consegnato, la ringraziamo per aver utilizzato UniboVinyl.");
+                        }
                         $type = "consegnato";
-                        $dbNotificationMgr->sendNotification($idCustomer, "Ordine consegnato", "Il suo ordine è stato consegnato, la ringraziamo per aver utilizzato UniboVinyl.");        
+                        $dbNotificationMgr->sendNotification($idCustomer, "cliente", "Ordine #".$idOrder." consegnato", "L' ordine #".$idOrder." è stato consegnato, la ringraziamo per aver utilizzato UniboVinyl.");        
                     break;
                 }
                 $data = $dbOrderMgr->changeState($idOrder, $state);
