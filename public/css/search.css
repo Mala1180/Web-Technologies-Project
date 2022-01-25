@@ -56,11 +56,12 @@ main section aside h2 {
 }
 
 /* text overflow on name and description */
-main section aside h2 {
+main section aside h2,
+main section aside div:first-of-type span {
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
-    -webkit-line-clamp: 2; /* number of lines to show */
+    -webkit-line-clamp: 1; /* number of lines to show */
     -webkit-box-orient: vertical;
 }
 
@@ -96,6 +97,7 @@ main section aside div:last-of-type span {
  *  Cart Preview
  */
 body > aside {
+    display: none;
     position: fixed;
     bottom: 0;
     left: 0;
@@ -127,7 +129,8 @@ body > aside > header > h2 {
 }
 
 body > aside > header > button {
-    all: unset;
+    background: none;
+    padding: 0;
 }
 
 body > aside > header > button:focus-visible {
@@ -201,9 +204,19 @@ body > aside ul section h2 {
     -webkit-box-orient: vertical;
 }
 
+body > aside ul section div:first-of-type {
+    flex-grow: 1;
+}
+
+body > aside ul section div:first-of-type span {
+    margin-left: auto;
+    margin-right: 10px;
+}
+
 body > aside ul section div:last-of-type span {
     margin-left: 3px;
 }
+
 body > aside ul section div:last-of-type span:nth-of-type(2) {
     font-family: lato-regular;
 }
@@ -245,7 +258,7 @@ span.material-icons-outlined {
     }
 
     body > aside {
-        display: none;
+        display: none !important;
         /* width: 80vw;
         margin-left: 10%; */
     }
@@ -259,6 +272,11 @@ span.material-icons-outlined {
     main section {
         flex: 1 0 50%;
         max-width: 50%;
+    }
+
+    main section aside h2,
+    main section aside div:first-of-type span {
+        -webkit-line-clamp: 1; /* number of lines to show */
     }
 }
 
