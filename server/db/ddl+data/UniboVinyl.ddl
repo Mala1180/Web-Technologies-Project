@@ -133,6 +133,14 @@ create table notification (
      idCustomer int,
      idAuthor int,
      constraint IDnotification primary key (idNotification));
+     
+create table password_recovery (
+     idRecovery int not null auto_increment,
+     idUser int not null,
+     type varchar(20) not null,
+     code varchar(100) not null,
+     done tinyint not null,
+     constraint IDRecovery primary key (idRecovery));
 
 -- Constraints Section
 -- ___________________ 
