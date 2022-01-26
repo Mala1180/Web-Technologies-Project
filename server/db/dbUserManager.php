@@ -67,7 +67,7 @@ class DBUserMgr {
 				}
 				$query = "INSERT INTO `password_recovery` (`idUser`, `type`, `code`, `done`) VALUES (?, ?, ?, ?)";
 				if(execute_query($this->db, $query, array($idUser, $type, $tmpCode, $done))) {
-					$link = "https://link.it?code=".$tmpCode;
+					$link = "http://".$_SERVER["SERVER_ADDR"]."/userPasswordRecover.php?code=".$tmpCode;
 					sendMail($mail, "Recupero password", "Clicca sul seguente link per generare una nuova password ".$link);
 					return true;
 				}
